@@ -1,23 +1,32 @@
 class Actividad{
     id;
-    username;
-    contrasena;
-    email;
+    id_usuario;
+    paso_uno;
+    paso_dos;
+    paso_tres;
+    paso_cuatro;
+    nombre;
 }
 
-constructor(id, username, contrasena, email)
+constructor(id, id_usuario, paso_uno, paso_dos, paso_tres, paso_cuatro, nombre)
 {
     this.id = id;
-    this.username = username;
-    this.contrasena = contrasena;
-    this.email = email;
+    this.id_usuario = id_usuario;
+    this.paso_uno = paso_uno;
+    this.paso_dos = paso_dos;
+    this.paso_tres = paso_tres;
+    this.paso_cuatro = paso_cuatro;
+    this.nombre = nombre;
 }
 
-constructor(username, contrasena, email)
+constructor(id_usuario, paso_uno, paso_dos, paso_tres, paso_cuatro, nombre)
 {
-    this.username = username;
-    this.contrasena = contrasena;
-    this.email = email;
+    this.id_usuario = id_usuario;
+    this.paso_uno = paso_uno;
+    this.paso_dos = paso_dos;
+    this.paso_tres = paso_tres;
+    this.paso_cuatro = paso_cuatro;
+    this.nombre = nombre;
 }
 
 export default Actividad;
