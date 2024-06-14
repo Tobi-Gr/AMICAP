@@ -1,5 +1,5 @@
 {
-  "name": "amicap",
+  "name": "amicap_api",
   "version": "1.0.0",
   "description": "api de consulta a la base de datos",
   "main": "index.js",
