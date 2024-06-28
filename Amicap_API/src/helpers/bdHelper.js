@@ -2,7 +2,8 @@ import DBConfig from './../configs/dbConfig.js';
 import pkg from 'pg';
 const {Client} = pkg;
 
-export default class DataBaseHelper{
+export default class DataBaseHelper
+{
     //este devuelve un objeto
     requestOne = async (sql, values) => {
         let data = null;
