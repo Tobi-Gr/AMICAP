@@ -11,7 +11,7 @@ const Titulo: React.FC<promps> = ({ text }) => {
   }
 
   const styles = StyleSheet.create({
-    bodyText: {fontFamily: 'FiraSans-Regular.ttf', fontSize: 40, },
+    bodyText: {fontFamily: 'FiraSans-Regular.ttf', fontSize: 40 }
     });
   
 export default Titulo;

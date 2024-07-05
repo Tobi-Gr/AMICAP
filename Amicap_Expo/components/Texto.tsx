@@ -11,7 +11,7 @@ const Texto: React.FC<promps> = ({ text }) => {
   }
 
   const styles = StyleSheet.create({
-    bodyText: {fontFamily: 'Montserrat-Regular.ttf', fontSize: 20, },
+    bodyText: {fontFamily: 'Montserrat-Regular.ttf', fontSize: 20 }
     });
   
 export default Texto;
