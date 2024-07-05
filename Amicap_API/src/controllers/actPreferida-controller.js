@@ -1,11 +1,13 @@
 import {Router} from 'express';
-import ActPreferidaService from '../services/actPreferida-service.js'
+import ActPreferidaService from '../services/actPreferida-service.js';
+import ValidationHelper from '../helpers/validationHelper.js';
 const router = Router();
 const svc = new ActPreferidaService();
+const hlp = new ValidationHelper;
 
 router.get('/:id_usuario', async (req, res) =>{
     let respuesta;
-    let id_usuario = req.params.id_usuario;
+    let id_usuario = hlp.validarInt(req.params.id_usuario);
     const returnArray = await svc.getByIdUsuarioAsync(id_usuario);
     if (returnArray != null)
     {
@@ -30,7 +32,7 @@ router.post('', async (req, res) =>{
 
 router.delete('', async (req, res) =>{
     let respuesta;
-    let id = req.query.id;
+    let id = hlp.validarInt(req.query.id);
     const returnArray = await svc.deleteByIdAsync(id);
     if (returnArray != null)
     {

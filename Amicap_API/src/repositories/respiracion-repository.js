@@ -1,5 +1,5 @@
 import DataBaseHelper from '../helpers/bdHelper.js';
-const  pgHelper = new DataBaseHelper 
+const pgHelper = new DataBaseHelper;
 
 export default class RespiracionRepository
 {
