@@ -12,6 +12,8 @@ const defaultUrls: { [key: string]: string } = {
     white_arrow: './../assets/icons/white_arrow.svg',
 };
 
+
+
 interface Props {
     styleContainer?: ViewStyle,
     iconType: string,
