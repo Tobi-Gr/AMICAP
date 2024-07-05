@@ -2,7 +2,7 @@ import ContactoRepository from '../repositories/contacto-repository.js';
 
 export default class ContactoService
 {
-    getByIUsuariodAsync = async (id_usuario) =>
+    getByIdUsuarioAsync = async (id_usuario) =>
     {
         const repo = new ContactoRepository();
         const returnArray = await repo.getByIdUsuarioAsync(id_usuario);

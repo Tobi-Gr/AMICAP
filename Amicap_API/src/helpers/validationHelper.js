@@ -7,9 +7,9 @@ export default class ValidationHelper
         {
             throw new Error('Value is not an integer');
         }
-        else if (data)
+        else if (data <= min && data >= max)
         {
-
+            
         }
         else return data;
     }

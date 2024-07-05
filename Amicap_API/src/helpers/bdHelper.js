@@ -21,6 +21,7 @@ export default class DataBaseHelper
         }
         return data;
     }
+
     //devuelve las row counts
     requestCount = async (sql, values) => {
         let data = null;
@@ -38,6 +39,7 @@ export default class DataBaseHelper
         }
         return data;
     }
+
     // varios objetos
     requestValues = async (sql, values) => {
         let data = null;
@@ -55,6 +57,7 @@ export default class DataBaseHelper
         }
         return data;
     }
+    
     //Todos
     request = async (sql) => {
         let data = null;
