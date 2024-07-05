@@ -8,7 +8,7 @@ interface IconProps {
     height?: number;
   }
 
-const Icon: React.FC<IconProps> = ({ name, width = 100, height = 100 }) => {
+const Icon: React.FC<IconProps> = ({ name, width = 24, height = 24 }) => {
   /*const IconSvg = icons[name];
   if (!IconSvg) {
     console.error(`Icon "${name}" does not exist.`);
@@ -16,11 +16,9 @@ const Icon: React.FC<IconProps> = ({ name, width = 100, height = 100 }) => {
   }
   */
 
-  const xxx = `
-  <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
-  </svg>
-`;
+  const xxx = ` <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
+                </svg>`;
 return <SvgXml xml={xxx} />;
   //return <SvgXml xml={IconSvg} width={width} height={height} />;
 };

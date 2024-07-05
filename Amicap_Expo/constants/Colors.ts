@@ -29,7 +29,7 @@ export const Colors = {
     gris: '#9DD2CF',
     celeste: '#48EAE0',
     turquesa: '#1F878D',
-    negro: '001C1A'
+    negro: '#001C1A'
   }
 };
 

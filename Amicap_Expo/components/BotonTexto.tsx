@@ -7,12 +7,11 @@ interface Props{
 
 const BotonTexto: FC<Props> = ({text}) => (
 <SafeAreaView style={styles.container}>
-<View>
-    <Text style={styles.title}>
-    </Text>
-    <Button title={text} onPress={() => Alert.alert('Se ha presionado!')}
-    />
-</View>
+    <View>
+        <Text style={styles.title}></Text>
+        <Button title={text} onPress={() => Alert.alert('Se ha presionado!')}
+        />
+    </View>
 </SafeAreaView>
 );
 
