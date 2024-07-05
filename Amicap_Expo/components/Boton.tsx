@@ -11,7 +11,7 @@ interface Props {
 const Boton: FC<Props> = ({onPress, styleText, styleContainer, texto }) => {
     const handlePress = () => {
         if (onPress) {
-            onPress(); // Call the onPress function if it's provided
+            onPress();
         }
     };
 
