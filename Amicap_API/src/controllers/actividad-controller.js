@@ -1,7 +1,9 @@
 import {Router} from 'express';
-import ActividadService from '../services/actividad-service.js'
+import ActividadService from '../services/actividad-service.js';
+import ValidationHelper from '../helpers/validationHelper.js';
 const router = Router();
 const svc = new ActividadService();
+const hlp = new ValidationHelper;
 
 router.post('', async (req, res) =>{
     let respuesta;
@@ -30,7 +32,7 @@ router.put('', async (req, res) =>{
 
 router.delete('', async (req, res) =>{
     let respuesta;
-    let id = req.query.id;
+    let id = hlp.validarInt(req.query.id);
     const returnArray = await svc.deleteByIdAsync(id);
     if (returnArray != null)
     {

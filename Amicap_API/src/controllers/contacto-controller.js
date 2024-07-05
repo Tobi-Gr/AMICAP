@@ -1,11 +1,13 @@
 import {Router} from 'express';
-import ContactoService from '../services/contacto-service.js'
+import ContactoService from '../services/contacto-service.js';
+import ValidationHelper from '../helpers/validationHelper.js';
 const router = Router();
 const svc = new ContactoService();
+const hlp = new ValidationHelper;
 
 router.get('/:id_usuario', async (req, res) =>{
     let respuesta;
-    let id_usuario = req.params.id_usuario;
+    let id_usuario = hlp.validarInt(req.params.id_usuario);
     const returnArray = await svc.getByIdUsuarioAsync(id_usuario);
     if (returnArray != null)
     {
@@ -42,7 +44,7 @@ router.put('', async (req, res) =>{
 
 router.delete('/:id', async (req, res) =>{
     let respuesta;
-    let id = req.params.id;
+    let id = hlp.validarInt(req.params.id);
     const returnArray = await svc.deleteByIdAsync(id);
     if (returnArray != null)
     {

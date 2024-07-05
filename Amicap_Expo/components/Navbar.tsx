@@ -2,19 +2,19 @@
 
 import React from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
-import Icon from './Icon'; // Importa tu componente Icon
+import Icon from './Icon'; 
 
 const Navbar = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => console.log('Botón 1 presionado')}>
-        <Icon iconType="home"/>
+        <Icon name="home" width={50} height={50} />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => console.log('Botón 2 presionado')}>
-        <Icon iconType="settings"/>
+        <Icon name="settings" width={50} height={50}/>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => console.log('Botón 3 presionado')}>
-        <Icon iconType="profile"/>
+        <Icon name="profile" width={50} height={50}/>
       </TouchableOpacity>
    
     </View>

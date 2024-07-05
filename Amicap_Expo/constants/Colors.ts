@@ -23,4 +23,21 @@ export const Colors = {
     tabIconDefault: '#9BA1A6',
     tabIconSelected: tintColorDark,
   },
+  color: {
+    naranja: '#FFA62B',
+    blanco: '#F4FDFD',
+    gris: '#9DD2CF',
+    celeste: '#48EAE0',
+    turquesa: '#1F878D',
+    negro: '001C1A'
+  }
 };
+
+export const Colores = {  
+    naranja: '#FFA62B',
+    blanco: '#F4FDFD',
+    gris: '#9DD2CF',
+    celeste: '#48EAE0',
+    turquesa: '#1F878D',
+    negro: '001C1A'  
+}
