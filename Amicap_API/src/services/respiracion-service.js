@@ -2,7 +2,7 @@ import RespiracionRepository from '../repositories/respiracion-repository.js';
 
 export default class RespiracionService
 {
-    getByIUsuariodAsync = async (id_usuario) =>
+    getByIdUsuariodAsync = async (id_usuario) =>
     {
         const repo = new RespiracionRepository();
         const returnArray = await repo.getByIdUsuarioAsync(id_usuario);

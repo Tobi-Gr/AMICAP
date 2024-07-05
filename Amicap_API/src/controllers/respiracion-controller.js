@@ -1,11 +1,13 @@
 import {Router} from 'express';
-import RespiracionService from '../services/respiracion-service.js'
+import RespiracionService from '../services/respiracion-service.js';
+import ValidationHelper from '../helpers/validationHelper.js';
 const router = Router();
 const svc = new RespiracionService();
+const hlp = new ValidationHelper;
 
 router.get('/:id_usuario', async (req, res) =>{
     let respuesta;
-    let id_usuario = req.params.id_usuario;
+    let id_usuario = hlp.validarInt(req.params.id_usuario);
     const returnArray = await svc.getByIdUsuarioAsync(id_usuario);
     if (returnArray != null)
     {
