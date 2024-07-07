@@ -3,6 +3,7 @@ import Navbar from './../../components/Navbar';
 import Piso from './../../components/Piso';
 import Icon from './../../components/Icon';
 import FondoAzul from '@/components/FondoAzul';
+import Texto from '@/components/Texto'
 import {Colores} from './../../constants/Colors';
 
 export default function HomeScreen() {  
