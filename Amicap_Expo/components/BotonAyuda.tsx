@@ -20,7 +20,7 @@ const BotonAyuda = () => {
     >
       <View style={[styles.sombra, { height: diametro, width: diametro }]} />     
       <View style={[styles.circulo, { height: diametro, width: diametro }]}>       
-        <Texto text="Ayuda" estilo="ayuda" style={{ fontSize: tamanoFuente }} />
+        <Texto text="Ayuda" estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} />
       </View>
     </TouchableOpacity>
   );
