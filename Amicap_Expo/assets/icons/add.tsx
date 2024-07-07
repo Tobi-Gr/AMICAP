@@ -5,7 +5,7 @@ export const add = () => {
         </g>
         <defs>
         <clipPath id="clip0_18_70">
-        <rect width="32" height="30" fill="white"/>
+        <rect width="1em" height="1em" fill="curentColor"/>
         </clipPath>
         </defs>
     </svg>    
