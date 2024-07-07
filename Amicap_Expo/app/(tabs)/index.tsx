@@ -1,5 +1,6 @@
 import { Image, StyleSheet, Platform, View, Text } from 'react-native';
 import Navbar from './../../components/Navbar';
+import BotonAyuda from './../../components/BotonAyuda'
 import Piso from './../../components/Piso';
 import Icon from './../../components/Icon';
 import FondoAzul from '@/components/FondoAzul';
@@ -10,7 +11,7 @@ export default function HomeScreen() {
   return (
       // flex es para que ocupe toda la pantalla
     <View style={{flex: 1, backgroundColor: Colores.turquesa}}>
-      <Piso/>      
+      <BotonAyuda/>
     </View>
    );
 }

@@ -35,6 +35,7 @@ export const Colors = {
 
 export const Colores = {  
     naranja: '#FFA62B',
+    naranjaOscuro: '#B8771E',
     blanco: '#F4FDFD',
     gris: '#9DD2CF',
     celeste: '#48EAE0',
