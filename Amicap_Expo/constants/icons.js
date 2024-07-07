@@ -1,8 +1,8 @@
-import HomeSvg from "./../assets/icons/home.svg";
-import SettingsSvg from "./../assets/icons/settings.svg";
-import ProfileSvg from "./../assets/icons/profile.svg";
-import InfoSvg from "./../assets/icons/info.svg";
-import ContactSvg from "./../assets/icons/contact.svg";
+import HomeSvg from "../assets/icons/home.tsx";
+import SettingsSvg from "../assets/icons/settings.tsx/index.js";
+import ProfileSvg from "../assets/icons/profile.tsx/index.js";
+import InfoSvg from "../assets/icons/info.tsx/index.js";
+import ContactSvg from "../assets/icons/contact.tsx";
 import WhiteArrowSvg from "./../assets/icons/white_arrow.svg";
 
 export const icons = {

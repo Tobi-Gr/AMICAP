@@ -1,3 +1,4 @@
+export const contact = () => {
 <svg width="47" height="53" viewBox="0 0 47 53" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_27_238)">
 <g clip-path="url(#clip1_27_238)">
@@ -13,3 +14,4 @@
 </clipPath>
 </defs>
 </svg>
+}

@@ -1,3 +1,4 @@
+export const profile = () => {
 <svg width="34" height="37" viewBox="0 0 34 37" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_18_45)">
 <path d="M2.04001 35.4584V33.5741C2.04001 27.3302 7.06337 22.2686 13.26 22.2686H20.74C26.9366 22.2686 31.96 27.3302 31.96 33.5741V35.4584" stroke="#1F878D" stroke-width="2" stroke-linecap="round"/>
@@ -9,3 +10,4 @@
 </clipPath>
 </defs>
 </svg>
+}

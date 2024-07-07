@@ -1,3 +1,4 @@
+export const info = () => {
 <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_18_55)">
 <g clip-path="url(#clip1_18_55)">
@@ -15,3 +16,4 @@
 </clipPath>
 </defs>
 </svg>
+}
