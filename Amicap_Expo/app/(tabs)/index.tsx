@@ -5,6 +5,7 @@ import Icon from './../../components/Icon';
 import FondoAzul from '@/components/FondoAzul';
 import Texto from '@/components/Texto'
 import {Colores} from './../../constants/Colors';
+import ListaContactos from '@/components/ListaContactos';
 
 export default function HomeScreen() {  
   const windowWidth = Dimensions.get('window').width;
@@ -17,6 +18,12 @@ export default function HomeScreen() {
 
   const yAyuda = windowHeight * 0.45;
   const xAyuda = windowWidth / 3.5;
+
+  const contactos =
+  [
+    {nombre: 'Luca', numero: '5491125119535'},
+    {nombre: 'Lifschitz', numero: '9786543'}
+  ]
   return (
       // flex:1 es para que ocupe toda la pantalla
     <View style={{flex: 1, backgroundColor: Colores.blanco}}>
@@ -28,6 +35,9 @@ export default function HomeScreen() {
       </View>
       <View style={{ marginTop: yAyuda, marginLeft: xAyuda, position: 'absolute'}}>
         <BotonAyuda/>
+      </View>*/
+      <View style={{ marginTop: yAyuda, marginLeft: xAyuda, position: 'absolute'}}>
+        <ListaContactos contactos={contactos}/>
       </View>
     </View>
    );
