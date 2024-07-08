@@ -13,7 +13,7 @@ interface Props {
 const Contacto: FC<Props> = ({ nombre}) => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Icon name={'contact'} />
+      <Icon type={'home'} />
       <Texto text={nombre} />
     </View>
   );

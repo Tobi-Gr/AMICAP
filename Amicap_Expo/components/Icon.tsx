@@ -1,26 +1,46 @@
+// Icono.tsx
 import React from 'react';
-import { SvgXml } from 'react-native-svg';
-import { icons } from './../constants/icons'; 
+import { View, StyleSheet } from 'react-native';
+import HomeSvg from './../assets/icons/Home.tsx'; // Example import
 
-interface IconProps {
-    name: keyof typeof icons;
-    width?: number;
-    height?: number;
+type IconType = 'home' | 'settings' | 'profile';
+
+interface IconoProps {
+  type: IconType;
+  color?: string;
+  width?: number;
+  height?: number;
+}
+
+const Icono: React.FC<IconoProps> = ({ type, color = 'black', width = 24, height = 24 }) => {
+  let SvgComponent;
+
+  switch (type) {
+    case 'home':
+      SvgComponent = HomeSvg;
+      break;
+    // Add cases for other icons here
+    default:
+      SvgComponent = null;
+      break;
   }
 
-const Icon: React.FC<IconProps> = ({ name, width = 24, height = 24 }) => {
-  /*const IconSvg = icons[name];
-  if (!IconSvg) {
-    console.error(`Icon "${name}" does not exist.`);
-    return null;
+  if (!SvgComponent) {
+    return null; // Handle the case where the icon type is not defined
   }
-  */
 
-  const xxx = ` <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
-                </svg>`;
-return <SvgXml xml={xxx} />;
-  //return <SvgXml xml={IconSvg} width={width} height={height} />;
+  return (
+    <View style={styles.container}>
+      <SvgComponent width={width} height={height} fill={color} />
+    </View>
+  );
 };
 
-export default Icon;
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
+
+export default Icono;

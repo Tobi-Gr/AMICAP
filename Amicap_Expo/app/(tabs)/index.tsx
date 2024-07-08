@@ -1,10 +1,11 @@
 import { Image, StyleSheet, Platform, View, Text, Dimensions} from 'react-native';
 import Navbar from './../../components/Navbar';
 import BotonAyuda from './../../components/BotonAyuda'
-import Icon from './../../components/Icon';
+import Icon from './../../components/Icon'
 import FondoAzul from '@/components/FondoAzul';
 import Texto from '@/components/Texto'
 import {Colores} from './../../constants/Colors';
+
 
 export default function HomeScreen() {  
   const windowWidth = Dimensions.get('window').width;
@@ -17,10 +18,12 @@ export default function HomeScreen() {
 
   const yAyuda = windowHeight * 0.45;
   const xAyuda = windowWidth / 3.5;
+  
+  // flex:1 es para que ocupe toda la pantalla
   return (
-      // flex:1 es para que ocupe toda la pantalla
     <View style={{flex: 1, backgroundColor: Colores.blanco}}>
-      <View style={[styles.titleContainer, {marginTop: yTexto}]}>
+      <Icon type='home' color={Colores.turquesa} height={36} width={36}/>
+       <View style={[styles.titleContainer, {marginTop: yTexto}]}>
         <Texto text={saludo} estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }}/> 
       </View>
       <View style={{position:'relative'}}>
@@ -28,7 +31,7 @@ export default function HomeScreen() {
       </View>
       <View style={{ marginTop: yAyuda, marginLeft: xAyuda, position: 'absolute'}}>
         <BotonAyuda/>
-      </View>
+      </View> 
     </View>
    );
 }
