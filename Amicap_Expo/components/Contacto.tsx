@@ -5,13 +5,12 @@ import Icon from './Icon';
 
 interface Props {
   nombre: string;
-  id: number;
 }
 
 //icono + nombre
 //ver en donde pasamos el valor de id
 //falta línea de abajo
-const Contacto: FC<Props> = ({ nombre, id }) => {
+const Contacto: FC<Props> = ({ nombre}) => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Icon name={'contact'} />
