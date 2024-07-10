@@ -30,8 +30,7 @@ export default function HomeScreen() {
   ]
   return (
       <View style={{flex: 1, backgroundColor: Colores.blanco}}>
-        <Add width={32} height={30} color={Colores.naranja}/>
-        {/* <View style={[styles.titleContainer, {marginTop: yTexto}]}>
+        <View style={[styles.titleContainer, {marginTop: yTexto}]}>
           <Texto text={saludo} estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }}/> 
         </View>
         <View style={{position:'relative'}}>
@@ -39,7 +38,7 @@ export default function HomeScreen() {
         </View>
         <View style={{ marginTop: yAyuda, marginLeft: xAyuda, position: 'absolute'}}>
           <BotonAyuda/>
-        </View>  */}
+        </View>  
       </View>
         // <View style={{ marginTop: yAyuda, marginLeft: xAyuda, position: 'absolute'}}>
         //   <ListaContactos contactos={contactos}/>

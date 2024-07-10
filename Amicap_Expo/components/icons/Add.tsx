@@ -2,11 +2,11 @@ import React from 'react';
 import Svg, { G, Path, Defs, ClipPath, Rect, SvgProps } from 'react-native-svg';
 import { View, StyleSheet } from 'react-native';
 
-interface AddProps extends SvgProps {
+interface Props extends SvgProps {
   color?: string;
 }
 
-const Add: React.FC<AddProps> = ({ color = "currentColor", ...props }) => (
+const Add: React.FC<Props> = ({ color = "currentColor", ...props }) => (
   <View style={styles.container}>
     <Svg
       width={32}
