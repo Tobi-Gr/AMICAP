@@ -1,7 +1,6 @@
 import { Image, StyleSheet, Platform, View, Text, Dimensions} from 'react-native';
-//import Navbar from './../../components/Navbar';
+import Navbar from './../../components/Navbar';
 import BotonAyuda from './../../components/BotonAyuda'
-//import Icon from './../../components/Icon'
 import Add from './../../components/icons/Add'
 import FondoAzul from '@/components/FondoAzul';
 import Texto from '@/components/Texto'
@@ -39,6 +38,7 @@ export default function HomeScreen() {
         <View style={{ marginTop: yAyuda, marginLeft: xAyuda, position: 'absolute'}}>
           <BotonAyuda/>
         </View>  
+        <Navbar/>
       </View>
         // <View style={{ marginTop: yAyuda, marginLeft: xAyuda, position: 'absolute'}}>
         //   <ListaContactos contactos={contactos}/>

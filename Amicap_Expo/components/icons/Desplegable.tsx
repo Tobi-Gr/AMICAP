@@ -6,26 +6,18 @@ interface Props extends SvgProps {
   color?: string;
 }
 
-const Desplegable: React.FC<Props> = ({ color = "currentColor", ...props }) => (
+const Desplegable: React.FC<Props> = ({ color, ...props }) => (
   <View style={styles.container}>
-    <Svg
-        width={27}
-        height={25}
-        fill="none"
-        viewBox="0 0 27 25"
-        {...props}
+      <Svg
+      width={16}
+      height={9}
+      fill="none"
+      {...props}
     >
-        <G clipPath="url(#a)">
-        <Path
-            fill="#F4FDFD"
-            d="M13.158 18.486a1 1 0 0 0 1.414 0l6.364-6.364a1 1 0 1 0-1.414-1.414l-5.657 5.656-5.657-5.656a1 1 0 1 0-1.414 1.414l6.364 6.364Zm-.293-1.594v.887h2v-.887h-2Z"
-        />
-        </G>
-        <Defs>
-        <ClipPath id="a">
-            <Rect width="1em" height="1em" fill="currentColor" />
-        </ClipPath>
-        </Defs>
+      <Path
+        fill={color}
+        d="M7.158 8.486a1 1 0 0 0 1.414 0l6.364-6.364A1 1 0 1 0 13.522.708L7.865 6.365 2.208.708A1 1 0 0 0 .794 2.122l6.364 6.364Zm-.293-1.594v.887h2v-.887h-2Z"
+      />
     </Svg>
   </View>
 );

@@ -6,7 +6,7 @@ interface Props extends SvgProps {
   color?: string;
 }
 
-const Home: React.FC<Props> = ({ color = "currentColor", ...props }) => (
+const Home: React.FC<Props> = ({ color, ...props }) => (
   <View style={styles.container}>
     <Svg
         width={37}
@@ -15,7 +15,7 @@ const Home: React.FC<Props> = ({ color = "currentColor", ...props }) => (
         {...props}
     >
         <G
-        stroke="currentcolor"
+        stroke={color}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={2}
@@ -26,7 +26,7 @@ const Home: React.FC<Props> = ({ color = "currentColor", ...props }) => (
         </G>
         <Defs>
         <ClipPath id="a">
-            <Path fill="currentColor" d="M0 0h37v37H0z" />
+            <Path fill={color} d="M0 0h37v37H0z" />
         </ClipPath>
         </Defs>
     </Svg>

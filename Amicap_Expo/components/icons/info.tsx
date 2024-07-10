@@ -6,38 +6,28 @@ interface Props extends SvgProps {
   color?: string;
 }
 
-const Info: React.FC<Props> = ({ color = "currentColor", ...props }) => (
+const Info: React.FC<Props> = ({ color, ...props }) => (
   <View style={styles.container}>
-    <Svg
-        width={37}
-        height={37}
-        fill="currentColor"
-        viewBox="0 0 37 37"
-        {...props}
+      <Svg
+      width={37}
+      height={37}
+      fill="none"
+      {...props}
     >
-        <G clipPath="url(#a)">
-        <G strokeWidth={2} clipPath="url(#b)">
-            <Path
-            stroke="currentColor"
-            d="M18.5 35.059c9.145 0 16.559-7.414 16.559-16.559 0-9.145-7.414-16.559-16.559-16.559-9.145 0-16.559 7.414-16.559 16.559 0 9.145 7.414 16.559 16.559 16.559Z"
-            />
-            <Path stroke="currentColor" strokeLinecap="round" d="M18.5 10.22h.017" />
-            <Path
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M15.188 16.844H18.5v8.28m-3.312 0h6.624"
-            />
-        </G>
-        </G>
-        <Defs>
+      <G stroke={color} strokeWidth={2} clipPath="url(#a)">
+        <Path d="M18.5 35.059c9.145 0 16.559-7.414 16.559-16.559 0-9.145-7.414-16.559-16.559-16.559-9.145 0-16.559 7.414-16.559 16.559 0 9.145 7.414 16.559 16.559 16.559Z" />
+        <Path strokeLinecap="round" d="M18.5 10.22h.017" />
+        <Path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M15.188 16.844H18.5v8.28m-3.312 0h6.624"
+        />
+      </G>
+      <Defs>
         <ClipPath id="a">
-            <Rect width="1em" height="1em" />
+          <Path fill={color} d="M0 0h37v37H0z" />
         </ClipPath>
-        <ClipPath id="b">
-            <Rect width="1em" height="1em" />
-        </ClipPath>
-        </Defs>
+      </Defs>
     </Svg>
   </View>
 );
