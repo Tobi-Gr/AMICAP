@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'flex-end', 
-        alignItems: 'center', 
+        alignItems: 'center'
     },
     rectangle: {
         width: '100%', 
