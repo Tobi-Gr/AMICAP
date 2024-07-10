@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
     rectangle: {
         width: '100%', 
         backgroundColor: Colores.turquesa,
-        borderRadius: 80,
+        borderTopLeftRadius: 80,
+        borderTopRightRadius: 80
     },
 });
 
