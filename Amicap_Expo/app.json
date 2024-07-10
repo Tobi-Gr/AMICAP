@@ -28,10 +28,16 @@
     },
     "plugins": [
       "expo-router",
-      ["expo-font",
-      {
-        "fonts": ["./assets/fonts/FiraSans-Regular.tff", "./assets/fonts/Montserrat-Bold.tff", "./assets/fonts/Montserrat-Regular.tff"]
-      }]
+      [
+        "expo-font",
+        {
+          "fonts": {
+            "FiraSans-Regular": "./assets/fonts/FiraSans-Regular.ttf",
+            "Montserrat-Bold": "./assets/fonts/Montserrat-Bold.ttf",
+            "Montserrat-Regular": "./assets/fonts/Montserrat-Regular.ttf"
+          }
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

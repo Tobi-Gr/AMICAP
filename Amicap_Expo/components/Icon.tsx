@@ -1,7 +1,7 @@
 // Icono.tsx
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import HomeSvg from './../assets/icons/Home.tsx'; // Example import
+//import HomeSvg from './../assets/icons/Home.tsx'; // Example import
 
 type IconType = 'home' | 'settings' | 'profile';
 
@@ -17,7 +17,7 @@ const Icono: React.FC<IconoProps> = ({ type, color = 'black', width = 24, height
 
   switch (type) {
     case 'home':
-      SvgComponent = HomeSvg;
+//      SvgComponent = HomeSvg;
       break;
     // Add cases for other icons here
     default:
