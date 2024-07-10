@@ -1,3 +1,4 @@
+import {useFonts} from 'expo-font';
 import React,{FC} from 'react';
 import {Text, StyleSheet, View} from 'react-native';
 import {Colores} from './../constants/Colors';
@@ -8,6 +9,11 @@ interface promps{
     style?: any,
 }
 const Texto: React.FC<promps> = ({ text, estilo, style }) => {
+  const [loaded, error] = useFonts({
+    'FiraSans-Regular': require('./../assets/fonts/FiraSans-Regular.ttf'),
+    'Montserrat-Regular': require('./../assets/fonts/Montserrat-Regular.ttf'),
+  });
+  
   const textStyle = estilo ? styles[estilo] : styles.defaultText;
   return (
       <View style={styles.container}>
@@ -22,7 +28,7 @@ const Texto: React.FC<promps> = ({ text, estilo, style }) => {
       justifyContent: "center"
     },
     defaultText: {
-      fontFamily: 'Montserrat-Regular.ttf',
+      fontFamily: 'Montserrat-Regular',
       fontSize: 20
     },
     tituloTurquesa: {
