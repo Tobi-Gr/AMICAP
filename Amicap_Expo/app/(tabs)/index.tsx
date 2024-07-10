@@ -43,6 +43,7 @@ export default function HomeScreen() {
           <ListaContactos contactos={contactos}/>
         </View>
       
+        <Navbar tipo="home"/>
       </View>
         
   );
