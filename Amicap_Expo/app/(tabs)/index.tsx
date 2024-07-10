@@ -39,10 +39,12 @@ export default function HomeScreen() {
           <BotonAyuda/>
         </View>  
         <Navbar/>
+        <View style={{ marginTop: yAyuda, marginLeft: xAyuda, position: 'absolute'}}>
+          <ListaContactos contactos={contactos}/>
+        </View>
+      
       </View>
-        // <View style={{ marginTop: yAyuda, marginLeft: xAyuda, position: 'absolute'}}>
-        //   <ListaContactos contactos={contactos}/>
-        // </View>
+        
   );
 }
 
