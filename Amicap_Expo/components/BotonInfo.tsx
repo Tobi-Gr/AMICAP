@@ -1,23 +1,21 @@
-import React, { FC, ReactNode } from "react";
-import { TouchableOpacity, ViewStyle, StyleSheet, Dimensions, View} from 'react-native';
+import React, { FC } from "react";
+import { TouchableOpacity, StyleSheet, Dimensions, View } from 'react-native';
 import Info from './icons/Info';
-import {Colores} from './../constants/Colors';
+import { Colores } from './../constants/Colors';
 
-
-
-const BotonInfo=  () => {
+const BotonInfo: FC = () => {
     const windowWidth = Dimensions.get('window').width;
-    const diameter = windowWidth / 4;
+    const diameter = windowWidth / 5.45;
     const iconDiameter = diameter / 1.4;
     const handlePress = () => {
-            console.log("Ver info")
+        console.log("Ver info");
     };
 
     return (
         <TouchableOpacity onPress={handlePress} style={styles.container} activeOpacity={1}>
-            <View style={[styles.borderWrapper, { width: diameter + 4, height: diameter + 8, borderRadius: (diameter + 4) / 2 }]}>
-                <View style={[styles.button, { width: diameter, height: diameter }]}>
-                    <Info width={iconDiameter} height={iconDiameter} color={Colores.turquesa}/>
+            <View style={[styles.borderWrapper, { width: diameter + 4, height: diameter + 4, borderRadius: (diameter + 4) / 2 }]}>
+                <View style={[styles.button, { width: diameter, height: diameter, borderRadius: diameter / 2 }]}>
+                    <Info width={iconDiameter} height={iconDiameter} color={Colores.turquesa} />
                 </View>
             </View>
         </TouchableOpacity>
@@ -36,7 +34,6 @@ const styles = StyleSheet.create({
         opacity: 0.6,
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius:80
     },
     container: {
         alignItems: 'center',

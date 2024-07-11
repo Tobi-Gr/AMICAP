@@ -1,4 +1,5 @@
-import { Image, StyleSheet, Platform, View, Text, Dimensions} from 'react-native';
+import {StyleSheet, View, Dimensions} from 'react-native';
+import {Link} from 'expo-router'
 import Navbar from './../../components/Navbar';
 import BotonAyuda from './../../components/BotonAyuda'
 import Add from './../../components/icons/Add'
@@ -24,6 +25,9 @@ export default function HomeScreen() {
 
   const yContacto = windowHeight / 3;
   const xContacto = windowWidth / 5.8
+
+  const yInfo = windowHeight / 2.07;
+  const xInfo = windowWidth / 12.8;
   
   // flex:1 es para que ocupe toda la pantalla
 
@@ -44,9 +48,10 @@ export default function HomeScreen() {
           <BotonContacto/>
         </View> 
         <View style={{ marginTop: yAyuda, marginLeft: xAyuda, position: 'absolute'}}>
+          <Link href="/ayuda"></Link>
           <BotonAyuda/>
         </View>  
-        <View style={{ marginTop: yAyuda, marginLeft: xAyuda, position: 'absolute'}}>
+        <View style={{ marginTop: yInfo, marginLeft: xInfo, position: 'absolute'}}>
           <BotonInfo/>
         </View>  
         <Navbar tipo="home"/>
