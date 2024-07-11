@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import {View, TouchableOpacity} from 'react-native';
 import Texto from './Texto';
-import Icon from './Icon';
 
 interface Contact{
   nombre:string;
