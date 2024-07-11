@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from "react";
-import { TouchableOpacity, Text, TextStyle, ViewStyle, StyleSheet, Dimensions, View} from 'react-native';
-import Infoi from './icons/Info';
+import { TouchableOpacity, ViewStyle, StyleSheet, Dimensions, View} from 'react-native';
+import Info from './icons/Info';
 import {Colores} from './../constants/Colors';
 
 
@@ -20,7 +20,7 @@ const BotonInfo: FC<Props> = ({styleContainer}) => {
         <TouchableOpacity onPress={handlePress} style={styles.container} activeOpacity={1}>
             <View>
                 <View style={[styles.button, { width: diameter, height: diameter }]}>
-                    <Infoi/>
+                    <Info/>
                 </View>
             </View>
         </TouchableOpacity>
@@ -28,18 +28,22 @@ const BotonInfo: FC<Props> = ({styleContainer}) => {
 };
 
 const styles = StyleSheet.create({
-    button: {
-        backgroundColor: Colores.naranja,
-        opacity: 0.7,
-        borderRadius: 80
+    borderWrapper: {
+        borderWidth: 4,
+        borderColor: Colores.blanco,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
-    border:{
+    button: {
         backgroundColor: Colores.blanco,
+        opacity: 0.6,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     container: {
         alignItems: 'center',
         justifyContent: 'center',
     }
-  });
+});
 
 export default BotonInfo;
