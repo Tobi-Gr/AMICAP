@@ -11,8 +11,6 @@ interface Contact{
 interface Props{
   contactos: Contact[];
 }
-//Número de teléfono al que quieres llamar
-let phoneNumber = '+54911';
 
 const ListaContactos: FC<Props> = ({contactos}) => {
   const urlApi = "http://localhost:3000/api/contacto/:id_usuario=1";
