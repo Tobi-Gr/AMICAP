@@ -13,8 +13,9 @@ const Info: React.FC<Props> = ({ color = "#000", width = 33, height = 37, ...pro
     <Svg
       width={width}
       height={height}
-      viewBox="0 0 33 37"  
+      viewBox="0 0 33 37"
       fill="none"
+      style={styles.svg}
       {...props}
     >
       <G stroke={color} strokeWidth={2} clipPath="url(#a)">
@@ -39,6 +40,12 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  svg: {
+    position: 'absolute',
+    top: '30%',
+    left: '26%',
+    transform: [{ translateX: -16.5 }, { translateY: -16.5 }], // Half of the width and height of the SVG
   },
 });
 

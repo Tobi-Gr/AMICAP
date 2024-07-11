@@ -13,8 +13,9 @@ const Contact: React.FC<Props> = ({ color = "#000", width = 33, height = 37, ...
     <Svg
       width={width}
       height={height}
-      viewBox="0 0 33 37"  // Agregado el viewBox
+      viewBox="0 0 33 37"
       fill={color}
+      style={styles.svg}
       {...props}
     >
       <G clipPath="url(#a)">
@@ -36,6 +37,12 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  svg: {
+    position: 'absolute',
+    top: '25%',
+    left: '28%',
+    transform: [{ translateX: -16.5 }, { translateY: -18.5 }], // Mitad del alto y ancho del SVG
   },
 });
 
