@@ -1,15 +1,19 @@
 import React from 'react';
-import { StyleSheet, View, Dimensions, TouchableOpacity } from 'react-native'; // Importa TouchableOpacity para manejar onPress
+import { StyleSheet, View, Dimensions, TouchableOpacity } from 'react-native';
 import { Colores } from './../constants/Colors';
 import Texto from './Texto';
 
-const BotonAyuda = () => {
+interface Props {
+  navigation: any;
+}
+
+const BotonAyuda: React.FC<Props> = ({ navigation }) => {
   const windowWidth = Dimensions.get('window').width;
   const diametro = windowWidth * 0.6;
   const tamanoFuente = diametro / 5;
 
   const handlePress = () => {
-    console.log("Toma tu ayuda");
+    navigation.navigate('Ayuda');
   };
 
   return (
