@@ -9,42 +9,56 @@ interface Actividad
     numero:string;
 }
 
-export default function ActividadScreen() {  
-  const windowWidth = Dimensions.get('window').width;
-  const windowHeight = Dimensions.get('window').height;
-  const tamanoFuente = windowWidth / 10;
+const ActividadScreen: React.FC = () => {  
+    const windowWidth = Dimensions.get('window').width;
+    const windowHeight = Dimensions.get('window').height;
+    const tamanoFuente = windowWidth / 10;
 
-  const urlApi = "http://localhost:3000/api/actPreferida/1";
-  const [fetchedActividades, setFetchedActividades] = useState<Actividad[]>([]);
-  const [selectedActividad, setSelectedActividad] = useState<Actividad | null>(null);
-  useEffect(() => {
-    fetch(urlApi)
-        .then(response => response.json())
-        .then(data => 
-        {
-          // Mapear los resultados para adaptarlos al formato de Contacto que se espera
-          const mappedActividades: Actividad[] = data.results.map((result: any) =>
-          ({
-            nombre: result.nombre,
-            numero: result.number,
+    const urlApi = "http://localhost:3000/api/actPreferida/1";
+    const [Actividades, setActividades] = useState<Actividad[]>([]);
+    const [selectedActividad, setSelectedActividad] = useState<Actividad | null>(null);
+
+    const fetchActividades = async () => {
+        try {
+            const response = await fetch(urlApi);
+            if (!response.ok) {
+            throw new Error('Failed to fetch data');
+            }
+            const data = await response.json();
+    
+            // Mapear los resultados para adaptarlos al formato de Contacto que se espera
+            const mappedActividades: Actividad[] = data.results.map((result: any) =>
+            ({
+                nombre: result.nombre,
+                numero: result.number,
             }));
-        setFetchedActividades(mappedActividades);
+            setActividades(mappedActividades);
+    
+            //selecciona una actividad random
             const rnd = Math.floor(Math.random() * mappedActividades.length)
             setSelectedActividad(mappedActividades[rnd]);
-    })
-        })
-    //     .catch(error => console.log('Hubo un error ' + error));
-    // }, []);
+        } catch (error) {
+            console.log('Hubo un error ', error);
+        }
+  
+    }
+
+    useEffect(() =>{
+        fetchActividades();
+
+    }, []);
 
   return (
       <View style={{flex: 1, backgroundColor: Colores.blanco}}>
           <Texto text={"Página de ayuda"} estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }}/> 
       </View>
         );    
-      
+  };
+
 const styles = StyleSheet.create({
   titleContainer: {
     flex: 1,
     alignItems: 'center',
   }
 });
+export default ActividadScreen;
