@@ -4,23 +4,20 @@ import Info from './icons/Info';
 import {Colores} from './../constants/Colors';
 
 
-interface Props {
-    styleContainer?: ViewStyle,
-}
 
-const BotonInfo: FC<Props> = ({styleContainer}) => {
+const BotonInfo=  () => {
     const windowWidth = Dimensions.get('window').width;
     const diameter = windowWidth / 4;
-    const borderDiameter = diameter + 4;
+    const iconDiameter = diameter / 1.4;
     const handlePress = () => {
-            //función llamar
+            console.log("Ver info")
     };
 
     return (
         <TouchableOpacity onPress={handlePress} style={styles.container} activeOpacity={1}>
-            <View>
+            <View style={[styles.borderWrapper, { width: diameter + 4, height: diameter + 8, borderRadius: (diameter + 4) / 2 }]}>
                 <View style={[styles.button, { width: diameter, height: diameter }]}>
-                    <Info/>
+                    <Info width={iconDiameter} height={iconDiameter} color={Colores.turquesa}/>
                 </View>
             </View>
         </TouchableOpacity>
@@ -39,6 +36,7 @@ const styles = StyleSheet.create({
         opacity: 0.6,
         alignItems: 'center',
         justifyContent: 'center',
+        borderRadius:80
     },
     container: {
         alignItems: 'center',

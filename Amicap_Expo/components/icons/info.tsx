@@ -1,16 +1,20 @@
+
 import React from 'react';
-import Svg, { G, Path, Defs, ClipPath, Rect, SvgProps } from 'react-native-svg';
+import Svg, { G, Path, Defs, ClipPath, SvgProps } from 'react-native-svg';
 import { View, StyleSheet } from 'react-native';
 
 interface Props extends SvgProps {
   color?: string;
+  width?: number;
+  height?: number;
 }
 
-const Info: React.FC<Props> = ({ color, ...props }) => (
-  <View style={styles.container}>
-      <Svg
-      width={37}
-      height={37}
+const Contact: React.FC<Props> = ({ color = "#000", width = 33, height = 37, ...props }) => (
+  <View style={[styles.container, { width, height }]}>
+    <Svg
+      width={width}
+      height={height}
+      viewBox="0 0 33 37"  
       fill="none"
       {...props}
     >
@@ -39,4 +43,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Info;
+export default Contact;
+
