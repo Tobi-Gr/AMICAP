@@ -6,6 +6,7 @@ import FondoAzul from '@/components/FondoAzul';
 import Texto from '@/components/Texto'
 import {Colores} from './../../constants/Colors';
 import ListaContactos from '@/components/ListaContactos';
+import BotonContacto from '@/components/BotonContacto';
 
 
 export default function HomeScreen() {  
@@ -19,6 +20,9 @@ export default function HomeScreen() {
 
   const yAyuda = windowHeight * 0.45;
   const xAyuda = windowWidth / 3.5;
+
+  const yContacto = windowHeight / 3;
+  const xContacto = windowWidth / 5.8
   
   // flex:1 es para que ocupe toda la pantalla
 
@@ -35,20 +39,22 @@ export default function HomeScreen() {
         <View style={{position:'relative'}}>
           <FondoAzul/>
         </View>
+        <View style={{ marginTop: yContacto, marginLeft: xContacto, position: 'absolute'}}>
+          <BotonContacto/>
+        </View> 
         <View style={{ marginTop: yAyuda, marginLeft: xAyuda, position: 'absolute'}}>
           <BotonAyuda/>
         </View>  
-        <Navbar/>
-        <View style={{ marginTop: yAyuda, marginLeft: xAyuda, position: 'absolute'}}>
-          <ListaContactos contactos={contactos}/>
-        </View>
-      
-        <Navbar tipo="home"/>
+        <Navbar tipo= "home"/>
       </View>
         
-  );
-}
-
+        );
+      }
+      // <View style={{ marginTop: yAyuda, marginLeft: xAyuda, position: 'absolute'}}>
+      //   <ListaContactos contactos={contactos}/>
+      // </View>
+    
+      
 const styles = StyleSheet.create({
   titleContainer: {
     flex: 1,
