@@ -15,7 +15,7 @@ interface Props{
 let phoneNumber = '+54911';
 
 const ListaContactos: FC<Props> = ({contactos}) => {
-  const urlApi = "https://randomuser.me/api/?results=5";
+  const urlApi = "http://localhost:3000/api/contacto/:id_usuario=1";
   const [fetchedContactos, setFetchedContacts] = useState<Contact[]>([]);
   const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
 
