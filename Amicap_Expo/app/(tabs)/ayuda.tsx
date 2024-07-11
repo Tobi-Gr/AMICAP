@@ -1,24 +1,29 @@
-import { Image, StyleSheet, Platform, View, Text, Dimensions} from 'react-native';
-import Texto from '@/components/Texto'
-import {Colores} from './../../constants/Colors';
+import { StyleSheet, View, Dimensions } from 'react-native';
+import Texto from '@/components/Texto';
+import { Colores } from '../../constants/Colors';
 
+interface Props {
+  navigation: any;
+}
 
-export default function HomeScreen() {  
+const AyudaScreen: React.FC<Props> = ({ navigation }) => {  
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
 
-  const tamanoFuente = windowWidth / 10;
   return (
-      <View style={{flex: 1, backgroundColor: Colores.blanco}}>
-          <Texto text={"Página de ayuda"} estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }}/> 
+    <View style={{ flex: 1, backgroundColor: Colores.blanco }}>
+      <View style={[styles.titleContainer]}>
+        <Texto text={"Página de ayuda"} estilo="tituloTurquesa" /> 
       </View>
-        
-        );
-      }    
-      
+    </View>
+  );
+};
+
 const styles = StyleSheet.create({
   titleContainer: {
     flex: 1,
     alignItems: 'center',
   }
 });
+
+export default AyudaScreen;
