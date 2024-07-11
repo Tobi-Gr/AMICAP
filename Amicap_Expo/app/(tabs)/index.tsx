@@ -6,6 +6,8 @@ import FondoAzul from '@/components/FondoAzul';
 import Texto from '@/components/Texto'
 import {Colores} from './../../constants/Colors';
 import ListaContactos from '@/components/ListaContactos';
+import BotonContacto from '@/components/BotonContacto';
+import BotonInfo from '@/components/BotonInfo';
 
 
 export default function HomeScreen() {  
@@ -37,6 +39,9 @@ export default function HomeScreen() {
         </View>
         <View style={{ marginTop: yAyuda, marginLeft: xAyuda, position: 'absolute'}}>
           <BotonAyuda/>
+        </View>  
+        <View style={{ marginTop: yAyuda, marginLeft: xAyuda, position: 'absolute'}}>
+          <BotonInfo/>
         </View>  
         <Navbar tipo="home"/>
       </View>
