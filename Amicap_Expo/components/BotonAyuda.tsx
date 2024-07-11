@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'expo-router'
 import { StyleSheet, View, Dimensions, TouchableOpacity } from 'react-native'; // Importa TouchableOpacity para manejar onPress
 import { Colores } from './../constants/Colors';
 import Texto from './Texto';
@@ -18,6 +19,7 @@ const BotonAyuda = () => {
       onPress={handlePress}
       style={[styles.container, { width: diametro, height: diametro }]}
     >
+      <Link href="/ayuda"></Link>
       <View style={[styles.sombra, { height: diametro, width: diametro }]} />     
       <View style={[styles.circulo, { height: diametro, width: diametro }]}>       
         <Texto text="Ayuda" estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} />
