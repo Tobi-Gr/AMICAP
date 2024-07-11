@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { TouchableOpacity, StyleSheet, Dimensions, View } from 'react-native';
-import Info from './icons/Info';
+import Info from './icons/info';
 import { Colores } from './../constants/Colors';
 
 const BotonInfo: FC = () => {

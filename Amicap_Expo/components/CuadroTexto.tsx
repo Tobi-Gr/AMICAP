@@ -1,66 +1,65 @@
 import React, {FC, useState, useEffect} from 'react';
-import {View, StyleSheet, Dimensions, Text} from 'react-native';
+import {View, StyleSheet, Dimensions} from 'react-native';
 import {Colores} from './../constants/Colors';
+import Texto from './Texto';
 
-interface Actividad{
-    nombre:string;
-    paso:string;
-}
-interface Props{
-    actividad: Actividad;
+interface Props {
+  nombre?: string;
+  actividad: string;
 }
 
+const CuadroTexto: FC<Props> = ({ nombre, actividad }) => {
+  const windowWidth = Dimensions.get('window').width;
+  const windowHeight = Dimensions.get('window').height;
+  const cuadroWidth = windowWidth / 1.4;
+  const cuadroHeight = windowHeight / 3;
+  const izqTriangulo = cuadroWidth / 14.5; //distancia desde el borde izquierdo de la burbuja y el principio del triángulo
 
-
-
-const CuadroTexto: FC<Props> =({ actividad }) => {
-    // Establece el estilo base y el estilo de la punta del cuadro
-    const cuadroStyles = [styles.cuadro];
-    const flechaStyles = [styles.flecha];
-  
-    return (
-      <View style={cuadroStyles}>
-        <Text>{actividad.nombre}</Text>
-        <Text>{actividad.paso}</Text>
-        <View style={flechaStyles} />
+  return (
+    <View style={styles.dialogo}>
+      <View style={[styles.cuadro, {width: cuadroWidth, height: cuadroHeight}]}>
+        {nombre && <Texto text={nombre} />} 
+        <Texto text={actividad} />
       </View>
-    );
-  };
-  
-  const styles = StyleSheet.create({
-    cuadro: {
-      backgroundColor: Colores.blanco,
-      padding: 10,
-      borderRadius: 10,
-      maxWidth: '80%',
-      position: 'relative',
-      marginBottom: 10,
-    },
-    flecha: {
-        position: 'absolute',
-        width: 0,
-        height: 0,
-        borderLeftColor: 'transparent',
-        borderRightColor: 'transparent',
-        borderTopColor: 'transparent',
-        borderBottomWidth: 10,
-        borderBottomColor: Colores.blanco, 
-        left: 20, // Ajusta la posición de la punta
-        top: -10, 
-    },
-    nombre: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 5,
-      },
-      paso: {
-        fontSize: 16,
-      },
-      placeholderText: {
-        fontSize: 18,
-        marginBottom: 20,
-      },
-   
-  });
-  
-  export default CuadroTexto;
+      <View style={[styles.flecha, {left: izqTriangulo, top: cuadroHeight}]} />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  dialogo: {
+    backgroundColor: "transparent",
+  },
+  cuadro: {
+    backgroundColor: Colores.blanco,
+    padding: 10,
+    borderRadius: 18,
+    justifyContent: 'center', // Para alinear el contenido verticalmente en el centro
+  },
+  flecha: {
+    position: "absolute",
+    width: 0,
+    height: 0,
+    borderTopColor: "transparent",
+    borderTopWidth: 0, //ángulo de la parte de arriba
+    borderLeftWidth: 60, //ancho de arriba
+    borderRightColor: Colores.blanco,
+    borderLeftColor: Colores.blanco,
+    borderBottomWidth: 60, //altura
+    borderBottomColor: "transparent",
+  },
+  nombre: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  paso: {
+    fontSize: 16,
+  },
+  placeholderText: {
+    fontSize: 18,
+    marginBottom: 20,
+  },
+});
+
+export default CuadroTexto;

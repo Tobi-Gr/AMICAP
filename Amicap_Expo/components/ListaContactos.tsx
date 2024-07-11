@@ -12,13 +12,8 @@ interface Props{
   contactos: Contact[];
 }
 
-<<<<<<< HEAD
-const ListaContactos: FC<Props> = ({contactos}) => {
-  const urlApi = "http://localhost:3000/api/contacto/1";
-=======
 const ListaContactos: FC<Props> = () => {
   const urlApi = "http://localhost:3000/api/contacto/:id_usuario=1";
->>>>>>> f8ea2935251b343c2f858fe557875eb789df92e6
   const [fetchedContactos, setFetchedContacts] = useState<Contact[]>([]);
   const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
 
