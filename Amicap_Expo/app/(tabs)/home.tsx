@@ -6,6 +6,7 @@
  import { Colores } from '../../constants/Colors';
  import BotonContacto from '@/components/BotonContacto';
  import BotonInfo from '@/components/BotonInfo';
+
  interface Props {
    navigation: any;
  }
