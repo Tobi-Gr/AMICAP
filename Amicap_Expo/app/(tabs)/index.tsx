@@ -21,6 +21,9 @@ export default function HomeScreen() {
 
   const yAyuda = windowHeight * 0.45;
   const xAyuda = windowWidth / 3.5;
+
+  const yContacto = windowHeight / 3;
+  const xContacto = windowWidth / 5.8
   
   // flex:1 es para que ocupe toda la pantalla
 
@@ -37,6 +40,9 @@ export default function HomeScreen() {
         <View style={{position:'relative'}}>
           <FondoAzul/>
         </View>
+        <View style={{ marginTop: yContacto, marginLeft: xContacto, position: 'absolute'}}>
+          <BotonContacto/>
+        </View> 
         <View style={{ marginTop: yAyuda, marginLeft: xAyuda, position: 'absolute'}}>
           <BotonAyuda/>
         </View>  
