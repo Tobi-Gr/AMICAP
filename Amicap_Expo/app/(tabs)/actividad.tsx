@@ -13,10 +13,11 @@ const ActividadScreen: React.FC = () => {
     const windowWidth = Dimensions.get('window').width;
     const windowHeight = Dimensions.get('window').height;
     const tamanoFuente = windowWidth / 10;
-
+    
     const urlApi = "http://localhost:3000/api/actPreferida/1";
     const [Actividades, setActividades] = useState<Actividad[]>([]);
-    const [selectedActividad, setSelectedActividad] = useState<Actividad | null>(null);
+    let [selectedActividad, setSelectedActividad] = useState<Actividad | null>(null);
+    selectedActividad = {"numero": "0", "nombre": ""};
 
     const fetchActividades = async () => {
         try {
@@ -45,12 +46,11 @@ const ActividadScreen: React.FC = () => {
 
     useEffect(() =>{
         fetchActividades();
-
     }, []);
 
   return (
       <View style={{flex: 1, backgroundColor: Colores.blanco}}>
-          <Texto text={"Página de ayuda"} estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }}/> 
+          <Texto text={selectedActividad.nombre} estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }}/> 
       </View>
         );    
   };
