@@ -1,21 +1,30 @@
 import React, { FC } from 'react';
-import { View } from 'react-native';
+import {View, TouchableOpacity} from 'react-native';
 import Texto from './Texto';
 import Icon from './Icon';
 
+interface Contact{
+  nombre:string;
+  numero:string;
+}
+
 interface Props {
-  nombre: string;
+  contact: Contact;
+  onClick: () => void;
 }
 
 //icono + nombre
-//ver en donde pasamos el valor de id
-//falta línea de abajo
-const Contacto: FC<Props> = ({ nombre}) => {
+const Contacto: FC<Props> = ({contact, onClick}) => {
+  const {nombre} = contact;
+  const handlePress = () =>
+  {
+    onClick();
+  };
+
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Icon type={'home'} />
+    <TouchableOpacity onPress={handlePress} style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Texto text={nombre} />
-    </View>
+    </TouchableOpacity>
   );
 };
 

@@ -1,34 +1,75 @@
 //hay q arreglarlo
-import React, {FC} from 'react';
+import React, {FC, useState, useEffect} from 'react';
 import { View, Button, Text} from 'react-native';
 import Communications from 'react-native-communications';
 import Contacto from './Contacto';
 
-interface Contacto{
+interface Contact{
   nombre:string;
   numero:string;
 }
 interface Props{
-  contactos: Contacto[];
+  contactos: Contact[];
 }
+//Número de teléfono al que quieres llamar
+let phoneNumber = '+54911';
 
 const ListaContactos: FC<Props> = ({contactos}) => {
-  const handlePhoneCall = () => {
-    //Número de teléfono al que quieres llamar
-    const phoneNumber = '+5491125119535';
-    //Llamar a la función para realizar la llamada
-    Communications.phonecall(phoneNumber, true);
-    //El segundo parámetro (true) indica que la llamada debe iniciarse inmediatamente (no mostrar el diálogo de confirmación).
-    //Si lo cambias a false, se mostrará un diálogo de confirmación antes de iniciar la llamada.
-    // {contactos.map((contacto: Contacto) => (
-    //   <Contacto nombre={contacto.nombre}/>
-    // ))}
+  const urlApi = "https://randomuser.me/api/?results=5";
+  const [fetchedContactos, setFetchedContacts] = useState<Contact[]>([]);
+  const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
+
+  useEffect(() => {
+      fetch(urlApi)
+          .then(response => response.json())
+          .then(data => {
+            // Mapear los resultados para adaptarlos al formato de Contacto que se espera
+            const mappedContacts: Contact[] = data.results.map((result: any) => ({
+              nombre: result.nombre,
+              numero: result.number,
+          }));
+          setFetchedContacts(mappedContacts);})
+          .catch(error => console.log('Hubo un error ' + error));
+  }, []);
+
+  const handleContactClick = (contact: Contact) => {
+    setSelectedContact(contact);
   };
+
+  const handlePhoneCall = () => {
+    if(selectedContact)
+    {
+      Communications.phonecall(selectedContact.numero, true);
+      //El segundo parámetro (true) indica que la llamada debe iniciarse inmediatamente (no mostrar el diálogo de confirmación).
+      //Si lo cambias a false, se mostrará un diálogo de confirmación antes de iniciar la llamada.
+    }
+  };
+
+  const closeModal = () => {
+    setSelectedContact(null);
+  };
+
   return (
     <View>
-      <Text> Administra tus citas </Text>
-      <Button title="Llamar" onPress={handlePhoneCall} />
+      <Text> Contactos </Text>
+      <View>
+        {fetchedContactos.map((contact, index) => (
+          <Contacto key={index} contact={contact} onClick={() => handleContactClick(contact)}/>
+        ))}
+      </View>
+      {selectedContact && <Button title="Llamar" onPress={handlePhoneCall} />}
     </View>
   );
 };
+
+// { <UserDetailsModal  onClose={closeModal} />}
+//       <div className="users-list-container">
+//           <h1>Listado: </h1>
+//           <div className="user-cards-container">
+//               {users.map((user, index) => (
+//                   <UserCard key={index} user={user} onClick={() => handleUserClick(user)} />
+//               ))}
+//           </div>
+//       </div>
+
 export default ListaContactos;
