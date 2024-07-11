@@ -1,26 +1,22 @@
-import React, { FC, ReactNode } from "react";
-import { TouchableOpacity, Text, TextStyle, ViewStyle, StyleSheet, Dimensions, View} from 'react-native';
+import React, { FC } from "react";
+import { TouchableOpacity, View, StyleSheet, Dimensions } from 'react-native';
 import Contact from './icons/Contact';
-import {Colores} from './../constants/Colors';
+import { Colores } from './../constants/Colors';
 
-
-interface Props {
-    styleContainer?: ViewStyle,
-}
-
-const BotonContacto: FC<Props> = ({styleContainer}) => {
+const BotonContacto = () => {
     const windowWidth = Dimensions.get('window').width;
     const diameter = windowWidth / 4;
-    const borderDiameter = diameter + 4;
+    const iconWidth = diameter / 1.6;
+    const iconHeight = iconWidth / 0.9;
     const handlePress = () => {
-            //función llamar
+        console.log("llamaste a Luca")
     };
 
     return (
         <TouchableOpacity onPress={handlePress} style={styles.container} activeOpacity={1}>
-            <View>
-                <View style={[styles.button, { width: diameter, height: diameter }]}>
-                    <Contact/>
+            <View style={[styles.borderWrapper, { width: diameter + 4, height: diameter + 8, borderRadius: (diameter + 4) / 2 }]}>
+                <View style={[styles.button, { width: diameter, height: diameter, borderRadius: diameter / 2 }]}>
+                    <Contact width={iconWidth} height={iconHeight} color={Colores.turquesa} />
                 </View>
             </View>
         </TouchableOpacity>
@@ -28,18 +24,22 @@ const BotonContacto: FC<Props> = ({styleContainer}) => {
 };
 
 const styles = StyleSheet.create({
-    button: {
-        backgroundColor: Colores.naranja,
-        opacity: 0.7,
-        borderRadius: 80
+    borderWrapper: {
+        borderWidth: 4,
+        borderColor: Colores.blanco,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
-    border:{
+    button: {
         backgroundColor: Colores.blanco,
+        opacity: 0.6,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     container: {
         alignItems: 'center',
         justifyContent: 'center',
     }
-  });
+});
 
 export default BotonContacto;
