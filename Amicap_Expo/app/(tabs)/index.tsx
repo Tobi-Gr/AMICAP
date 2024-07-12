@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './home';
 import AyudaScreen from './ayuda';
 import RespiracionScreen from './respiracion';
+import ActividadScreen from './actividad';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,7 +18,9 @@ const App = () => {
         component={AyudaScreen} 
         options={{ headerShown: false }} />
         <Stack.Screen name="Respiracion" 
-        component={RespiracionScreen} 
+        component={RespiracionScreen} />
+        <Stack.Screen name="Actividad" 
+        component={ActividadScreen} 
         options={{ headerShown: false }} />
       </Stack.Navigator>
   );

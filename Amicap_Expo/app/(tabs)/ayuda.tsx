@@ -23,10 +23,18 @@ const AyudaScreen: React.FC<Props> = ({ navigation }) => {
   const flechaTamano = windowWidth / 10;
 
   const nombre = "Nombre"
- 
-  const IrARespiracion = () => {
-    navigation.navigate('Respiracion');
-  };
+
+  function handleOnPressRespiracion(){
+    navigation.navigate('Ayuda');
+  }
+  function handleOnPressActividad(){
+    navigation.navigate('Actividad');
+  }
+
+  // <Arrow color={Colores.blanco} 
+  //   height={flechaTamano} 
+  //   width={flechaTamano} 
+  //   style={styles.flecha}/>
 
   return (
     <View style={{ flex: 1, backgroundColor: Colores.turquesa }} >
@@ -37,9 +45,10 @@ const AyudaScreen: React.FC<Props> = ({ navigation }) => {
         style={{top: dialogoY, left: dialogoX}}
         textStyle={{fontSize: tamanoFuente}}/>
       <View style={[styles.buttonsContainer, {top: botonesY, left:botonesX}]}>
-        <BotonPrincipal texto={"Respiración"} styleText={{fontSize: tamanoFuente}} onPress={IrARespiracion}/>
-        <BotonPrincipal texto={"Otra actividad"} styleText={{fontSize: tamanoFuente}}/>
-      </View>      
+        <BotonPrincipal texto={"Respiración"} styleText={{fontSize: tamanoFuente}} onPress={handleOnPressRespiracion}/>
+        <BotonPrincipal texto={"Otra actividad"} styleText={{fontSize: tamanoFuente}} onPress={handleOnPressActividad}/>
+      </View>
+      
       <Piso/>
     </View>
   );
