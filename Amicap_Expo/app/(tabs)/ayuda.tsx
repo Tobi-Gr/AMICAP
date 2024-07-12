@@ -24,8 +24,11 @@ const AyudaScreen: React.FC<Props> = ({ navigation }) => {
 
   const nombre = "Nombre"
 
-  function handleOnPress(){
-
+  function handleOnPressRespiracion(){
+    navigation.navigate('Ayuda');
+  }
+  function handleOnPressActividad(){
+    navigation.navigate('Actividad');
   }
 
   // <Arrow color={Colores.blanco} 
@@ -37,8 +40,8 @@ const AyudaScreen: React.FC<Props> = ({ navigation }) => {
     <View style={{ flex: 1, backgroundColor: Colores.turquesa }}>
       <CuadroTexto nombre={nombre} actividad="¿Qué querés hacer?" style={{top: dialogoY, left: dialogoX}}/>
       <View style={[styles.buttonsContainer, {top: botonesY, left:botonesX}]}>
-        <BotonPrincipal texto={"Respiración"} styleText={{fontSize: tamanoFuente}}/>
-        <BotonPrincipal texto={"Otra actividad"} styleText={{fontSize: tamanoFuente}}/>
+        <BotonPrincipal texto={"Respiración"} styleText={{fontSize: tamanoFuente}} onPress={handleOnPressRespiracion}/>
+        <BotonPrincipal texto={"Otra actividad"} styleText={{fontSize: tamanoFuente}} onPress={handleOnPressActividad}/>
       </View>
       
       <Piso/>
