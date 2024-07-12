@@ -42,12 +42,12 @@ const styles = StyleSheet.create({
   },
   textoTurquesa:{
     color: Colores.turquesa,
-    fontFamily: 'Montserrat-Bold',
+    fontFamily: 'Montserrat-Regular',
     fontWeight: 'bold'
   },
   textoNegro:{
     color: Colores.negro,
-    fontFamily: 'Montserrat-Bold',
+    fontFamily: 'Montserrat-Regular',
   }
 });
 
