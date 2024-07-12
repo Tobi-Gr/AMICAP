@@ -1,10 +1,9 @@
 import { Image, StyleSheet, Platform, View, Text, Dimensions} from 'react-native';
 import React, {FC, useState, useEffect} from 'react';
-import Texto from '@/components/Texto'
 import {Colores} from './../../constants/Colors';
 import CuadroTexto from '@/components/CuadroTexto';
 import Piso from './../../components/Piso';
-import Arrow from '@/components/icons/Arrow';
+import Flecha from '@/components/Flecha';
 import BotonPrincipal from '@/components/BotonPrincipal';
 
 interface Actividad
@@ -32,55 +31,58 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
 
     function handleOnPressRespiracion(){
         navigation.navigate('Ayuda');
-      }
-      function handleOnPressActividad(){
+    }
+    function handleOnPressActividad(){
         navigation.navigate('Actividad');
-      }
-    
-    // const urlApi = "http://localhost:3000/api/actPreferida/1";
-    // const [Actividades, setActividades] = useState<Actividad[]>([]);
-    // let [selectedActividad, setSelectedActividad] = useState<Actividad | null>(null);
-    // selectedActividad = {"paso_uno": "0", "nombre": ""};
+    }
 
-    // const fetchActividades = async () => {
-    //     try {
-    //         const response = await fetch(urlApi);
-    //         if (!response.ok) {
-    //         throw new Error('Failed to fetch data');
-    //         }
-    //         const data = await response.json();
-    
-    //         // Mapear los resultados para adaptarlos al formato de Contacto que se espera
-    //         const mappedActividades: Actividad[] = data.results.map((result: any) =>
-    //         ({
-    //             nombre: result.nombre,
-    //             paso_uno: result.paso_uno,
-    //         }));
-    //         setActividades(mappedActividades);
-    
-    //         //selecciona una actividad random
-    //         const rnd = Math.floor(Math.random() * mappedActividades.length)
-    //         setSelectedActividad(mappedActividades[rnd]);
-    //     } catch (error) {
-    //         console.log('Hubo un error ', error);
-    //     }
-  
-    // }
+    const urlApi = "http://localhost:3000/api/actPreferida/1";
+    const [Actividades, setActividades] = useState<Actividad[]>([]);
+    let [selectedActividad, setSelectedActividad] = useState<Actividad | null>(null);
 
-    // useEffect(() =>{
-    //     fetchActividades();
-    // }, []);
+    const fetchActividades = async () => {
+        try {
+            const response = await fetch(urlApi);
+            if (!response.ok) {
+            throw new Error('Failed to fetch data');
+            }
+            const data = await response.json();
+        
+            // Mapear los resultados para adaptarlos al formato de Contacto que se espera
+            const mappedActividades: Actividad[] = data.results.map((result: any) =>
+            ({
+                nombre: result.nombre,
+                paso_uno: result.paso_uno,
+            }));
+            setActividades(mappedActividades);
+        
+            //selecciona una actividad random
+            const rnd = Math.floor(Math.random() * mappedActividades.length)
+            setSelectedActividad(Actividades[rnd]);
+        } catch (error) {
+            console.log('Hubo un error ', error);
+        }
+    
+    }
+
+    useEffect(() =>{
+        fetchActividades();
+    }, []);
 
     return (
-        <View style={{ flex: 1, backgroundColor: Colores.turquesa }}>
-          <CuadroTexto actividad="Actividad" style={{top: dialogoY, left: dialogoX}}/>
-          <View style={[styles.buttonsContainer, {top: botonesY, left:botonesX}]}>
-            <BotonPrincipal texto={"Proxima actividad"} styleText={{fontSize: tamanoFuente}} onPress={handleOnPressActividad}/>
-            <BotonPrincipal texto={"Terminar"} styleText={{fontSize: tamanoFuente}} onPress={handleOnPressRespiracion}/>
-          </View>
-          
-          <Piso/>
+        <View style={{ flex: 1, backgroundColor: Colores.turquesa }} >
+        <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Home"}/>
+        <CuadroTexto 
+          actividad={selectedActividad.paso_uno} 
+          style={{top: dialogoY, left: dialogoX}}
+          textStyle={{fontSize: tamanoFuente}}/>
+        <View style={[styles.buttonsContainer, {top: botonesY, left:botonesX}]}>
+          <BotonPrincipal texto={"Respiración"} styleText={{fontSize: tamanoFuente}} onPress={handleOnPressRespiracion}/>
+          <BotonPrincipal texto={"Otra actividad"} styleText={{fontSize: tamanoFuente}} onPress={handleOnPressActividad}/>
         </View>
+        
+        <Piso/>
+      </View>
       );
         //<Texto text={selectedActividad.paso_uno} estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }}/> 
   };

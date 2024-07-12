@@ -7,7 +7,7 @@ const hlp = new ValidationHelper;
 
 router.get('/:id_usuario', async (req, res) =>{
     let respuesta;
-    let id_usuario = hlp.validarInt(req.params.id_usuario);
+    const id_usuario = hlp.validarInt(req.params.id_usuario);
     const returnArray = await svc.getByIdUsuarioAsync(id_usuario);
     if (returnArray != null)
     {
