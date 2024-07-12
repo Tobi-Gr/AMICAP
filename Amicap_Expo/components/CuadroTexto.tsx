@@ -19,7 +19,7 @@ const CuadroTexto: FC<Props> = ({ nombre, actividad, style }) => {
   return (
     <View style={[styles.dialogo, style]}> 
       <View style={[styles.cuadro, { width: cuadroWidth, height: cuadroHeight }]}>
-        {nombre && <Texto text={nombre} />}
+        {nombre && <Texto text={nombre + ','} />}
         <Texto text={actividad} />
       </View>
       <View style={[styles.flecha, { left: izqTriangulo, top: topTriangulo }]} />
