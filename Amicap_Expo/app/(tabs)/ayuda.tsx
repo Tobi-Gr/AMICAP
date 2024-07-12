@@ -1,4 +1,4 @@
-import { StyleSheet, View, Dimensions } from 'react-native';
+import { StyleSheet, View, Dimensions, Pressable} from 'react-native';
 import { Colores } from '../../constants/Colors';
 import Piso from './../../components/Piso';
 import CuadroTexto from '@/components/CuadroTexto';
@@ -12,7 +12,7 @@ const AyudaScreen: React.FC<Props> = ({ navigation }) => {
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
 
-  const tamanoFuente = windowWidth / 18;
+  const tamanoFuente = windowWidth / 20;
   const botonesX = windowWidth / 5.5;
   const botonesY = windowHeight / 4.5;
 
@@ -24,17 +24,19 @@ const AyudaScreen: React.FC<Props> = ({ navigation }) => {
 
   const nombre = "Nombre"
 
-  function handleOnPress(){
-
+  function goBack(){
+    navigation.navigate('Home');
   }
 
-  // <Arrow color={Colores.blanco} 
-  //   height={flechaTamano} 
-  //   width={flechaTamano} 
-  //   style={styles.flecha}/>
-
+  
   return (
-    <View style={{ flex: 1, backgroundColor: Colores.turquesa }}>
+    <View style={{ flex: 1, backgroundColor: Colores.turquesa }} >
+      <Pressable onPress={goBack} style={{height: flechaTamano, width: flechaTamano}}>
+        <Arrow color={Colores.blanco} 
+          height={flechaTamano} 
+          width={flechaTamano} 
+          style={styles.flecha}/>
+      </Pressable>
       <CuadroTexto nombre={nombre} actividad="¿Qué querés hacer?" style={{top: dialogoY, left: dialogoX}}/>
       <View style={[styles.buttonsContainer, {top: botonesY, left:botonesX}]}>
         <BotonPrincipal texto={"Respiración"} styleText={{fontSize: tamanoFuente}}/>
@@ -54,6 +56,7 @@ const styles = StyleSheet.create({
   flecha: {
     position: 'absolute',
     left: '5%',
+    top: 20
   },
   buttonsContainer:{
     alignContent: 'center',
