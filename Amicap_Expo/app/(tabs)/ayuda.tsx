@@ -2,7 +2,7 @@ import { StyleSheet, View, Dimensions, Pressable} from 'react-native';
 import { Colores } from '../../constants/Colors';
 import Piso from './../../components/Piso';
 import CuadroTexto from '@/components/CuadroTexto';
-import Arrow from '@/components/icons/Arrow';
+import Flecha from '@/components/Flecha';
 import BotonPrincipal from '@/components/BotonPrincipal';
 interface Props {
   navigation: any;
@@ -23,20 +23,10 @@ const AyudaScreen: React.FC<Props> = ({ navigation }) => {
   const flechaTamano = windowWidth / 10;
 
   const nombre = "Nombre"
-
-  function goBack(){
-    navigation.navigate('Home');
-  }
-
-  
+ 
   return (
     <View style={{ flex: 1, backgroundColor: Colores.turquesa }} >
-      <Pressable onPress={goBack} style={{height: flechaTamano, width: flechaTamano}}>
-        <Arrow color={Colores.blanco} 
-          height={flechaTamano} 
-          width={flechaTamano} 
-          style={styles.flecha}/>
-      </Pressable>
+      <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Home"}/>
       <CuadroTexto nombre={nombre} actividad="¿Qué querés hacer?" style={{top: dialogoY, left: dialogoX}}/>
       <View style={[styles.buttonsContainer, {top: botonesY, left:botonesX}]}>
         <BotonPrincipal texto={"Respiración"} styleText={{fontSize: tamanoFuente}}/>
