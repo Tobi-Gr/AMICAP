@@ -39,7 +39,6 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
     const urlApi = "http://localhost:3000/api/actPreferida/1";
     const [Actividades, setActividades] = useState<Actividad[]>([]);
     let [selectedActividad, setSelectedActividad] = useState<Actividad | null>(null);
-
     const fetchActividades = async () => {
         try {
             const response = await fetch(urlApi);
@@ -49,7 +48,7 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
             const data = await response.json();
         
             // Mapear los resultados para adaptarlos al formato de Contacto que se espera
-            const mappedActividades: Actividad[] = data.results.map((result: any) =>
+            const mappedActividades: Actividad[] = data?.results.map((result: any) =>
             ({
                 nombre: result.nombre,
                 paso_uno: result.paso_uno,
