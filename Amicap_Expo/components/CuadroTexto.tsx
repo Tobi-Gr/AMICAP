@@ -1,15 +1,16 @@
 import React, { FC } from 'react';
-import { View, StyleSheet, Dimensions, ViewStyle } from 'react-native';
+import { View, StyleSheet, Dimensions, ViewStyle, TextStyle } from 'react-native';
 import { Colores } from './../constants/Colors';
 import Texto from './Texto';
 
 interface Props {
-  nombre?: string;
-  actividad: string;
-  style?: ViewStyle; // Asegúrate de importar ViewStyle para los estilos del View
+  nombre?: string,
+  actividad: string,
+  style?: ViewStyle,
+  textStyle?: TextStyle
 }
 
-const CuadroTexto: FC<Props> = ({ nombre, actividad, style }) => {
+const CuadroTexto: FC<Props> = ({ nombre, actividad, style, textStyle }) => {
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
   const cuadroWidth = windowWidth / 1.4;
@@ -19,8 +20,8 @@ const CuadroTexto: FC<Props> = ({ nombre, actividad, style }) => {
   return (
     <View style={[styles.dialogo, style]}> 
       <View style={[styles.cuadro, { width: cuadroWidth, height: cuadroHeight }]}>
-        {nombre && <Texto text={nombre + ','} />}
-        <Texto text={actividad} />
+        {nombre && <Texto text={nombre + ','} estilo="textoTurquesa" style={textStyle}/>}
+        <Texto text={actividad} estilo="textoNegro" style={textStyle}/>
       </View>
       <View style={[styles.flecha, { left: izqTriangulo, top: topTriangulo }]} />
     </View>
@@ -33,9 +34,10 @@ const styles = StyleSheet.create({
   },
   cuadro: {
     backgroundColor: Colores.blanco,
-    padding: 10,
+    paddingTop: '7%',
+    paddingHorizontal: '5%',
     borderRadius: 18,
-    justifyContent: 'center', // Para alinear el contenido verticalmente en el centro
+    justifyContent: 'flex-start',
   },
   flecha: {
     position: "absolute",

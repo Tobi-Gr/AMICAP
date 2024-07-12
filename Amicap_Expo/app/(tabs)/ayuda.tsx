@@ -39,7 +39,11 @@ const AyudaScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <View style={{ flex: 1, backgroundColor: Colores.turquesa }} >
       <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Home"}/>
-      <CuadroTexto nombre={nombre} actividad="¿Qué querés hacer?" style={{top: dialogoY, left: dialogoX}}/>
+      <CuadroTexto 
+        nombre={nombre} 
+        actividad="¿Qué querés hacer?" 
+        style={{top: dialogoY, left: dialogoX}}
+        textStyle={{fontSize: tamanoFuente}}/>
       <View style={[styles.buttonsContainer, {top: botonesY, left:botonesX}]}>
         <BotonPrincipal texto={"Respiración"} styleText={{fontSize: tamanoFuente}} onPress={handleOnPressRespiracion}/>
         <BotonPrincipal texto={"Otra actividad"} styleText={{fontSize: tamanoFuente}} onPress={handleOnPressActividad}/>
