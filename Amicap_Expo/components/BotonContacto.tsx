@@ -3,13 +3,27 @@ import { TouchableOpacity, View, StyleSheet, Dimensions } from 'react-native';
 import Contact from './icons/Contact';
 import { Colores } from './../constants/Colors';
 
-const BotonContacto = () => {
+interface Contact{
+  nombre:string;
+  numero:string;
+}
+interface Props {
+    contactos: Contact[],
+    key: number,
+    onPress?: (contactos: Contact[], key:number) => void
+}
+
+
+const BotonContacto: FC<Props> = ({onPress, contactos, key}) => {
     const windowWidth = Dimensions.get('window').width;
     const diameter = windowWidth / 4;
     const iconWidth = diameter / 1.6;
     const iconHeight = iconWidth / 0.9;
     const handlePress = () => {
-        console.log("llamaste a Luca")
+        console.log("llamando a luca");
+        if(onPress){
+            onPress(contactos, key);
+        }
     };
 
     return (
