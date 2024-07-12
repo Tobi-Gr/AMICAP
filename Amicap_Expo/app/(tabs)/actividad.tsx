@@ -6,7 +6,7 @@ import {Colores} from './../../constants/Colors';
 interface Actividad
 {
     nombre:string;
-    numero:string;
+    paso_uno:string;
 }
 
 const ActividadScreen: React.FC = () => {  
@@ -17,7 +17,7 @@ const ActividadScreen: React.FC = () => {
     const urlApi = "http://localhost:3000/api/actPreferida/1";
     const [Actividades, setActividades] = useState<Actividad[]>([]);
     let [selectedActividad, setSelectedActividad] = useState<Actividad | null>(null);
-    selectedActividad = {"numero": "0", "nombre": ""};
+    selectedActividad = {"paso_uno": "0", "nombre": ""};
 
     const fetchActividades = async () => {
         try {
@@ -31,7 +31,7 @@ const ActividadScreen: React.FC = () => {
             const mappedActividades: Actividad[] = data.results.map((result: any) =>
             ({
                 nombre: result.nombre,
-                numero: result.number,
+                paso_uno: result.paso_uno,
             }));
             setActividades(mappedActividades);
     

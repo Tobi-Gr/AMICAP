@@ -35,7 +35,7 @@ import { useEffect, useState } from 'react';
    const xInfo = windowWidth / 12.8;
 
 
-  //TEMPORAL PARA PRUEBAS
+  //TEMPORAL PARA PRUEBAS (Contactos)
   const contact = {"nombre": "Luca", "numero": "+5491125119535"};
   const contact2 = {"nombre": "Marciano", "numero": "1"}
   const urlApi = "http://localhost:3000/api/contacto/:id_usuario=1";
@@ -60,7 +60,7 @@ import { useEffect, useState } from 'react';
   };
 
   const handlePhoneCall = () => {
-    if(selectedContact)
+    if(true)
     {
       Communications.phonecall(contact.numero, true);
       //El segundo parámetro (true) indica que la llamada debe iniciarse inmediatamente (no mostrar el diálogo de confirmación).
