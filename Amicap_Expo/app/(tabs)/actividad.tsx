@@ -38,7 +38,8 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
 
     const urlApi = "http://localhost:3000/api/actPreferida/1";
     const [Actividades, setActividades] = useState<Actividad[]>([]);
-    let [selectedActividad, setSelectedActividad] = useState<Actividad | null>(null);
+    let [selectedActividad, setSelectedActividad] = useState<Actividad>({ nombre: '', paso_uno: '' });
+    console.log(selectedActividad);
     const fetchActividades = async () => {
         try {
             const response = await fetch(urlApi);
@@ -68,6 +69,8 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
         fetchActividades();
     }, []);
 
+
+    //arreglar la direccion de los botones
     return (
         <View style={{ flex: 1, backgroundColor: Colores.turquesa }} >
         <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Home"}/>
@@ -76,8 +79,8 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
           style={{top: dialogoY, left: dialogoX}}
           textStyle={{fontSize: tamanoFuente}}/>
         <View style={[styles.buttonsContainer, {top: botonesY, left:botonesX}]}>
-          <BotonPrincipal texto={"Respiración"} styleText={{fontSize: tamanoFuente}} onPress={handleOnPressRespiracion}/>
-          <BotonPrincipal texto={"Otra actividad"} styleText={{fontSize: tamanoFuente}} onPress={handleOnPressActividad}/>
+          <BotonPrincipal texto={"Proxima actividad"} styleText={{fontSize: tamanoFuente}} onPress={handleOnPressRespiracion}/> 
+          <BotonPrincipal texto={"Terminar"} styleText={{fontSize: tamanoFuente}} onPress={handleOnPressActividad}/>
         </View>
         
         <Piso/>
