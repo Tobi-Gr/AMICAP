@@ -10,6 +10,9 @@ interface Actividad
 {
     nombre:string;
     paso_uno:string;
+    paso_dos?:string;
+    paso_tres?:string;
+    paso_cuatro?:string;
 }
 
 interface Props {
@@ -29,46 +32,48 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
   
     const flechaTamano = windowWidth / 10;
 
-    function handleOnPressRespiracion(){
-        navigation.navigate('Ayuda');
-    }
-    function handleOnPressActividad(){
-        navigation.navigate('Actividad');
-    }
-
-    const urlApi = "http://localhost:3000/api/actPreferida/1";
+    //hay que poner la IP de donde se este hosteando la API
+    const urlApi = "http://192.168.0.157:3000/api/actPreferida/1";
     const [Actividades, setActividades] = useState<Actividad[]>([]);
     let [selectedActividad, setSelectedActividad] = useState<Actividad>({ nombre: '', paso_uno: '' });
-    console.log(selectedActividad);
-    const fetchActividades = async () => {
-        try {
-            const response = await fetch(urlApi);
-            if (!response.ok) {
-            throw new Error('Failed to fetch data');
-            }
-            const data = await response.json();
-        
-            // Mapear los resultados para adaptarlos al formato de Contacto que se espera
-            const mappedActividades: Actividad[] = data?.results.map((result: any) =>
-            ({
-                nombre: result.nombre,
-                paso_uno: result.paso_uno,
-            }));
-            setActividades(mappedActividades);
-        
-            //selecciona una actividad random
-            const rnd = Math.floor(Math.random() * mappedActividades.length)
-            setSelectedActividad(Actividades[rnd]);
-        } catch (error) {
-            console.log('Hubo un error ', error);
-        }
     
+    const fetchActividades = async () => {
+      try {
+          const response = await fetch(urlApi);
+          if (!response.ok) {
+            throw new Error('Failed to fetch data');
+          }
+          const data = await response.json();
+          if (!data) {
+            throw new Error('data failed to response');
+          }
+
+          // Mapear los resultados para adaptarlos al formato de Contacto que se espera
+          const mappedActividades: Actividad[] = data.map((result: any) =>
+          ({
+              nombre: result.nombre,
+              paso_uno: result.paso_uno,
+          }));
+
+          //selecciona una actividad random
+          const rnd = Math.floor(Math.random() * mappedActividades.length)
+          setSelectedActividad(mappedActividades[rnd]);
+      } catch (error) {
+          console.log('Hubo un error en el try ', error);
+      }
+  
     }
 
     useEffect(() =>{
         fetchActividades();
     }, []);
 
+    function handleOnPressRespiracion(){
+      navigation.navigate('Ayuda');
+    }
+    function handleOnPressActividad(){
+      navigation.navigate('Actividad');
+      }
 
     //arreglar la direccion de los botones
     return (
@@ -103,4 +108,5 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
       marginHorizontal: 'auto'
     }
   });
+
 export default ActividadScreen;
