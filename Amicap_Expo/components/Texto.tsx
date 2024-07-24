@@ -40,6 +40,10 @@ const styles = StyleSheet.create({
     color: Colores.turquesa,
     fontFamily: 'FiraSans-Regular'
   },
+  tituloBlanco: {
+    color: Colores.blanco,
+    fontFamily: 'FiraSans-Regular'
+  },
   textoTurquesa:{
     color: Colores.turquesa,
     fontFamily: 'Montserrat-Regular',
