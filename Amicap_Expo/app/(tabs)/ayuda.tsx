@@ -25,7 +25,7 @@ const AyudaScreen: React.FC<Props> = ({ navigation }) => {
   const nombre = "Nombre"
 
   function handleOnPressRespiracion(){
-    navigation.navigate('Ayuda');
+    navigation.navigate('Respiracion');
   }
   function handleOnPressActividad(){
     navigation.navigate('Actividad');

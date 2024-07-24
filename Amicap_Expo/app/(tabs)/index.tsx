@@ -18,7 +18,8 @@ const App = () => {
         component={AyudaScreen} 
         options={{ headerShown: false }} />
         <Stack.Screen name="Respiracion" 
-        component={RespiracionScreen} />
+        component={RespiracionScreen}
+        options={{ headerShown: false }} />
         <Stack.Screen name="Actividad" 
         component={ActividadScreen} 
         options={{ headerShown: false }} />
