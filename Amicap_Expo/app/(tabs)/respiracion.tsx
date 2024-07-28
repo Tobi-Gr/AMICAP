@@ -16,14 +16,23 @@ const RespiracionScreen: React.FC<Props> = ({ navigation }) => {
   const exhalar = 4;
   const mantener = 4;
 
-  const tamanoFuente = windowWidth / 20;
-
+  const tamanoFuente = windowWidth / 15
   const flechaTamano = windowWidth / 10;
+  const margenSuperiorCuadrado = windowHeight / 6;
+  const margenSuperiorBoton = margenSuperiorCuadrado / 3;
+
+
+  function handleOnPressInicio(){
+    navigation.navigate('Home');
+  }
  
   return (
     <View style={{ flex: 1, backgroundColor: Colores.turquesa }} >
       <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Ayuda"}/>
+      <View style={{height: margenSuperiorCuadrado}} ></View>
       <Respirar inhalar={inhalar} exhalar={exhalar} mantener={mantener}/>
+      <View style={{height: margenSuperiorBoton}} ></View>
+      <BotonPrincipal texto="Volver a inicio" onPress={handleOnPressInicio} styleText={{fontSize: tamanoFuente}}/>
     </View>
   );
 };
