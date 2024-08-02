@@ -7,6 +7,9 @@
  import BotonContacto from '@/components/BotonContacto';
  import BotonInfo from '@/components/BotonInfo';
 
+
+ import { useDialog } from '@/components/ContactosContexto';
+
  interface Props {
    navigation: any;
  }
@@ -73,7 +76,7 @@ import { useEffect, useState } from 'react';
   };
   //TERMINA LO TEMPORAL
 
-
+  const { showDialog } = useDialog();
    return (
      <View style={{ flex: 1, backgroundColor: Colores.blanco }}>
        <View style={[styles.titleContainer, { marginTop: yTexto }]}>
@@ -83,7 +86,8 @@ import { useEffect, useState } from 'react';
          <FondoAzul />
        </View>
        <View style={{ marginTop: yContacto, marginLeft: xContacto, position: 'absolute' }} >
-         <BotonContacto contactos={[contact, contact2]} key={0} onPress={() => handlePhoneCall()}/>
+        {/*cambié handlePhoneCall por showDialog*/}
+         <BotonContacto contactos={[contact, contact2]} key={0} onPress={showDialog}/>
        </View> 
        <View style={{ marginTop: yAyuda, marginLeft: xAyuda, position: 'absolute' }}>
          <BotonAyuda navigation={navigation} /> 
