@@ -16,7 +16,7 @@ const Texto: React.FC<Props> = ({ text, estilo, style }) => {
   });
 
   if (!fontsLoaded) {
-    return <ActivityIndicator size="small" color="#0000ff" />; // Muestra un indicador de carga si lo deseas
+    return <ActivityIndicator size="small" color="#0000ff" />; // Muestra un indicador de carga
   }
 
   const textStyle = estilo ? styles[estilo] : styles.defaultText;
