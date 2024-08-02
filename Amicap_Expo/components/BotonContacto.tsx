@@ -8,9 +8,9 @@ interface Contact{
   numero:string;
 }
 interface Props {
-    contactos: Contact[],
-    key: number,
-    onPress?: (contactos: Contact[], key:number) => void
+    contactos?: Contact[],
+    key?: number,
+    onPress?: () => void
 }
 
 
@@ -21,9 +21,9 @@ const BotonContacto: FC<Props> = ({onPress, contactos, key}) => {
     const iconHeight = iconWidth / 0.9;
     const handlePress = () => {
         console.log("llamando a luca");
-        if(onPress){
-            onPress(contactos, key);
-        }
+         if(onPress){
+             onPress();
+         }
     };
 
     return (
