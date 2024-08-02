@@ -6,17 +6,17 @@ import RespiracionScreen from './respiracion';
 import ActividadScreen from './actividad';
 import ContactosModal from '../../components/ContactosModal';
 
-import { DialogProvider } from '@/components/ContactosContexto';
+import contactoModal from '@/components/ContactosModal';
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
-    <DialogProvider>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" 
         component={HomeScreen} 
         options={{ headerShown: false }} />
+        <ContactosModal/>
         <Stack.Screen name="Ayuda" 
         component={AyudaScreen} 
         options={{ headerShown: false }} />
@@ -27,7 +27,6 @@ const App = () => {
         component={ActividadScreen} 
         options={{ headerShown: false }} />
       </Stack.Navigator>
-    </DialogProvider>
   );
 };
 

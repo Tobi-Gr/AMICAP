@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { Button, Dialog, Portal, PaperProvider, Text } from 'react-native-paper';
 import { useDialog } from './ContactosContexto';
 
-const MyComponent: React.FC = () => {
+const contactosModal: React.FC = () => {
   const { dialogVisible, hideDialog } = useDialog();
   return (
     <PaperProvider>
@@ -24,4 +24,4 @@ const MyComponent: React.FC = () => {
   );
 };
 
-export default MyComponent;
+export default contactosModal;
