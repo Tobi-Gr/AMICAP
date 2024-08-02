@@ -73,7 +73,8 @@ import { useEffect, useState } from 'react';
   };
   //TERMINA LO TEMPORAL
 
-
+  
+  //<BotonContacto contactos={[contact, contact2]} key={0} onPress={() => handlePhoneCall()}/>
    return (
      <View style={{ flex: 1, backgroundColor: Colores.blanco }}>
        <View style={[styles.titleContainer, { marginTop: yTexto }]}>
@@ -83,7 +84,6 @@ import { useEffect, useState } from 'react';
          <FondoAzul />
        </View>
        <View style={{ marginTop: yContacto, marginLeft: xContacto, position: 'absolute' }} >
-         <BotonContacto contactos={[contact, contact2]} key={0} onPress={() => handlePhoneCall()}/>
        </View> 
        <View style={{ marginTop: yAyuda, marginLeft: xAyuda, position: 'absolute' }}>
          <BotonAyuda navigation={navigation} /> 

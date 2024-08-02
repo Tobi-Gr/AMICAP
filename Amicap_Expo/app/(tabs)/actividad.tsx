@@ -33,47 +33,57 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
     const flechaTamano = windowWidth / 10;
 
     //hay que poner la IP de donde se este hosteando la API
-    const urlApi = "http://192.168.0.157:3000/api/actPreferida/1";
+    const urlApi = "http://localhost:3000/api/actPreferida/1";
     const [Actividades, setActividades] = useState<Actividad[]>([]);
-    let [selectedActividad, setSelectedActividad] = useState<Actividad>({ nombre: '', paso_uno: '' });
+    let [selectedActividad, setSelectedActividad] = useState<Actividad>({nombre: '', paso_uno: '', paso_dos:'', paso_tres:'', paso_cuatro:''});
     
     const fetchActividades = async () => {
       try {
-          const response = await fetch(urlApi);
-          if (!response.ok) {
-            throw new Error('Failed to fetch data');
-          }
-          const data = await response.json();
-          if (!data) {
-            throw new Error('data failed to response');
-          }
-
-          // Mapear los resultados para adaptarlos al formato de Contacto que se espera
-          const mappedActividades: Actividad[] = data.map((result: any) =>
-          ({
-              nombre: result.nombre,
-              paso_uno: result.paso_uno,
-          }));
-
-          //selecciona una actividad random
-          const rnd = Math.floor(Math.random() * mappedActividades.length)
-          setSelectedActividad(mappedActividades[rnd]);
+        const response = await fetch(urlApi);
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        const data = await response.json();
+        if (!data) {
+          throw new Error('data failed to response');
+        }
+        mapearActividades(data);
+        //selecciona una actividad random
+        randomActividad();
       } catch (error) {
-          console.log('Hubo un error en el try ', error);
+        console.log('Hubo un error en el fetchActividades ', error);
       }
-  
+    }
+
+    const randomActividad = () => {
+      try {
+        //selecciona una actividad random
+        const rnd = Math.floor(Math.random() * Actividades.length)
+        setSelectedActividad(Actividades[rnd]);
+        //elimina la actividad seleccionada del array
+        setActividades(Actividades.filter(Actividad => Actividad !== Actividades[rnd]));
+      } catch (error) {
+        console.log('Hubo un error en el randomActividad ', error);
+      }
+    }
+    const mapearActividades = (data: Actividad[]) => {
+      setActividades(data.map((result: any) =>
+      ({
+        nombre: result.nombre,
+        paso_uno: result.paso_uno,
+        paso_dos: result.paso_dos,
+        paso_tres: result.paso_tres,
+        paso_cuatro: result.paso_cuatro,
+      })));
     }
 
     useEffect(() =>{
-        fetchActividades();
+      fetchActividades();
     }, []);
 
-    function handleOnPressRespiracion(){
-      navigation.navigate('Ayuda');
+    function handleOnPressHome(){
+      navigation.navigate('Home');
     }
-    function handleOnPressActividad(){
-      navigation.navigate('Actividad');
-      }
 
     //arreglar la direccion de los botones
     return (
@@ -84,8 +94,8 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
           style={{top: dialogoY, left: dialogoX}}
           textStyle={{fontSize: tamanoFuente}}/>
         <View style={[styles.buttonsContainer, {top: botonesY, left:botonesX}]}>
-          <BotonPrincipal texto={"Proxima actividad"} styleText={{fontSize: tamanoFuente}} onPress={handleOnPressRespiracion}/> 
-          <BotonPrincipal texto={"Terminar"} styleText={{fontSize: tamanoFuente}} onPress={handleOnPressActividad}/>
+          <BotonPrincipal texto={"Proxima actividad"} styleText={{fontSize: tamanoFuente}} onPress={randomActividad}/> 
+          <BotonPrincipal texto={"Terminar"} styleText={{fontSize: tamanoFuente}} onPress={handleOnPressHome}/>
         </View>
         
         <Piso/>
