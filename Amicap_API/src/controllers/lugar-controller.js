@@ -1,8 +1,8 @@
 import {Router} from 'express';
-import CausaService from '../services/causa-service.js';
+import LugarService from '../services/lugar-service.js';
 import ValidationHelper from '../helpers/validationHelper.js';
 const router = Router();
-const svc = new CausaService();
+const svc = new LugarService();
 const hlp = new ValidationHelper;
 
 router.post('', async (req, res) =>{

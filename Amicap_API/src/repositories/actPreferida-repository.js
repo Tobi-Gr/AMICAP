@@ -1,7 +1,7 @@
 import DataBaseHelper from '../helpers/bdHelper.js';
 const pgHelper = new DataBaseHelper;
 
-export default class ActividadRepository
+export default class ActPreferidaRepository
 {
     getByIdUsuarioAsync = async (id_usuario) =>
     {
