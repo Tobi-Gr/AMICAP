@@ -48,7 +48,7 @@ const ContactosModal: FC<Props> = ({ visible, setVisible }) => {
         }
     }
 
-    const mapearActividades = (data: Contact[]) => {
+    const mapearActividades = (data: Contacto[]) => {
         console.log('map: ', data);
         setContactos(data);
     }
