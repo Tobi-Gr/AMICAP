@@ -3,7 +3,17 @@ import { TouchableOpacity, StyleSheet, Dimensions, View } from 'react-native';
 import Info from './icons/info';
 import { Colores } from './../constants/Colors';
 
-const BotonInfo: FC = () => {
+interface Informacion{
+    id:number;
+    informacion:string;
+  }
+  interface Props {
+      contactos?: Informacion[],
+      key?: number,
+      onPress?: () => void
+  }
+
+const BotonInfo: FC<Props> = () => {
     const windowWidth = Dimensions.get('window').width;
     const diameter = windowWidth / 5.45;
     const iconDiameter = diameter / 1.4;

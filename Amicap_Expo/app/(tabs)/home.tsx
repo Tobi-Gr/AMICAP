@@ -26,7 +26,7 @@ import { useEffect, useState } from 'react';
  const HomeScreen: React.FC<Props> = ({ navigation }) => {  
    const windowWidth = Dimensions.get('window').width;
    const windowHeight = Dimensions.get('window').height;
-   const tamanoFuente = windowWidth / 10;
+   const tamanoTitulo= windowWidth/10
    const yTexto = windowHeight / 10;
    const nombre = "nombre"; //debería pasarnoslo el back
    const saludo = "Hola, " + nombre;
@@ -47,7 +47,7 @@ import { useEffect, useState } from 'react';
      <View style={{ flex: 1, backgroundColor: Colores.blanco }}> 
         <ContactosModal visible={visible} setVisible={setVisible}/>
        <View style={[styles.titleContainer, { marginTop: yTexto }]}>
-         <Texto text={saludo} estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} /> 
+         <Texto text={saludo} estilo="tituloTurquesa" style={{ fontSize: tamanoTitulo }} /> 
        </View>
        <View style={{ position: 'relative' }}>
          <FondoAzul />
