@@ -6,8 +6,7 @@ import Piso from './../../components/Piso';
 import Flecha from '@/components/Flecha';
 import BotonPrincipal from '@/components/BotonPrincipal';
 
-interface Actividad
-{
+interface Actividad {
     nombre:string;
     paso_uno:string;
     paso_dos?:string;
@@ -33,8 +32,8 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
     const flechaTamano = windowWidth / 10;
 
     //hay que poner la IP de donde se este hosteando la API
-    const urlApi = "http://localhost:3000/api/actPreferida/1";
-    const [Actividades, setActividades] = useState<Actividad[]>([]);
+    const urlApi = "http://192.168.179.226:3000/api/actPreferida/1";
+    const [actividades, setActividades] = useState<Actividad[]>([]);
     let [selectedActividad, setSelectedActividad] = useState<Actividad>({nombre: '', paso_uno: '', paso_dos:'', paso_tres:'', paso_cuatro:''});
     
     const fetchActividades = async () => {
@@ -47,9 +46,7 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
         if (!data) {
           throw new Error('data failed to response');
         }
-        mapearActividades(data);
-        //selecciona una actividad random
-        randomActividad();
+        return data;
       } catch (error) {
         console.log('Hubo un error en el fetchActividades ', error);
       }
@@ -58,28 +55,43 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
     const randomActividad = () => {
       try {
         //selecciona una actividad random
-        const rnd = Math.floor(Math.random() * Actividades.length)
-        setSelectedActividad(Actividades[rnd]);
+        const rnd = Math.floor(Math.random() * actividades.length)
+        setSelectedActividad(actividades[rnd]);
         //elimina la actividad seleccionada del array
-        setActividades(Actividades.filter(Actividad => Actividad !== Actividades[rnd]));
+        setActividades(actividades.filter(actividad => actividad !== actividades[rnd]));
       } catch (error) {
         console.log('Hubo un error en el randomActividad ', error);
       }
     }
     const mapearActividades = (data: Actividad[]) => {
-      setActividades(data.map((result: any) =>
-      ({
-        nombre: result.nombre,
-        paso_uno: result.paso_uno,
-        paso_dos: result.paso_dos,
-        paso_tres: result.paso_tres,
-        paso_cuatro: result.paso_cuatro,
-      })));
+      setActividades(data);
+      // setActividades(data.map((actividad: Actividad) =>
+      // ({
+      //   nombre: actividad.nombre,
+      //   paso_uno: actividad.paso_uno,
+      //   paso_dos: actividad.paso_dos,
+      //   paso_tres: actividad.paso_tres,
+      //   paso_cuatro: actividad.paso_cuatro,
+      // })));
     }
 
-    useEffect(() =>{
-      fetchActividades();
+    useEffect( () =>{
+      const funcion = async () => {
+        const data = await fetchActividades();
+        console.log(data);
+        setActividades(data);
+        console.log(actividades);
+      }
+      funcion();
     }, []);
+
+    useEffect( () =>{
+      const funcion = async () => {
+        //selecciona una actividad random
+        randomActividad(); 
+      }
+      funcion();
+    }, [actividades]);
 
     function handleOnPressHome(){
       navigation.navigate('Home');
