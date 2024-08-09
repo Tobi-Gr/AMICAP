@@ -49,6 +49,11 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat-Regular',
     fontWeight: 'bold'
   },
+  textoBlanco:{
+    color: Colores.blanco,
+    fontFamily: 'Montserrat-Regular',
+    fontWeight: 'bold'
+  },
   textoNegro:{
     color: Colores.negro,
     fontFamily: 'Montserrat-Regular',

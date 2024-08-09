@@ -1,28 +1,42 @@
+import { Colores } from './../constants/Colors';
 import React,{FC} from 'react';
-import {StyleSheet, Button, View, SafeAreaView, Text, Alert } from 'react-native';
+import Texto from './Texto';
+import {StyleSheet, Pressable, Dimensions } from 'react-native';
 
 interface Props{
-    text:string
+    text:string,
+    onPress?: () => void,
 }
 
-const BotonTexto: FC<Props> = ({text}) => (
-<SafeAreaView style={styles.container}>
-    <View>
-        <Text style={styles.title}></Text>
-        <Button title={text} onPress={() => Alert.alert('Se ha presionado!')}
-        />
-    </View>
-</SafeAreaView>
-);
+
+const BotonTexto: FC<Props> = ({text, onPress}) => {
+    const windowWidth = Dimensions.get('window').width;
+    const tamanoFuente = windowWidth * 0.05;
+    
+    const handleOnPress = () =>
+    {
+        if(onPress)
+        {
+            onPress();
+        }
+    };
+  
+    return (
+        <Pressable style={styles.container} onPress={handleOnPress}>
+            <Texto text={text} estilo="textoBlanco" style={{fontSize: tamanoFuente }}/>
+        </Pressable>
+    );
+  };
 
 const styles = StyleSheet.create({
-container: {
-flex: 1, justifyContent: 'center',
-marginHorizontal: 16,
-},
-title: {
-textAlign: 'center', marginVertical: 8,
-},
+    container: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginHorizontal: 16,
+        padding: "3%",
+        backgroundColor: Colores.turquesa,
+        borderRadius: 12
+    }
 });
 
 export default BotonTexto;
