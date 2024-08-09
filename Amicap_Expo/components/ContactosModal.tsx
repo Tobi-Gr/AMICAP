@@ -7,7 +7,7 @@ import { StyleSheet, TouchableOpacity, View, Text, Modal, Dimensions, ScrollView
 import Texto from './Texto';
 import NombreContacto from './NombreContacto';
 
-interface Contact {
+interface Contacto {
     id: number;
     nombre: string;
     numero: string;
@@ -28,20 +28,39 @@ const ContactosModal: FC<Props> = ({ visible, setVisible }) => {
         { id: 4, nombre: "Tobi", numero: "+5491170033777" }
     ], []);
     const urlApi = "http://localhost:3000/api/contacto/:id_usuario=1";
-    const [fetchedContactos, setFetchedContacts] = useState<Contact[]>([]);
-    const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
+    const [contactos, setContactos] = useState<Contacto[]>([]);
+    const [selectedContact, setSelectedContact] = useState<Contacto | null>(null);
+
+    const fetchContactos = async () => {
+        try {
+            const response = await fetch(urlApi);
+            if (!response.ok) {
+            throw new Error('Failed to fetch data');
+            }
+            const data = await response.json();
+            if (!data) {
+            throw new Error('data failed to response');
+            }
+            console.log('data: ', data);
+            return data;
+        } catch (error) {
+            console.log('Hubo un error en el fetchContactos ', error);
+        }
+    }
+
+    const mapearActividades = (data: Contact[]) => {
+        console.log('map: ', data);
+        setContactos(data);
+    }
 
     useEffect(() => {
-        fetch(urlApi)
-            .then(response => response.json())
-            .then(data => {
-                const mappedContacts: Contact[] = data.results.map((result: any) => ({
-                    nombre: result.nombre,
-                    numero: result.number,
-                }));
-                setFetchedContacts(mappedContacts);
-            })
-            .catch(error => console.log('Hubo un error ' + error));
+        const fetchAndSetContactos = async () => {
+            const data = await fetchContactos();
+            if (data.length > 0) {
+                setContactos(data);
+            }
+        };
+        fetchAndSetContactos();
     }, []);
 
     const handlePhoneCall = () => {
@@ -55,7 +74,7 @@ const ContactosModal: FC<Props> = ({ visible, setVisible }) => {
         setSelectedContact(null);
     }
 
-    const handleContactPress = (contact: Contact) => {
+    const handleContactPress = (contact: Contacto) => {
         setSelectedContact(prevSelectedContact =>
             prevSelectedContact?.id === contact.id ? null : contact
         );

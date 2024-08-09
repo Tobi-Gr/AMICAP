@@ -46,6 +46,7 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
         if (!data) {
           throw new Error('data failed to response');
         }
+        console.log('data: ', data);
         return data;
       } catch (error) {
         console.log('Hubo un error en el fetchActividades ', error);
@@ -54,6 +55,7 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
 
     const randomActividad = () => {
       try {
+        console.log('random: ', actividades);
         //selecciona una actividad random
         const rnd = Math.floor(Math.random() * actividades.length)
         setSelectedActividad(actividades[rnd]);
@@ -63,7 +65,9 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
         console.log('Hubo un error en el randomActividad ', error);
       }
     }
+    
     const mapearActividades = (data: Actividad[]) => {
+      console.log('map: ', data);
       setActividades(data);
       // setActividades(data.map((actividad: Actividad) =>
       // ({
@@ -76,21 +80,22 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
     }
 
     useEffect( () =>{
-      const funcion = async () => {
+      const fetchAndSetActividades = async () => {
         const data = await fetchActividades();
-        console.log(data);
-        setActividades(data);
-        console.log(actividades);
-      }
-      funcion();
+        if (data.length > 0) {
+          setActividades(data);
+        }
+      };
+      fetchAndSetActividades();
+      console.log('effect: ', actividades);
+
     }, []);
 
     useEffect( () =>{
-      const funcion = async () => {
+      if(actividades.length > 0) {
         //selecciona una actividad random
         randomActividad(); 
       }
-      funcion();
     }, [actividades]);
 
     function handleOnPressHome(){
