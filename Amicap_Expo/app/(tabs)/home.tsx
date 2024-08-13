@@ -51,7 +51,7 @@ const abrirModal = () =>
         <BotonAyuda navigation={navigation} /> 
       </View>  
       <View style={{ marginTop: yInfo, marginLeft: xInfo, position: 'absolute' }}>
-        <BotonInfo/>
+        <BotonInfo navigation={navigation}/>
       </View>
       <Navbar tipo="home" />
     </View>

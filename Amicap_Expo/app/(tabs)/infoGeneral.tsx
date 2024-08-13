@@ -5,8 +5,19 @@ import Flecha from '@/components/Flecha';
 import BotonPrincipal from '@/components/BotonPrincipal';
 import Texto from '@/components/Texto';
 import InfoModal from '@/components/InfoModal';
+
+interface Info{
+  id: number
+  titulo:string
+  informacion: string
+}
+
+
 interface Props {
   navigation: any;
+  informacion?: Info[],
+  key?: number,
+  onPress?: () => void
 }
 
 const InfoGeneralScreen: React.FC<Props> = ({ navigation }) => {  

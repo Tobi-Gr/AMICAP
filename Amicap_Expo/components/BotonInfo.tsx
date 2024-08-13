@@ -3,24 +3,30 @@ import { TouchableOpacity, StyleSheet, Dimensions, View } from 'react-native';
 import Info from './icons/info';
 import { Colores } from './../constants/Colors';
 
-interface Informacion{
-    id:number;
-    informacion:string;
-  }
-  interface Props {
-      contactos?: Informacion[],
-      key?: number,
-      onPress?: () => void
+interface Info{
+    id: number
+    titulo:string
+    informacion: string
   }
 
-const BotonInfo: FC<Props> = () => {
+  interface Props {
+    navigation: any;
+    informacion?: Info[],
+    key?: number,
+    onPress?: () => void
+  }
+
+const BotonInfo: FC<Props> = ({navigation}) => {
     const windowWidth = Dimensions.get('window').width;
     const diameter = windowWidth / 5.45;
     const iconDiameter = diameter / 1.4;
+    
+    
     const handlePress = () => {
-        console.log("Ver info");
+        navigation.navigate('InfoGeneral');
     };
-
+    
+ 
     return (
         <TouchableOpacity onPress={handlePress} style={styles.container} activeOpacity={1}>
             <View style={[styles.borderWrapper, { width: diameter + 4, height: diameter + 4, borderRadius: (diameter + 4) / 2 }]}>
