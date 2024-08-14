@@ -4,6 +4,8 @@ import Piso from './../../components/Piso';
 import CuadroTexto from '@/components/CuadroTexto';
 import Flecha from '@/components/Flecha';
 import BotonPrincipal from '@/components/BotonPrincipal';
+import Add from '@/components/icons/Add';
+
 interface Props {
   navigation: any;
 }
