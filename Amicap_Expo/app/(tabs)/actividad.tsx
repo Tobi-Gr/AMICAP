@@ -24,11 +24,8 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
     const tamanoFuente = windowWidth / 18;
     const botonesX = windowWidth / 5.5;
     const botonesY = windowHeight / 4.5;
-  
-  
     const dialogoY = windowHeight / 9.4;
     const dialogoX = windowWidth / 4.5;
-  
     const flechaTamano = windowWidth / 10;
 
     //hay que poner la IP de donde se este hosteando la API

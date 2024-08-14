@@ -5,10 +5,11 @@ import { Colores } from './../constants/Colors';
 import Texto from './Texto';
 import { tapHandlerName } from 'react-native-gesture-handler/lib/typescript/handlers/TapGestureHandler';
 
-interface Informacion{
-  id:number;
-  informacion:string;
-}
+interface Info{
+    id: number
+    titulo:string
+    informacion: string
+  }
 
 interface Props {
     visible: boolean;
@@ -18,29 +19,10 @@ interface Props {
 const InfoModal: FC<Props> = ({visible, setVisible}) => {
     const windowWidth = Dimensions.get('window').width;
     const tamanoFuente = windowWidth / 14;
-    //TEMPORAL PARA PRUEBAS (Contactos)
-    const contact = {"nombre": "Luca", "numero": "+5491125119535"};
-    const contact2 = {"nombre": "Marciano", "numero": "1"}
-    const urlApi = "http://localhost:3000/api/contacto/:id_usuario=1";
-    const [fetchedContactos, setFetchedContacts] = useState<Contact[]>([]);
-    const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
-
-    useEffect(() => {
-        fetch(urlApi)
-            .then(response => response.json())
-            .then(data => {
-                // Mapear los resultados para adaptarlos al formato de Contacto que se espera
-                const mappedContacts: Informacion[] = data.results.map((result: any) => ({
-                nombre: result.nombre,
-                numero: result.number,
-            }));
-            setFetchedContacts(mappedContacts);})
-            .catch(error => console.log('Hubo un error ' + error));
-    }, []);
 
 
     const closeModal = () => {
-        setSelectedContact(null);
+        setSelectedInfo(null);
     };
   //TERMINA LO TEMPORAL
     function cerrarModal(){
