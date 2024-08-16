@@ -6,6 +6,7 @@ import RespiracionScreen from './respiracion';
 import ActividadScreen from './actividad';
 import infoGeneralScreen from './infoGeneral';
 import InicioScreen from './inicio';
+import ConfiguracionScreen from './configuracion';
 
 const Stack = createNativeStackNavigator();
 
@@ -29,6 +30,9 @@ const App = () => {
           options={{ headerShown: false }} />
           <Stack.Screen name="InfoGeneral" 
           component={infoGeneralScreen} 
+          options={{ headerShown: false }} />
+          <Stack.Screen name="Configuracion" 
+          component={ConfiguracionScreen} 
           options={{ headerShown: false }} />
         </Stack.Navigator>
   );

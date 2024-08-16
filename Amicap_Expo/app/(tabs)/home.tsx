@@ -75,17 +75,17 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
       <View style={{ position: 'relative' }}>
         <FondoAzul />
       </View>
-      <View style={{ marginTop: yContacto, marginLeft: xContacto, position: 'absolute' }} >
-        <BotonContacto  onPress={((abrirModal))}/>
-        {/*contactos={[contact, contact2]} key={0} */}
-      </View> 
-      <View style={{ marginTop: yAyuda, marginLeft: xAyuda, position: 'absolute' }}>
-        <BotonAyuda navigation={navigation} /> 
-      </View>  
-      <View style={{ marginTop: yInfo, marginLeft: xInfo, position: 'absolute' }}>
-        <BotonInfo navigation={navigation}/>
+        <View style={{ marginTop: yContacto, marginLeft: xContacto, position: 'absolute' }} >
+          <BotonContacto  onPress={((abrirModal))}/>
+          {/*contactos={[contact, contact2]} key={0} */}
+        </View> 
+        <View style={{ marginTop: yAyuda, marginLeft: xAyuda, position: 'absolute' }}>
+          <BotonAyuda navigation={navigation} /> 
+        </View>  
+        <View style={{ marginTop: yInfo, marginLeft: xInfo, position: 'absolute' }}>
+          <BotonInfo navigation={navigation}/>
       </View>
-      <Navbar tipo="home" />
+      <Navbar tipo="home" navigation={navigation} />
     </View>
   );
 };
