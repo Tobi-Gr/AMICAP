@@ -27,7 +27,7 @@ const ContactosModal: FC<Props> = ({ visible, setVisible }) => {
         { id: 3, nombre: "Juli Lav", numero: "+5491139435672" },
         { id: 4, nombre: "Tobi", numero: "+5491170033777" }
     ], []);
-    const urlApi = "http://10.152.2.130:3000/api/contacto/:id_usuario=1"; //poner la ip de la compu que está ejecutando la api
+    const urlApi = "http://localhost:3000/api/contacto/1";
     const [contactos, setContactos] = useState<Contacto[]>([]);
     const [selectedContact, setSelectedContact] = useState<Contacto | null>(null);
 

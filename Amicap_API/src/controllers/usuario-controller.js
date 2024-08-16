@@ -1,9 +1,13 @@
 import {Router} from 'express';
-import UsuarioServices from '../services/usuario-services.js';
+import UsuarioService from '../services/usuario-service.js';
 import ValidationHelper from '../helpers/validationHelper.js';
 const router = Router();
-const svc = new UsuarioServices();
+const svc = new UsuarioService();
 const hlp = new ValidationHelper;
+
+router.get('/prueba', async (req, res) =>{
+        return res.status(200).json('Hola, funciona el Ngork');
+});
 
 //login
 router.post('/login', async (req, res) =>{

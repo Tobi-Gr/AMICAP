@@ -1,3 +1,4 @@
+import DBDomain from '../../constants/dbDomain';
 import { Image, StyleSheet, Platform, View, Text, Dimensions} from 'react-native';
 import React, {FC, useState, useEffect} from 'react';
 import {Colores} from './../../constants/Colors';
@@ -29,7 +30,7 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
     const flechaTamano = windowWidth / 10;
 
     //hay que poner la IP de donde se este hosteando la API
-    const urlApi = "http://192.168.179.226:3000/api/actPreferida/1";
+    const urlApi = `${DBDomain.domain}/api/actPreferida/1`;
     const [actividades, setActividades] = useState<Actividad[]>([]);
     let [selectedActividad, setSelectedActividad] = useState<Actividad>({nombre: '', paso_uno: '', paso_dos:'', paso_tres:'', paso_cuatro:''});
     
@@ -66,14 +67,6 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
     const mapearActividades = (data: Actividad[]) => {
       console.log('map: ', data);
       setActividades(data);
-      // setActividades(data.map((actividad: Actividad) =>
-      // ({
-      //   nombre: actividad.nombre,
-      //   paso_uno: actividad.paso_uno,
-      //   paso_dos: actividad.paso_dos,
-      //   paso_tres: actividad.paso_tres,
-      //   paso_cuatro: actividad.paso_cuatro,
-      // })));
     }
 
     useEffect( () =>{
