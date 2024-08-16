@@ -30,7 +30,7 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
     const flechaTamano = windowWidth / 10;
 
     //hay que poner la IP de donde se este hosteando la API
-    const urlApi = `${DBDomain.domain}/api/actPreferida/1`;
+    const urlApi = `${DBDomain}/api/actPreferida/1`;
     const [actividades, setActividades] = useState<Actividad[]>([]);
     let [selectedActividad, setSelectedActividad] = useState<Actividad>({nombre: '', paso_uno: '', paso_dos:'', paso_tres:'', paso_cuatro:''});
     

@@ -6,7 +6,7 @@ const svc = new UsuarioService();
 const hlp = new ValidationHelper;
 
 router.get('/prueba', async (req, res) =>{
-        return res.status(200).json('Hola, funciona el Ngork');
+        return res.status(200).json('Hola, funciona el Ngrok');
 });
 
 //login

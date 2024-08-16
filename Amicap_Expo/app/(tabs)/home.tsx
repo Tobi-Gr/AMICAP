@@ -30,7 +30,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
   const xInfo = windowWidth / 12.8;
 
   //Prueba de Ngrok
-  const urlApi = `${DBDomain.domain}/api/usuario/prueba`;
+  const urlApi = `${DBDomain}/api/usuario/prueba`;
   let test: string;
   const fetchActividades = async () => {
     try {
