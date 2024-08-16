@@ -5,12 +5,16 @@ import AyudaScreen from './ayuda';
 import RespiracionScreen from './respiracion';
 import ActividadScreen from './actividad';
 import infoGeneralScreen from './infoGeneral';
+import InicioScreen from './inicio';
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
-        <Stack.Navigator initialRouteName="Home">
+        <Stack.Navigator initialRouteName="Inicio">
+          <Stack.Screen name="Inicio" 
+          component={InicioScreen} 
+          options={{ headerShown: false }} />
           <Stack.Screen name="Home" 
           component={HomeScreen} 
           options={{ headerShown: false }} />
