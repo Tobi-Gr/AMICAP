@@ -20,21 +20,21 @@ export default class ValidationHelper
         const mail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!mail.test(data))
         {
-            throw new Error('Value is not a mail');
+            return true;
         }
-        else return data;
+        else return false;
     }
 
     //Valida si es un string
-    validarString = (data, min = 0, max = 999) =>
+    validarString = (data, min = 1, max = 999) =>
     {
         if (!(data instanceof string))
         {
-            throw new Error('Value is not an string');
+            return 'Value is not an string';
         }
         else if (data.length <= min && data.length >= max)
         {
-            throw new Error('Value is not in range of character');
+            return 'Value is not in range of character';
         }
         else return data;
     }
