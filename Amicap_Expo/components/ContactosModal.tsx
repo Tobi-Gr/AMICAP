@@ -105,8 +105,8 @@ const ContactosModal: FC<Props> = ({ visible, setVisible }) => {
                     </View>
                     <Contactos />
                     <View style={styles.botonesContainer}>
-                        <BotonTexto text="Cerrar" onPress={cerrarModal} />
-                        <BotonTexto text="Llamada" onPress={handlePhoneCall} />
+                        <BotonTexto text="Cerrar" onPress={cerrarModal} textStyle='textoBlanco' containerColor='turquesa'/>
+                        <BotonTexto text="Llamada" onPress={handlePhoneCall} textStyle='textoBlanco' containerColor='turquesa'/>
                     </View>
                 </View>
             </View>
