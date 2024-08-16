@@ -2,7 +2,7 @@ import {StyleSheet, Platform, View, Text, Dimensions} from 'react-native';
 import React, {FC, useState, useEffect} from 'react';
 import {Colores} from '../../constants/Colors';
 import Flecha from '@/components/Flecha';
-import BotonPrincipal from '@/components/BotonPrincipal';
+import BotonTexto from '@/components/BotonTexto';
 import Texto from '@/components/Texto';
 import InfoModal from '@/components/InfoModal';
 
@@ -30,12 +30,12 @@ const InfoGeneralScreen: React.FC<Props> = ({navigation}) => {
     const info1 = {id: 1, titulo: "¿Que es amicap?", informacion: "amicap es esto"};
     const urlApi = "http://localhost:3000/api/information";
     const [fetchedInfos, setFetchedInfos] = useState<Info[]>([]);
-    let [selectedInfo, setSelectedInfo] = useState<Info>({id: 0, titulo: '', informacion: ''});
+    let [selectedInfo, setSelectedInfo] = useState<Info | null>(null);
     const [visible, setVisible] = useState(false);
 
-    const abrirModal = (id: number) =>
+     const abrirModal = (id: number) =>
     {
-      selectInfo(id);
+       selectInfo(id);
       setVisible(true);
     }
 
@@ -79,24 +79,24 @@ const InfoGeneralScreen: React.FC<Props> = ({navigation}) => {
       console.log('effect: ', fetchedInfos);
     }, []);
 
-    return(
-     <View style={{ flex: 1, backgroundColor: Colores.turquesa }} >
-      <InfoModal visible={visible} setVisible={setVisible}/>
-        <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Home"}/>
+    return (
+      <View style={{ flex: 1, backgroundColor: Colores.turquesa }}>
+        <InfoModal visible={visible} setVisible={setVisible} selectedInfo={selectedInfo} />
+        <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Home"} />
         <View style={[styles.titleContainer, { marginTop: yTexto }]}>
-            <Texto text={"Información"} estilo="tituloBlanco" style={{ fontSize: tamanoTitulo }} /> 
+          <Texto text={"Información"} estilo="tituloBlanco" style={{ fontSize: tamanoTitulo }} />
         </View>
-        <View style={[styles.buttonsContainer, {top: botonesY, left:botonesX}]}>
-        <BotonPrincipal texto={"¿Cómo usar la app?"} styleText={{fontSize: tamanoFuente}} onPress={abrirModal(1)}/>
-        <BotonPrincipal texto={"¿Qué es un ataque de pánico?"} styleText={{fontSize: tamanoFuente}} onPress={abrirModal(2)}/>
-        <BotonPrincipal texto={"¿Cómo detectar un ataque de pánico?"} styleText={{fontSize: tamanoFuente}} onPress={abrirModal(3)}/>
-        <BotonPrincipal texto={"¿Dónde puedo buscar ayuda?"} styleText={{fontSize: tamanoFuente}} onPress={abrirModal(4)}/>
-        <BotonPrincipal texto={"¿Cómo puedo ayudar a alguien que tiene ataques de pánico?"} styleText={{fontSize: tamanoFuente}} onPress={abrirModal(5)}/>
-        <BotonPrincipal texto={"¿Cómo puedo ayuda a alguien durante un ataque de pánico"} styleText={{fontSize: tamanoFuente}} onPress={abrirModal(6)}/>
+        <View style={[styles.buttonsContainer, { top: botonesY, left: botonesX }]}>
+          <BotonTexto texto={"¿Cómo usar la app?"} styleText={{ fontSize: tamanoFuente }} onPress={() => abrirModal(1)} />
+          <BotonTexto texto={"¿Qué es un ataque de pánico?"} styleText={{ fontSize: tamanoFuente }} onPress={() => abrirModal(2)} />
+          <BotonTexto texto={"¿Cómo detectar un ataque de pánico?"} styleText={{ fontSize: tamanoFuente }} onPress={() => abrirModal(3)} />
+          <BotonTexto texto={"¿Dónde puedo buscar ayuda?"} styleText={{ fontSize: tamanoFuente }} onPress={() => abrirModal(4)} />
+          <BotonTexto texto={"¿Cómo puedo ayudar a alguien que tiene ataques de pánico?"} styleText={{ fontSize: tamanoFuente }} onPress={() => abrirModal(5)} />
+          <BotonTexto texto={"¿Cómo puedo ayudar a alguien durante un ataque de pánico?"} styleText={{ fontSize: tamanoFuente }} onPress={() => abrirModal(6)} />
         </View>
-     </View>
-    );  
-} 
+      </View>
+    );
+  };
 
 const styles = StyleSheet.create({
     titleContainer: {
