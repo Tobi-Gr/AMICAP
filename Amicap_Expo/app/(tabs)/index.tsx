@@ -7,6 +7,8 @@ import ActividadScreen from './actividad';
 import infoGeneralScreen from './infoGeneral';
 import InicioScreen from './inicio';
 import ConfiguracionScreen from './configuracion';
+import RegistroScreen from './registro';
+import InicioSesionScreen from './inicioSesion';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,6 +17,10 @@ const App = () => {
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="Inicio" 
           component={InicioScreen} 
+          options={{ headerShown: false }} />
+          <Stack.Screen name="InicioSesion" component={InicioSesionScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="Registro" 
+          component={RegistroScreen} 
           options={{ headerShown: false }} />
           <Stack.Screen name="Home" 
           component={HomeScreen} 

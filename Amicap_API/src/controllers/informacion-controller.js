@@ -2,10 +2,10 @@ import {Router} from 'express';
 import InformacionService from '../services/informacion-service.js';
 import ValidationHelper from '../helpers/validationHelper.js';
 const router = Router();
-const svc = new In();
+const svc = new InformacionService();
 const hlp = new ValidationHelper;
 
-router.get('/', async (req, res) =>{
+router.get('', async (req, res) =>{
     let respuesta;
     const returnArray = await svc.getAllAsync();
     if (returnArray != null)
