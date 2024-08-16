@@ -2,7 +2,7 @@ import DataBaseHelper from '../helpers/bdHelper.js';
 const pgHelper = new DataBaseHelper;
 import jwt from 'jsonwebtoken';
 
-export default class UsersRepository
+export default class UsuarioRepository
 {
     LoginAsync = async (entity) =>
     {

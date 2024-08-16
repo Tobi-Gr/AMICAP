@@ -1,7 +1,7 @@
-import UsersRepository from '../repositories/users-repositories.js';
+import UsuarioRepository from '../repositories/usuario-repository.js';
 
-const repo = new UsersRepository();
-export default class UsuarioServices
+const repo = new UsuarioRepository();
+export default class UsuarioService
 {
     LoginAsync = async (entity) =>
     {
