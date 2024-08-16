@@ -10,6 +10,7 @@ interface Props {
 const InicioScreen: React.FC<Props> = ({ navigation }) => {
     const windowWidth = Dimensions.get('window').width;
     const tamanoFuente = windowWidth / 10;
+
     {/*finjamos que el view vacío es ami saludando*/} 
   return (
     <View style={styles.background}>
@@ -17,11 +18,24 @@ const InicioScreen: React.FC<Props> = ({ navigation }) => {
         <Texto text="¿Qué necesitas?" estilo="tituloBlanco" style={{fontSize: tamanoFuente}}/>
         <View style={styles.ami}></View>
         <View style={styles.orangeBttnContainer}>
-            <BotonTexto text="Ayuda" textStyle='textoTurquesa' containerColor='naranja' fullWidth={true}/>
+            <BotonTexto 
+                text="Ayuda" 
+                textStyle='textoTurquesa' 
+                containerColor='naranja' 
+                fullWidth={true}
+                onPress={() => navigation.navigate('Ayuda')}/>
         </View>
         <View style={styles.whiteBttnsContainer}>
-            <BotonTexto text="Iniciar sesión" textStyle='textoTurquesa' containerColor='blanco'/>
-            <BotonTexto text="Registrarme" textStyle='textoTurquesa' containerColor='blanco'/>
+            <BotonTexto 
+                text="Iniciar sesión" 
+                textStyle='textoTurquesa' 
+                containerColor='blanco'
+                onPress={() => navigation.navigate('InicioSesion')}/>
+            <BotonTexto 
+                text="Registrarme" 
+                textStyle='textoTurquesa' 
+                containerColor='blanco'
+                onPress={() => navigation.navigate('Registro')}/>
         </View>
     </View>
   );
@@ -56,8 +70,10 @@ const styles = StyleSheet.create({
     },
     ami: {
         backgroundColor: Colores.gris,
-        width: '40%',
-        height: '40%'
+        width: '50%',
+        height: '40%',
+        marginTop: '10%',
+        marginBottom: '12%',
     }
 });
 
