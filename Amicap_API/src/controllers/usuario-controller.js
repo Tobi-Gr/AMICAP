@@ -5,9 +5,10 @@ const router = Router();
 const svc = new UsuarioService();
 const hlp = new ValidationHelper;
 
-router.post('/prueba', async (req, res) =>{
-        return res.status(200).json('Hola, funciona la API');
+router.get('/prueba', async (req, res) =>{
+        return res.status(200).json('Hola, funciona el Ngrok');
 });
+
 //login
 router.post('/login', async (req, res) =>{
     let respuesta;
