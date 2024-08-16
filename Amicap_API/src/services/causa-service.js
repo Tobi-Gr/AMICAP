@@ -8,12 +8,6 @@ export default class CausaService
         const returnArray = await repo.getByIdUsuarioAsync(id_usuario);
         return returnArray;
     }
-    
-    getByIdAtaqueAsync = async (id_ataque) =>
-    {
-        const returnArray = await repo.getByIdAtaqueAsync(id_ataque);
-        return returnArray;
-    }
 
     createAsync = async (entity) =>
     {

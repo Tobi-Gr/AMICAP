@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
   defaultText: {
     fontFamily: 'Montserrat-Regular',
-    fontSize: 20
+    fontSize: 18
   },
   tituloTurquesa: {
     color: Colores.turquesa,

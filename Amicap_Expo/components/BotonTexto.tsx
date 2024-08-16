@@ -9,12 +9,13 @@ interface Props{
     textStyle: 'textoTurquesa' | 'textoBlanco' | 'textoNegro';
     containerColor: keyof typeof styles;
     fullWidth?: boolean;
+    tamanoFuenteProps?: number;
 }
 
 
-const BotonTexto: FC<Props> = ({text, onPress, textStyle, containerColor, fullWidth}) => {
+const BotonTexto: FC<Props> = ({text, onPress, textStyle, containerColor, fullWidth, tamanoFuenteProps}) => { 
     const windowWidth = Dimensions.get('window').width;
-    const tamanoFuente = windowWidth * 0.05;
+    const tamanoFuenteLocal = windowWidth * 0.05;
     
     const handleOnPress = () =>
     {
@@ -28,7 +29,7 @@ const BotonTexto: FC<Props> = ({text, onPress, textStyle, containerColor, fullWi
         <Pressable 
             style={fullWidth? [styles.container, styles.fullWidth, styles[containerColor]] :[styles.container, styles[containerColor]]}
             onPress={handleOnPress}>
-            <Texto text={text} estilo={textStyle} style={{fontSize: tamanoFuente }}/>
+            <Texto text={text} estilo={textStyle} style={tamanoFuenteProps? {fontSize: tamanoFuenteProps } : {fontSize: tamanoFuenteLocal }}/>
         </Pressable>
     );
   };
@@ -52,6 +53,10 @@ const styles = StyleSheet.create({
     turquesa: {
         backgroundColor: Colores.turquesa,        
     },
+    gris:{
+        backgroundColor: Colores.gris
+    },
+
     fullWidth:{
         width: '100%',
     }

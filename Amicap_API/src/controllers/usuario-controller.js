@@ -14,12 +14,12 @@ router.post('/login', async (req, res) =>{
     let respuesta;
     const entity = req.body;
     const returnArray = await svc.LoginAsync(entity);
-    if (hlp.validarMail(entity.username) ) return res.status(400).send('mail invalido');
+    if (hlp.validarMail(entity.email)) return res.status(400).send('mail invalido');
     else if (returnArray != null)
     {
-        return res.status(200).json(returnArray);
+        return res.status(200).json(returnArray.token);
     }
-    else return res.status(401).send('username o contraseña invalida');
+    else return res.status(401).send('mail o contraseña invalida');
 });
 
 //registro
@@ -27,14 +27,10 @@ router.post('/register', async (req, res) =>{
     try {
         const entity = req.body;
         const returnArray = await svc.RegisterAsync(entity);
-        if (hlp.validarMail(entity.username))
-        {
-            return res.status(400).send('mail invalido');
-        }
-        else if (returnArray != null)
-        {
-            return res.status(201).json(returnArray);
-        }
+        if (hlp.validarMail(entity.email)) return res.status(400).send('mail invalido');
+        else if (hlp.validarString(entity.username)) return res.status(400).send('username invalido');
+        else if (hlp.validarString(entity.contrasena)) return res.status(400).send('contraseña invalida');
+        else if (returnArray != null)return res.status(201).json(returnArray);
         else return res.status(400).send('Error interno');
     } catch (e) {
         console.log(e);

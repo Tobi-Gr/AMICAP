@@ -14,18 +14,17 @@ interface Info{
 interface Props {
     visible: boolean;
     setVisible: (visible: boolean) => void;
+    selectedInfo: Info | null;
 }
 
-const InfoModal: FC<Props> = ({visible, setVisible}) => {
+const InfoModal: FC<Props> = ({visible, setVisible, selectedInfo}) => {
     const windowWidth = Dimensions.get('window').width;
     const tamanoFuente = windowWidth / 14;
 
 
-    const closeModal = () => {
-        setSelectedInfo(null);
-    };
-  //TERMINA LO TEMPORAL
+  
     function cerrarModal(){
+        // setSelectedInfo(null);
         setVisible(false);
     }
 
@@ -33,14 +32,20 @@ const InfoModal: FC<Props> = ({visible, setVisible}) => {
         <Modal visible={visible} transparent={true} animationType="fade">
             <View style={styles.container}>
                 <View style={styles.card}>
-                    <Texto text="Contactar" estilo="textoTurquesa" style={{fontSize: tamanoFuente}}/>
-                    <NombreContacto nombre="Juli L"/>
-                    <TouchableOpacity onPress={(cerrarModal)}>
-                        <Text style={styles.boton}>cerrar</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
-       </Modal>
+        {selectedInfo ? (
+            <>
+              <Texto text={selectedInfo.titulo} estilo="textoTurquesa" style={{ fontSize: tamanoFuente }} />
+              <Texto text={selectedInfo.informacion} estilo="textoTurquesa" style={{ fontSize: tamanoFuente }} />
+            </>
+          ) : (
+            <Texto text="No hay información disponible" estilo="textoTurquesa" style={{ fontSize: tamanoFuente }} />
+          )}
+          <TouchableOpacity onPress={cerrarModal}>
+            <Text style={styles.boton}>Cerrar</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </Modal>
   );
 };
 

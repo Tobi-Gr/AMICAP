@@ -15,15 +15,27 @@ export default class AtaqueService
         return returnArray;
     }
 
-    updateAsync = async (entity) =>
-    {
-        const returnArray = await repo.updateAsync(entity);
-        return returnArray;
-    }
-
     deleteByIdAsync = async (id) =>
     {
         const returnArray = await repo.deleteByIdAsync(id);
+        return returnArray;
+    }
+
+    updateLugarAsync = async (entity) =>
+    {
+        const returnArray = await repo.updateLugarAsync(entity);
+        return returnArray;
+    }
+
+    createCausaAsync = async (entity) =>
+    {
+        const returnArray = await repo.createCausaAsync(entity);
+        return returnArray;
+    }
+
+    deleteCausaAsync = async (id) =>
+    {
+        const returnArray = await repo.deleteCausaAsync(id);
         return returnArray;
     }
 }
