@@ -2,7 +2,7 @@ import {StyleSheet, View, Dimensions} from 'react-native';
 import React, { useState } from "react";
 import {Colores} from '../../constants/Colors';
 import Texto from '@/components/Texto';
-import BotonTexto from '@/components/BotonTexto';
+import Boton from '@/components/Boton';
 import InputTexto from '@/components/inputTexto';
 
 interface Props {
@@ -30,7 +30,7 @@ const InicioSesion: React.FC<Props> = ({ navigation }) => {
             <InputTexto  placeholder="Email" onChange={handleEmailChange} keyBoardType='email-address'/>
             <InputTexto  placeholder="Contraseña" onChange={handleContrasenaChange} esContrasena={true}/>
         </View>
-        <BotonTexto text="Iniciar" textStyle='textoTurquesa' containerColor='blanco'/>
+        <Boton text="Iniciar" textStyle='textoTurquesa' containerColor='blanco'/>
     </View>
   );
 };

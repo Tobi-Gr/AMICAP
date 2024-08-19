@@ -2,7 +2,7 @@ import {StyleSheet, View, Dimensions} from 'react-native';
 import React, { useState } from "react";
 import {Colores} from '../../constants/Colors';
 import Texto from '@/components/Texto';
-import BotonTexto from '@/components/BotonTexto';
+import Boton from '@/components/Boton';
 import InputTexto from '@/components/inputTexto';
 
 interface Props {
@@ -40,7 +40,7 @@ const Registro: React.FC<Props> = ({ navigation }) => {
             <InputTexto  placeholder="Contraseña" onChange={handleContrasenaChange} esContrasena={true}/>
             <InputTexto  placeholder="Confirmar contraseña" onChange={handleContrasenaChange} esContrasena={true}/>
         </View>
-        <BotonTexto text="Registrar" textStyle='textoTurquesa' containerColor='blanco'/>
+        <Boton text="Registrar" textStyle='textoTurquesa' containerColor='blanco'/>
     </View>
   );
 };

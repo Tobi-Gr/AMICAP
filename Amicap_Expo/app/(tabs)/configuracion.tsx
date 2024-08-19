@@ -5,7 +5,7 @@ import FondoAzul from '@/components/FondoAzul';
 import Texto from '@/components/Texto';
 import { Colores } from '../../constants/Colors';
 //import CrearActividadModal from '@/components/CrearActivdadModal';
-import BotonPrincipal from '@/components/BotonPrincipal';
+import Boton from '@/components/Boton';
 import { NativeScreen } from 'react-native-screens';
 
 
@@ -39,8 +39,8 @@ const abrirModal = () =>
         <FondoAzul />
       </View>
       <View style={[styles.buttonsContainer, {top: botonesY, left:botonesX}]}>
-        <BotonPrincipal texto={"Actividades que no me sirven"} styleText={{fontSize: tamanoFuente}}   onPress={((abrirModal))}/>
-        <BotonPrincipal texto={"Crear actividad"} styleText={{fontSize: tamanoFuente}}   onPress={((abrirModal))}/>
+        <Boton text={"Actividades que no me sirven"} tamanoFuenteProps={tamanoFuente} onPress={abrirModal} containerColor='gris' textStyle='textoNegro'/>
+        <Boton text={"Crear actividad"} tamanoFuenteProps={tamanoFuente} onPress={abrirModal} containerColor='gris' textStyle='textoNegro'/>
       </View>  
       <Navbar tipo="configuration" navigation={navigation}/>
     </View>

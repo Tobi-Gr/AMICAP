@@ -123,7 +123,7 @@ import { StyleSheet, View, Dimensions } from 'react-native';
 import React, { FC, useState, useEffect } from 'react';
 import { Colores } from '../../constants/Colors';
 import Flecha from '@/components/Flecha';
-import BotonTexto from '@/components/BotonTexto';
+import Boton from '@/components/Boton';
 import Texto from '@/components/Texto';
 import InfoModal from '@/components/InfoModal';
 
@@ -197,12 +197,12 @@ const InfoGeneralScreen: React.FC<Props> = ({ navigation }) => {
         <Texto text={"Información"} estilo="tituloBlanco" style={{ fontSize: tamanoTitulo }} />
       </View>
       <View style={styles.buttonsContainer}>
-        <BotonTexto text={"¿Cómo usar la app?"} textStyle='textoNegro' containerColor='gris' fullWidth onPress={() => abrirModal(1)} />
-        <BotonTexto text="¿Qué es un ataque de pánico?" textStyle='textoNegro' containerColor='gris' fullWidth onPress={() => abrirModal(2)} />
-        <BotonTexto text={"¿Cómo detectar un ataque de pánico?"} textStyle='textoNegro' containerColor='gris' fullWidth onPress={() => abrirModal(3)} />
-        <BotonTexto text={"¿Dónde puedo buscar ayuda?"} textStyle='textoNegro' containerColor='gris' fullWidth onPress={() => abrirModal(4)} />
-        <BotonTexto text={"¿Cómo puedo ayudar a alguien que tiene ataques de pánico?"} textStyle='textoNegro' containerColor='gris' fullWidth onPress={() => abrirModal(5)} />
-        <BotonTexto text={"¿Cómo puedo ayudar a alguien durante un ataque de pánico?"} textStyle='textoNegro' containerColor='gris' fullWidth onPress={() => abrirModal(6)} />
+        <Boton text={"¿Cómo usar la app?"} textStyle='textoNegro' containerColor='gris' fullWidth onPress={() => abrirModal(1)} />
+        <Boton text="¿Qué es un ataque de pánico?" textStyle='textoNegro' containerColor='gris' fullWidth onPress={() => abrirModal(2)} />
+        <Boton text={"¿Cómo detectar un ataque de pánico?"} textStyle='textoNegro' containerColor='gris' fullWidth onPress={() => abrirModal(3)} />
+        <Boton text={"¿Dónde puedo buscar ayuda?"} textStyle='textoNegro' containerColor='gris' fullWidth onPress={() => abrirModal(4)} />
+        <Boton text={"¿Cómo puedo ayudar a alguien que tiene ataques de pánico?"} textStyle='textoNegro' containerColor='gris' fullWidth onPress={() => abrirModal(5)} />
+        <Boton text={"¿Cómo puedo ayudar a alguien durante un ataque de pánico?"} textStyle='textoNegro' containerColor='gris' fullWidth onPress={() => abrirModal(6)} />
       </View>
     </View>
   );

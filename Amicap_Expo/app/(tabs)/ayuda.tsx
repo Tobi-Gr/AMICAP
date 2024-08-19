@@ -3,7 +3,7 @@ import { Colores } from '../../constants/Colors';
 import Piso from './../../components/Piso';
 import CuadroTexto from '@/components/CuadroTexto';
 import Flecha from '@/components/Flecha';
-import BotonPrincipal from '@/components/BotonPrincipal';
+import Boton from '@/components/Boton';
 import Add from '@/components/icons/Add';
 
 interface Props {
@@ -47,8 +47,8 @@ const AyudaScreen: React.FC<Props> = ({ navigation }) => {
         style={{top: dialogoY, left: dialogoX}}
         textStyle={{fontSize: tamanoFuente}}/>
       <View style={[styles.buttonsContainer, {top: botonesY, left:botonesX}]}>
-        <BotonPrincipal texto={"Respiración"} styleText={{fontSize: tamanoFuente}} onPress={handleOnPressRespiracion}/>
-        <BotonPrincipal texto={"Otra actividad"} styleText={{fontSize: tamanoFuente}} onPress={handleOnPressActividad}/>
+        <Boton text={"Respiración"} tamanoFuenteProps={tamanoFuente} onPress={handleOnPressRespiracion} containerColor='blanco' textStyle='textoTurquesa'/>
+        <Boton text={"Otra actividad"} tamanoFuenteProps={tamanoFuente} onPress={handleOnPressActividad} containerColor='blanco' textStyle='textoTurquesa'/>
       </View>
       
       <Piso/>

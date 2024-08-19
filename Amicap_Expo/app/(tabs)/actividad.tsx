@@ -5,7 +5,7 @@ import {Colores} from './../../constants/Colors';
 import CuadroTexto from '@/components/CuadroTexto';
 import Piso from './../../components/Piso';
 import Flecha from '@/components/Flecha';
-import BotonPrincipal from '@/components/BotonPrincipal';
+import Boton from '@/components/Boton';
 
 interface Actividad {
     nombre:string;
@@ -101,8 +101,8 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
           style={{top: dialogoY, left: dialogoX}}
           textStyle={{fontSize: tamanoFuente}}/>
         <View style={[styles.buttonsContainer, {top: botonesY, left:botonesX}]}>
-          <BotonPrincipal texto={"Proxima actividad"} styleText={{fontSize: tamanoFuente}} onPress={randomActividad}/> 
-          <BotonPrincipal texto={"Terminar"} styleText={{fontSize: tamanoFuente}} onPress={handleOnPressHome}/>
+          <Boton text={"Proxima actividad"} tamanoFuenteProps={tamanoFuente} onPress={randomActividad}  containerColor={'blanco'} textStyle={'textoTurquesa'}/> 
+          <Boton text={"Terminar"} tamanoFuenteProps={tamanoFuente} onPress={handleOnPressHome}  containerColor={'turquesa'} textStyle={'textoBlanco'}/> 
         </View>
         
         <Piso/>

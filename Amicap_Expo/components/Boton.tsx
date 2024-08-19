@@ -1,4 +1,4 @@
-import { Colores } from './../constants/Colors';
+import { Colores } from '../constants/Colors';
 import React,{FC} from 'react';
 import Texto from './Texto';
 import {StyleSheet, Pressable, Dimensions } from 'react-native';
@@ -13,7 +13,7 @@ interface Props{
 }
 
 
-const BotonTexto: FC<Props> = ({text, onPress, textStyle, containerColor, fullWidth, tamanoFuenteProps}) => { 
+const Boton: FC<Props> = ({text, onPress, textStyle, containerColor, fullWidth, tamanoFuenteProps}) => { 
     const windowWidth = Dimensions.get('window').width;
     const tamanoFuenteLocal = windowWidth * 0.05;
     
@@ -62,4 +62,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default BotonTexto;
+export default Boton;

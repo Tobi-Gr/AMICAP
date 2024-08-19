@@ -1,5 +1,5 @@
 import Add from './icons/Add';
-import BotonTexto from './BotonTexto';
+import Boton from './Boton';
 import { Colores } from './../constants/Colors';
 import Communications from 'react-native-communications';
 import React, { FC, useEffect, useState, useMemo } from 'react';
@@ -105,8 +105,8 @@ const ContactosModal: FC<Props> = ({ visible, setVisible }) => {
                     </View>
                     <Contactos />
                     <View style={styles.botonesContainer}>
-                        <BotonTexto text="Cerrar" onPress={cerrarModal} textStyle='textoBlanco' containerColor='turquesa'/>
-                        <BotonTexto text="Llamada" onPress={handlePhoneCall} textStyle='textoBlanco' containerColor='turquesa'/>
+                        <Boton text="Cerrar" onPress={cerrarModal} textStyle='textoBlanco' containerColor='turquesa'/>
+                        <Boton text="Llamada" onPress={handlePhoneCall} textStyle='textoBlanco' containerColor='turquesa'/>
                     </View>
                 </View>
             </View>

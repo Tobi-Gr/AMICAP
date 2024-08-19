@@ -1,7 +1,7 @@
 import {StyleSheet, View, Dimensions} from 'react-native';
 import {Colores} from '../../constants/Colors';
 import Flecha from '@/components/Flecha';
-import BotonPrincipal from '@/components/BotonPrincipal';
+import Boton from '@/components/Boton';
 import Respirar from '@/components/Respirar';
 interface Props {
   navigation: any;
@@ -32,7 +32,7 @@ const RespiracionScreen: React.FC<Props> = ({ navigation }) => {
       <View style={{height: margenSuperiorCuadrado}} ></View>
       <Respirar inhalar={inhalar} exhalar={exhalar} mantener={mantener}/>
       <View style={{height: margenSuperiorBoton}} ></View>
-      <BotonPrincipal texto="Volver a inicio" onPress={handleOnPressInicio} styleText={{fontSize: tamanoFuente}}/>
+      <Boton text={"Volver a inicio"} onPress={handleOnPressInicio} tamanoFuenteProps={tamanoFuente} containerColor={'blanco'} textStyle={'textoTurquesa'}/>
     </View>
   );
 };

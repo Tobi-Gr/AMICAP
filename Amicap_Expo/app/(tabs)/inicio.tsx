@@ -1,7 +1,7 @@
 import {StyleSheet, View, Dimensions} from 'react-native';
 import {Colores} from '../../constants/Colors';
 import Texto from '@/components/Texto';
-import BotonTexto from '@/components/BotonTexto';
+import Boton from '@/components/Boton';
 
 interface Props {
   navigation: any;
@@ -18,7 +18,7 @@ const InicioScreen: React.FC<Props> = ({ navigation }) => {
         <Texto text="¿Qué necesitas?" estilo="tituloBlanco" style={{fontSize: tamanoFuente}}/>
         <View style={styles.ami}></View>
         <View style={styles.orangeBttnContainer}>
-            <BotonTexto 
+            <Boton 
                 text="Ayuda" 
                 textStyle='textoTurquesa' 
                 containerColor='naranja' 
@@ -26,12 +26,12 @@ const InicioScreen: React.FC<Props> = ({ navigation }) => {
                 onPress={() => navigation.navigate('Ayuda')}/>
         </View>
         <View style={styles.whiteBttnsContainer}>
-            <BotonTexto 
+            <Boton 
                 text="Iniciar sesión" 
                 textStyle='textoTurquesa' 
                 containerColor='blanco'
                 onPress={() => navigation.navigate('InicioSesion')}/>
-            <BotonTexto 
+            <Boton 
                 text="Registrarme" 
                 textStyle='textoTurquesa' 
                 containerColor='blanco'
