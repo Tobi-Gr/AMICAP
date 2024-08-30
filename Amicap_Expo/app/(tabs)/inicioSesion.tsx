@@ -13,8 +13,9 @@ const InicioSesion: React.FC<Props> = ({ navigation }) => {
     const windowWidth = Dimensions.get('window').width;
     const [email, setEmail] = useState('');
     const [contrasena, setContrasena] = useState('');
-    const tamanoFuente = windowWidth / 10;
-
+    const tamanoTitulo = windowWidth / 10;
+    const tamanoTexto = windowWidth / 20;
+    
 
     const handleEmailChange = (nuevoEmail: string) => {
         setEmail(nuevoEmail);
@@ -25,12 +26,13 @@ const InicioSesion: React.FC<Props> = ({ navigation }) => {
 
   return (
     <View style={styles.background}>
-        <Texto text="Inicio Sesión" estilo="tituloBlanco" style={{fontSize: tamanoFuente}}/>
+        <Texto text="Inicio Sesión" estilo="tituloBlanco" style={{fontSize: tamanoTitulo}}/>
         <View style={styles.inputContainer}>
             <InputTexto  placeholder="Email" onChange={handleEmailChange} keyBoardType='email-address'/>
             <InputTexto  placeholder="Contraseña" onChange={handleContrasenaChange} esContrasena={true}/>
         </View>
         <Boton text="Iniciar" textStyle='textoTurquesa' containerColor='blanco'/>
+        <Texto text="¿Ya tenés cuenta?" estilo="textoBlanco" style={{fontSize: tamanoTexto}}/>
     </View>
   );
 };

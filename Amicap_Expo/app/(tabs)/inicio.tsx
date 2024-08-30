@@ -1,4 +1,4 @@
-import {StyleSheet, View, Dimensions} from 'react-native';
+import {StyleSheet, View, Dimensions, Image} from 'react-native';
 import {Colores} from '../../constants/Colors';
 import Texto from '@/components/Texto';
 import Boton from '@/components/Boton';
@@ -10,13 +10,14 @@ interface Props {
 const InicioScreen: React.FC<Props> = ({ navigation }) => {
     const windowWidth = Dimensions.get('window').width;
     const tamanoFuente = windowWidth / 10;
+    const gifAmi = require('./../../assets/images/ami-saludando.gif');
 
     {/*finjamos que el view vacío es ami saludando*/} 
   return (
     <View style={styles.background}>
         <Texto text="Hola, soy Ami!" estilo="tituloBlanco" style={{fontSize: tamanoFuente}}/>
         <Texto text="¿Qué necesitas?" estilo="tituloBlanco" style={{fontSize: tamanoFuente}}/>
-        <View style={styles.ami}></View>
+        <Image source={gifAmi} style={styles.ami} resizeMode='contain'/>
         <View style={styles.orangeBttnContainer}>
             <Boton 
                 text="Ayuda" 
@@ -69,11 +70,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     ami: {
-        backgroundColor: Colores.gris,
-        width: '50%',
+        width: '90%',
         height: '40%',
         marginTop: '10%',
         marginBottom: '12%',
+        left: '-6.5%'
     }
 });
 
