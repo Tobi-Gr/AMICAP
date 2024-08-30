@@ -13,6 +13,7 @@ interface Props {
 const Flecha: FC<Props> = ({ height, width, navigation, screen}) => {
     function goBack(){
         navigation.navigate(screen);
+        //navigation.goBack();?
       }
     return (
     <Pressable onPress={goBack} style={{height: height, width: width}}>

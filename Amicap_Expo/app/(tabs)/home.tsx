@@ -85,7 +85,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
         <View style={{ marginTop: yInfo, marginLeft: xInfo, position: 'absolute' }}>
           <BotonInfo navigation={navigation}/>
       </View>
-      <Navbar tipo="home" navigation={navigation} />
+      <Navbar tipo="home" navigation={navigation}/>
     </View>
   );
 };

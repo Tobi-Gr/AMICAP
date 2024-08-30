@@ -9,37 +9,29 @@ import InicioScreen from './inicio';
 import ConfiguracionScreen from './configuracion';
 import RegistroScreen from './registro';
 import InicioSesionScreen from './inicioSesion';
+import PerfilScreen from './perfil';
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
-        <Stack.Navigator initialRouteName="Inicio">
+        <Stack.Navigator 
+          initialRouteName="Home"
+          screenOptions={{
+            headerShown: false,
+          }}>
           <Stack.Screen name="Inicio" 
           component={InicioScreen} 
           options={{ headerShown: false }} />
-          <Stack.Screen name="InicioSesion" component={InicioSesionScreen} options={{ headerShown: false }} />
-          <Stack.Screen name="Registro" 
-          component={RegistroScreen} 
-          options={{ headerShown: false }} />
-          <Stack.Screen name="Home" 
-          component={HomeScreen} 
-          options={{ headerShown: false }} />
-          <Stack.Screen name="Ayuda" 
-          component={AyudaScreen} 
-          options={{ headerShown: false }} />
-          <Stack.Screen name="Respiracion" 
-          component={RespiracionScreen}
-          options={{ headerShown: false }} />
-          <Stack.Screen name="Actividad" 
-          component={ActividadScreen} 
-          options={{ headerShown: false }} />
-          <Stack.Screen name="InfoGeneral" 
-          component={infoGeneralScreen} 
-          options={{ headerShown: false }} />
-          <Stack.Screen name="Configuracion" 
-          component={ConfiguracionScreen} 
-          options={{ headerShown: false }} />
+          <Stack.Screen name="InicioSesion" component={InicioSesionScreen}/>
+          <Stack.Screen name="Registro" component={RegistroScreen}/>
+          <Stack.Screen name="Home" component={HomeScreen}/>
+          <Stack.Screen name="Ayuda" component={AyudaScreen}/>
+          <Stack.Screen name="Respiracion" component={RespiracionScreen}/>
+          <Stack.Screen name="Actividad" component={ActividadScreen}/>
+          <Stack.Screen name="InfoGeneral" component={infoGeneralScreen}/>
+          <Stack.Screen name="Configuracion" component={ConfiguracionScreen}/>
+          <Stack.Screen name="Perfil" component={PerfilScreen}/>
         </Stack.Navigator>
   );
 };
