@@ -12,7 +12,6 @@ const InicioScreen: React.FC<Props> = ({ navigation }) => {
     const tamanoFuente = windowWidth / 10;
     const gifAmi = require('./../../assets/images/ami-saludando.gif');
 
-    {/*finjamos que el view vacío es ami saludando*/} 
   return (
     <View style={styles.background}>
         <Texto text="Hola, soy Ami!" estilo="tituloBlanco" style={{fontSize: tamanoFuente}}/>
