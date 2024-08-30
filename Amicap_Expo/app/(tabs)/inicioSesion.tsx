@@ -4,6 +4,7 @@ import {Colores} from '../../constants/Colors';
 import Texto from '@/components/Texto';
 import Boton from '@/components/Boton';
 import InputTexto from '@/components/inputTexto';
+import BotonTexto from '@/components/BotonTexto';
 
 interface Props {
   navigation: any;
@@ -14,7 +15,7 @@ const InicioSesion: React.FC<Props> = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [contrasena, setContrasena] = useState('');
     const tamanoTitulo = windowWidth / 10;
-    const tamanoTexto = windowWidth / 20;
+    const tamanoTexto = windowWidth * 0.05;
     
 
     const handleEmailChange = (nuevoEmail: string) => {
@@ -23,6 +24,12 @@ const InicioSesion: React.FC<Props> = ({ navigation }) => {
     const handleContrasenaChange = (nuevaContrasena: string) => {
         setContrasena(nuevaContrasena);
     }; 
+    const registroPress = () => {
+        navigation.navigate("Registro");
+    };
+    const sinCuentaPress = () => {
+        navigation.navigate("Ayuda");
+    };
 
   return (
     <View style={styles.background}>
@@ -32,7 +39,11 @@ const InicioSesion: React.FC<Props> = ({ navigation }) => {
             <InputTexto  placeholder="Contraseña" onChange={handleContrasenaChange} esContrasena={true}/>
         </View>
         <Boton text="Iniciar" textStyle='textoTurquesa' containerColor='blanco'/>
-        <Texto text="¿Ya tenés cuenta?" estilo="textoBlanco" style={{fontSize: tamanoTexto}}/>
+        <View style={styles.botonesContainer} >
+            <Texto text="¿No tenés cuenta?" estilo="textoBlanco" style={{fontSize: tamanoTexto}}/>
+            <BotonTexto text="Registrate" onPress={registroPress}/>
+            <BotonTexto text="Seguir sin cuenta" onPress={sinCuentaPress}/>
+        </View>
     </View>
   );
 };
@@ -47,9 +58,15 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         width: '90%',
-        marginTop: '20%',
-        height: '50%',
+        height: '35%',
         justifyContent: 'space-evenly',
+        marginTop: '10%'
+    },
+    botonesContainer: {
+        height: '25%',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        marginTop: '5%'
     }
 });
 

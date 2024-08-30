@@ -38,6 +38,10 @@ const AyudaScreen: React.FC<Props> = ({ navigation }) => {
   //   width={flechaTamano} 
   //   style={styles.flecha}/>
 
+
+  //PARA LA FLECHA HAY QUE VER SI EL USUARIO ESTA REGISTRADO O NO
+  // Si está registrado vuelve a 'Home'
+  // Si no vuelve a 'Inicio'
   return (
     <View style={{ flex: 1, backgroundColor: Colores.turquesa }} >
       <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Home"}/>

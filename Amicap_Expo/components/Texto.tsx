@@ -57,6 +57,11 @@ const styles = StyleSheet.create({
   textoNegro:{
     color: Colores.negro,
     fontFamily: 'Montserrat-Regular',
+  },
+  textoCeleste:{
+    color: Colores.celeste,
+    fontWeight: 'bold',
+    fontFamily: 'Montserrat-Regular',
   }
 });
 
