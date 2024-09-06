@@ -12,15 +12,15 @@ export default class UsuarioRepository
         {
             const login =
             {
-                username: entity.username,
-                password: entity.password
+                email: entity.email,
+                contrasena: entity.contrasena
             };
             const options =
             {
                 expiresIn: '1h'
             };
-            const sql = `select * From users Where username= $1 And password= $2`;
-            const values = [entity.username, entity.password];
+            const sql = `select * From users Where email= $1 And contrasena= $2`;
+            const values = [entity.email, entity.contrasena];
             const consulta = pgHelper.requestValues(sql, values);
             if(consulta != null)
             {
@@ -44,8 +44,8 @@ export default class UsuarioRepository
     RegisterAsync = async (entity) =>
     {
         let returnArray = null;
-        const sql = `Insert into Users(first_name, last_name, username, password) Values ($1,$2,$3,$4)`;
-        const values = [entity.first_name, entity.last_name, entity.username, entity.password];
+        const sql = `Insert into Users(username, email, contrasena) Values ($1,$2,$3)`;
+        const values = [entity.username, entity.email, entity.contrasena];
         returnArray = pgHelper.requestCount(sql, values);
         return returnArray;
     }

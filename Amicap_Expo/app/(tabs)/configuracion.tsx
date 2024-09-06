@@ -39,8 +39,8 @@ const abrirModal = () =>
       </View>
       <SliderNumeros/>
       <View style={[styles.buttonsContainer, {top: botonesY}]}>
-        <BotonTextoIcono text={"Seleccionar actividades"} icon={"check"}/>
-        <BotonTextoIcono text={"Crear actividad"} icon={"add"}/>
+      <BotonTextoIcono text="Seleccionar actividades" icon="check" onPress={() => console.log('Botón Actividades presionado')}/>
+      <BotonTextoIcono text="Agregar actividad" icon="add" onPress={() => console.log('Botón AgregarActividad presionado')}/>
       </View>  
       <Navbar tipo="configuration" navigation={navigation}/>
     </View>
@@ -51,12 +51,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
-  buttonsContainer: {
+  buttonsContainer:{
     position: 'absolute',
-    width: '100%',
-    alignItems: 'center',
-    flexDirection: 'column',
-  }
+    bottom: 80, 
+    left: '5%',
+    right: '5%', 
+    flexDirection: 'column', 
+    alignItems: 'center', 
+  },
 });
 
 export default ConfiguracionScreen;

@@ -55,9 +55,10 @@ const AyudaScreen: React.FC<Props> = ({ navigation }) => {
         <Boton text={"Otra actividad"} tamanoFuenteProps={tamanoFuente} onPress={handleOnPressActividad} containerColor='blanco' textStyle='textoTurquesa'/>
       </View>
       
-      <Piso/>
     </View>
   );
+  //El Piso tapa los botones
+  // <Piso/>
 };
 
 const styles = StyleSheet.create({
