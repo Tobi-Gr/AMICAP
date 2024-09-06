@@ -18,7 +18,6 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
   const windowHeight = Dimensions.get('window').height;
   const tamanoFuente = windowWidth / 10;
   const yTexto = windowHeight / 10;
-  const titulo="Configuracion";
   const botonesX = windowWidth / 5.5;
   const botonesY = windowHeight / 4.5;
 
@@ -33,14 +32,14 @@ const abrirModal = () =>
     <View style={{ flex: 1, backgroundColor: Colores.blanco }}> 
       {/* <CrearActividadModal visible={visible} setVisible={setVisible}/> */}
       <View style={[styles.titleContainer, { marginTop: yTexto }]}>
-        <Texto text={titulo} estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} /> 
+        <Texto text="Configuracion" estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} /> 
       </View>
       <View style={{ position: 'relative' }}>
         <FondoAzul />
       </View>
       <View style={[styles.buttonsContainer, {top: botonesY, left:botonesX}]}>
-        <Boton text={"Actividades que no me sirven"} tamanoFuenteProps={tamanoFuente} onPress={abrirModal} containerColor='gris' textStyle='textoNegro'/>
-        <Boton text={"Crear actividad"} tamanoFuenteProps={tamanoFuente} onPress={abrirModal} containerColor='gris' textStyle='textoNegro'/>
+        {/* <Boton text={"Actividades que no me sirven"} tamanoFuenteProps={tamanoFuente} onPress={abrirModal} containerColor='gris' textStyle='textoNegro'/>
+        <Boton text={"Crear actividad"} tamanoFuenteProps={tamanoFuente} onPress={abrirModal} containerColor='gris' textStyle='textoNegro'/> */}
       </View>  
       <Navbar tipo="configuration" navigation={navigation}/>
     </View>
