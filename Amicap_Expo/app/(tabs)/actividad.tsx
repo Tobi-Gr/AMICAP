@@ -29,11 +29,12 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
     const dialogoX = windowWidth / 4.5;
     const flechaTamano = windowWidth / 10;
 
-    //hay que poner la IP de donde se este hosteando la API
+    //DBDomain tiene el dominio del ngrok
     const urlApi = `${DBDomain}/api/actPreferida/1`;
     const [actividades, setActividades] = useState<Actividad[]>([]);
     let [selectedActividad, setSelectedActividad] = useState<Actividad>({nombre: '', paso_uno: '', paso_dos:'', paso_tres:'', paso_cuatro:''});
     
+    //toma las actividades preferidas de la API
     const fetchActividades = async () => {
       try {
         const response = await fetch(urlApi);
@@ -51,33 +52,36 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
       }
     }
 
-    const randomActividad = () => {
+    const randomActividad = async () => {
       try {
         console.log('random: ', actividades);
         //selecciona una actividad random
-        const rnd = Math.floor(Math.random() * actividades.length)
-        setSelectedActividad(actividades[rnd]);
-        //elimina la actividad seleccionada del array
-        setActividades(actividades.filter(actividad => actividad !== actividades[rnd]));
+        if (actividades.length > 0) {
+          const rnd = Math.floor(Math.random() * actividades.length)
+          setSelectedActividad(actividades[rnd]);
+          //Elimina la actividad seleccionada del array
+          //No funciona bien esto
+          let nuevasActividades = actividades;
+          nuevasActividades.splice(rnd-1, 1);
+          console.log(nuevasActividades);
+          setActividades(nuevasActividades);
+        }
       } catch (error) {
         console.log('Hubo un error en el randomActividad ', error);
       }
     }
-    
-    const mapearActividades = (data: Actividad[]) => {
-      console.log('map: ', data);
-      setActividades(data);
-    }
 
     useEffect( () =>{
       const fetchAndSetActividades = async () => {
+        console.log('fetchAndSetActividades (antes del fetchActividades): ');
         const data = await fetchActividades();
+        console.log('fetchAndSetActividades (despues del fetchActividades): ', data );
         if (data.length > 0) {
           setActividades(data);
         }
       };
       fetchAndSetActividades();
-      console.log('effect: ', actividades);
+      //console.log('effect: ', actividades);
 
     }, []);
 
@@ -87,6 +91,10 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
         randomActividad(); 
       }
     }, [actividades]);
+
+    useEffect( () =>{
+      console.log('selectedActividad', selectedActividad);
+    }, [selectedActividad]);
 
     function handleOnPressHome(){
       navigation.navigate('Home');

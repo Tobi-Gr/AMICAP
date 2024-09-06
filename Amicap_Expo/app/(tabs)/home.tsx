@@ -29,37 +29,6 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
   const yInfo = windowHeight / 2.07;
   const xInfo = windowWidth / 12.8;
 
-  //Prueba de Ngrok
-  const urlApi = `${DBDomain}/api/usuario/prueba`;
-  let test: string;
-  const fetchActividades = async () => {
-    try {
-      const response = await fetch(urlApi);
-      if (!response.ok) {
-        throw new Error('Failed to fetch data');
-      }
-      const data = await response.json();
-      if (!data) {
-        throw new Error('data failed to response');
-      }
-      console.log('data: ', data);
-      return data;
-    } catch (error) {
-      console.log('Hubo un error en el fetchActividades ', error);
-    }
-  }
-  useEffect( () =>{
-    const fetchAndSetActividades = async () => {
-      const data = await fetchActividades();
-      if (data.length > 0) {
-        test = data;
-      }
-    };
-    fetchAndSetActividades();
-    console.log('effect: ', test);
-  }, []);
-  //Termina la prueba
-
   const [visible, setVisible] = useState(false);
   const abrirModal = () =>
   {
