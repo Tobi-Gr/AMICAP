@@ -32,7 +32,10 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
     //DBDomain tiene el dominio del ngrok
     const urlApi = `${DBDomain}/api/actPreferida/1`;
     const [actividades, setActividades] = useState<Actividad[]>([]);
-    let [selectedActividad, setSelectedActividad] = useState<Actividad>({nombre: '', paso_uno: '', paso_dos:'', paso_tres:'', paso_cuatro:''});
+    const [selectedActividad, setSelectedActividad] = useState<Actividad>({nombre: '', paso_uno: '', paso_dos:'', paso_tres:'', paso_cuatro:''});
+    const [pasoActual, setPasoActual] = useState<number>(1);
+    const [enunciado, setEnunciado] = useState<string>();
+
     
     //toma las actividades preferidas de la API
     const fetchActividades = async () => {
@@ -58,16 +61,57 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
         //selecciona una actividad random
         if (actividades.length > 0) {
           const rnd = Math.floor(Math.random() * actividades.length)
-          setSelectedActividad(actividades[rnd]);
+          const nuevaAct = actividades[rnd];
+          setSelectedActividad(nuevaAct);
+          setPasoActual(1);
+          setEnunciado(selectedActividad.paso_uno)
           //Elimina la actividad seleccionada del array
           //No funciona bien esto
           let nuevasActividades = actividades;
-          nuevasActividades.splice(rnd-1, 1);
+          nuevasActividades.splice(rnd, 1);
           console.log(nuevasActividades);
           setActividades(nuevasActividades);
         }
       } catch (error) {
         console.log('Hubo un error en el randomActividad ', error);
+      }
+    }
+
+    const siguientePaso = async () => {
+      try {
+        switch (pasoActual) {
+          case 1:
+            if(selectedActividad.paso_dos !== null)
+            {
+              setPasoActual(2);
+              setEnunciado(selectedActividad.paso_dos);
+            }
+            else randomActividad();
+            break;
+            case 2:
+              if(selectedActividad.paso_tres !== null)
+              {
+                setPasoActual(3);
+                setEnunciado(selectedActividad.paso_tres);
+              }
+              else randomActividad();
+            break;
+            case 3:
+              if(selectedActividad.paso_cuatro !== null)
+              {
+                setPasoActual(4);
+                setEnunciado(selectedActividad.paso_cuatro);
+              }
+              else randomActividad();
+            break;
+            case 4:
+              randomActividad();
+            break;
+          default:
+          break;
+        }
+      } catch (error) {
+        console.log('Hubo un error en el siguientePaso ', error);
       }
     }
 
@@ -80,15 +124,14 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
           setActividades(data);
         }
       };
-      fetchAndSetActividades();
-      //console.log('effect: ', actividades);
 
+      fetchAndSetActividades();
     }, []);
 
     useEffect( () =>{
       if(actividades.length > 0) {
         //selecciona una actividad random
-        randomActividad(); 
+        randomActividad();
       }
     }, [actividades]);
 
@@ -105,11 +148,11 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
         <View style={{ flex: 1, backgroundColor: Colores.turquesa }} >
         <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Home"}/>
         <CuadroTexto 
-          actividad={selectedActividad.paso_uno} 
+          actividad={enunciado} 
           style={{top: dialogoY, left: dialogoX}}
           textStyle={{fontSize: tamanoFuente}}/>
         <View style={[styles.buttonsContainer, {top: botonesY, left:botonesX}]}>
-          <Boton text={"Proxima actividad"} tamanoFuenteProps={tamanoFuente} onPress={randomActividad}  containerColor={'blanco'} textStyle={'textoTurquesa'}/> 
+          <Boton text={"Proxima actividad"} tamanoFuenteProps={tamanoFuente} onPress={siguientePaso}  containerColor={'blanco'} textStyle={'textoTurquesa'}/> 
           <Boton text={"Terminar"} tamanoFuenteProps={tamanoFuente} onPress={handleOnPressHome}  containerColor={'turquesa'} textStyle={'textoBlanco'}/> 
         </View>
         
