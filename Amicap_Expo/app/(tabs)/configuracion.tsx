@@ -8,6 +8,7 @@ import { Colores } from '../../constants/Colors';
 import Boton from '@/components/Boton';
 import { NativeScreen } from 'react-native-screens';
 import BotonTextoIcono from '@/components/BotonTextoIcono';
+import SliderNumeros from '@/components/sliderNumeros';
 
 interface Props {
   navigation: any;
@@ -36,6 +37,7 @@ const abrirModal = () =>
       <View style={{ position: 'relative' }}>
         <FondoAzul />
       </View>
+      <SliderNumeros/>
       <View style={[styles.buttonsContainer, {top: botonesY}]}>
         <BotonTextoIcono text={"Seleccionar actividades"} icon={"check"}/>
         <BotonTextoIcono text={"Crear actividad"} icon={"add"}/>

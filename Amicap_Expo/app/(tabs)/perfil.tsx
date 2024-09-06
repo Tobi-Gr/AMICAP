@@ -34,9 +34,10 @@ const PerfilScreen: React.FC<Props> = ({ navigation }) => {
         </View>
         <View style={{ position: 'relative' }}>
           <FondoAzul />
-        {/* <View style={[styles.buttonsContainer, {top: botonesY, left:botonesX}]}>
-        acá van los BotonTextoIcono
-        </View> */}
+        <View style={[styles.buttonsContainer, {top: botonesY, left:botonesX}]}>
+          <BotonTextoIcono text="Tus contactos" icon='contact'/>
+          <BotonTextoIcono text="Tus registros" icon='graph'/>
+        </View>
         </View>
         <Navbar tipo="profile" navigation={navigation}/>
       </View>
