@@ -1,13 +1,14 @@
 import React from 'react';
 import Svg, { G, Path, Defs, ClipPath, Rect, SvgProps } from 'react-native-svg';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 
 interface Props extends SvgProps {
   color?: string;
+  onPress?: () => void;
 }
 
-const Edit: React.FC<Props> = ({ color, ...props }) => (
-  <View style={styles.container}>
+const Edit: React.FC<Props> = ({ color,onPress, ...props }) => (
+      <TouchableOpacity onPress={onPress} style={styles.container}>
       <Svg
       width={37}
       height={37}
@@ -27,7 +28,10 @@ const Edit: React.FC<Props> = ({ color, ...props }) => (
         clipRule="evenodd"
       />
     </Svg>
-  </View>
+    </TouchableOpacity>
+
+
+  
 );
 
 const styles = StyleSheet.create({
