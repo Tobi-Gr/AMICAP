@@ -7,7 +7,7 @@ import { Colores } from '../../constants/Colors';
 //import CrearActividadModal from '@/components/CrearActivdadModal';
 import Boton from '@/components/Boton';
 import { NativeScreen } from 'react-native-screens';
-
+import BotonTextoIcono from '@/components/BotonTextoIcono';
 
 interface Props {
   navigation: any;
@@ -18,7 +18,6 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
   const windowHeight = Dimensions.get('window').height;
   const tamanoFuente = windowWidth / 10;
   const yTexto = windowHeight / 10;
-  const botonesX = windowWidth / 5.5;
   const botonesY = windowHeight / 4.5;
 
 
@@ -37,9 +36,9 @@ const abrirModal = () =>
       <View style={{ position: 'relative' }}>
         <FondoAzul />
       </View>
-      <View style={[styles.buttonsContainer, {top: botonesY, left:botonesX}]}>
-        {/* <Boton text={"Actividades que no me sirven"} tamanoFuenteProps={tamanoFuente} onPress={abrirModal} containerColor='gris' textStyle='textoNegro'/>
-        <Boton text={"Crear actividad"} tamanoFuenteProps={tamanoFuente} onPress={abrirModal} containerColor='gris' textStyle='textoNegro'/> */}
+      <View style={[styles.buttonsContainer, {top: botonesY}]}>
+        <BotonTextoIcono text={"Seleccionar actividades"} icon={"check"}/>
+        <BotonTextoIcono text={"Crear actividad"} icon={"add"}/>
       </View>  
       <Navbar tipo="configuration" navigation={navigation}/>
     </View>
@@ -50,9 +49,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
-  buttonsContainer:{
-    alignContent: 'center',
-    marginHorizontal: 'auto'
+  buttonsContainer: {
+    position: 'absolute',
+    width: '100%',
+    alignItems: 'center',
+    flexDirection: 'column',
   }
 });
+
 export default ConfiguracionScreen;

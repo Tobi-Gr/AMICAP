@@ -1,4 +1,3 @@
-import { Colores } from '../constants/Colors';
 import React,{FC} from 'react';
 import Texto from './Texto';
 import {StyleSheet, Pressable, Dimensions } from 'react-native';
