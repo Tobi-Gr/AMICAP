@@ -10,6 +10,7 @@ import { NativeScreen } from 'react-native-screens';
 import BotonTextoIcono from '@/components/BotonTextoIcono';
 import SliderSegundos from '@/components/sliderSegundos';
 import SliderVolumen from '@/components/SliderVolumen';
+import TextArea from '@/components/TextArea';
 
 interface Props {
   navigation: any;
@@ -31,6 +32,7 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
   const [mantener, setMantener] = useState(4);
 
   const [pruebaVolumen, setPruebaVolumen] = useState(0);
+  const [pruebaMensaje, setPruebaMensaje] = useState("Estoy teniendo un ataque de pánico.");
 
   const abrirModal = () =>
   {
@@ -47,12 +49,14 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
         <FondoAzul />
       </View >
       <View style={[styles.scrollContainer, {top: botonesY}]}>
+
         <SliderVolumen value={pruebaVolumen} onValueChange={setPruebaVolumen}/>
         <BotonTextoIcono text="Seleccionar actividades" icon="check" onPress={() => console.log('Botón Actividades presionado')}/>
         <BotonTextoIcono text="Agregar actividad" icon="add" onPress={() => console.log('Botón AgregarActividad presionado')}/>
         <SliderSegundos value={inhalar} onValueChange={setInhalar} text={"Tiempo inhalando"}/>
         <SliderSegundos value={exhalar} onValueChange={setExhalar} text={"Tiempo exhalando"}/>
         <SliderSegundos value={mantener} onValueChange={setMantener} text={"Tiempo manteniendo"}/>
+        <TextArea prompt="Mensaje por defecto" value={pruebaMensaje} onChange={setPruebaMensaje}/>
       </View>
         
       
