@@ -1,11 +1,12 @@
 import {StyleSheet, View, Dimensions} from 'react-native';
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext} from "react";
 import {Colores} from '../../constants/Colors';
 import Texto from '@/components/Texto';
 import Boton from '@/components/Boton';
 import InputTexto from '@/components/inputTexto';
 import BotonTexto from '@/components/BotonTexto';
 import DBDomain from '@/constants/dbDomain';
+import {UserProvider, useUserContext} from '@/context/UserContext'
 
 interface Props {
   navigation: any;
@@ -31,12 +32,14 @@ const InicioSesion: React.FC<Props> = ({ navigation }) => {
         navigation.navigate("Ayuda");
     };
 
-    //DBDomain es el dominio de ngrok
-    const urlApi = `${DBDomain}/api/usuario/login`;
-    const [token, setToken] = useState<string | null>(null);
+    const {token, setToken} = useUserContext();
+    const {usuario, setUsuario}= useUserContext();
     
     //fetch del token
     const fetchToken = async () => {
+        //DBDomain es el dominio de ngrok
+        const urlApi = `${DBDomain}/api/usuario/login`;
+
         try {
             const response = await fetch(urlApi, {
                 //metodo POST para mandarle un json
@@ -56,7 +59,7 @@ const InicioSesion: React.FC<Props> = ({ navigation }) => {
             if (!data || data === null) {
                 throw new Error('data failed to response');
             }
-            console.log('data: ', data);
+            console.log('data.Fetch: ', data);
             return data;
         } catch (error) {
             console.log('Hubo un error en el fetchToken ', error);
@@ -73,31 +76,55 @@ const InicioSesion: React.FC<Props> = ({ navigation }) => {
         else throw new Error('Token invalido');
     }
 
+    //Verifyca el token
+    const verifyToken = async () => {
+        //DBDomain es el dominio de ngrok
+        const urlApi = `${DBDomain}/api/usuario/verify/${token}`;
+        
+        try {
+            const response = await fetch(urlApi);
+            if (!response.ok) {
+            throw new Error('Failed to fetch data');
+            }
+            const data = await response.json();
+            if (!data) {
+            throw new Error('data failed to response');
+            }
+            console.log('data.Verify: ', data);
+            setUsuario(data);
+        } catch (error) {
+            console.log('Hubo un error en el fetchActividades ', error);
+        }
+    }
+
     useEffect( () =>{
         setToken(null);
-      }, []);
+    }, []);
 
-      useEffect( () =>{
-        if (token !== null) {
-            navigation.navigate('Home');
-        }
-      }, [token]);
+    useEffect( () =>{
+    if (token !== null) {
+        verifyToken;
+        navigation.navigate('Home');
+    }
+    }, [token]);
 
-  return (
-    <View style={styles.background}>
-        <Texto text="Inicio Sesión" estilo="tituloBlanco" style={{fontSize: tamanoTitulo}}/>
-        <View style={styles.inputContainer}>
-            <InputTexto  placeholder="Email" onChange={handleEmailChange} keyBoardType='email-address'/>
-            <InputTexto  placeholder="Contraseña" onChange={handleContrasenaChange} esContrasena={true}/>
-        </View>
-        <Boton text="Iniciar" textStyle='textoTurquesa' containerColor='blanco' onPress={generateToken}/>
-        <View style={styles.botonesContainer} >
-            <Texto text="¿No tenés cuenta?" estilo="textoBlanco" style={{fontSize: tamanoTexto}}/>
-            <BotonTexto text="Registrate" onPress={registroPress}/>
-            <BotonTexto text="Seguir sin cuenta" onPress={sinCuentaPress}/>
-        </View>
-    </View>
-  );
+    return (
+        <UserProvider>
+            <View style={styles.background}>
+                <Texto text="Inicio Sesión" estilo="tituloBlanco" style={{fontSize: tamanoTitulo}}/>
+                <View style={styles.inputContainer}>
+                    <InputTexto  placeholder="Email" onChange={handleEmailChange} keyBoardType='email-address'/>
+                    <InputTexto  placeholder="Contraseña" onChange={handleContrasenaChange} esContrasena={true}/>
+                </View>
+                <Boton text="Iniciar" textStyle='textoTurquesa' containerColor='blanco' onPress={generateToken}/>
+                <View style={styles.botonesContainer} >
+                    <Texto text="¿No tenés cuenta?" estilo="textoBlanco" style={{fontSize: tamanoTexto}}/>
+                    <BotonTexto text="Registrate" onPress={registroPress}/>
+                    <BotonTexto text="Seguir sin cuenta" onPress={sinCuentaPress}/>
+                </View>
+            </View>
+        </UserProvider>
+    );
 };
 
 const styles = StyleSheet.create({

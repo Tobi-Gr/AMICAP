@@ -8,15 +8,15 @@ import Flecha from '@/components/Flecha';
 import Boton from '@/components/Boton';
 
 interface Actividad {
-    nombre:string;
-    paso_uno:string;
-    paso_dos?:string;
-    paso_tres?:string;
-    paso_cuatro?:string;
+  nombre:string;
+  paso_uno:string;
+  paso_dos?:string;
+  paso_tres?:string;
+  paso_cuatro?:string;
 }
 
 interface Props {
-    navigation: any;
+  navigation: any;
 }
 
 const ActividadScreen: React.FC<Props> = ({navigation}) => {  
