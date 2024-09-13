@@ -19,7 +19,7 @@ const App = () => {
   return (
     <UserProvider>
         <Stack.Navigator 
-          initialRouteName="Inicio"
+          initialRouteName="Home"
           screenOptions={{
             headerShown: false,
           }}>
