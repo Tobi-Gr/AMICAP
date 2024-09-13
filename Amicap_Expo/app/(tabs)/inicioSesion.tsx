@@ -1,12 +1,12 @@
 import {StyleSheet, View, Dimensions} from 'react-native';
-import React, { useState, useEffect, useContext} from "react";
+import React, { useState, useEffect} from "react";
 import {Colores} from '../../constants/Colors';
 import Texto from '@/components/Texto';
 import Boton from '@/components/Boton';
 import InputTexto from '@/components/inputTexto';
 import BotonTexto from '@/components/BotonTexto';
 import DBDomain from '@/constants/dbDomain';
-import {UserProvider, useUserContext} from '@/context/UserContext'
+import {useUserContext} from '@/context/UserContext'
 
 interface Props {
   navigation: any;
@@ -103,27 +103,25 @@ const InicioSesion: React.FC<Props> = ({ navigation }) => {
 
     useEffect( () =>{
     if (token !== null) {
-        verifyToken;
+        verifyToken();
         navigation.navigate('Home');
     }
     }, [token]);
 
     return (
-        <UserProvider>
-            <View style={styles.background}>
-                <Texto text="Inicio Sesión" estilo="tituloBlanco" style={{fontSize: tamanoTitulo}}/>
-                <View style={styles.inputContainer}>
-                    <InputTexto  placeholder="Email" onChange={handleEmailChange} keyBoardType='email-address'/>
-                    <InputTexto  placeholder="Contraseña" onChange={handleContrasenaChange} esContrasena={true}/>
-                </View>
-                <Boton text="Iniciar" textStyle='textoTurquesa' containerColor='blanco' onPress={generateToken}/>
-                <View style={styles.botonesContainer} >
-                    <Texto text="¿No tenés cuenta?" estilo="textoBlanco" style={{fontSize: tamanoTexto}}/>
-                    <BotonTexto text="Registrate" onPress={registroPress}/>
-                    <BotonTexto text="Seguir sin cuenta" onPress={sinCuentaPress}/>
-                </View>
+        <View style={styles.background}>
+            <Texto text="Inicio Sesión" estilo="tituloBlanco" style={{fontSize: tamanoTitulo}}/>
+            <View style={styles.inputContainer}>
+                <InputTexto  placeholder="Email" onChange={handleEmailChange} keyBoardType='email-address'/>
+                <InputTexto  placeholder="Contraseña" onChange={handleContrasenaChange} esContrasena={true}/>
             </View>
-        </UserProvider>
+            <Boton text="Iniciar" textStyle='textoTurquesa' containerColor='blanco' onPress={generateToken}/>
+            <View style={styles.botonesContainer} >
+                <Texto text="¿No tenés cuenta?" estilo="textoBlanco" style={{fontSize: tamanoTexto}}/>
+                <BotonTexto text="Registrate" onPress={registroPress}/>
+                <BotonTexto text="Seguir sin cuenta" onPress={sinCuentaPress}/>
+            </View>
+        </View>
     );
 };
 
