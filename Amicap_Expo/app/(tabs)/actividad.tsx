@@ -64,7 +64,7 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
           const nuevaAct = actividades[rnd];
           setSelectedActividad(nuevaAct);
           setPasoActual(1);
-          setEnunciado(selectedActividad.paso_uno)
+          setEnunciado(nuevaAct.paso_uno)
           //Elimina la actividad seleccionada del array
           //No funciona bien esto
           let nuevasActividades = actividades;

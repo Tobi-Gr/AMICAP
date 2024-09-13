@@ -69,8 +69,8 @@ const InicioSesion: React.FC<Props> = ({ navigation }) => {
     //Hace el fetch, devuelve el token, lo guarda en el estado y pasa a la Home
     const generateToken = async () => {
         const data = await fetchToken();
-        console.log(data);
-        if (data.length > 0 && data !== null) {
+        console.log('token: ', data);
+        if (data) {
           setToken(data);
         }
         else throw new Error('Token invalido');
@@ -81,6 +81,7 @@ const InicioSesion: React.FC<Props> = ({ navigation }) => {
         //DBDomain es el dominio de ngrok
         const urlApi = `${DBDomain}/api/usuario/verify/${token}`;
         
+        if(!token) return;
         try {
             const response = await fetch(urlApi);
             if (!response.ok) {
@@ -93,7 +94,7 @@ const InicioSesion: React.FC<Props> = ({ navigation }) => {
             console.log('data.Verify: ', data);
             setUsuario(data);
         } catch (error) {
-            console.log('Hubo un error en el fetchActividades ', error);
+            console.log('Hubo un error en el VerifyToken ', error);
         }
     }
 

@@ -11,15 +11,12 @@ router.get('/prueba', async (req, res) =>{
 
 //login
 router.post('/login', async (req, res) =>{
-    let respuesta;
     const entity = req.body;
-    const returnArray = await svc.LoginAsync(entity);
     if (hlp.validarMail(entity.email)) return res.status(400).send('mail invalido');
-    else if (returnArray != null)
-    {
-        return res.status(200).json(returnArray.token);
-    }
+    const returnArray = await svc.LoginAsync(entity);
+    if (returnArray != null) return res.status(200).json(returnArray.token); 
     else return res.status(401).send('mail o contraseña invalida');
+    
 });
 
 //registro

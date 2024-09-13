@@ -18,13 +18,18 @@ export default class UsuarioRepository
             const sql = `select username, email From users Where email= $1 And contrasena= $2`;
             const values = [entity.email, entity.contrasena];
             const consulta = pgHelper.requestValues(sql, values);
+            const user =
+            {
+                username: consulta.username,
+                email: consulta.email
+            };
             if(consulta != null)
             {
-                const token = jwt.sign(consulta, KEY, options);
+                const token = jwt.sign(user, KEY, options);
                 const result =
                 {
                     succcess: true,
-                    message: '',
+                    message: 'success',
                     token: token
                 }
                 returnArray = result;
