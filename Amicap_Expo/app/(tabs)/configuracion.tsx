@@ -20,6 +20,7 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
   const tamanoFuente = windowWidth / 10;
   const yTexto = windowHeight / 10;
   const botonesY = windowHeight / 4.5;
+  const rectangleHeight = windowHeight * 0.7;
 
 
 const [visible, setVisible] = useState(false);
@@ -36,7 +37,7 @@ const abrirModal = () =>
       <View style={[styles.titleContainer, { marginTop: yTexto }]}>
         <Texto text="Configuracion" estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} /> 
       </View>
-      <View style={styles.fondo}>
+      <View style={[styles.fondo, { height: rectangleHeight }]}>
         <FondoAzul />
       </View>
       <SliderSegundos value={pruebaSlider} onValueChange={setPruebaSlider} text={"Tiempo inhalando"}/>

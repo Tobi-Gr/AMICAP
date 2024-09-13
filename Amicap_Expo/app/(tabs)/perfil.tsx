@@ -20,6 +20,7 @@ const PerfilScreen: React.FC<Props> = ({ navigation }) => {
     const botonesX = windowWidth / 5.5;
     const botonesY = windowHeight / 4.5;
     const editTamano = windowWidth / 10;
+    const rectangleHeight = windowHeight * 0.7;
 
     //dsp hacer que el nombre salga de la base de datos
     const nombre = "Nombre";
@@ -32,8 +33,8 @@ const PerfilScreen: React.FC<Props> = ({ navigation }) => {
         <View style={[styles.titleContainer, { marginTop: yTexto }]}>
           <Texto text={nombre} estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} /> 
         </View>
-        <View style={styles.fondo}>
-          <FondoAzul />
+        <View style={[styles.fondo, { height: rectangleHeight }]}>
+        <FondoAzul />
          <View style={[styles.buttonsContainer, {top: botonesY}]}>
          <BotonTextoIcono text="Tus contactos" icon="contact" onPress={() => console.log('Botón Contactos presionado')}/>
           <BotonTextoIcono text="Tus registros" icon="graph" onPress={() => console.log('Botón registros presionado')}/>

@@ -13,12 +13,14 @@ interface Props {
 
 const EditarPerfilScreen: React.FC<Props> = ({ navigation }) => {
     const windowWidth = Dimensions.get('window').width;
+    const windowHeight = Dimensions.get('window').height;
     const tamanoTitulo = windowWidth / 10;
     const tamanoTexto = windowWidth * 0.05;
+    const rectangleHeight = windowHeight * 3;
 
     return (
       <View style={{ flex: 1, backgroundColor: Colores.blanco }}> 
-           <View style={{ position: 'relative' }}>
+           <View style={styles.fondo}>
           <FondoAzul />
         </View>
         {/* <InputTexto placeholder="Nombre" onChange={}/>
@@ -46,6 +48,11 @@ const EditarPerfilScreen: React.FC<Props> = ({ navigation }) => {
             justifyContent: 'space-evenly',
             alignItems: 'center',
             marginTop: '5%'
+        },
+        fondo:
+        {
+          position: 'absolute',
+          top: '30%',
         }
     });
     
