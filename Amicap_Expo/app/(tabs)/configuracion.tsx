@@ -49,7 +49,6 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
         <FondoAzul />
       </View >
       <View style={[styles.scrollContainer, {top: botonesY}]}>
-
         <SliderVolumen value={pruebaVolumen} onValueChange={setPruebaVolumen}/>
         <BotonTextoIcono text="Seleccionar actividades" icon="check" onPress={() => console.log('Botón Actividades presionado')}/>
         <BotonTextoIcono text="Agregar actividad" icon="add" onPress={() => console.log('Botón AgregarActividad presionado')}/>
@@ -57,8 +56,7 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
         <SliderSegundos value={exhalar} onValueChange={setExhalar} text={"Tiempo exhalando"}/>
         <SliderSegundos value={mantener} onValueChange={setMantener} text={"Tiempo manteniendo"}/>
         <TextArea prompt="Mensaje por defecto" value={pruebaMensaje} onChange={setPruebaMensaje}/>
-      </View>
-        
+      </View>        
       
       <Navbar tipo="configuration" navigation={navigation}/>
     </View>

@@ -104,7 +104,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         alignItems: 'center',
         backgroundColor: Colores.turquesa,
-        position: 'relative',
+        position: 'absolute',
+        bottom: 0,
     },
     button: {
         alignItems: 'center',
