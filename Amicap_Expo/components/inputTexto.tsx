@@ -7,7 +7,7 @@ interface Props {
     placeholder: string;
     keyBoardType?: KeyboardTypeOptions;
     onChange: (text: string) => void;
-    esContrasena?: boolean; // Add this prop to handle password input
+    esContrasena?: boolean;
 }
 
 const InputTexto: FC<Props> = ({ placeholder, keyBoardType = 'default', onChange, esContrasena = false }) => { 

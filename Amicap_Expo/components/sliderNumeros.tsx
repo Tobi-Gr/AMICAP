@@ -8,9 +8,11 @@ type Props = {
     value: number;
     onValueChange: (value: number) => void;
     position?: "flex-start" | "flex-end";
+    min?: number;
+    max?: number;
 };
 
-const SliderNumeros: React.FC<Props> = ({ value, onValueChange, position }) => {
+const SliderNumeros: React.FC<Props> = ({ value, onValueChange, position, min=4, max=10 }) => {
     return (
         <View style={[styles.wrapper, {alignItems: position}]}>
             <Slider
@@ -18,8 +20,8 @@ const SliderNumeros: React.FC<Props> = ({ value, onValueChange, position }) => {
                 onValueChange={onValueChange}
                 maximumTrackTintColor={Colores.negro}
                 minimumTrackTintColor={Colores.celeste}
-                maximumValue={10}
-                minimumValue={4}
+                maximumValue={max}
+                minimumValue={min}
                 step={1}
                 allowTouchTrack
                 trackStyle={{ height: 4 }}
@@ -32,12 +34,11 @@ const SliderNumeros: React.FC<Props> = ({ value, onValueChange, position }) => {
 
 const styles = StyleSheet.create({
     wrapper: {
-        backgroundColor: Colores.turquesa,
-        width: '100%',
+        width: '80%',
         paddingHorizontal: '7%'
     },
     container: {
-        width: '69%',
+        width: '100%',
     },
     thumb: {
         height: 20, 

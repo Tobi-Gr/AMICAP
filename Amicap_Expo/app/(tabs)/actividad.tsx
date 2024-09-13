@@ -8,15 +8,15 @@ import Flecha from '@/components/Flecha';
 import Boton from '@/components/Boton';
 
 interface Actividad {
-    nombre:string;
-    paso_uno:string;
-    paso_dos?:string;
-    paso_tres?:string;
-    paso_cuatro?:string;
+  nombre:string;
+  paso_uno:string;
+  paso_dos?:string;
+  paso_tres?:string;
+  paso_cuatro?:string;
 }
 
 interface Props {
-    navigation: any;
+  navigation: any;
 }
 
 const ActividadScreen: React.FC<Props> = ({navigation}) => {  
@@ -34,7 +34,7 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
     const [actividades, setActividades] = useState<Actividad[]>([]);
     const [selectedActividad, setSelectedActividad] = useState<Actividad>({nombre: '', paso_uno: '', paso_dos:'', paso_tres:'', paso_cuatro:''});
     const [pasoActual, setPasoActual] = useState<number>(1);
-    const [enunciado, setEnunciado] = useState<string>();
+    const [enunciado, setEnunciado] = useState<string>('');
 
     
     //toma las actividades preferidas de la API
@@ -64,7 +64,7 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
           const nuevaAct = actividades[rnd];
           setSelectedActividad(nuevaAct);
           setPasoActual(1);
-          setEnunciado(selectedActividad.paso_uno)
+          setEnunciado(nuevaAct.paso_uno)
           //Elimina la actividad seleccionada del array
           //No funciona bien esto
           let nuevasActividades = actividades;
@@ -84,7 +84,7 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
             if(selectedActividad.paso_dos !== null)
             {
               setPasoActual(2);
-              setEnunciado(selectedActividad.paso_dos);
+              setEnunciado(selectedActividad.paso_dos ?? '');
             }
             else randomActividad();
             break;
@@ -92,7 +92,7 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
               if(selectedActividad.paso_tres !== null)
               {
                 setPasoActual(3);
-                setEnunciado(selectedActividad.paso_tres);
+                setEnunciado(selectedActividad.paso_tres ?? '');
               }
               else randomActividad();
             break;
@@ -100,7 +100,7 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
               if(selectedActividad.paso_cuatro !== null)
               {
                 setPasoActual(4);
-                setEnunciado(selectedActividad.paso_cuatro);
+                setEnunciado(selectedActividad.paso_cuatro ?? '');
               }
               else randomActividad();
             break;

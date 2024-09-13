@@ -2,6 +2,7 @@
 import DBDomain from '../../constants/dbDomain';
 import { useEffect, useState } from 'react';
 import { StyleSheet, View, Dimensions, Pressable, Touchable, TouchableOpacity, Text } from 'react-native';
+import {useUserContext} from '@/context/UserContext'
 import Navbar from '../../components/Navbar';
 import BotonAyuda from '../../components/BotonAyuda';
 import FondoAzul from '@/components/FondoAzul';
@@ -16,12 +17,15 @@ interface Props {
 }
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {  
+  
+  const {token, setToken} = useUserContext();
+  const {usuario, setUsuario}= useUserContext();
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
   const tamanoFuente = windowWidth / 10;
   const yTexto = windowHeight / 10;
-  const nombre = "nombre"; //debería pasarnoslo el back
-  const saludo = "Hola, " + nombre;
+  const nombre = usuario?.username; //debería pasarnoslo el back
+  const saludo = "Hola, " + nombre?? 'usuario';
   const yAyuda = windowHeight * 0.45;
   const xAyuda = windowWidth / 3.5;
   const yContacto = windowHeight / 3;
