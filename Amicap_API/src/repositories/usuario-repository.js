@@ -15,15 +15,16 @@ export default class UsuarioRepository
             {
                 expiresIn: '1h'
             };
-            const sql = `select username, email From users Where email= $1 And contrasena= $2`;
+            const sql = `select username, email From "Usuarios" Where email= $1 And contrasena= $2`;
             const values = [entity.email, entity.contrasena];
             const consulta = pgHelper.requestValues(sql, values);
+            console.log('consulta: ', consulta);
             const user =
             {
-                username: consulta.username,
-                email: consulta.email
+                username: consulta.username, //null
+                email: consulta.email // null
             };
-            if(consulta != null)
+            if(consulta != null && consulta.lentgh > 0)
             {
                 const token = jwt.sign(user, KEY, options);
                 const result =
@@ -45,7 +46,7 @@ export default class UsuarioRepository
     RegisterAsync = async (entity) =>
     {
         let returnArray = null;
-        const sql = `Insert into Users(username, email, contrasena) Values ($1,$2,$3)`;
+        const sql = `Insert into "Usuarios"(username, email, contrasena) Values ($1,$2,$3)`;
         const values = [entity.username, entity.email, entity.contrasena];
         returnArray = pgHelper.requestCount(sql, values);
         return returnArray;

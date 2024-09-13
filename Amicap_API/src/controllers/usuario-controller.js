@@ -14,7 +14,7 @@ router.post('/login', async (req, res) =>{
     const entity = req.body;
     if (hlp.validarMail(entity.email)) return res.status(400).send('mail invalido');
     const returnArray = await svc.LoginAsync(entity);
-    if (returnArray != null) return res.status(200).json(returnArray.token); 
+    if (returnArray != null) return res.status(200).json(returnArray); 
     else return res.status(401).send('mail o contraseña invalida');
     
 });

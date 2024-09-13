@@ -70,8 +70,8 @@ const InicioSesion: React.FC<Props> = ({ navigation }) => {
     const generateToken = async () => {
         const data = await fetchToken();
         console.log('token: ', data);
-        if (data) {
-          setToken(data);
+        if (data && data.token) {
+          setToken(data.token);
         }
         else throw new Error('Token invalido');
     }
@@ -105,7 +105,11 @@ const InicioSesion: React.FC<Props> = ({ navigation }) => {
     useEffect( () =>{
     if (token !== null) {
         verifyToken();
-        navigation.navigate('Home');
+        if (usuario !== null)
+        {
+            console.log('usuario: ', usuario)
+            navigation.navigate('Home');
+        }
     }
     }, [token]);
 
