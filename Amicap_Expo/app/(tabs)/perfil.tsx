@@ -32,19 +32,12 @@ const PerfilScreen: React.FC<Props> = ({ navigation }) => {
         <View style={[styles.titleContainer, { marginTop: yTexto }]}>
           <Texto text={nombre} estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} /> 
         </View>
-        <View style={{ position: 'relative' }}>
+        <View style={styles.fondo}>
           <FondoAzul />
-<<<<<<< HEAD
-        <View style={[styles.buttonsContainer, {top: botonesY, left:botonesX}]}>
-          <BotonTextoIcono text="Tus contactos" icon='contact'/>
-          <BotonTextoIcono text="Tus registros" icon='graph'/>
-        </View>
-=======
          <View style={[styles.buttonsContainer, {top: botonesY}]}>
          <BotonTextoIcono text="Tus contactos" icon="contact" onPress={() => console.log('Botón Contactos presionado')}/>
           <BotonTextoIcono text="Tus registros" icon="graph" onPress={() => console.log('Botón registros presionado')}/>
         </View> 
->>>>>>> 1af5ae6418e482a6f302418685a7dad76fb0bc9c
         </View>
         <Navbar tipo="profile" navigation={navigation}/>
       </View>
@@ -69,6 +62,11 @@ const styles = StyleSheet.create({
     flexDirection: 'column', 
     alignItems: 'center', 
   },
+  fondo:
+  {
+    position: 'absolute',
+    top: '21%'
+  }
 });
 
 export default PerfilScreen;
