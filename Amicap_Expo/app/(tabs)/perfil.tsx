@@ -34,17 +34,10 @@ const PerfilScreen: React.FC<Props> = ({ navigation }) => {
         </View>
         <View style={{ position: 'relative' }}>
           <FondoAzul />
-<<<<<<< HEAD
-        <View style={[styles.buttonsContainer, {top: botonesY, left:botonesX}]}>
-          <BotonTextoIcono text="Tus contactos" icon='contact'/>
-          <BotonTextoIcono text="Tus registros" icon='graph'/>
-        </View>
-=======
          <View style={[styles.buttonsContainer, {top: botonesY}]}>
          <BotonTextoIcono text="Tus contactos" icon="contact" onPress={() => console.log('Botón Contactos presionado')}/>
           <BotonTextoIcono text="Tus registros" icon="graph" onPress={() => console.log('Botón registros presionado')}/>
         </View> 
->>>>>>> 1af5ae6418e482a6f302418685a7dad76fb0bc9c
         </View>
         <Navbar tipo="profile" navigation={navigation}/>
       </View>
