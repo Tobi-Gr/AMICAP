@@ -41,7 +41,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
       <View style={[styles.titleContainer, { marginTop: yTexto }]}>
         <Texto text={saludo} estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} />
       </View>
-      <View style={{ position: 'relative' }}>
+      <View style={styles.fondo}>
         <FondoAzul />
       </View>
         <View style={{ marginTop: yContacto, marginLeft: xContacto, position: 'absolute' }} >
@@ -62,6 +62,11 @@ const styles = StyleSheet.create({
   titleContainer: {
     flex: 1,
     alignItems: 'center',
+  },
+  fondo:
+  {
+    position: 'absolute',
+    top: '21%'
   }
 });
 export default HomeScreen;

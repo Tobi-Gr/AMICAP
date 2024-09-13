@@ -8,7 +8,7 @@ import { Colores } from '../../constants/Colors';
 import Boton from '@/components/Boton';
 import { NativeScreen } from 'react-native-screens';
 import BotonTextoIcono from '@/components/BotonTextoIcono';
-import SliderNumeros from '@/components/sliderNumeros';
+import SliderSegundos from '@/components/sliderSegundos';
 
 interface Props {
   navigation: any;
@@ -23,6 +23,8 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
 
 
 const [visible, setVisible] = useState(false);
+const [pruebaSlider, setPruebaSlider] = useState(4);
+
 const abrirModal = () =>
 {
   setVisible(true);
@@ -34,14 +36,15 @@ const abrirModal = () =>
       <View style={[styles.titleContainer, { marginTop: yTexto }]}>
         <Texto text="Configuracion" estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} /> 
       </View>
-      <View style={{ position: 'relative' }}>
+      <View style={styles.fondo}>
         <FondoAzul />
       </View>
-      <SliderNumeros/>
+      <SliderSegundos value={pruebaSlider} onValueChange={setPruebaSlider} text={"Tiempo inhalando"}/>
       <View style={[styles.buttonsContainer, {top: botonesY}]}>
       <BotonTextoIcono text="Seleccionar actividades" icon="check" onPress={() => console.log('Botón Actividades presionado')}/>
       <BotonTextoIcono text="Agregar actividad" icon="add" onPress={() => console.log('Botón AgregarActividad presionado')}/>
-      </View>  
+      </View>
+      
       <Navbar tipo="configuration" navigation={navigation}/>
     </View>
   );
@@ -59,6 +62,11 @@ const styles = StyleSheet.create({
     flexDirection: 'column', 
     alignItems: 'center', 
   },
+  fondo:
+  {
+    position: 'absolute',
+    top: '21%'
+  }
 });
 
 export default ConfiguracionScreen;

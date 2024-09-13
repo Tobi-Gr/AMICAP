@@ -4,14 +4,15 @@ import { Slider } from '@rneui/themed';
 import { Colores } from '../constants/Colors';
 //https://reactnativeelements.com/docs/components/slider
 
-type SliderNumerosProps = {
+type Props = {
     value: number;
     onValueChange: (value: number) => void;
+    position?: "flex-start" | "flex-end";
 };
 
-const SliderNumeros: React.FC<SliderNumerosProps> = ({ value, onValueChange }) => {
+const SliderNumeros: React.FC<Props> = ({ value, onValueChange, position }) => {
     return (
-        <View style={styles.wrapper}>
+        <View style={[styles.wrapper, {alignItems: position}]}>
             <Slider
                 value={value}
                 onValueChange={onValueChange}
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
     wrapper: {
         backgroundColor: Colores.turquesa,
         width: '100%',
-        alignItems: 'center',
+        paddingHorizontal: '7%'
     },
     container: {
         width: '69%',

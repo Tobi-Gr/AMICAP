@@ -32,7 +32,7 @@ const PerfilScreen: React.FC<Props> = ({ navigation }) => {
         <View style={[styles.titleContainer, { marginTop: yTexto }]}>
           <Texto text={nombre} estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} /> 
         </View>
-        <View style={{ position: 'relative' }}>
+        <View style={styles.fondo}>
           <FondoAzul />
          <View style={[styles.buttonsContainer, {top: botonesY}]}>
          <BotonTextoIcono text="Tus contactos" icon="contact" onPress={() => console.log('Botón Contactos presionado')}/>
@@ -62,6 +62,11 @@ const styles = StyleSheet.create({
     flexDirection: 'column', 
     alignItems: 'center', 
   },
+  fondo:
+  {
+    position: 'absolute',
+    top: '21%'
+  }
 });
 
 export default PerfilScreen;
