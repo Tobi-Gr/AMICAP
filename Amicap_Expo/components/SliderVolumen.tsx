@@ -1,27 +1,24 @@
 import React from 'react';
 import { StyleSheet, View, Dimensions } from 'react-native';
 import SliderNumeros from './sliderNumeros';
+import { Colores } from '../constants/Colors';
 import Texto from './Texto';
+import Sound from './icons/Sound';
 
 type Props = {
     value: number;
     onValueChange: (value: number) => void;
-    text: string;
 };
 
-const SliderSegundos: React.FC<Props> = ({ value, onValueChange, text }) => {
-    const windowWidth = Dimensions.get('window').width;
-    const tamanoFuente = windowWidth * 0.05;
+// hay que añadirle funcionalidad !!!!
 
+const SliderVolumen: React.FC<Props> = ({ value, onValueChange }) => {
     return (
         <View style={styles.wrapper}>
-            <View style={styles.container}>
-                <Texto text={text} estilo='textoBlanco' style={{ fontSize: tamanoFuente }} />
                 <View style={styles.sliderContainer}>
+                    <Sound color={Colores.blanco}/>
                     <SliderNumeros value={value} onValueChange={onValueChange} position='flex-start' />
-                    <Texto text={`${value}s`} estilo='textoBlanco' style={{ fontSize: tamanoFuente }} />
                 </View>
-            </View>
         </View>
     );
 };
@@ -30,13 +27,10 @@ const styles = StyleSheet.create({
     wrapper: {
         alignItems: 'center',
     },
-    container: {
-        alignItems: 'flex-start',
-    },
     sliderContainer: {
         flexDirection: 'row',
         alignItems: 'center'
     },
 });
 
-export default SliderSegundos;
+export default SliderVolumen;

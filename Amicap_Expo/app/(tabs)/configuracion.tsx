@@ -9,6 +9,7 @@ import Boton from '@/components/Boton';
 import { NativeScreen } from 'react-native-screens';
 import BotonTextoIcono from '@/components/BotonTextoIcono';
 import SliderSegundos from '@/components/sliderSegundos';
+import SliderVolumen from '@/components/SliderVolumen';
 
 interface Props {
   navigation: any;
@@ -19,16 +20,22 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
   const windowHeight = Dimensions.get('window').height;
   const tamanoFuente = windowWidth / 10;
   const yTexto = windowHeight / 10;
-  const botonesY = windowHeight / 4.5;
+  const botonesY = windowHeight / 4;
 
 
-const [visible, setVisible] = useState(false);
-const [pruebaSlider, setPruebaSlider] = useState(4);
+  const [visible, setVisible] = useState(false);
 
-const abrirModal = () =>
-{
-  setVisible(true);
-};
+  //conectar con la base de datos
+  const [inhalar, setInhalar] = useState(4);
+  const [exhalar, setExhalar] = useState(4);
+  const [mantener, setMantener] = useState(4);
+
+  const [pruebaVolumen, setPruebaVolumen] = useState(0);
+
+  const abrirModal = () =>
+  {
+    setVisible(true);
+  };
 
   return (
     <View style={{ flex: 1, backgroundColor: Colores.blanco }}> 
@@ -38,12 +45,16 @@ const abrirModal = () =>
       </View>
       <View style={styles.fondo}>
         <FondoAzul />
+      </View >
+      <View style={[styles.scrollContainer, {top: botonesY}]}>
+        <SliderVolumen value={pruebaVolumen} onValueChange={setPruebaVolumen}/>
+        <BotonTextoIcono text="Seleccionar actividades" icon="check" onPress={() => console.log('Botón Actividades presionado')}/>
+        <BotonTextoIcono text="Agregar actividad" icon="add" onPress={() => console.log('Botón AgregarActividad presionado')}/>
+        <SliderSegundos value={inhalar} onValueChange={setInhalar} text={"Tiempo inhalando"}/>
+        <SliderSegundos value={exhalar} onValueChange={setExhalar} text={"Tiempo exhalando"}/>
+        <SliderSegundos value={mantener} onValueChange={setMantener} text={"Tiempo manteniendo"}/>
       </View>
-      <SliderSegundos value={pruebaSlider} onValueChange={setPruebaSlider} text={"Tiempo inhalando"}/>
-      <View style={[styles.buttonsContainer, {top: botonesY}]}>
-      <BotonTextoIcono text="Seleccionar actividades" icon="check" onPress={() => console.log('Botón Actividades presionado')}/>
-      <BotonTextoIcono text="Agregar actividad" icon="add" onPress={() => console.log('Botón AgregarActividad presionado')}/>
-      </View>
+        
       
       <Navbar tipo="configuration" navigation={navigation}/>
     </View>
@@ -54,7 +65,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
-  buttonsContainer:{
+  scrollContainer:{
     position: 'absolute',
     bottom: 80, 
     left: '5%',
