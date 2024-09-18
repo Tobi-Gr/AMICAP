@@ -16,12 +16,12 @@ const EditarPerfilScreen: React.FC<Props> = ({ navigation }) => {
     const windowHeight = Dimensions.get('window').height;
     const tamanoTitulo = windowWidth / 10;
     const tamanoTexto = windowWidth * 0.05;
-    const rectangleHeight = windowHeight * 3;
+    const rectangleHeight=windowHeight*0.7;
 
     return (
       <View style={{ flex: 1, backgroundColor: Colores.blanco }}> 
-           <View style={styles.fondo}>
-          <FondoAzul />
+           <View style={[styles.fondo, { height: rectangleHeight }]}>
+        <FondoAzul />
         </View>
         {/* <InputTexto placeholder="Nombre" onChange={}/>
         <InputTexto placeholder="Contraseña" onChange={}/>
@@ -53,6 +53,7 @@ const EditarPerfilScreen: React.FC<Props> = ({ navigation }) => {
         {
           position: 'absolute',
           top: '30%',
+        
         }
     });
     
