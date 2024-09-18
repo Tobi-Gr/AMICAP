@@ -22,7 +22,6 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
   const tamanoFuente = windowWidth / 10;
   const yTexto = windowHeight / 10;
   const botonesY = windowHeight / 4;
-  const rectangleHeight = windowHeight * 0.7;
 
 
   const [visible, setVisible] = useState(false);
@@ -46,9 +45,7 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
       <View style={[styles.titleContainer, { marginTop: yTexto }]}>
         <Texto text="Configuracion" estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} /> 
       </View>
-      <View style={[styles.fondo, { height: rectangleHeight }]}>
-        <FondoAzul />
-      </View >
+      <FondoAzul currentScreen="Configuracion"/>
       <View style={[styles.scrollContainer, {top: botonesY}]}>
         <SliderVolumen value={pruebaVolumen} onValueChange={setPruebaVolumen}/>
         <BotonTextoIcono text="Seleccionar actividades" icon="check" onPress={() => console.log('Botón Actividades presionado')}/>

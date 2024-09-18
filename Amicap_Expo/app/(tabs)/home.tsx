@@ -32,7 +32,6 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
   const xContacto = windowWidth / 5.8;
   const yInfo = windowHeight / 2.07;
   const xInfo = windowWidth / 12.8;
-  const rectangleHeight = windowHeight * 0.7;
 
   const [visible, setVisible] = useState(false);
   const abrirModal = () =>
@@ -46,9 +45,9 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
       <View style={[styles.titleContainer, { marginTop: yTexto }]}>
         <Texto text={saludo} estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} />
       </View>
-      <View style={[styles.fondo, { height: rectangleHeight }]}>
-        <FondoAzul />
-      </View>
+
+        <FondoAzul currentScreen="Home"/>
+    
         <View style={{ marginTop: yContacto, marginLeft: xContacto, position: 'absolute' }} >
           <BotonContacto  onPress={((abrirModal))}/>
           {/*contactos={[contact, contact2]} key={0} */}
