@@ -1,6 +1,7 @@
 import {StyleSheet, View, Dimensions} from 'react-native';
 import React, { useState } from "react";
 import {Colores} from '../../constants/Colors';
+import DBDomain from '@/constants/dbDomain';
 import Texto from '@/components/Texto';
 import Boton from '@/components/Boton';
 import InputTexto from '@/components/inputTexto';
@@ -39,23 +40,69 @@ const Registro: React.FC<Props> = ({ navigation }) => {
         navigation.navigate("Ayuda");
     };
 
-  return (
-    <View style={styles.background}>
-        <Texto text="Inicio Sesión" estilo="tituloBlanco" style={{fontSize: tamanoTitulo}}/>
-        <View style={styles.inputContainer}>
-            <InputTexto  placeholder="Nombre" onChange={handleNombreChange}/>
-            <InputTexto  placeholder="Email" onChange={handleEmailChange} keyBoardType='email-address'/>
-            <InputTexto  placeholder="Contraseña" onChange={handleContrasenaChange} esContrasena={true}/>
-            <InputTexto  placeholder="Confirmar contraseña" onChange={handleContrasenaChange} esContrasena={true}/>
+    //fetch del token
+    const createUser = async () => {
+        //DBDomain es el dominio de ngrok
+        const urlApi = `${DBDomain}/api/usuario/register`;
+
+        try {
+            const response = await fetch(urlApi, {
+                //metodo POST para mandarle un json
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: nombre,
+                    email: email,
+                    contrasena: contrasena,
+                }),
+            });
+            if (!response.ok) {
+                throw new Error('Failed to fetch data');
+            }
+            const data = await response.json();
+            if (!data || data === null) {
+                throw new Error('data failed to response');
+            }
+            console.log('data.Fetch: ', data);
+            return data;
+        } catch (error) {
+            console.log('Hubo un error en el createUser ', error);
+        }
+    }
+
+    const register = async () => {
+        if (contrasena == confirmacion)
+        {
+            const data = await createUser();
+            console.log('user: ', data);
+            if (data.lentgh > 0)
+            {
+              navigation.navigate('InicioSecion');
+            }
+            else throw new Error('no se pudo crear la cuenta');
+        }
+        else throw new Error('contrasena y confirmar no coinciden');
+    }
+
+    return (
+        <View style={styles.background}>
+            <Texto text="Inicio Sesión" estilo="tituloBlanco" style={{fontSize: tamanoTitulo}}/>
+            <View style={styles.inputContainer}>
+                <InputTexto  placeholder="Nombre" onChange={handleNombreChange}/>
+                <InputTexto  placeholder="Email" onChange={handleEmailChange} keyBoardType='email-address'/>
+                <InputTexto  placeholder="Contraseña" onChange={handleContrasenaChange} esContrasena={true}/>
+                <InputTexto  placeholder="Confirmar contraseña" onChange={handleConfirmacionChange} esContrasena={true}/>
+            </View>
+            <Boton text="Registrar" textStyle='textoTurquesa' containerColor='blanco'/>
+            <View style={styles.botonesContainer} >
+                <Texto text="¿Ya tenés cuenta?" estilo="textoBlanco" style={{fontSize: tamanoTexto}}/>
+                <BotonTexto text="Inicia sesión" onPress={inicioSesionPress}/>
+                <BotonTexto text="Seguir sin cuenta" onPress={sinCuentaPress}/>
+            </View>
         </View>
-        <Boton text="Registrar" textStyle='textoTurquesa' containerColor='blanco'/>
-        <View style={styles.botonesContainer} >
-            <Texto text="¿Ya tenés cuenta?" estilo="textoBlanco" style={{fontSize: tamanoTexto}}/>
-            <BotonTexto text="Inicia sesión" onPress={inicioSesionPress}/>
-            <BotonTexto text="Seguir sin cuenta" onPress={sinCuentaPress}/>
-        </View>
-    </View>
-  );
+    );
 };
 
 const styles = StyleSheet.create({

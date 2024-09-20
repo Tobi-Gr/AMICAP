@@ -26,5 +26,5 @@ app.use("/api/usuario", usuarioRouter);
 
 //Inicio el Server y lo pongo a escuchar.
 app.listen(port,()=> {
-    console.log(`Example app listening on port${port}`)
+    console.log(`Example app listening on port ${port}`)
 })

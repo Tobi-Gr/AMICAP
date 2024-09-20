@@ -32,8 +32,7 @@ const InicioSesion: React.FC<Props> = ({ navigation }) => {
         navigation.navigate("Ayuda");
     };
 
-    const {token, setToken} = useUserContext();
-    const {usuario, setUsuario}= useUserContext();
+    const {token, setToken, usuario, setUsuario} = useUserContext();
     
     //fetch del token
     const fetchToken = async () => {
@@ -52,9 +51,6 @@ const InicioSesion: React.FC<Props> = ({ navigation }) => {
                     contrasena: userContrasena,
                 }),
             });
-            if (!response.ok) {
-                throw new Error('Failed to fetch data');
-            }
             const data = await response.json();
             if (!data || data === null) {
                 throw new Error('data failed to response');
@@ -69,7 +65,6 @@ const InicioSesion: React.FC<Props> = ({ navigation }) => {
     //Hace el fetch, devuelve el token, lo guarda en el estado y pasa a la Home
     const generateToken = async () => {
         const data = await fetchToken();
-        console.log('token: ', data);
         if (data && data.token) {
           setToken(data.token);
         }
@@ -80,7 +75,7 @@ const InicioSesion: React.FC<Props> = ({ navigation }) => {
     const verifyToken = async () => {
         //DBDomain es el dominio de ngrok
         const urlApi = `${DBDomain}/api/usuario/verify/${token}`;
-        
+        console.log('Token: ', token)
         if(!token) return;
         try {
             const response = await fetch(urlApi);

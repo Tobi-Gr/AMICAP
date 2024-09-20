@@ -38,6 +38,7 @@ router.post('/register', async (req, res) =>{
 router.post('/verify/:token', async (req, res) =>{
     try {
         const token = req.params.token;
+        console.log(token)
         let returnArray;
         if (token != null)
         {

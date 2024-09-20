@@ -15,17 +15,16 @@ export default class UsuarioRepository
             {
                 expiresIn: '1h'
             };
-            const sql = `select username, email From "Usuarios" Where email= $1 And contrasena= $2`;
+            const sql = `select username, email From "Usuarios" Where email = $1 And contrasena = $2`;
             const values = [entity.email, entity.contrasena];
-            const consulta = pgHelper.requestValues(sql, values);
-            console.log('consulta: ', consulta);
-            const user =
+            const consulta = await pgHelper.requestValues(sql, values);
+            if(consulta != null)
             {
-                username: consulta.username, //null
-                email: consulta.email // null
-            };
-            if(consulta != null && consulta.lentgh > 0)
-            {
+                const user =
+                {
+                    username: consulta.username, //null
+                    email: consulta.email // null
+                };
                 const token = jwt.sign(user, KEY, options);
                 const result =
                 {
@@ -56,10 +55,10 @@ export default class UsuarioRepository
     {
         let returnArray = null;
         const Token = token;
-
+        console.log('Token: ', Token)
         try
         {
-            returnArray = await jwt.verify(Token, KEY);
+            returnArray = jwt.verify(Token, KEY);
         }
         catch (error)
         {
