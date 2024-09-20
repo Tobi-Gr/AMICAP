@@ -34,11 +34,10 @@ router.post('/register', async (req, res) =>{
     }
 });
 
-//registro
-router.post('/verify/:token', async (req, res) =>{
+//Verifica el token y devuelve el usuario
+router.get('/verify/:token', async (req, res) =>{
     try {
         const token = req.params.token;
-        console.log(token)
         let returnArray;
         if (token != null)
         {

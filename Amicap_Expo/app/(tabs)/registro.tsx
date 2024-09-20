@@ -79,11 +79,11 @@ const Registro: React.FC<Props> = ({ navigation }) => {
             console.log('user: ', data);
             if (data.lentgh > 0)
             {
-              navigation.navigate('InicioSecion');
+              navigation.navigate('InicioSesion');
             }
             else throw new Error('no se pudo crear la cuenta');
         }
-        else throw new Error('contrasena y confirmar no coinciden');
+        else throw new Error('contraseña y confirmar contraseña no coinciden');
     }
 
     return (
@@ -95,7 +95,7 @@ const Registro: React.FC<Props> = ({ navigation }) => {
                 <InputTexto  placeholder="Contraseña" onChange={handleContrasenaChange} esContrasena={true}/>
                 <InputTexto  placeholder="Confirmar contraseña" onChange={handleConfirmacionChange} esContrasena={true}/>
             </View>
-            <Boton text="Registrar" textStyle='textoTurquesa' containerColor='blanco'/>
+            <Boton text="Registrar" textStyle='textoTurquesa' containerColor='blanco' onPress={(register)}/>
             <View style={styles.botonesContainer} >
                 <Texto text="¿Ya tenés cuenta?" estilo="textoBlanco" style={{fontSize: tamanoTexto}}/>
                 <BotonTexto text="Inicia sesión" onPress={inicioSesionPress}/>

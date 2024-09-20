@@ -2,8 +2,9 @@ import React, { useState, createContext, useContext, ReactNode} from "react";
 
 // Define el tipo para el contexto
 interface Usuario {
-    username:string;
-    email:string;
+  id:number;
+  username:string;
+  email:string;
 }
 interface UserContextType
 {

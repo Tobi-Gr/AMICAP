@@ -17,52 +17,20 @@ interface Contacto {
 interface Props {
     visible: boolean;
     setVisible: (visible: boolean) => void;
+    contactosArray: Contacto[];
 }
 
-const ContactosModal: FC<Props> = ({ visible, setVisible }) => {
+const ContactosModal: FC<Props> = ({ visible, setVisible, contactosArray }) => {
     const windowWidth = Dimensions.get('window').width;
     const tamanoFuente = windowWidth / 14;
-    const contactosArray = useMemo(() => [
-        { id: 1, nombre: "Luca", numero: "+5491125119535" },
-        { id: 2, nombre: "Juli Lif", numero: "+549116245965" },
-        { id: 3, nombre: "Juli Lav", numero: "+5491139435672" },
-        { id: 4, nombre: "Tobi", numero: "+5491170033777" }
-    ], []);
-    const urlApi = `${DBDomain}/api/contacto/1`;
-    const [contactos, setContactos] = useState<Contacto[]>([]);
+    // const contactosArray = useMemo(() => [
+    //     { id: 1, nombre: "Luca", numero: "+5491125119535" },
+    //     { id: 2, nombre: "Juli Lif", numero: "+549116245965" },
+    //     { id: 3, nombre: "Juli Lav", numero: "+5491139435672" },
+    //     { id: 4, nombre: "Tobi", numero: "+5491170033777" }
+    // ], []);
+
     const [selectedContact, setSelectedContact] = useState<Contacto | null>(null);
-
-    const fetchContactos = async () => {
-        try {
-            const response = await fetch(urlApi);
-            if (!response.ok) {
-            throw new Error('Failed to fetch data');
-            }
-            const data = await response.json();
-            if (!data) {
-            throw new Error('data failed to response');
-            }
-            console.log('data: ', data);
-            return data;
-        } catch (error) {
-            console.log('Hubo un error en el fetchContactos ', error);
-        }
-    }
-
-    const mapearActividades = (data: Contacto[]) => {
-        console.log('map: ', data);
-        setContactos(data);
-    }
-
-    useEffect(() => {
-        const fetchAndSetContactos = async () => {
-            const data = await fetchContactos();
-            if (data.length > 0) {
-                setContactos(data);
-            }
-        };
-        fetchAndSetContactos();
-    }, []);
 
     const handlePhoneCall = () => {
         if (selectedContact != null) {

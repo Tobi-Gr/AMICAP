@@ -80,13 +80,13 @@ const InicioSesion: React.FC<Props> = ({ navigation }) => {
         try {
             const response = await fetch(urlApi);
             if (!response.ok) {
-            throw new Error('Failed to fetch data');
+                throw new Error('Failed to fetch data');
             }
             const data = await response.json();
-            if (!data) {
-            throw new Error('data failed to response');
-            }
             console.log('data.Verify: ', data);
+            if (!data) {
+                throw new Error('data failed to response');
+            }
             setUsuario(data);
         } catch (error) {
             console.log('Hubo un error en el VerifyToken ', error);
@@ -100,13 +100,15 @@ const InicioSesion: React.FC<Props> = ({ navigation }) => {
     useEffect( () =>{
     if (token !== null) {
         verifyToken();
-        if (usuario !== null)
-        {
+    }
+    }, [token]);
+
+    useEffect( () =>{
+        if (usuario !== null) {
             console.log('usuario: ', usuario)
             navigation.navigate('Home');
         }
-    }
-    }, [token]);
+        }, [usuario]);
 
     return (
         <View style={styles.background}>
