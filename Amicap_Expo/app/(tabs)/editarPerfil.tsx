@@ -19,50 +19,102 @@ const EditarPerfilScreen: React.FC<Props> = ({ navigation }) => {
     const tamanoTitulo = windowWidth / 10;
     const tamanoTexto = windowWidth * 0.05;
     const flechaTamano = windowWidth / 10;
+    const botonesY = windowHeight / 4;
   
+    const [nombre, setNombre] = useState<string>('');
+  const [contrasena, setContrasena] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+
+  const handleGuardarCambios = () => {
+    // Aquí puedes implementar la lógica para guardar los cambios
+    console.log("Nombre:", nombre);
+    console.log("Contraseña:", contrasena);
+    console.log("Email:", email);
+  };
 
     return (
       <View style={{ flex: 1, backgroundColor: Colores.blanco }}> 
           <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Perfil"} color={Colores.turquesa}/>
         <FondoAzulEditarPerfil />
-        
-         {/* <InputTexto placeholder="Nombre" onChange={}/>
-        <InputTexto placeholder="Contraseña" onChange={}/>
-        <InputTexto placeholder="Email" onChange={}/>  */}
+        <View style={styles.itemcontainer}>
+          <InputTexto placeholder="Nombre" onChange={setNombre}/>
+          <InputTexto placeholder="Contraseña" onChange={setContrasena} esContrasena={true}/>
+          <InputTexto placeholder="Email" onChange={setEmail}/>   
+          </View>
+
+          <View style={styles.botoncontainer}>
+          <Boton text="Guardar" onPress={handleGuardarCambios} containerColor={'blanco'} textStyle={'textoNegro'}/>
+          <Boton text="Cancelar" onPress={handleGuardarCambios} containerColor={'turquesa'} textStyle={'textoBlanco'}/>
+          </View>
         </View>
-      );
+   
+        
+      );  
     };
     
+
     const styles = StyleSheet.create({
-        background:{
-            flex: 1,
-            flexDirection: 'column', 
-            backgroundColor: Colores.turquesa,
-            alignItems: 'center',
-            paddingTop: '20%'
-        },
-        inputContainer: {
-            width: '90%',
-            height: '50%',
-            justifyContent: 'space-evenly',
-        },
-        botonesContainer: {
-            height: '20%',
-            justifyContent: 'space-evenly',
-            alignItems: 'center',
-            marginTop: '5%'
-        },
-        fondo:
-        {
-          position: 'absolute',
-          top: '30%',
+
+      itemcontainer:{
         
-        },
-        flecha: {
-          position: 'absolute',
-          left: '5%',
-          top: 20
-        },
+        position: 'absolute',
+        bottom: 450, 
+        left: '5%',
+        right: '5%', 
+        flexDirection: 'column', 
+        alignItems: 'center', 
+        
+      },
+      
+      botoncontainer:{
+        
+        position: 'absolute',
+        bottom:20,
+        left: '5%',
+        right: '5%', 
+        flexDirection: 'column', 
+        alignItems: 'center', 
+        
+      }
+
     });
-    
+
+
     export default EditarPerfilScreen;
+
+
+        // const styles = StyleSheet.create({
+    //     background:{
+    //         flex: 1,
+    //         flexDirection: 'column', 
+   
+    //         alignItems: 'center',
+    //         paddingTop: '20%'
+    //     },
+    //     inputContainer: {
+    //       flex: 1,
+    //         width: '90%',
+    //         height: '50%',
+    //         justifyContent: 'center',
+    //     },
+    //     buttonsContainer:{
+    //       position: 'absolute',
+    //       bottom: 20, 
+    //       left: '5%',
+    //       right: '5%', 
+    //       flexDirection: 'column', 
+    //       alignItems: 'center', 
+    //     },
+    //     fondo:
+    //     {
+    //       position: 'absolute',
+    //       top: '30%',
+        
+    //     },
+    //     flecha: {
+    //       position: 'absolute',
+    //       left: '5%',
+    //       top: 20
+    //     },
+    // });
+    
