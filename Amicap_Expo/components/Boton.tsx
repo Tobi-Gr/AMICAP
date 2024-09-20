@@ -27,7 +27,7 @@ const Boton: FC<Props> = ({text, onPress, textStyle, containerColor, fullWidth, 
   
     return (
         <Pressable 
-            style={fullWidth? [styles.container, styles.fullWidth, styles[containerColor]] :[styles.container, styles[containerColor]]}
+            style={fullWidth? [ styles.container, styles.fullWidth, styles[containerColor]] :[styles.container, styles[containerColor]]}
             onPress={handleOnPress}>
             <Texto text={text} estilo={textStyle} style={tamanoFuenteProps? {fontSize: tamanoFuenteProps } : {fontSize: tamanoFuenteLocal }}/>
         </Pressable>
