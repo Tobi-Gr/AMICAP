@@ -28,7 +28,7 @@ const RespiracionScreen: React.FC<Props> = ({ navigation }) => {
  
   return (
     <View style={{ flex: 1, backgroundColor: Colores.turquesa }} >
-      <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Ayuda"}/>
+      <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Ayuda"} color={Colores.blanco}/>
       <View style={{height: margenSuperiorCuadrado}} ></View>
       <Respirar inhalar={inhalar} exhalar={exhalar} mantener={mantener}/>
       <View style={{height: margenSuperiorBoton}} ></View>

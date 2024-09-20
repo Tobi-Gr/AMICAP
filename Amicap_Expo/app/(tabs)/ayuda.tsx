@@ -44,7 +44,7 @@ const AyudaScreen: React.FC<Props> = ({ navigation }) => {
   // Si no vuelve a 'Inicio'
   return (
     <View style={{ flex: 1, backgroundColor: Colores.turquesa }} >
-      <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Home"}/>
+      <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Home"} color={Colores.blanco}/>
       <CuadroTexto 
         nombre={nombre} 
         actividad="¿Qué querés hacer?" 

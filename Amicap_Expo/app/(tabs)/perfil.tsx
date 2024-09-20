@@ -33,7 +33,7 @@ const PerfilScreen: React.FC<Props> = ({ navigation }) => {
         <View style={[styles.titleContainer, { marginTop: yTexto }]}>
           <Texto text={nombre} estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} /> 
         </View>
-        <FondoAzul currentScreen="Perfil"/>
+        <FondoAzul/>
          <View style={[styles.buttonsContainer, {top: botonesY}]}>
          <BotonTextoIcono text="Tus contactos" icon="contact" onPress={() => console.log('Botón Contactos presionado')}/>
           <BotonTextoIcono text="Tus registros" icon="graph" onPress={() => console.log('Botón registros presionado')}/>

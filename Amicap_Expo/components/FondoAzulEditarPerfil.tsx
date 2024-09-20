@@ -1,9 +1,9 @@
 import {View, StyleSheet, Dimensions} from 'react-native';
  import {Colores} from './../constants/Colors';
- const FondoAzul  = () => {
+ const FondoAzulEditarPerfil  = () => {
      const windowWidth = Dimensions.get('window').width;
      const windowHeight = Dimensions.get('window').height;
-      const rectangleHeight = windowHeight * 0.7;
+      const rectangleHeight = windowHeight * 0.9;
      return <View style={[styles.container, { width: windowWidth }]}>
                  <View style={[styles.rectangle,{ height: rectangleHeight } ]} />
              </View>;
@@ -21,4 +21,4 @@ import {View, StyleSheet, Dimensions} from 'react-native';
          borderTopRightRadius: 80,
      },
  });
- export default FondoAzul;
+ export default FondoAzulEditarPerfil;

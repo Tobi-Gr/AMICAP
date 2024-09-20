@@ -146,7 +146,7 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
     //arreglar la direccion de los botones
     return (
         <View style={{ flex: 1, backgroundColor: Colores.turquesa }} >
-        <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Home"}/>
+        <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Home"} color={Colores.blanco}/>
         <CuadroTexto 
           actividad={enunciado} 
           style={{top: dialogoY, left: dialogoX}}

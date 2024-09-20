@@ -45,9 +45,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
       <View style={[styles.titleContainer, { marginTop: yTexto }]}>
         <Texto text={saludo} estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} />
       </View>
-
-        <FondoAzul currentScreen="Home"/>
-    
+        <FondoAzul/>
         <View style={{ marginTop: yContacto, marginLeft: xContacto, position: 'absolute' }} >
           <BotonContacto  onPress={((abrirModal))}/>
           {/*contactos={[contact, contact2]} key={0} */}

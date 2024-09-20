@@ -45,7 +45,7 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
       <View style={[styles.titleContainer, { marginTop: yTexto }]}>
         <Texto text="Configuracion" estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} /> 
       </View>
-      <FondoAzul currentScreen="Configuracion"/>
+      <FondoAzul/>
       <View style={[styles.scrollContainer, {top: botonesY}]}>
         <SliderVolumen value={pruebaVolumen} onValueChange={setPruebaVolumen}/>
         <BotonTextoIcono text="Seleccionar actividades" icon="check" onPress={() => console.log('Botón Actividades presionado')}/>

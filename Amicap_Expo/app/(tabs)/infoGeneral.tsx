@@ -192,7 +192,7 @@ const InfoGeneralScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <InfoModal visible={visible} setVisible={setVisible} selectedInfo={selectedInfo} />
-      <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Home"} />
+      <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Home"} color={Colores.blanco} />
       <View style={[styles.titleContainer, { marginTop: yTexto }]}>
         <Texto text={"Información"} estilo="tituloBlanco" style={{ fontSize: tamanoTitulo }} />
       </View>
