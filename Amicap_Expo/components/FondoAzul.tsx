@@ -3,7 +3,7 @@ import {View, StyleSheet, Dimensions} from 'react-native';
  const FondoAzul  = () => {
      const windowWidth = Dimensions.get('window').width;
      const windowHeight = Dimensions.get('window').height;
-      const rectangleHeight = windowHeight * 0.7;
+      const rectangleHeight = windowHeight * 0.8;
      return <View style={[styles.container, { width: windowWidth }]}>
                  <View style={[styles.rectangle,{ height: rectangleHeight } ]} />
              </View>;

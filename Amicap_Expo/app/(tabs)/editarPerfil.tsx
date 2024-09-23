@@ -20,6 +20,7 @@ const EditarPerfilScreen: React.FC<Props> = ({ navigation }) => {
     const tamanoTexto = windowWidth * 0.05;
     const flechaTamano = windowWidth / 10;
     const botonesY = windowHeight / 4;
+    const tamanoFuente = windowWidth / 20;
   
     const [nombre, setNombre] = useState<string>('');
   const [contrasena, setContrasena] = useState<string>('');
@@ -35,6 +36,9 @@ const EditarPerfilScreen: React.FC<Props> = ({ navigation }) => {
     return (
       <View style={{ flex: 1, backgroundColor: Colores.blanco }}> 
           <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Perfil"} color={Colores.turquesa}/>
+          <View style={styles.editarcontainer}>
+          <Texto text='Editar'estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} />
+          </View>
         <FondoAzulEditarPerfil />
         <View style={styles.itemcontainer}>
           <InputTexto placeholder="Nombre" onChange={setNombre}/>
@@ -75,6 +79,12 @@ const EditarPerfilScreen: React.FC<Props> = ({ navigation }) => {
         flexDirection: 'column', 
         alignItems: 'center', 
         
+      },
+
+      editarcontainer:{
+        position: 'absolute',
+        left: '25%',
+        top: 25
       }
 
     });

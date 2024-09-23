@@ -6,6 +6,7 @@ import Navbar from '@/components/Navbar';
 import FondoAzul from '@/components/FondoAzul';
 import Edit from '@/components/icons/Edit';
 import BotonTextoIcono from '@/components/BotonTextoIcono';
+import BotonTexto from '@/components/BotonTexto';
 
 interface Props {
   navigation: any;
@@ -35,6 +36,7 @@ const PerfilScreen: React.FC<Props> = ({ navigation }) => {
         </View>
         <FondoAzul/>
          <View style={[styles.buttonsContainer, {top: botonesY}]}>
+          
          <BotonTextoIcono text="Tus contactos" icon="contact" onPress={() => console.log('Botón Contactos presionado')}/>
           <BotonTextoIcono text="Tus registros" icon="graph" onPress={() => console.log('Botón registros presionado')}/>
         </View> 
