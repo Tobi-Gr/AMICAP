@@ -7,6 +7,7 @@ import FondoAzul from '@/components/FondoAzul';
 import Edit from '@/components/icons/Edit';
 import BotonTextoIcono from '@/components/BotonTextoIcono';
 import Boton from '@/components/BotonTexto';
+import RecEmail from '@/components/RecEmail';
 
 interface Props {
   navigation: any;
@@ -43,6 +44,7 @@ const PerfilScreen: React.FC<Props> = ({ navigation }) => {
         <FondoAzul/>
 
          <View style={styles.itemContainer}>   
+         <RecEmail/>
          <BotonTextoIcono text="Tus contactos" icon="contact" onPress={() => console.log('Botón Contactos presionado')}/>
           <BotonTextoIcono text="Tus registros" icon="graph" onPress={() => console.log('Botón registros presionado')}/>
           </View>
@@ -77,7 +79,7 @@ const styles = StyleSheet.create({
   itemContainer:{
         
     position: 'absolute',
-    bottom: 450, 
+    bottom: 390, 
     left: '5%',
     right: '5%', 
     flexDirection: 'column', 
@@ -88,7 +90,9 @@ const styles = StyleSheet.create({
   {
     position: 'absolute',
     top: '21%'
-  }
+  },
+ 
 });
+
 
 export default PerfilScreen;

@@ -1,3 +1,4 @@
+
 import {StyleSheet, View, Dimensions} from 'react-native';
 import React, { useState } from "react";
 import {Colores} from '../../constants/Colors';
