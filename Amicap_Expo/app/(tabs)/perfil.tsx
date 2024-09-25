@@ -41,12 +41,12 @@ const PerfilScreen: React.FC<Props> = ({ navigation }) => {
           <Texto text={nombre} estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} /> 
         </View>
         <FondoAzul/>
-         <View style={[styles.buttonsContainer, {top: botonesY}]}>
-          
+
+         <View style={styles.itemContainer}>   
          <BotonTextoIcono text="Tus contactos" icon="contact" onPress={() => console.log('Botón Contactos presionado')}/>
           <BotonTextoIcono text="Tus registros" icon="graph" onPress={() => console.log('Botón registros presionado')}/>
           </View>
-          <View style={styles.botonContainer}>
+          <View style={styles.buttonsContainer}>
           <Boton text="Eliminar cuenta" onPress={eliminarCuenta} containerColor={'turquesa'} textStyle={'textoBlanco'}/>
           <Boton text="Cerrar sesión" onPress={cerrarSesion} containerColor={'turquesa'} textStyle={'textoBlanco'}/>
         </View> 
@@ -74,8 +74,15 @@ const styles = StyleSheet.create({
     flexDirection: 'column', 
     alignItems: 'center', 
   },
-  botonContainer:{
-
+  itemContainer:{
+        
+    position: 'absolute',
+    bottom: 450, 
+    left: '5%',
+    right: '5%', 
+    flexDirection: 'column', 
+    alignItems: 'center', 
+    
   },
   fondo:
   {
