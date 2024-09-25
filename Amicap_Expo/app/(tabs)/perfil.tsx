@@ -6,11 +6,17 @@ import Navbar from '@/components/Navbar';
 import FondoAzul from '@/components/FondoAzul';
 import Edit from '@/components/icons/Edit';
 import BotonTextoIcono from '@/components/BotonTextoIcono';
-import BotonTexto from '@/components/BotonTexto';
+import Boton from '@/components/BotonTexto';
 
 interface Props {
   navigation: any;
 }
+const eliminarCuenta = () => {
+  console.log("Se eliminó la cuenta");
+};
+const cerrarSesion = () => {
+  console.log("Se cerró la sesión");
+};
 
 const PerfilScreen: React.FC<Props> = ({ navigation }) => {
     const windowWidth = Dimensions.get('window').width;
@@ -39,6 +45,10 @@ const PerfilScreen: React.FC<Props> = ({ navigation }) => {
           
          <BotonTextoIcono text="Tus contactos" icon="contact" onPress={() => console.log('Botón Contactos presionado')}/>
           <BotonTextoIcono text="Tus registros" icon="graph" onPress={() => console.log('Botón registros presionado')}/>
+          </View>
+          <View style={styles.botonContainer}>
+          <Boton text="Eliminar cuenta" onPress={eliminarCuenta} containerColor={'turquesa'} textStyle={'textoBlanco'}/>
+          <Boton text="Cerrar sesión" onPress={cerrarSesion} containerColor={'turquesa'} textStyle={'textoBlanco'}/>
         </View> 
         
         <Navbar tipo="profile" navigation={navigation}/>
@@ -63,6 +73,9 @@ const styles = StyleSheet.create({
     right: '5%', 
     flexDirection: 'column', 
     alignItems: 'center', 
+  },
+  botonContainer:{
+
   },
   fondo:
   {

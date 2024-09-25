@@ -51,8 +51,7 @@ const EditarPerfilScreen: React.FC<Props> = ({ navigation }) => {
           <Boton text="Cancelar" onPress={handleGuardarCambios} containerColor={'turquesa'} textStyle={'textoBlanco'}/>
           </View>
         </View>
-   
-        
+
       );  
     };
     
