@@ -10,7 +10,6 @@ import usuarioRouter from './src/controllers/usuario-controller.js';
 
 const app=express();
 const port=3000; //El puerto 3000 (http://localhost:3000)
-//Este es el dominio del ngrok: https://gentle-pika-cunning.ngrok-free.app 
 
 //Agrego los Middlewares
 app.use(cors()); //Middleware de CORS.

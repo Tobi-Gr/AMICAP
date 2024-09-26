@@ -7,8 +7,8 @@ import { tapHandlerName } from 'react-native-gesture-handler/lib/typescript/hand
 
 interface Info{
     id: number
-    Titulo:string
-    Informacion: string
+    titulo:string
+    informacion: string
   }
 
 interface Props {
@@ -18,23 +18,23 @@ interface Props {
 }
 
 const InfoModal: FC<Props> = ({visible, setVisible, selectedInfo}) => {
-    const windowWidth = Dimensions.get('window').width;
-    const tamanoFuente = windowWidth / 14;
-  
-    console.log('Modal: ', selectedInfo);
-    function cerrarModal(){
-      // setSelectedInfo(null);
-      setVisible(false);
-    }
+  const windowWidth = Dimensions.get('window').width;
+  const tamanoFuente = windowWidth / 14;
 
-    return (
-        <Modal visible={visible} transparent={true} animationType="fade">
-            <View style={styles.container}>
-                <View style={styles.card}>
-        {selectedInfo ? (
+  console.log('Modal: ', selectedInfo);
+  function cerrarModal(){
+    // setSelectedInfo(null);
+    setVisible(false);
+  }
+
+  return (
+    <Modal visible={visible} transparent={true} animationType="fade">
+      <View style={styles.container}>
+        <View style={styles.card}>
+          {selectedInfo ? (
             <>
-              <Texto text={selectedInfo.Titulo} estilo="textoTurquesa" style={{ fontSize: tamanoFuente }} />
-              <Texto text={selectedInfo.Informacion} estilo="textoTurquesa" style={{ fontSize: tamanoFuente }} />
+              <Texto text={selectedInfo.titulo} estilo="textoTurquesa" style={{ fontSize: tamanoFuente }} />
+              <Texto text={selectedInfo.informacion} estilo="textoTurquesa" style={{ fontSize: tamanoFuente }} />
             </>
           ) : (
             <Texto text="No hay información disponible" estilo="textoTurquesa" style={{ fontSize: tamanoFuente }} />
