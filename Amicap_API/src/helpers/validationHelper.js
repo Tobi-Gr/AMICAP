@@ -26,16 +26,13 @@ export default class ValidationHelper
     }
 
     //Valida si es un string
-    validarString = (data, min = 1, max = 999) =>
-    {
-        if (!(data instanceof string))
-        {
-            return 'Value is not an string';
+    validarString = (data, min = 1, max = 999) => {
+        if (typeof data !== 'string') {
+            return false;
+        } else if (data.length < min || data.length > max) {
+            return false;
+        } else {
+            return true;
         }
-        else if (data.length <= min && data.length >= max)
-        {
-            return 'Value is not in range of character';
-        }
-        else return data;
-    }
+    };
 }

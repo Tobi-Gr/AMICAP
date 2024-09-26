@@ -30,8 +30,10 @@ export default class DataBaseHelper
             await client.connect();
             const result = await client.query(sql, values);
             await client.end();
-            if (result.rows.length > 0){
+            console.log('result: ', result);
+            if (result.rowCount > 0){
                 data = result.rowCount;
+                console.log('data: ', data);
             }
         }
         catch (error){

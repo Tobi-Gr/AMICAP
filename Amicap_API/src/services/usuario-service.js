@@ -10,7 +10,12 @@ export default class UsuarioService
     }
     RegisterAsync = async (entity) =>
     {
-        const returnArray = await repo.LoginAsync(entity);
+        const returnArray = await repo.RegisterAsync(entity);
+        return returnArray;
+    }
+    updateAsync = async (entity) =>
+    {
+        const returnArray = await repo.updateAsync(entity);
         return returnArray;
     }
     VerificarUsuarioAsync = async (token) =>
