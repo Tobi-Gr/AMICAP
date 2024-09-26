@@ -6,14 +6,12 @@ const svc = new InformacionService();
 const hlp = new ValidationHelper;
 
 router.get('', async (req, res) =>{
-    let respuesta;
     const returnArray = await svc.getAllAsync();
     if (returnArray != null)
     {
-        respuesta = res.status(200).json(returnArray);
+        return res.status(200).json(returnArray);
     }
-    else respuesta = res.status(404).send('No se encontro ningun resultado')
-    return respuesta;
+    else return res.status(404).send('No se encontro ningun resultado')
 });
 
 export default router;

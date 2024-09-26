@@ -20,7 +20,7 @@ app.use(express.json()); //Middleware para parsear y comprender JSON.
 app.use("/api/actPreferida", actPreferidaRouter);
 app.use("/api/ataque", ataqueRouter);
 app.use("/api/contacto", contactoRouter);
-app.use("/api/info", informacionRouter);
+app.use("/api/informacion", informacionRouter);
 app.use("/api/respiracion", respiracionRouter);
 app.use("/api/usuario", usuarioRouter);
 
