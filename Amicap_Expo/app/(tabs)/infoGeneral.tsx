@@ -122,6 +122,7 @@
 import { StyleSheet, View, Dimensions } from 'react-native';
 import React, { FC, useState, useEffect } from 'react';
 import { Colores } from '../../constants/Colors';
+import DBDomain from '../../constants/dbDomain';
 import Flecha from '@/components/Flecha';
 import Boton from '@/components/Boton';
 import Texto from '@/components/Texto';
@@ -129,8 +130,8 @@ import InfoModal from '@/components/InfoModal';
 
 interface Info {
   id: number;
-  titulo: string;
-  informacion: string;
+  Titulo: string;
+  Informacion: string;
 }
 
 interface Props {
@@ -143,17 +144,17 @@ const InfoGeneralScreen: React.FC<Props> = ({ navigation }) => {
   const tamanoTitulo = windowWidth / 10;
   const yTexto = windowHeight / 10;
   const flechaTamano = windowWidth / 10;
-  const urlApi = "http://localhost:3000/api/information";
   const [fetchedInfos, setFetchedInfos] = useState<Info[]>([]);
   const [selectedInfo, setSelectedInfo] = useState<Info | null>(null);
   const [visible, setVisible] = useState(false);
-
+  
   const abrirModal = (id: number) => {
     selectInfo(id);
     setVisible(true);
   }
-
+  
   const fetchInfo = async () => {
+    const urlApi = `${DBDomain}/api/informacion`;
     try {
       const response = await fetch(urlApi);
       if (!response.ok) {
@@ -163,6 +164,7 @@ const InfoGeneralScreen: React.FC<Props> = ({ navigation }) => {
       if (!data) {
         throw new Error('Data failed to response');
       }
+      console.log('data: ', data);
       return data;
     } catch (error) {
       console.log('Hubo un error en el fetchInfo ', error);
@@ -171,8 +173,8 @@ const InfoGeneralScreen: React.FC<Props> = ({ navigation }) => {
 
   const selectInfo = (id: number) => {
     try {
-      const info = fetchedInfos.find(info => info.id === id);
-      if (info === undefined) console.log('Hubo un error en el fetchedInfos.find');
+      const info = fetchedInfos.find((info) => info.id == id);
+      if (info === undefined) console.log('Hubo un error en el fetchedInfos.find: ', info);
       else setSelectedInfo(info);
     } catch (error) {
       console.log('Hubo un error en el selectInfo ', error);
@@ -182,7 +184,7 @@ const InfoGeneralScreen: React.FC<Props> = ({ navigation }) => {
   useEffect(() => {
     const fetchAndSetInfo = async () => {
       const data = await fetchInfo();
-      if (data && data.length > 0) {
+      if (data.length > 0) {
         setFetchedInfos(data);
       }
     };
