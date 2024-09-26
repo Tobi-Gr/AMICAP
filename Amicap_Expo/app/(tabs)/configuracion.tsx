@@ -8,6 +8,7 @@ import BotonTextoIcono from '@/components/BotonTextoIcono';
 import SliderSegundos from '@/components/sliderSegundos';
 import SliderVolumen from '@/components/SliderVolumen';
 import TextArea from '@/components/TextArea';
+import SeleccionarActsModal from '@/components/SeleccionarActsModal';
 
 interface Props {
   navigation: any;
@@ -20,7 +21,8 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
   const tamanoFuente = windowWidth / 10;
   const yTexto = windowHeight / 10;
   const botonesY = windowHeight / 4;
-  const [visible, setVisible] = useState(false);
+  const [visibleSeleccionar, setVisibleSeleccionar] = useState(false);
+  
   //conectar con la base de datos
   const [inhalar, setInhalar] = useState(4);
   const [exhalar, setExhalar] = useState(4);
@@ -28,13 +30,20 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
   const [pruebaVolumen, setPruebaVolumen] = useState(0);
   const [pruebaMensaje, setPruebaMensaje] = useState("Estoy teniendo un ataque de pánico.");
 
-  const abrirModal = () =>
+  const abrirModalSeleccionar = () =>
   {
-    setVisible(true);
+    setVisibleSeleccionar(true);
   };
+
+  const MockActividades = [
+    {'id': 0, 'nombre': 'a'},
+    {'id': 1, 'nombre': 'b'},
+    {'id': 2, 'nombre': 'c'},
+  ]
 
   return (
     <View style={{ flex: 1, backgroundColor: Colores.blanco }}> 
+      <SeleccionarActsModal visible={visibleSeleccionar} setVisible={setVisibleSeleccionar} actividades={MockActividades}/>
       <View style={[styles.titleContainer, { marginTop: yTexto }]}>
         <Texto text="Configuracion" estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} /> 
       </View>
@@ -44,7 +53,7 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
           <SliderVolumen value={pruebaVolumen} onValueChange={setPruebaVolumen}/>
         </View>
         <View style={styles.seccion}>
-          <BotonTextoIcono text="Seleccionar actividades" icon="check" onPress={() => console.log('Botón Actividades presionado')}/>
+          <BotonTextoIcono text="Seleccionar actividades" icon="check" onPress={abrirModalSeleccionar}/>
           <BotonTextoIcono text="Agregar actividad" icon="add" onPress={() => console.log('Botón AgregarActividad presionado')}/>
         </View>
         <View style={styles.seccion}>
