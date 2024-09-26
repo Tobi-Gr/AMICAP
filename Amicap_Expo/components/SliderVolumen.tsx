@@ -17,7 +17,7 @@ const SliderVolumen: React.FC<Props> = ({ value, onValueChange }) => {
         <View style={styles.wrapper}>
                 <View style={styles.sliderContainer}>
                     <Sound color={Colores.blanco}/>
-                    <SliderNumeros value={value} onValueChange={onValueChange} position='flex-start' />
+                    <SliderNumeros value={value} onValueChange={onValueChange} position="flex-end"/>
                 </View>
         </View>
     );
@@ -26,10 +26,10 @@ const SliderVolumen: React.FC<Props> = ({ value, onValueChange }) => {
 const styles = StyleSheet.create({
     wrapper: {
         alignItems: 'center',
+        justifyContent: 'space-around'
     },
     sliderContainer: {
         flexDirection: 'row',
-        alignItems: 'center'
     },
 });
 
