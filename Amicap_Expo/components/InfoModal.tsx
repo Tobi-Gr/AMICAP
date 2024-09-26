@@ -7,8 +7,8 @@ import { tapHandlerName } from 'react-native-gesture-handler/lib/typescript/hand
 
 interface Info{
     id: number
-    titulo:string
-    informacion: string
+    Titulo:string
+    Informacion: string
   }
 
 interface Props {
@@ -20,12 +20,11 @@ interface Props {
 const InfoModal: FC<Props> = ({visible, setVisible, selectedInfo}) => {
     const windowWidth = Dimensions.get('window').width;
     const tamanoFuente = windowWidth / 14;
-
-
   
+    console.log('Modal: ', selectedInfo);
     function cerrarModal(){
-        // setSelectedInfo(null);
-        setVisible(false);
+      // setSelectedInfo(null);
+      setVisible(false);
     }
 
     return (
@@ -34,8 +33,8 @@ const InfoModal: FC<Props> = ({visible, setVisible, selectedInfo}) => {
                 <View style={styles.card}>
         {selectedInfo ? (
             <>
-              <Texto text={selectedInfo.titulo} estilo="textoTurquesa" style={{ fontSize: tamanoFuente }} />
-              <Texto text={selectedInfo.informacion} estilo="textoTurquesa" style={{ fontSize: tamanoFuente }} />
+              <Texto text={selectedInfo.Titulo} estilo="textoTurquesa" style={{ fontSize: tamanoFuente }} />
+              <Texto text={selectedInfo.Informacion} estilo="textoTurquesa" style={{ fontSize: tamanoFuente }} />
             </>
           ) : (
             <Texto text="No hay información disponible" estilo="textoTurquesa" style={{ fontSize: tamanoFuente }} />

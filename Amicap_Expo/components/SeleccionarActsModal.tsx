@@ -1,10 +1,11 @@
 import Boton from './Boton';
 import { Colores } from './../constants/Colors';
 import React, { FC, useEffect, useState, useMemo } from 'react';
-import { StyleSheet, TouchableOpacity, View, Text, Modal, Dimensions, ScrollView } from 'react-native';
+import { StyleSheet, TouchableOpacity, View, Text, Modal, Dimensions, ScrollView, Pressable } from 'react-native';
 import Texto from './Texto';
 import DBDomain from '@/constants/dbDomain';
 import Ex from './icons/Ex';
+import BotonRadio from './BotonRadio';
 
 interface Actividad {
     id: number;
@@ -19,7 +20,7 @@ interface Props {
 
 const SeleccionarActsModal: FC<Props> = ({ visible, setVisible, actividades }) => {
     const windowWidth = Dimensions.get('window').width;
-    const tamanoFuente = windowWidth / 14;
+    const tamanoFuente = windowWidth * 0.06;
         
     function cerrarModal() {
         setVisible(false);
@@ -34,6 +35,7 @@ const SeleccionarActsModal: FC<Props> = ({ visible, setVisible, actividades }) =
     //hay que hacer los botones de radio
         return (
             <ScrollView>
+                <BotonRadio text="AMI Contra Ataques de Pánico" id={4}/>
             </ScrollView>
         );
     }
@@ -42,10 +44,14 @@ const SeleccionarActsModal: FC<Props> = ({ visible, setVisible, actividades }) =
         <Modal visible={visible} transparent={true} animationType="fade">
             <View style={styles.container}>
                 <View style={styles.card}>
-                    <Ex  color={Colores.turquesa} />
-                    <Texto text='Actividades que me sirven'/>
+                    <View style={styles.header}>
+                        <Texto text='Actividades que me sirven' estilo="textoTurquesa" style={{fontSize: tamanoFuente}}/>
+                        <Pressable onPress={cerrarModal}>
+                            <Ex color={Colores.turquesa}/>
+                        </Pressable>
+                    </View>
                     {listaActs()}
-                    <View>
+                    <View style={styles.buttonContainer}>
                         <Boton onPress={cerrarModal} text="Cancelar" containerColor='blanco' textStyle='textoTurquesa'/>
                         <Boton  onPress={guardarCambios} text="Guardar" containerColor='turquesa' textStyle='textoBlanco'/>
                     </View>
@@ -71,7 +77,15 @@ const styles = StyleSheet.create({
     },
     buttonContainer:
     {
-        backgroundColor: Colores.naranja
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center'
+    },
+    header:
+    {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
     }
 });
 
