@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     boton: {
-        color: 'rgb(255, 0, 255)',
+        color: Colores.turquesa,
         fontSize: 20
     },
     container: {
