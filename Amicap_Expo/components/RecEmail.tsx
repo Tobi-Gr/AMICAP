@@ -10,11 +10,11 @@ const RecEmail = () => {
 
     return (
         <View style={styles.email}>
-            <View style={styles.email}>
-                <Texto text={"Email:"} estilo={'textoNegro'} style={{fontSize: tamanoFuente}}/>
-            </View>            
-                <Texto text={"nombre@mail"} estilo={'textoNegro'} style={{fontSize: tamanoFuente}}/>
-        </View> 
+            <Texto text={"Email:"} estilo={'textoNegro'} style={{fontSize: tamanoFuente}}/>
+        <View style={styles.coso}>  
+            <Texto text={"nombre@mail"} estilo={'textoNegro'} style={{fontSize: tamanoFuente}}/>
+        </View>     
+         </View> 
     );
     }
     
@@ -30,6 +30,11 @@ const RecEmail = () => {
     justifyContent: 'space-between',
     marginBottom: '5%',
     height:50,
+  },
+  coso: {
+    position: 'absolute',
+    right: '5%',
+    top: 15
   }
   });
   export default RecEmail;
