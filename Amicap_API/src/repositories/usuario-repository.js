@@ -48,7 +48,18 @@ export default class UsuarioRepository
         let returnArray = null;
         const sql = `Insert into "Usuarios"(username, email, contrasena) Values ($1,$2,$3)`;
         const values = [entity.username, entity.email, entity.contrasena];
-        returnArray = pgHelper.requestCount(sql, values);
+        console.log(values);
+        returnArray = await pgHelper.requestCount(sql, values);
+        console.log('register-repository: ', returnArray);
+        return returnArray;
+    }
+
+    updateAsync = async (entity) =>
+    {
+        let returnArray = null;
+        const sql = `Update "Usuarios" Set username = $2, email = $3, contrasena = $4 Where id = $1`;
+        const values = [entity.id, entity.username, entity.email, entity.contrasena]
+        returnArray = await pgHelper.requestCount(sql, values);
         return returnArray;
     }
 

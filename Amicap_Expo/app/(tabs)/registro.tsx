@@ -77,7 +77,7 @@ const Registro: React.FC<Props> = ({ navigation }) => {
         {
             const data = await createUser();
             console.log('user: ', data);
-            if (data.lentgh > 0)
+            if (data > 0)
             {
               navigation.navigate('InicioSesion');
             }

@@ -51,6 +51,9 @@ const InicioSesion: React.FC<Props> = ({ navigation }) => {
                     contrasena: userContrasena,
                 }),
             });
+            if (!response.ok) {
+                throw new Error('Failed to fetch data');
+            }
             const data = await response.json();
             if (!data || data === null) {
                 throw new Error('data failed to response');
@@ -98,9 +101,9 @@ const InicioSesion: React.FC<Props> = ({ navigation }) => {
     }, []);
 
     useEffect( () =>{
-    if (token !== null) {
-        verifyToken();
-    }
+        if (token !== null) {
+            verifyToken();
+        }
     }, [token]);
 
     useEffect( () =>{
@@ -108,7 +111,7 @@ const InicioSesion: React.FC<Props> = ({ navigation }) => {
             console.log('usuario: ', usuario)
             navigation.navigate('Home');
         }
-        }, [usuario]);
+    }, [usuario]);
 
     return (
         <View style={styles.background}>
