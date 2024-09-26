@@ -40,7 +40,7 @@ const TextArea: FC<Props> = ({onChange, prompt, value}) => {
 
 const styles = StyleSheet.create({
     container: {
-        width: '100%',
+        width: '90%',
         borderWidth: 2,
         borderColor: Colores.celeste,
         paddingTop: 5,
