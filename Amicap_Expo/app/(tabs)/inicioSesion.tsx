@@ -97,10 +97,6 @@ const InicioSesion: React.FC<Props> = ({ navigation }) => {
     }
 
     useEffect( () =>{
-        setToken(null);
-    }, []);
-
-    useEffect( () =>{
         if (token !== null) {
             verifyToken();
         }

@@ -1,5 +1,6 @@
 import {StyleSheet, View, Dimensions} from 'react-native';
 import React, { useState } from "react";
+import { useUserContext } from '@/context/UserContext';
 import {Colores} from '../../constants/Colors';
 import Texto from '@/components/Texto';
 import Navbar from '@/components/Navbar';
@@ -26,14 +27,18 @@ const PerfilScreen: React.FC<Props> = ({ navigation }) => {
     const rectangleHeight = windowHeight * 0.7;
 
     //dsp hacer que el nombre salga de la base de datos
-    const nombre = "Nombre";
+    const {token, setToken, usuario, setUsuario} = useUserContext();
+    const nombre = usuario?.username;
     
     function handleOnPressEliminarCuenta () {
       console.log("Se eliminó la cuenta");
     };
+
     function handleOnPressCerrarSesion()  {
+      setToken(null);
+      setUsuario(null);
       console.log("Se cerró la sesión");
-      navigation.navigate('InicioSesion');
+      navigation.navigate('Inicio');
     };
     return (
       <View style={{ flex: 1, backgroundColor: Colores.blanco }}> 
@@ -41,7 +46,7 @@ const PerfilScreen: React.FC<Props> = ({ navigation }) => {
         <Edit height={editTamano} width={editTamano} color={Colores.turquesa} onPress={() => navigation.navigate('EditarPerfil')}/>
       </View>
         <View style={[styles.titleContainer, { marginTop: yTexto }]}>
-          <Texto text={nombre} estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} /> 
+          <Texto text={nombre || ''} estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} /> 
         </View>
         <FondoAzul/>
 

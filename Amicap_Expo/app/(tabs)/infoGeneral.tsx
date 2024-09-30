@@ -104,7 +104,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
   },
-
+  flecha: {
+    position: 'absolute',
+    left: '5%',
+  },
 });
 
 export default InfoGeneralScreen;
