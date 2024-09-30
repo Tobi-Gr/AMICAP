@@ -26,9 +26,79 @@ const ConfirmarModal: FC<Props> = ({ visible, setVisible, nombre, email, contras
         setVisible(false);
     }
 
-    function updateUsuario()
-    {
+    //corrobora que la contraseña sea correcta
+    const fetchToken = async () => {
+        //DBDomain es el dominio de ngrok
+        const urlApi = `${DBDomain}/api/usuario/login`;
 
+        try {
+            const response = await fetch(urlApi, {
+                //metodo POST para mandarle un json
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: usuario?.email,
+                    contrasena: confirmacion,
+                }),
+            });
+            if (!response.ok) {
+                throw new Error('Failed to fetch data');
+            }
+            const data = await response.json();
+            if (!data || data === null) {
+                throw new Error('data failed to response');
+            }
+            console.log('data.Fetch: ', data);
+            return data;
+        } catch (error) {
+            console.log('Hubo un error en el fetchToken ', error);
+        }
+    }
+
+    const putUsuario = async () =>
+    {
+        //DBDomain es el dominio de ngrok
+        const urlApi = `${DBDomain}/api/usuario/update`;
+
+        try {
+            const response = await fetch(urlApi, {
+                //metodo PUT para mandarle un json
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id: usuario?.id,
+                    username: nombre,
+                    email: email,
+                    contrasena: contrasena,
+                }),
+            });
+            if (!response.ok) {
+                throw new Error('Failed to fetch data');
+            }
+            const data = await response.json();
+            if (!data || data === null) {
+                throw new Error('data failed to response');
+            }
+            console.log('update.data: ', data);
+            return data;
+        } catch (error) {
+            console.log('Hubo un error en el createUser ', error);
+        }
+    }
+
+    const updateUsuario = async () =>
+    {
+        const token = await fetchToken();
+        if (token !== null) {
+            const data = await putUsuario()
+            if (data && data.length > 0) cerrarModal()
+            else alert('algo salio mal, por favor intente denuevo');
+        }
+        else alert('la contraseña es incorrecta')
     }
 
     return (
@@ -39,7 +109,7 @@ const ConfirmarModal: FC<Props> = ({ visible, setVisible, nombre, email, contras
                         <InputTexto placeholder="ingrese su contraseña actual" onChange={setConfirmacion} esContrasena={true}/>
                     </View>
                     <View style={styles.botonesContainer}>
-                        <Boton text="Confirmar" onPress={cerrarModal} textStyle='textoBlanco' containerColor='turquesa'/>
+                        <Boton text="Confirmar" onPress={updateUsuario} textStyle='textoBlanco' containerColor='turquesa'/>
                         <Boton text="Cancelar" onPress={cerrarModal} textStyle='textoBlanco' containerColor='turquesa'/>
                     </View>
                 </View>
