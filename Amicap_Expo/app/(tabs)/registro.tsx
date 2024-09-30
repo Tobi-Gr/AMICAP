@@ -13,10 +13,10 @@ interface Props {
 
 const Registro: React.FC<Props> = ({ navigation }) => {
     const windowWidth = Dimensions.get('window').width;
-    const [email, setEmail] = useState('');
-    const [nombre, setNombre] = useState('');
-    const [confirmacion, setConfirmacion] = useState('');
-    const [contrasena, setContrasena] = useState('');
+    const [email, setEmail] = useState<string>('');
+    const [nombre, setNombre] = useState<string>('');
+    const [confirmacion, setConfirmacion] = useState<string>('');
+    const [contrasena, setContrasena] = useState<string>('');
     const tamanoTitulo = windowWidth / 10;
     const tamanoTexto = windowWidth * 0.05;
 

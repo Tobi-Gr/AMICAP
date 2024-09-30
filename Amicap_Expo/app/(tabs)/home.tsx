@@ -2,7 +2,7 @@
 import DBDomain from '../../constants/dbDomain';
 import { useEffect, useState } from 'react';
 import { StyleSheet, View, Dimensions, Pressable, Touchable, TouchableOpacity, Text } from 'react-native';
-import {useUserContext} from '@/context/UserContext'
+import {useUserContext} from '@/context/UserContext';
 import Navbar from '../../components/Navbar';
 import BotonAyuda from '../../components/BotonAyuda';
 import FondoAzul from '@/components/FondoAzul';
