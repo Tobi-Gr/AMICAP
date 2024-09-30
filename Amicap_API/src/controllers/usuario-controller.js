@@ -37,7 +37,7 @@ router.post('/register', async (req, res) =>{
 });
 
 //modifica el usuario
-router.put('', async (req, res) =>{
+router.put('/update', async (req, res) =>{
     const entity = req.query;
     const returnArray = await svc.updateAsync(entity);
     if (returnArray != null)

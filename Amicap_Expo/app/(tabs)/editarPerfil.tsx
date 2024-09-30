@@ -1,57 +1,57 @@
-
 import {StyleSheet, View, Dimensions} from 'react-native';
 import React, { useState } from "react";
 import {Colores} from '../../constants/Colors';
 import Texto from '@/components/Texto';
 import Boton from '@/components/Boton';
 import InputTexto from '@/components/inputTexto';
-import BotonTexto from '@/components/BotonTexto';
 import FondoAzulEditarPerfil from '@/components/FondoAzulEditarPerfil';
 import Flecha from '@/components/Flecha';
-
+import ConfirmarModal from '@/components/ConfirmarModal';
 
 interface Props {
   navigation: any;
 }
 
 const EditarPerfilScreen: React.FC<Props> = ({ navigation }) => {
-    const windowWidth = Dimensions.get('window').width;
-    const windowHeight = Dimensions.get('window').height;
-    const tamanoTitulo = windowWidth / 10;
-    const tamanoTexto = windowWidth * 0.05;
-    const flechaTamano = windowWidth / 10;
-    const botonesY = windowHeight / 4;
-    const tamanoFuente = windowWidth / 20;
-  
-    const [nombre, setNombre] = useState<string>('');
-  const [contrasena, setContrasena] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
+  const windowWidth = Dimensions.get('window').width;
+  const windowHeight = Dimensions.get('window').height;
+  const tamanoTitulo = windowWidth / 10;
+  const tamanoTexto = windowWidth * 0.05;
+  const flechaTamano = windowWidth / 10;
+  const botonesY = windowHeight / 4;
+  const tamanoFuente = windowWidth / 20;
 
-  const handleGuardarCambios = () => {
-    // Aquí puedes implementar la lógica para guardar los cambios
-    console.log("Nombre:", nombre);
-    console.log("Contraseña:", contrasena);
-    console.log("Email:", email);
+  const [nombre, setNombre] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [contrasena, setContrasena] = useState<string>('');
+  const [confirmacion, setConfirmacion] = useState<string>('');
+
+  const [visible, setVisible] = useState(false);
+  const abrirModal = () =>
+  {
+    if (contrasena == confirmacion) setVisible(true);
+    else alert('contraseña y confirmar contraseña no coinciden');
   };
 
     return (
       <View style={{ flex: 1, backgroundColor: Colores.blanco }}> 
-          <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Perfil"} color={Colores.turquesa}/>
-          <View style={styles.editarcontainer}>
+        <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Perfil"} color={Colores.turquesa}/>
+        <ConfirmarModal visible={visible} setVisible={setVisible} nombre={nombre} email={email} contrasena={contrasena}/>
+        <View style={styles.editarcontainer}>
           <Texto text='Editar'estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} />
-          </View>
+        </View>
         <FondoAzulEditarPerfil />
         <View style={styles.itemcontainer}>
           <InputTexto placeholder="Nombre" onChange={setNombre}/>
-          <InputTexto placeholder="Contraseña" onChange={setContrasena} esContrasena={true}/>
           <InputTexto placeholder="Email" onChange={setEmail}/>   
-          </View>
-
-          <View style={styles.botoncontainer}>
-          <Boton text="Guardar" onPress={handleGuardarCambios} containerColor={'blanco'} textStyle={'textoNegro'}/>
-          <Boton text="Cancelar" onPress={handleGuardarCambios} containerColor={'turquesa'} textStyle={'textoBlanco'}/>
-          </View>
+          <InputTexto placeholder="Nueva contraseña" onChange={setContrasena} esContrasena={true}/>
+          <InputTexto  placeholder="Confirmar contraseña" onChange={setConfirmacion} esContrasena={true}/>
         </View>
+
+        <View style={styles.botoncontainer}>
+          <Boton text="Guardar cambios" onPress={abrirModal} containerColor={'blanco'} textStyle={'textoNegro'}/>
+        </View>
+      </View>
 
       );  
     };
