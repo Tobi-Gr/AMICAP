@@ -20,8 +20,8 @@ interface Props {
 const InfoGeneralScreen: React.FC<Props> = ({ navigation }) => {
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
-  const tamanoTitulo = windowWidth / 10;
-  const yTexto = windowHeight / 10;
+  const tamanoTitulo = windowWidth / 8;
+  const yTexto = windowHeight / 45;
   const flechaTamano = windowWidth / 10;
   const [fetchedInfos, setFetchedInfos] = useState<Info[]>([]);
   const [selectedInfo, setSelectedInfo] = useState<Info | null>(null);
@@ -73,7 +73,9 @@ const InfoGeneralScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <InfoModal visible={visible} setVisible={setVisible} selectedInfo={selectedInfo} />
-      <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Home"} color={Colores.blanco} />
+      <View style={styles.flechaContainer}>
+        <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Home"} color={Colores.blanco} />
+      </View>
       <View style={[styles.titleContainer, { marginTop: yTexto }]}>
         <Texto text={"Información"} estilo="tituloBlanco" style={{ fontSize: tamanoTitulo }} />
       </View>
@@ -93,20 +95,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colores.turquesa,
-    justifyContent: 'space-between', 
-    paddingHorizontal: Dimensions.get('window').width / 10, 
+    alignItems: 'center',
+    paddingHorizontal: Dimensions.get('window').width / 25, 
   },
   titleContainer: {
     alignItems: 'center',
   },
   buttonsContainer: {
-    flex: 1,
+    width: '100%',
+    height: '60%',
     justifyContent: 'space-evenly',
     alignItems: 'center',
   },
-  flecha: {
-    position: 'absolute',
-    left: '5%',
+  flechaContainer: {
+    alignSelf: 'flex-start'
   },
 });
 

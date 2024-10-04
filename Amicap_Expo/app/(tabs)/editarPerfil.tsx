@@ -1,6 +1,6 @@
-import {StyleSheet, View, Dimensions} from 'react-native';
+import { StyleSheet, View, Dimensions } from 'react-native';
 import React, { useState } from "react";
-import {Colores} from '../../constants/Colors';
+import { Colores } from '../../constants/Colors';
 import Texto from '@/components/Texto';
 import Boton from '@/components/Boton';
 import InputTexto from '@/components/inputTexto';

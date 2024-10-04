@@ -35,7 +35,7 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
     setVisibleSeleccionar(true);
   };
 
-  const MockActividades = [
+  const actividades_prueba = [
     {'id': 0, 'nombre': 'a'},
     {'id': 1, 'nombre': 'b'},
     {'id': 2, 'nombre': 'c'},
@@ -43,7 +43,7 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
 
   return (
     <View style={{ flex: 1, backgroundColor: Colores.blanco }}> 
-      <SeleccionarActsModal visible={visibleSeleccionar} setVisible={setVisibleSeleccionar} actividades={MockActividades}/>
+      <SeleccionarActsModal visible={visibleSeleccionar} setVisible={setVisibleSeleccionar} actividades={actividades_prueba}/>
       <View style={[styles.titleContainer, { marginTop: yTexto }]}>
         <Texto text="Configuracion" estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} /> 
       </View>
