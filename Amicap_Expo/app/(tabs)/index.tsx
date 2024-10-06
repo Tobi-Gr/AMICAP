@@ -19,12 +19,12 @@ const App = () => {
   return (
     <UserProvider>
         <Stack.Navigator 
-          initialRouteName="Inicio"
+          initialRouteName="EditarPerfil"
           screenOptions={{
             headerShown: false,
           }}>
         <Stack.Screen name="Inicio" 
-          component={InicioScreen} 
+          component={InicioScreen}
           options={{ headerShown: false }} />
         <Stack.Screen name="InicioSesion" component={InicioSesionScreen}/>
         <Stack.Screen name="Registro" component={RegistroScreen}/>

@@ -1,5 +1,5 @@
-import { StyleSheet, View, Dimensions } from 'react-native';
-import React, { useState } from "react";
+import { StyleSheet, View, Dimensions, Keyboard } from 'react-native';
+import React, { useState, useEffect } from "react";
 import { Colores } from '../../constants/Colors';
 import Texto from '@/components/Texto';
 import Boton from '@/components/Boton';
@@ -25,6 +25,27 @@ const EditarPerfilScreen: React.FC<Props> = ({ navigation }) => {
   const [email, setEmail] = useState<string>('');
   const [contrasena, setContrasena] = useState<string>('');
   const [confirmacion, setConfirmacion] = useState<string>('');
+  const [isKeyboardVisible, setKeyboardVisible] = useState(false); // Estado para controlar la visibilidad del teclado
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      () => {
+        setKeyboardVisible(true); // Muestra elementos si el teclado está visible
+      }
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => {
+        setKeyboardVisible(false); // Oculta elementos si el teclado no está visible
+      }
+    );
+
+    return () => {
+      keyboardDidHideListener.remove();
+      keyboardDidShowListener.remove();
+    };
+  }, []);
 
   const [visible, setVisible] = useState(false);
   const abrirModal = () =>
@@ -37,94 +58,55 @@ const EditarPerfilScreen: React.FC<Props> = ({ navigation }) => {
       <View style={{ flex: 1, backgroundColor: Colores.blanco }}> 
         <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Perfil"} color={Colores.turquesa}/>
         <ConfirmarModal visible={visible} setVisible={setVisible} nombre={nombre} email={email} contrasena={contrasena}/>
-        <View style={styles.editarcontainer}>
-          <Texto text='Editar'estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} />
+        <View style={styles.tituloContainer}>
+          <Texto text='Editar'estilo="textoTurquesa" style={{ fontSize: tamanoFuente }} />
         </View>
-        <FondoAzulEditarPerfil />
-        <View style={styles.itemcontainer}>
+        <FondoAzulEditarPerfil/>
+        <View style={styles.inputContainer}>
           <InputTexto placeholder="Nombre" onChange={setNombre}/>
           <InputTexto placeholder="Email" onChange={setEmail}/>   
           <InputTexto placeholder="Nueva contraseña" onChange={setContrasena} esContrasena={true}/>
           <InputTexto  placeholder="Confirmar contraseña" onChange={setConfirmacion} esContrasena={true}/>
         </View>
-
-        <View style={styles.botoncontainer}>
-          <Boton text="Guardar cambios" onPress={abrirModal} containerColor={'blanco'} textStyle={'textoNegro'}/>
-        </View>
+        {!isKeyboardVisible && (
+          <View style={styles.botoncontainer}>
+            <Boton text="Cancelar" onPress={abrirModal} containerColor={'turquesa'} textStyle={'textoBlanco'}/>
+            <Boton text="Guardar" onPress={abrirModal} containerColor={'blanco'} textStyle={'textoTurquesa'}/>
+          </View>
+        )}
+        
       </View>
 
       );  
     };
     
 
-    const styles = StyleSheet.create({
-
-      itemcontainer:{
-        
-        position: 'absolute',
-        bottom: 450, 
-        left: '5%',
-        right: '5%', 
-        flexDirection: 'column', 
-        alignItems: 'center', 
-        
-      },
-      
-      botoncontainer:{
-        
-        position: 'absolute',
-        bottom:20,
-        left: '5%',
-        right: '5%', 
-        flexDirection: 'column', 
-        alignItems: 'center', 
-        
-      },
-
-      editarcontainer:{
-        position: 'absolute',
-        left: '25%',
-        top: 25
-      }
-
-    });
+  const styles = StyleSheet.create({
+    inputContainer:{      
+      position: 'absolute',
+      top: Dimensions.get('screen').height * 0.2,
+      left: '5%',
+      right: '5%',
+      flexDirection: 'column',
+      justifyContent: 'space-evenly',
+      height: Dimensions.get('screen').height * 0.35
+    },    
+    botoncontainer:{      
+      position: 'absolute',
+      width: '100%',
+      bottom: '5%',
+      right: '2.5%',
+      flexDirection: 'row',
+      justifyContent: 'flex-end',
+    },
+    tituloContainer:{
+      position: 'absolute',
+      left: '12.5%',
+      top: 25
+    }
+  });
 
 
-    export default EditarPerfilScreen;
+  export default EditarPerfilScreen;
 
-
-        // const styles = StyleSheet.create({
-    //     background:{
-    //         flex: 1,
-    //         flexDirection: 'column', 
-   
-    //         alignItems: 'center',
-    //         paddingTop: '20%'
-    //     },
-    //     inputContainer: {
-    //       flex: 1,
-    //         width: '90%',
-    //         height: '50%',
-    //         justifyContent: 'center',
-    //     },
-    //     buttonsContainer:{
-    //       position: 'absolute',
-    //       bottom: 20, 
-    //       left: '5%',
-    //       right: '5%', 
-    //       flexDirection: 'column', 
-    //       alignItems: 'center', 
-    //     },
-    //     fondo:
-    //     {
-    //       position: 'absolute',
-    //       top: '30%',
-        
-    //     },
-    //     flecha: {
-    //       position: 'absolute',
-    //       left: '5%',
-    //       top: 20
-    //     },
-    // });
     
