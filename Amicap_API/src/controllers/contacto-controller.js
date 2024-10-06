@@ -6,15 +6,13 @@ const svc = new ContactoService();
 const hlp = new ValidationHelper;
 
 router.get('/:id_usuario', async (req, res) =>{
-    let respuesta;
-    let id_usuario = hlp.validarInt(req.params.id_usuario);
+    const id_usuario = hlp.validarInt(req.params.id_usuario);
     const returnArray = await svc.getByIdUsuarioAsync(id_usuario);
     if (returnArray != null)
     {
-        respuesta = res.status(200).json(returnArray);
+        return res.status(200).json(returnArray);
     }
-    else respuesta = res.status(404).send('No se encontro ningun resultado')
-    return respuesta;
+    else return res.status(404).send('No se encontro ningun resultado')
 });
 
 router.post('', async (req, res) =>{
