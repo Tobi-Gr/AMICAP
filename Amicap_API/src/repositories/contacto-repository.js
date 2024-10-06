@@ -6,9 +6,10 @@ export default class ContactoRepository
     getByIdUsuarioAsync = async (id_usuario) =>
     {
         let returnArray = null;
-        const sql = `SELECT * FROM "Contactos" where id_usuario = $1`;
-        const values = [id_usuario]
+        const sql = `SELECT * FROM "Contactos" where id_usuario = $1 Order By id`;
+        const values = [id_usuario];
         returnArray = await pgHelper.requestValues(sql, values);
+        console.log(returnArray);
         return returnArray;
     }
 
