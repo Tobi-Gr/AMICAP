@@ -2,8 +2,8 @@ import Add from './icons/Add';
 import Boton from './Boton';
 import { Colores } from './../constants/Colors';
 import Communications from 'react-native-communications';
-import React, { FC, useEffect, useState, useMemo } from 'react';
-import { StyleSheet, TouchableOpacity, View, Text, Modal, Dimensions, ScrollView } from 'react-native';
+import React, { FC, useState, useMemo } from 'react';
+import { StyleSheet, View, Modal, Dimensions, ScrollView, Linking } from 'react-native';
 import Texto from './Texto';
 import NombreContacto from './NombreContacto';
 import DBDomain from '@/constants/dbDomain';
@@ -18,9 +18,10 @@ interface Props {
     visible: boolean;
     setVisible: (visible: boolean) => void;
     contactosArray: Contacto[];
+    mensaje: string;
 }
 
-const ContactosModal: FC<Props> = ({ visible, setVisible, contactosArray }) => {
+const ContactosModal: FC<Props> = ({ visible, setVisible, contactosArray, mensaje }) => {
     const windowWidth = Dimensions.get('window').width;
     const tamanoFuente = windowWidth / 14;
     // const contactosArray = useMemo(() => [
@@ -41,6 +42,15 @@ const ContactosModal: FC<Props> = ({ visible, setVisible, contactosArray }) => {
     function cerrarModal() {
         setVisible(false);
         setSelectedContact(null);
+    }
+    
+    function mandarMensaje() {
+        let api_whatsapp;
+        if (selectedContact != null) {
+            api_whatsapp = `https://api.whatsapp.com/send?phone=${encodeURIComponent(selectedContact.numero)}&text=${encodeURIComponent(mensaje + ' yo ')}`;
+            Linking.openURL(api_whatsapp).catch(err => console.error("Error al abrir WhatsApp: ", err));
+        }
+        cerrarModal();
     }
 
     const handleContactPress = (contact: Contacto) => {
@@ -74,7 +84,7 @@ const ContactosModal: FC<Props> = ({ visible, setVisible, contactosArray }) => {
                     </View>
                     <Contactos />
                     <View style={styles.botonesContainer}>
-                        <Boton text="Cerrar" onPress={cerrarModal} textStyle='textoBlanco' containerColor='turquesa'/>
+                        <Boton text="Cerrar" onPress={mandarMensaje} textStyle='textoBlanco' containerColor='turquesa'/>
                         <Boton text="Llamada" onPress={handlePhoneCall} textStyle='textoBlanco' containerColor='turquesa'/>
                     </View>
                 </View>

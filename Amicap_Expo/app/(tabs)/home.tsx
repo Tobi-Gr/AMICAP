@@ -46,6 +46,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
   };
 
   const [contactos, setContactos] = useState<Contacto[]>([]);
+  const [mensaje, setMensaje] = useState('');
   
   //toma los contactos del usuario
   const fetchContactos = async () => {
@@ -66,6 +67,11 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
     }
   }
 
+  const fetchMensaje = async() => {
+    //HAY QUE SACARLO DE LA BASE DE DATOS !
+    setMensaje("Mensaje default");
+  }
+
   useEffect(() => {
     const fetchAndSetContactos = async () => {
       const data = await fetchContactos();
@@ -75,11 +81,12 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
     };
     console.log(usuario);
     fetchAndSetContactos();
+    fetchMensaje();
   }, []);
 
   return (
     <View style={{ flex: 1, backgroundColor: Colores.blanco }}> 
-      <ContactosModal visible={visible} setVisible={setVisible} contactosArray={contactos}/>
+      <ContactosModal visible={visible} setVisible={setVisible} contactosArray={contactos} mensaje={mensaje}/>
       <View style={[styles.titleContainer, { marginTop: yTexto }]}>
         <Texto text={saludo} estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} />
       </View>
