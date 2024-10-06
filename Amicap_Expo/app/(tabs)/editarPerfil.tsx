@@ -78,8 +78,7 @@ const EditarPerfilScreen: React.FC<Props> = ({ navigation }) => {
       </View>
 
       );  
-    };
-    
+    };    
 
   const styles = StyleSheet.create({
     inputContainer:{      

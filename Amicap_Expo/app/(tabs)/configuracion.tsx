@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { StyleSheet, View, Dimensions, ScrollView } from 'react-native';
+import { StyleSheet, View, Dimensions, ScrollView, Keyboard } from 'react-native';
 import Navbar from '../../components/Navbar';
 import FondoAzul from '@/components/FondoAzul';
 import Texto from '@/components/Texto';
@@ -22,6 +22,7 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
   const yTexto = windowHeight / 10;
   const botonesY = windowHeight / 4;
   const [visibleSeleccionar, setVisibleSeleccionar] = useState(false);
+  const [isKeyboardVisible, setKeyboardVisible] = useState(false); // Estado para controlar la visibilidad del teclado
   
   //conectar con la base de datos
   const [inhalar, setInhalar] = useState(4);
@@ -34,6 +35,26 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
   {
     setVisibleSeleccionar(true);
   };
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      () => {
+        setKeyboardVisible(true); // Muestra elementos si el teclado está visible
+      }
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => {
+        setKeyboardVisible(false); // Oculta elementos si el teclado no está visible
+      }
+    );
+
+    return () => {
+      keyboardDidHideListener.remove();
+      keyboardDidShowListener.remove();
+    };
+  }, []);
 
   const actividades_prueba = [
     {'id': 0, 'nombre': 'a'},
@@ -65,7 +86,8 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
           <TextArea prompt="Mensaje por defecto" value={pruebaMensaje} onChange={setPruebaMensaje}/>
         </View>        
       </ScrollView>
-      <Navbar tipo="configuration" navigation={navigation}/>
+      {!isKeyboardVisible && (<Navbar tipo="configuration" navigation={navigation}/>)}
+      {/*Navbar solo aparece si el teclado no es visible*/}     
     </View>
   );
 };
@@ -77,12 +99,13 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     position: 'absolute',
-    bottom: 80,
+    bottom: 100,
     flexDirection: 'column', 
   },
   scrollContent: {
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
+    paddingLeft: '1.5%'
   },
   fondo:
   {

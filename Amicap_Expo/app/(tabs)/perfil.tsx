@@ -26,9 +26,10 @@ const PerfilScreen: React.FC<Props> = ({ navigation }) => {
     const editTamano = windowWidth / 10;
     const rectangleHeight = windowHeight * 0.7;
 
-    //dsp hacer que el nombre salga de la base de datos
+    //dsp hacer que el nombre y email salga de la base de datos
     const {token, setToken, usuario, setUsuario} = useUserContext();
     const nombre = usuario?.username;
+    const email = 'usuario@gmail.com';
     
     function handleOnPressEliminarCuenta () {
       console.log("Se eliminó la cuenta");
@@ -40,18 +41,19 @@ const PerfilScreen: React.FC<Props> = ({ navigation }) => {
       console.log("Se cerró la sesión");
       navigation.navigate('Inicio');
     };
+
     return (
       <View style={{ flex: 1, backgroundColor: Colores.blanco }}> 
       <View style={styles.edit}>
         <Edit height={editTamano} width={editTamano} color={Colores.turquesa} onPress={() => navigation.navigate('EditarPerfil')}/>
       </View>
         <View style={[styles.titleContainer, { marginTop: yTexto }]}>
-          <Texto text={nombre || ''} estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} /> 
+          <Texto text={nombre || 'usuario'} estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} /> 
         </View>
         <FondoAzul/>
 
          <View style={styles.itemContainer}>   
-         <RecEmail/>
+         <RecEmail email={email}/>
          <BotonTextoIcono text="Tus contactos" icon="contact" onPress={() => console.log('Botón Contactos presionado')}/>
           <BotonTextoIcono text="Tus registros" icon="graph" onPress={() => console.log('Botón registros presionado')}/>
           </View>
@@ -76,12 +78,18 @@ const styles = StyleSheet.create({
     top: 20
   },
   buttonsContainer:{
+    // position: 'absolute',
+    // bottom: 70, 
+    // left: '5%',
+    // right: '5%', 
+    // flexDirection: 'column', 
+    // alignItems: 'center', 
     position: 'absolute',
-    bottom: 70, 
-    left: '5%',
-    right: '5%', 
-    flexDirection: 'column', 
-    alignItems: 'center', 
+      width: '100%',
+      bottom: '10%',
+      right: '2.5%',
+      flexDirection: 'row',
+      justifyContent: 'flex-end',
   },
   itemContainer:{
         

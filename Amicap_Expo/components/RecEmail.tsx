@@ -3,7 +3,11 @@ import { TouchableOpacity, Text, TextStyle, ViewStyle, StyleSheet, View, Dimensi
 import { Colores } from '../constants/Colors';
 import Texto from "./Texto";
 
-const RecEmail = () => { 
+interface Props{
+  email:string,
+}
+
+const RecEmail: FC<Props> = ({email}) => {
     const windowWidth = Dimensions.get('window').width;
     const tamanoFuente = windowWidth * 0.05;
     
@@ -12,7 +16,7 @@ const RecEmail = () => {
         <View style={styles.email}>
             <Texto text={"Email:"} estilo={'textoNegro'} style={{fontSize: tamanoFuente}}/>
         <View style={styles.coso}>  
-            <Texto text={"nombre@mail"} estilo={'textoNegro'} style={{fontSize: tamanoFuente}}/>
+            <Texto text={email} estilo={'textoNegro'} style={{fontSize: tamanoFuente}}/>
         </View>     
          </View> 
     );
