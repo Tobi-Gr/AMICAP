@@ -1,5 +1,5 @@
-import {StyleSheet, View, Dimensions} from 'react-native';
-import React, { useState } from "react";
+import { StyleSheet, View, Dimensions, Keyboard } from 'react-native';
+import React, { useState, useEffect } from "react";
 import {Colores} from '../../constants/Colors';
 import DBDomain from '@/constants/dbDomain';
 import Texto from '@/components/Texto';
@@ -17,10 +17,32 @@ const Registro: React.FC<Props> = ({ navigation }) => {
     const [nombre, setNombre] = useState<string>('');
     const [confirmacion, setConfirmacion] = useState<string>('');
     const [contrasena, setContrasena] = useState<string>('');
+    const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+
     const tamanoTitulo = windowWidth / 10;
     const tamanoTexto = windowWidth * 0.05;
 
+    useEffect(() => {
+        const keyboardDidShowListener = Keyboard.addListener(
+          'keyboardDidShow',
+          () => {
+            setKeyboardVisible(true); // Muestra elementos si el teclado está visible
+          }
+        );
+        const keyboardDidHideListener = Keyboard.addListener(
+          'keyboardDidHide',
+          () => {
+            setKeyboardVisible(false); // Oculta elementos si el teclado no está visible
+          }
+        );
+    
+        return () => {
+          keyboardDidHideListener.remove();
+          keyboardDidShowListener.remove();
+        };
+      }, []);
 
+      
     const handleEmailChange = (nuevoEmail: string) => {
         setEmail(nuevoEmail);
     }; 
@@ -88,19 +110,23 @@ const Registro: React.FC<Props> = ({ navigation }) => {
 
     return (
         <View style={styles.background}>
-            <Texto text="Inicio Sesión" estilo="tituloBlanco" style={{fontSize: tamanoTitulo}}/>
+            <Texto text="Registro" estilo="tituloBlanco" style={{fontSize: tamanoTitulo}}/>
             <View style={styles.inputContainer}>
                 <InputTexto  placeholder="Nombre" onChange={handleNombreChange}/>
                 <InputTexto  placeholder="Email" onChange={handleEmailChange} keyBoardType='email-address'/>
                 <InputTexto  placeholder="Contraseña" onChange={handleContrasenaChange} esContrasena={true}/>
                 <InputTexto  placeholder="Confirmar contraseña" onChange={handleConfirmacionChange} esContrasena={true}/>
             </View>
-            <Boton text="Registrar" textStyle='textoTurquesa' containerColor='blanco' onPress={(register)}/>
-            <View style={styles.botonesContainer} >
-                <Texto text="¿Ya tenés cuenta?" estilo="textoBlanco" style={{fontSize: tamanoTexto}}/>
-                <BotonTexto text="Inicia sesión" onPress={inicioSesionPress}/>
-                <BotonTexto text="Seguir sin cuenta" onPress={sinCuentaPress}/>
-            </View>
+            {!isKeyboardVisible && ( // Ocultar si el teclado está visible
+                <View>
+                    <Boton text="Registrar" textStyle='textoTurquesa' containerColor='blanco' onPress={(register)}/>
+                    <View style={styles.botonesContainer}>
+                        <Texto text="¿Ya tenés cuenta?" estilo="textoBlanco" style={{fontSize: tamanoTexto}}/>
+                        <BotonTexto text="Inicia sesión" onPress={inicioSesionPress}/>
+                        <BotonTexto text="Seguir sin cuenta" onPress={sinCuentaPress}/>
+                    </View>
+                </View>
+            )}
         </View>
     );
 };
@@ -115,11 +141,11 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         width: '90%',
-        height: '50%',
+        height: Dimensions.get('window').height * 0.5, //50%
         justifyContent: 'space-evenly',
     },
     botonesContainer: {
-        height: '20%',
+        height: Dimensions.get('window').height * 0.2, //20%
         justifyContent: 'space-evenly',
         alignItems: 'center',
         marginTop: '5%'
