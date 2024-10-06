@@ -19,7 +19,7 @@ const App = () => {
   return (
     <UserProvider>
         <Stack.Navigator 
-          initialRouteName="Configuracion"
+          initialRouteName="Perfil"
           screenOptions={{
             headerShown: false,
           }}>

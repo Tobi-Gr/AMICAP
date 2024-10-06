@@ -31,7 +31,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
   const tamanoFuente = windowWidth / 10;
   const yTexto = windowHeight / 10;
   const nombre = usuario?.username; //debería pasarnoslo el back
-  const saludo = "Hola, " + nombre?? 'usuario';
+  const saludo = nombre? 'Hola, ' + nombre : 'Hola, usuario';
   const yAyuda = windowHeight * 0.45;
   const xAyuda = windowWidth / 3.5;
   const yContacto = windowHeight / 3;
