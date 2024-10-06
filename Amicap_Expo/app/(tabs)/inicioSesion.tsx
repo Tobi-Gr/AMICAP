@@ -86,7 +86,6 @@ const InicioSesion: React.FC<Props> = ({ navigation }) => {
                 throw new Error('Failed to fetch data');
             }
             const data = await response.json();
-            console.log('data.Verify: ', data);
             if (!data) {
                 throw new Error('data failed to response');
             }

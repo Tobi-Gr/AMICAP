@@ -17,7 +17,7 @@ export default class UsuarioRepository
             };
             const sql = `select id, username, email From "Usuarios" Where email = $1 And contrasena = $2`;
             const values = [entity.email, entity.contrasena];
-            const consulta = await pgHelper.requestValues(sql, values);
+            const consulta = await pgHelper.requestOne(sql, values);
             if(consulta != null)
             {
                 const user =
