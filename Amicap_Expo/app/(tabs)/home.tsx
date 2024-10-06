@@ -73,7 +73,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
         setContactos(data);
       }
     };
-    
+    console.log(usuario);
     fetchAndSetContactos();
   }, []);
 
