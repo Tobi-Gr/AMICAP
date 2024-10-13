@@ -6,7 +6,7 @@ import Boton from '@/components/Boton';
 import InputTexto from '@/components/inputTexto';
 import FondoAzulEditarPerfil from '@/components/FondoAzulEditarPerfil';
 import Flecha from '@/components/Flecha';
-import ConfirmarModal from '@/components/ConfirmarModal';
+import ConfirmarContrasenaModal from '@/components/ConfirmarContrsenaModal';
 
 interface Props {
   navigation: any;
@@ -57,7 +57,7 @@ const EditarPerfilScreen: React.FC<Props> = ({ navigation }) => {
     return (
       <View style={{ flex: 1, backgroundColor: Colores.blanco }}> 
         <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Perfil"} color={Colores.turquesa}/>
-        <ConfirmarModal visible={visible} setVisible={setVisible} nombre={nombre} email={email} contrasena={contrasena}/>
+        <ConfirmarContrasenaModal visible={visible} setVisible={setVisible} nombre={nombre} email={email} contrasena={contrasena}/>
         <View style={styles.tituloContainer}>
           <Texto text='Editar'estilo="textoTurquesa" style={{ fontSize: tamanoFuente }} />
         </View>

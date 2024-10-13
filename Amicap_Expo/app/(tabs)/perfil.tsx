@@ -9,13 +9,23 @@ import Edit from '@/components/icons/Edit';
 import BotonTextoIcono from '@/components/BotonTextoIcono';
 import Boton from '@/components/Boton';
 import RecEmail from '@/components/RecEmail';
+import ConfirmarModal from '@/components/ConfirmarModal';
 
 interface Props {
   navigation: any;
 }
+//<ContactosModal visible={visible} setVisible={setVisible} contactosArray={contactos} mensaje={mensaje}/>
+// const [visible, setVisible] = useState(false);
+// const abrirModal = () =>
+// {
+//   setVisible(true);
+// };
 
 
 const PerfilScreen: React.FC<Props> = ({ navigation }) => {
+    const [visibleSesion, setVisibleSesion] = useState(false);
+    const [visibleEliminar, setVisibleEliminar] = useState(false);
+
     const windowWidth = Dimensions.get('window').width;
     const windowHeight = Dimensions.get('window').height;
     //const tamanoTitulo = windowWidth / 10;
@@ -32,10 +42,18 @@ const PerfilScreen: React.FC<Props> = ({ navigation }) => {
     const email = 'usuario@gmail.com';
     
     function handleOnPressEliminarCuenta () {
-      console.log("Se eliminó la cuenta");
+      setVisibleEliminar(true);
     };
+    
+    function handleOnPressCerrarSesion(){
+      setVisibleSesion(true);
+    }
+    
+    function eliminarCuenta(){
+      console.log("Se eliminó la cuenta");
+    }
 
-    function handleOnPressCerrarSesion()  {
+    function cerrarSesion()  {
       setToken(null);
       setUsuario(null);
       console.log("Se cerró la sesión");
@@ -44,6 +62,8 @@ const PerfilScreen: React.FC<Props> = ({ navigation }) => {
 
     return (
       <View style={{ flex: 1, backgroundColor: Colores.blanco }}> 
+        <ConfirmarModal visible={visibleSesion} setVisible={setVisibleSesion} prompt='¿Querés cerrar sesión?' confirmado={cerrarSesion}/>
+        <ConfirmarModal visible={visibleEliminar} setVisible={setVisibleEliminar} prompt='¿Querés eliminar tu cuenta?' confirmado={eliminarCuenta} aclaracion={"No vas a poder recuperar tu información"}/>
         <View style={styles.edit}>
           <Edit height={editTamano} width={editTamano} color={Colores.turquesa} onPress={() => navigation.navigate('EditarPerfil')}/>
         </View>
