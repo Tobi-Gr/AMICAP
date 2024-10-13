@@ -44,23 +44,23 @@ const PerfilScreen: React.FC<Props> = ({ navigation }) => {
 
     return (
       <View style={{ flex: 1, backgroundColor: Colores.blanco }}> 
-      <View style={styles.edit}>
-        <Edit height={editTamano} width={editTamano} color={Colores.turquesa} onPress={() => navigation.navigate('EditarPerfil')}/>
-      </View>
-        <View style={[styles.titleContainer, { marginTop: yTexto }]}>
-          <Texto text={nombre || 'usuario'} estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} /> 
+        <View style={styles.edit}>
+          <Edit height={editTamano} width={editTamano} color={Colores.turquesa} onPress={() => navigation.navigate('EditarPerfil')}/>
         </View>
-        <FondoAzul/>
+          <View style={[styles.titleContainer, { marginTop: yTexto }]}>
+            <Texto text={nombre || 'Usuario'} estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} /> 
+          </View>
+          <FondoAzul/>
 
-         <View style={styles.itemContainer}>   
-         <RecEmail email={email}/>
-         <BotonTextoIcono text="Tus contactos" icon="contact" onPress={() => console.log('Botón Contactos presionado')}/>
-          <BotonTextoIcono text="Tus registros" icon="graph" onPress={() => console.log('Botón registros presionado')}/>
+          <View style={styles.itemContainer}>   
+            <RecEmail email={email}/>
+            <BotonTextoIcono text="Tus contactos" icon="contact" onPress={() => console.log('Botón Contactos presionado')}/>
+            <BotonTextoIcono text="Tus registros" icon="graph" onPress={() => console.log('Botón registros presionado')}/>
           </View>
           <View style={styles.buttonsContainer}>
-          <Boton text="Eliminar cuenta" onPress={handleOnPressEliminarCuenta} containerColor={'turquesa'} textStyle={'textoBlanco'} />
-          <Boton text="Cerrar sesión" onPress={handleOnPressCerrarSesion} containerColor={'turquesa'} textStyle={'textoBlanco'}/>
-        </View> 
+            <Boton text="Eliminar cuenta" onPress={handleOnPressEliminarCuenta} containerColor={'turquesa'} textStyle={'textoBlanco'} />
+            <Boton text="Cerrar sesión" onPress={handleOnPressCerrarSesion} containerColor={'turquesa'} textStyle={'textoBlanco'}/>
+          </View> 
         
         <Navbar tipo="profile" navigation={navigation}/>
       </View>
@@ -91,15 +91,13 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'flex-end',
   },
-  itemContainer:{
-        
+  itemContainer:{        
     position: 'absolute',
-    bottom: 300, 
+    top: '30%',//Dimensions.get('screen').height * 0.25,
     left: '5%',
     right: '5%', 
     flexDirection: 'column', 
-    alignItems: 'center', 
-    
+    alignItems: 'center',    
   },
   fondo:
   {

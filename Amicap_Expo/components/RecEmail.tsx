@@ -11,19 +11,19 @@ const RecEmail: FC<Props> = ({email}) => {
     const windowWidth = Dimensions.get('window').width;
     const tamanoFuente = windowWidth * 0.05;
     
-
+    //Hay que ver cómo hacemos para que el email quede bien si es muy largo!!!!
     return (
-        <View style={styles.email}>
-            <Texto text={"Email:"} estilo={'textoNegro'} style={{fontSize: tamanoFuente}}/>
-        <View style={styles.coso}>  
-            <Texto text={email} estilo={'textoNegro'} style={{fontSize: tamanoFuente}}/>
-        </View>     
-         </View> 
+        <View style={styles.container}>
+          <Texto text={"Email:"} estilo={'textoTurquesa'} style={{fontSize: tamanoFuente}}/>
+          <View style={styles.email}>  
+              <Texto text={email} estilo={'textoNegro'} style={{fontSize: tamanoFuente}}/>
+          </View>     
+        </View> 
     );
     }
     
   const styles = StyleSheet.create({
-  email: {
+  container: {
     alignItems: 'center',
     marginHorizontal: 16,
     padding: "3%",
@@ -35,10 +35,9 @@ const RecEmail: FC<Props> = ({email}) => {
     marginBottom: '5%',
     height:50,
   },
-  coso: {
+  email: {
     position: 'absolute',
     right: '5%',
-    top: 15
   }
   });
   export default RecEmail;
