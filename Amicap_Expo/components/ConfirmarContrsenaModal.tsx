@@ -109,8 +109,9 @@ const ConfirmarContrasenaModal: FC<Props> = ({ visible, setVisible, nombre, emai
                         <InputTexto placeholder="ingrese su contraseña actual" onChange={setConfirmacion} esContrasena={true}/>
                     </View>
                     <View style={styles.botonesContainer}>
+                    <Boton text="Cancelar" onPress={cerrarModal} textStyle='textoBlanco' containerColor='turquesa'/>
                         <Boton text="Confirmar" onPress={updateUsuario} textStyle='textoBlanco' containerColor='turquesa'/>
-                        <Boton text="Cancelar" onPress={cerrarModal} textStyle='textoBlanco' containerColor='turquesa'/>
+                        
                     </View>
                 </View>
             </View>
