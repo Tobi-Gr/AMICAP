@@ -1,29 +1,26 @@
 import React from 'react';
 import { StyleSheet, View, Dimensions, TouchableOpacity } from 'react-native';
 import { Colores } from './../constants/Colors';
-import Add from './icons/Add';
+import Texto from './Texto';
 
-interface Props {
-  navigation: any;
+interface Props{
+    ataquesMes:number,
+    ataquesSemana:number,
 }
 
-const AgregarContacto: React.FC<Props> = ({ navigation }) => {
+const Ataque: React.FC<Props> = ({ ataquesMes, ataquesSemana}) => {
   const windowWidth = Dimensions.get('window').width;
   const windowHeight= Dimensions.get('window').height
-  const diametro = windowWidth * 0.15; //cambiar los tamaños
-  const heightIcon = windowHeight / 25;
-    const widthIcon = heightIcon * 0.9;
-  const handlePress = () => {
-    navigation.navigate('');
-  };
+  const diametro = windowWidth * 0.2; //cambiar los tamaños
+  const tamanoFuente = diametro / 5;
+
 
   return (
     <TouchableOpacity
       activeOpacity={1} 
-      onPress={handlePress}
       style={[styles.container, { width: diametro, height: diametro }]}>
-      <View style={[styles.circulo, { height: diametro, width: diametro }]}>       
-      <Add height={heightIcon} width={widthIcon} color={Colores.turquesa} />
+      <View style={[styles.circulo, { height: diametro, width: diametro }]}> 
+      <Texto text="" estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} />      
       </View>
     </TouchableOpacity>
   );
@@ -38,10 +35,10 @@ const styles = StyleSheet.create({
   circulo: {
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 200,
+    borderRadius: 10,
     backgroundColor: Colores.blanco,
     zIndex: 1,
   },
 });
 
-export default AgregarContacto;
+export default Ataque;

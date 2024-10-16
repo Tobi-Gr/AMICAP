@@ -65,7 +65,7 @@ const PerfilScreen: React.FC<Props> = ({ navigation }) => {
     }
 
     function handleOnPressRegistros(){
-      navigation.navigate ('ContactosRegistro')
+      navigation.navigate ('RegistroData')
     }
 
     return (
