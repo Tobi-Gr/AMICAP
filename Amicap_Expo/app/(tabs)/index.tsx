@@ -12,6 +12,7 @@ import RegistroScreen from './registro';
 import InicioSesionScreen from './inicioSesion';
 import PerfilScreen from './perfil';
 import EditarPerfilScreen from './editarPerfil';
+import ContactosConfigScreen from './contactosConfig';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +37,7 @@ const App = () => {
         <Stack.Screen name="Configuracion" component={ConfiguracionScreen}/>
         <Stack.Screen name="Perfil" component={PerfilScreen}/>
         <Stack.Screen name="EditarPerfil" component={EditarPerfilScreen}/>
+        <Stack.Screen name="ContactosConfig" component={ContactosConfigScreen}/>
       </Stack.Navigator>
     </UserProvider>
   );

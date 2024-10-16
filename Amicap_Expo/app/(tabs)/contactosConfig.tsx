@@ -5,7 +5,8 @@ import DBDomain from '../../constants/dbDomain';
 import Flecha from '@/components/Flecha';
 import Boton from '@/components/Boton';
 import Texto from '@/components/Texto';
-import NombreContacto from '@/components/NombreContacto';
+import ContactoContacto from '@/components/ContactoContacto';
+import AgregarContacto from '@/components/AgregarContacto';
 
 interface Info {
   id: number;
@@ -37,8 +38,8 @@ const ContactosConfigScreen: React.FC<Props> = ({ navigation }) => {
       <View style={[styles.titleContainer, { marginTop: yTexto }]}>
         <Texto text={"Contactos"} estilo="tituloBlanco" style={{ fontSize: tamanoTitulo }} />
       </View>
-      <View style={styles.}>
-   
+      <View style={styles.agregar}>
+      <AgregarContacto navigation={navigation} />
       </View>
     </View>
   );
@@ -58,6 +59,11 @@ const styles = StyleSheet.create({
   flechaContainer: {
     alignSelf: 'flex-start'
   },
+  agregar:{
+    position: 'absolute',
+    right: '5%',
+    bottom: 20
+  }
 });
 
 export default ContactosConfigScreen;

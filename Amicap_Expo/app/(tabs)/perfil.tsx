@@ -60,6 +60,14 @@ const PerfilScreen: React.FC<Props> = ({ navigation }) => {
       navigation.navigate('Inicio');
     };
 
+    function handleOnPressContactos(){
+      navigation.navigate ('ContactosConfig')
+    }
+
+    function handleOnPressRegistros(){
+      navigation.navigate ('ContactosRegistro')
+    }
+
     return (
       <View style={{ flex: 1, backgroundColor: Colores.blanco }}> 
         <ConfirmarModal visible={visibleSesion} setVisible={setVisibleSesion} prompt='¿Querés cerrar sesión?' confirmado={cerrarSesion}/>
@@ -74,8 +82,8 @@ const PerfilScreen: React.FC<Props> = ({ navigation }) => {
 
           <View style={styles.itemContainer}>   
             <RecEmail email={email}/>
-            <BotonTextoIcono text="Tus contactos" icon="contact" onPress={() => console.log('Botón Contactos presionado')}/>
-            <BotonTextoIcono text="Tus registros" icon="graph" onPress={() => console.log('Botón registros presionado')}/>
+            <BotonTextoIcono text="Tus contactos" icon="contact" onPress={handleOnPressContactos}/>
+            <BotonTextoIcono text="Tus registros" icon="graph" onPress={handleOnPressRegistros}/>
           </View>
           <View style={styles.buttonsContainer}>
             <Boton text="Eliminar cuenta" onPress={handleOnPressEliminarCuenta} containerColor={'turquesa'} textStyle={'textoBlanco'} />

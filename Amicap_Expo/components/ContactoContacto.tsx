@@ -8,6 +8,7 @@ import Contact from './icons/Contact';
 import { Colores } from './../constants/Colors';
 import Texto from "./Texto";
 import Edit from "./icons/Edit";
+import Add from "./icons/Add";
 
 interface Contact {
     id: number;
@@ -37,7 +38,8 @@ const ContactoContacto: FC<Props> = ({ contacto, seleccionado, onPress }) => {
             <View style={styles.innerContainer}>
                 <Contact height={heightIcon} width={widthIcon} color={seleccionado ? Colores.blanco : Colores.turquesa} />
                 <Texto text={contacto.nombre} estilo={seleccionado ? "textoBlanco" : "textoTurquesa"} style={{ fontSize: tamanoFuente, marginLeft: 10 }} />
-                <Edit height={heightIcon} width={widthIcon} color={Colores.turquesa} onPress={() => navigation.navigate('EditarPerfil')}/> 
+                <Edit height={heightIcon} width={widthIcon} color={Colores.blanco} /> 
+                <Add height={heightIcon} width={widthIcon} color={Colores.blanco} />
                 
             </View>
         </TouchableOpacity>
