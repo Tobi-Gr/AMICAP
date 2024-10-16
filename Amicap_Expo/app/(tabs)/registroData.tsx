@@ -31,7 +31,8 @@ const RegistroDataScreen: React.FC<Props> = ({ navigation }) => {
       <View style={[styles.titleContainer, { marginTop: yTexto }]}>
         <Texto text={"Mis registros"} estilo="tituloBlanco" style={{ fontSize: tamanoTitulo }} />
       </View>
-        <Ataque></Ataque>
+        <Ataque ataques={Ataque} tipo='semanal'/>
+        <Ataque ataques={Ataque} tipo='mensual'/>
     </View>
   );
 };
