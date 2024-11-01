@@ -12,7 +12,7 @@ export default class DataBaseHelper
             await client.connect();
             const result = await client.query(sql, values);
             await client.end();
-            if (result.rows.length > 0){
+            if (result.rowCount > 0){
                 data = result.rows[0];
             }
         }
@@ -48,7 +48,7 @@ export default class DataBaseHelper
             await client.connect();
             const result = await client.query(sql, values);
             await client.end();
-            if (result.rows.length > 0){
+            if (result.rowCount > 0){
                 data = result.rows;
             }
         }

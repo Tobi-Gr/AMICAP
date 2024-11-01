@@ -46,18 +46,18 @@ export default class UsuarioRepository
     RegisterAsync = async (entity) =>
     {
         let returnArray = null;
-        let sql = `select id From "Usuarios" Where email = $2`;
+        let sql = `select id From "Usuarios" Where email = $1`;
         let values = [entity.email];
-        repetido = pgHelper.requestOne(sql, values);
-        if(repetido != null) return null;
+        returnArray = await pgHelper.requestOne(sql, values);
+        if(returnArray != null) return console.log('email repetido'), null;
         sql = `Insert into "Usuarios"(username, email, contrasena) Values ($1,$2,$3)`;
         values = [entity.username, entity.email, entity.contrasena];
-        returnArray = await pgHelper.requestCount(sql, values);
-        if (returnArray > 0)
+        returnArray = await pgHelper.requestOne(sql, values);
+        console.log('register usuario: ', returnArray);
+        if (returnArray != null)
         {
             sql = `select id From "Usuarios" Where username = $1, email = $2 And contrasena = $3`;
-            const usuario = pgHelper.requestOne(sql, values);
-            console.log('register usuario: ', usuario);
+            const usuario = await pgHelper.requestOne(sql, values);
             if (usuario != null)
             {
                 sql = `select id From "Actividades" Where default = true`;
