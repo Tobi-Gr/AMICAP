@@ -1,12 +1,11 @@
-import ActividadRepository from '../repositories/actividad-repository.js';
+import MensajeRepository from '../repositories/mensaje-repository.js';
 
-const repo = new ActividadRepository();
-export default class ActividadService
+const repo = new MensajeRepository();
+export default class MensajeService
 {
-    //trae todas las actividades
-    getAllAsync = async () =>
+    getByIdUsuarioAsync = async (id_usuario) =>
     {
-        const returnArray = await repo.getAllAsync();
+        const returnArray = await repo.getByIdUsuarioAsync(id_usuario);
         return returnArray;
     }
 

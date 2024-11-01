@@ -1,13 +1,14 @@
 import {Router} from 'express';
-import ActividadService from '../services/actividad-service.js';
+import MensajeService from '../services/mensaje-service.js';
 import ValidationHelper from '../helpers/validationHelper.js';
 const router = Router();
-const svc = new ActividadService();
+const svc = new MensajeService();
 const hlp = new ValidationHelper;
 
-//trae todas las actividades
-router.get('', async (req, res) =>{
-    const returnArray = await svc.getAllAsync();
+//trae el mensaje del usuario
+router.get('/:id_usuario', async (req, res) =>{
+    const id_usuario = hlp.validarInt(req.params.id_usuario);
+    const returnArray = await svc.getByIdUsuarioAsync(id_usuario);
     if (returnArray != null)
     {
         return res.status(200).json(returnArray);
@@ -15,7 +16,7 @@ router.get('', async (req, res) =>{
     else return res.status(404).send('No se encontro ningun resultado')
 });
 
-//crea una nueva actividad
+//crea un mensaje nuevo
 router.post('', async (req, res) =>{
     const entity = req.query;
     const returnArray = await svc.createAsync(entity);
@@ -26,7 +27,7 @@ router.post('', async (req, res) =>{
     else return res.status(500).send('Error interno')
 });
 
-//modifica una actividad
+//modifica un mensaje
 router.put('', async (req, res) =>{
     const entity = req.query;
     const returnArray = await svc.updateAsync(entity);
@@ -37,15 +38,15 @@ router.put('', async (req, res) =>{
     else return res.status(500).send('Error interno')
 });
 
-//Elimina una actividad
-router.delete('', async (req, res) =>{
-    let id = hlp.validarInt(req.query.id);
+//borra un mensaje
+router.delete('/:id', async (req, res) =>{
+    let id = hlp.validarInt(req.params.id);
     const returnArray = await svc.deleteByIdAsync(id);
     if (returnArray != null)
     {
         return res.status(200).send('')
     }
-    else return res.status(500).send('Error interno')
+    else  return res.status(500).send('Error interno')
 });
 
 export default router;
