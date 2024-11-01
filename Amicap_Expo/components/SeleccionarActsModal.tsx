@@ -1,11 +1,12 @@
 import Boton from './Boton';
 import { Colores } from './../constants/Colors';
 import React, { FC, useEffect, useState, useMemo } from 'react';
-import { StyleSheet, TouchableOpacity, View, Text, Modal, Dimensions, ScrollView, Pressable } from 'react-native';
+import { StyleSheet, TouchableOpacity, View, Text, Modal, Dimensions, ScrollView, Pressable, TextInput } from 'react-native';
 import Texto from './Texto';
 import DBDomain from '@/constants/dbDomain';
 import Ex from './icons/Ex';
 import BotonRadio from './BotonRadio';
+import Search from './icons/Search';
 
 interface Actividad {
     id: number;
@@ -19,8 +20,10 @@ interface Props {
 }
 
 const SeleccionarActsModal: FC<Props> = ({ visible, setVisible, actividades }) => {
+    const [busqueda, setBusqueda] = React.useState('');
     const windowWidth = Dimensions.get('window').width;
-    const tamanoFuente = windowWidth * 0.06;
+    const tamanoFuente = windowWidth * 0.05;
+    const tamanoTitulo = windowWidth * 0.06;
         
     function cerrarModal() {
         setVisible(false);
@@ -31,11 +34,35 @@ const SeleccionarActsModal: FC<Props> = ({ visible, setVisible, actividades }) =
         //GUARDAR TODO EN LA BASE DE DATOS
     }
 
-    const listaActs = () => {
-    //hay que hacer los botones de radio
+    const Busqueda = () => {
+        return (
+            <View style={styles.busquedaContainer}>
+                <TextInput
+                    style={{fontSize: tamanoFuente, width: '90%' }}
+                    onChangeText={(nuevaBusqueda) => {
+                        setBusqueda(nuevaBusqueda);
+                        //onChange(nuevaBusqueda);
+                    }}
+                    value={busqueda}
+                    placeholder='Buscar'
+                    placeholderTextColor={Colores.negro}
+                />
+                <Search color={Colores.turquesa}/>
+            </View>
+        );
+    };
+
+    const ListaActs = () => {
         return (
             <ScrollView>
-                <BotonRadio text="AMI Contra Ataques de Pánico" id={4}/>
+                {actividades.map((actividad) => (
+                    <BotonRadio 
+                        key={actividad.id} 
+                        text={actividad.nombre} 
+                        id={actividad.id} 
+                        tamanoFuente={tamanoFuente} 
+                    />
+                ))}
             </ScrollView>
         );
     }
@@ -45,12 +72,13 @@ const SeleccionarActsModal: FC<Props> = ({ visible, setVisible, actividades }) =
             <View style={styles.container}>
                 <View style={styles.card}>
                     <View style={styles.header}>
-                        <Texto text='Actividades que me sirven' estilo="textoTurquesa" style={{fontSize: tamanoFuente}}/>
+                        <Texto text='Actividades que me sirven' estilo="textoTurquesa" style={{fontSize: tamanoTitulo}}/>
                         <Pressable onPress={cerrarModal}>
                             <Ex color={Colores.turquesa}/>
                         </Pressable>
                     </View>
-                    {listaActs()}
+                    <Busqueda/>
+                    {ListaActs()}
                     <View style={styles.buttonContainer}>
                         <Boton onPress={cerrarModal} text="Cancelar" containerColor='blanco' textStyle='textoTurquesa'/>
                         <Boton  onPress={guardarCambios} text="Guardar" containerColor='turquesa' textStyle='textoBlanco'/>
@@ -86,6 +114,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center'
+    },
+    busquedaContainer:
+    {
+        borderBottomColor: Colores.celeste,
+        borderBottomWidth: 2,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        margin: 5
     }
 });
 

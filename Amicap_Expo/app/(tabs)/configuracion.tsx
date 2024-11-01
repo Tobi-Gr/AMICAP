@@ -9,6 +9,7 @@ import SliderSegundos from '@/components/sliderSegundos';
 import SliderVolumen from '@/components/SliderVolumen';
 import TextArea from '@/components/TextArea';
 import SeleccionarActsModal from '@/components/SeleccionarActsModal';
+import CrearActividadModal from '@/components/CrearActivdadModal';
 
 interface Props {
   navigation: any;
@@ -22,6 +23,7 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
   const yTexto = windowHeight / 10;
   const botonesY = windowHeight / 4;
   const [visibleSeleccionar, setVisibleSeleccionar] = useState(false);
+  const [visibleCrear, setVisibleCrear] = useState(false);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false); // Estado para controlar la visibilidad del teclado
   
   //conectar con la base de datos
@@ -34,6 +36,11 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
   const abrirModalSeleccionar = () =>
   {
     setVisibleSeleccionar(true);
+  };
+
+  const abrirModalCrear = () =>
+  {
+    setVisibleCrear(true);
   };
 
   useEffect(() => {
@@ -56,15 +63,18 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
     };
   }, []);
 
+  //Acá hay que hacer el fetch de todas las acts, pero mientras tanto:
   const actividades_prueba = [
     {'id': 0, 'nombre': 'a'},
     {'id': 1, 'nombre': 'b'},
     {'id': 2, 'nombre': 'c'},
+    {'id': 3, 'nombre': 'd'},
   ]
 
   return (
     <View style={{ flex: 1, backgroundColor: Colores.blanco }}> 
       <SeleccionarActsModal visible={visibleSeleccionar} setVisible={setVisibleSeleccionar} actividades={actividades_prueba}/>
+      <CrearActividadModal visible={visibleCrear} setVisible={setVisibleCrear}/>
       <View style={[styles.titleContainer, { marginTop: yTexto }]}>
         <Texto text="Configuracion" estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} /> 
       </View>
