@@ -72,10 +72,12 @@ const InicioSesion: React.FC<Props> = ({ navigation }) => {
           contrasena: userContrasena,
         }),
       });
+      console.log(response)
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }
       const data = await response.json();
+      console.log(data)
       if (!data || data === null) {
         throw new Error('data failed to response');
       }
@@ -88,8 +90,10 @@ const InicioSesion: React.FC<Props> = ({ navigation }) => {
 
   const generateToken = async () => {
     const data = await fetchToken();
+    console.log(data)
     if (data && data.token) {
       setToken(data.token);
+      console.log(data.token)
     } else throw new Error('Token invalido');
   };
 

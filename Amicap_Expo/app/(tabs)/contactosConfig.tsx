@@ -70,13 +70,15 @@
 // });
 
 // export default ContactosConfigScreen;
-import { StyleSheet, View, Dimensions, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, Dimensions, ActivityIndicator, Text } from 'react-native';
 import React, { FC, useEffect, useState } from 'react';
 import { Colores } from '../../constants/Colors';
+import {useUserContext} from '@/context/UserContext';
 import Flecha from '@/components/Flecha';
 import Texto from '@/components/Texto';
 import AgregarContacto from '@/components/AgregarContacto';
 import ContactoContacto from '@/components/ContactoContacto';
+import DBDomain from '@/constants/dbDomain';
 
 interface Contact {
   id: number;
@@ -95,35 +97,73 @@ const ContactosConfigScreen: React.FC<Props> = ({ navigation }) => {
   const yTexto = windowHeight / 45;
   const flechaTamano = windowWidth / 10;
 
+  const {usuario, setUsuario} = useUserContext();
+
   // Estados para contactos y carga
   const [contactos, setContactos] = useState<Contact[]>([]);
-  const [selectedContact, setSelectedContact] = useState<number | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
+  const [fetchedContactos, setFetchedContactos] = useState<Contact[]>([]);
+  // const [loading, setLoading] = useState(true);
 
   // Función para obtener contactos desde la base de datos
   const fetchContactos = async () => {
     try {
-      const response = await fetch('TU_API_ENDPOINT'); // Reemplaza con tu endpoint
-      const data = await response.json();
-      setContactos(data); // Asegúrate de que `data` sea un array de contactos
+      const urlApi=`${DBDomain}/api/contacto/1`;
+    
+      const response = await fetch(urlApi);
+      if (!response.ok) {
+        throw new Error('Failed to fetch data');
+      }
+      const data = await response;
+      console.log(data)
+      if (!data) {
+        throw new Error('Data failed to response');
+      }
+      console.log('data: ', data);
+      return data;
     } catch (error) {
-      console.error('Error fetching contactos:', error);
-    } finally {
-      setLoading(false);
+      console.log('Hubo un error en el fetchContacto ', error);
     }
-  };
+  }
+  
+  //   const response = await fetch(urlApi); // Reemplaza con tu endpoint
+    //   const data = await response.json();
+    //   setContactos(data); // Asegúrate de que `data` sea un array de contactos
+    // } catch (error) {
+    //   console.error('Error fetching contactos:', error);
+    // } finally {
+    //   setLoading(false);
+    // }
+    // const selectContacto = (id: number) => {
+    //   try {
+    //     const contacto = fetchedContactos.find((contacto) => contacto.id == id);
+    //     if (contacto === undefined) console.log('Hubo un error en el fetchedContactos.find: ', contacto);
+    //     else setSelectedContact(contacto);
+    //   } catch (error) {
+    //     console.log('Hubo un error en el selectInfo ', error);
+    //   }
+    // }
 
   useEffect(() => {
-    fetchContactos();
+    const fetchAndSetContactos = async () => {
+      const data = await fetchContactos();
+      console.log(data)
+      if (data.length > 0) {
+        setContactos(data);
+      }
+      else console.log('no hay contactos');
+    };
+    
+    fetchAndSetContactos();
   }, []);
 
-  const handleContactPress = (contact: Contact) => {
-    setSelectedContact(prevSelected => (prevSelected === contact.id ? null : contact.id));
-  };
+  // const handleContactPress = (contact: Contact) => {
+  //   setSelectedContact(prevSelected => (prevSelected  contact.id ? null : contact.id));
+  // };
 
-  if (loading) {
-    return <ActivityIndicator size="large" color={Colores.blanco} />;
-  }
+  // if (loading) {
+  //   return <ActivityIndicator size="large" color={Colores.blanco} />;
+  // }
 
   return (
     <View style={styles.container}>
@@ -134,15 +174,14 @@ const ContactosConfigScreen: React.FC<Props> = ({ navigation }) => {
         <Texto text={"Contactos"} estilo="tituloBlanco" style={{ fontSize: tamanoTitulo }} />
       </View>  
       {/* Mostrar la lista de contactos usando ContactoContacto */}
-      {contactos.map(contacto => (
+      {/* {contactos.map(contacto => (
         <ContactoContacto
-          key={contacto.id}
           contacto={contacto}
-          seleccionado={selectedContact === contacto.id}
-          onPress={handleContactPress}
-          contactosArray={contactos} // Aunque no lo usas aquí, si lo necesitas puedes implementarlo
         />
-      ))}
+      ))} */}
+                  <View>
+                <Text>Hola</Text>
+            </View>
       <View style={styles.agregar}>
         <AgregarContacto navigation={navigation} />
       </View>

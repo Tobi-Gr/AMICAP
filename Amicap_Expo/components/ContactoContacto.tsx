@@ -122,7 +122,6 @@ import { Colores } from './../constants/Colors';
 import Texto from "./Texto";
 import Edit from "./icons/Edit";
 import Add from "./icons/Add";
-import NombreContacto from "./NombreContacto";
 
 interface Contact {
     id: number;
@@ -132,35 +131,30 @@ interface Contact {
 
 interface Props {
     contacto: Contact;
-    seleccionado: boolean;
-    onPress: (contacto: Contact) => void;
-    contactosArray: Contact[];
 }
 
-const ContactoContacto: FC<Props> = ({ contacto, seleccionado, onPress, contactosArray }) => {
+const ContactoContacto: FC<Props> = ({ contacto }) => {
     const windowHeight = Dimensions.get('window').height;
     const windowWidth = Dimensions.get('window').width;
     const tamanoFuente = windowWidth / 18;
     const heightIcon = windowHeight / 25;
     const widthIcon = heightIcon * 0.9;
 
-    const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
-
     const handleOnPress = () => {
-        onPress(contacto);
+        
     };
 
-    const handleContactPress = (contact: Contact) => {
-        setSelectedContact(prevSelectedContact =>
-            prevSelectedContact?.id === contact.id ? null : contact
-        );
-    };
+    // const handleContactPress = (contact: Contact) => {
+    //     setSelectedContact(prevSelectedContact =>
+    //         prevSelectedContact?.id === contact.id ? null : contact
+    //     );
+    // };
 
     return (
-        <TouchableOpacity onPress={handleOnPress} style={[styles.container, seleccionado ? styles.selected : styles.unselected]}>
+        <TouchableOpacity onPress={handleOnPress} style={[styles.container]}>
             <View style={styles.innerContainer}>
-                <Contact height={heightIcon} width={widthIcon} color={seleccionado ? Colores.blanco : Colores.turquesa} />
-                <Texto text={contacto.nombre} estilo={seleccionado ? "textoBlanco" : "textoTurquesa"} style={{ fontSize: tamanoFuente, marginLeft: 10 }} />
+                <Contact height={heightIcon} width={widthIcon} color={ Colores.blanco } />
+                <Texto text={contacto.nombre} estilo={"textoBlanco" } style={{ fontSize: tamanoFuente, marginLeft: 10 }} />
                 <Edit height={heightIcon} width={widthIcon} color={Colores.blanco} />
                 <Add height={heightIcon} width={widthIcon} color={Colores.blanco} />
             </View>
@@ -168,21 +162,21 @@ const ContactoContacto: FC<Props> = ({ contacto, seleccionado, onPress, contacto
     );
 };
 
-const ContactList: FC<{ contactosArray: Contact[]; onContactPress: (contact: Contact) => void; selectedContact: Contact | null }> = ({ contactosArray, onContactPress, selectedContact }) => {
-    return (
-        <ScrollView style={styles.contactList} contentContainerStyle={styles.contactListContent}>
-            {contactosArray.map((contacto) => (
-                <View key={contacto.id} style={styles.contactContainer}>
-                    <NombreContacto
-                        contacto={contacto}
-                        seleccionado={selectedContact?.id === contacto.id}
-                        onPress={() => onContactPress(contacto)}
-                    />
-                </View>
-            ))}
-        </ScrollView>
-    );
-};
+// const ContactList: FC<{ contactosArray: Contact[]; onContactPress: (contact: Contact) => void; selectedContact: Contact | null }> = ({ contactosArray, onContactPress, selectedContact }) => {
+//     return (
+//         <ScrollView style={styles.contactList} contentContainerStyle={styles.contactListContent}>
+//             {contactosArray.map((contacto) => (
+//                 <View key={contacto.id} style={styles.contactContainer}>
+//                     <NombreContacto
+//                         contacto={contacto}
+//                         seleccionado={selectedContact?.id === contacto.id}
+//                         onPress={() => onContactPress(contacto)}
+//                     />
+//                 </View>
+//             ))}
+//         </ScrollView>
+//     );
+// };
 
 const styles = StyleSheet.create({
     container: {
