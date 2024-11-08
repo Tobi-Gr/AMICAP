@@ -5,23 +5,24 @@ import {StyleSheet, Pressable, Dimensions, View } from 'react-native';
 
 interface Props{
     text:string,
-    onPress?: () => void,
+    onChange?: (checked: boolean) => void;
     tamanoFuente: number;
     id: number;
+    check: boolean;
 }
 
 
-const BotonRadio: FC<Props> = ({text, onPress, tamanoFuente, id}) => { 
+const BotonRadio: FC<Props> = ({text, onChange, tamanoFuente, id, check}) => { 
     const windowWidth = Dimensions.get('window').width;
     const tamanoFuenteLocal = windowWidth * 0.05;
-    const [checked, setChecked] = React.useState(true);
+    const [checked, setChecked] = React.useState(check);
     
     const handleOnPress = () =>
     {
         setChecked(!checked);
-        if(onPress)
+        if(onChange)
         {
-            onPress();
+            onChange(checked);
         }
     };
   
