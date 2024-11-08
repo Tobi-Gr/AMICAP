@@ -21,11 +21,11 @@ export default class ActPreferidaRepository
         return returnArray;
     }
 
-    deleteByIdAsync = async (id) =>
+    deleteAsync = async (idAct, idUsuario) =>
     {
         let returnArray = null;
-        const sql = `Delete FROM "actPreferidas" where id = $1`;
-        const values = [id];
+        const sql = `Delete FROM "actPreferidas" where id_actividad = $1 and id_actividad = $2`;
+        const values = [idAct, idUsuario];
         returnArray = await pgHelper.requestCount(sql, values);
         return returnArray;
     }

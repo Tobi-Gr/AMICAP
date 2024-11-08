@@ -76,6 +76,10 @@ export default class UsuarioRepository
                 sql = `Insert into "Respiracion"(id_usuario, tinhalando, texhalando, tconteniendo, tesperando) Values ($1, $2, $3, $4, $5)`;
                 values = [usuario.id, 4, 4, 4, 4]; 
                 hecho = await pgHelper.requestCount(sql, values);
+
+                sql = `select id, username, email From "Usuarios" Where username = $1 And email = $2 And contrasena = $3`;
+                values = [entity.username, entity.email, entity.contrasena];
+                returnArray = await pgHelper.requestOne(sql, values);
             }
         }
         return returnArray;
