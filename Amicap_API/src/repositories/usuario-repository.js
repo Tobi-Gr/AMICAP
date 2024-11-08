@@ -110,7 +110,8 @@ export default class UsuarioRepository
             sql = `Update "Usuarios" Set contrasena = $${values.length + 1}`;
             values.push(entity.contrasena);
         }
-        sql = `${sql} Where id = $1`
+        else return returnArray;
+        sql = `${sql} Where id = $1`;
         
         returnArray = await pgHelper.requestCount(sql, values);
         return returnArray;
