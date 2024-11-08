@@ -1,6 +1,7 @@
 import { StyleSheet, View, Dimensions, Keyboard } from 'react-native';
 import React, { useState, useEffect } from "react";
 import { Colores } from '../../constants/Colors';
+import {useUserContext} from '@/context/UserContext';
 import Texto from '@/components/Texto';
 import Boton from '@/components/Boton';
 import InputTexto from '@/components/inputTexto';

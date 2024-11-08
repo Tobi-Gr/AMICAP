@@ -30,8 +30,9 @@ router.post('', async (req, res) =>{
 
 router.delete('', async (req, res) =>{
     let respuesta;
-    let id = hlp.validarInt(req.query.id);
-    const returnArray = await svc.deleteByIdAsync(id);
+    let idAct = hlp.validarInt(req.query.idAct);
+    let idUsuario = hlp.validarInt(req.query.idUsuario);
+    const returnArray = await svc.deleteAsync(idAct, idUsuario);
     if (returnArray != null)
     {
         respuesta = res.status(200).send('')

@@ -10,6 +10,8 @@ import SliderVolumen from '@/components/SliderVolumen';
 import TextArea from '@/components/TextArea';
 import SeleccionarActsModal from '@/components/SeleccionarActsModal';
 import CrearActividadModal from '@/components/CrearActivdadModal';
+import DBDomain from '@/constants/dbDomain';
+import {useUserContext} from '@/context/UserContext';
 
 interface Props {
   navigation: any;
@@ -25,6 +27,8 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
   const [visibleSeleccionar, setVisibleSeleccionar] = useState(false);
   const [visibleCrear, setVisibleCrear] = useState(false);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false); // Estado para controlar la visibilidad del teclado
+  const [actividades, setActividades] = useState([]);
+  const [actsPref, setActsPref] = useState([]);
   
   //conectar con la base de datos
   const [inhalar, setInhalar] = useState(4);
@@ -43,6 +47,46 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
     setVisibleCrear(true);
   };
 
+  const fetchActividades = async () => {
+    const urlApi = `${DBDomain}/api/actividades`;
+    try {
+      const response = await fetch(urlApi);
+      if (!response.ok) {
+        throw new Error('Failed to fetch actividades');
+      }
+      const data = await response.json();
+      if (!data) {
+        throw new Error('data failed to response');
+      }
+      console.log('data: ', data);
+      return data;
+    } catch (error) {
+      console.log('Hubo un error en el fetchActividades ', error);
+    }
+  }
+
+  const fetchActividadesPref = async () => {
+    const { usuario } = useUserContext();
+    if(usuario)
+    {
+      const urlApi = `${DBDomain}/api/actPreferida/` + usuario.id;
+      try {
+        const response = await fetch(urlApi);
+        if (!response.ok) {
+          throw new Error('Failed to fetch actividadesPref');
+        }
+        const data = await response.json();
+        if (!data) {
+          throw new Error('data failed to response');
+        }
+        console.log('data: ', data);
+        return data;
+      } catch (error) {
+        console.log('Hubo un error en el fetchActividades ', error);
+      }
+    }
+  }
+
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
@@ -57,24 +101,27 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
       }
     );
 
-    return () => {
-      keyboardDidHideListener.remove();
-      keyboardDidShowListener.remove();
+    const fetchAndSetActividades = async () => {
+      const data = await fetchActividades();
+      if (data.length > 0) {
+        setActividades(data);
+      }
     };
-  }, []);
+    const fetchAndSetActsPref = async () => {
+      const data = await fetchActividadesPref();
+      if (data.length > 0) {
+        setActsPref(data);
+      }
+    };
 
-  //Acá hay que hacer el fetch de todas las acts, pero mientras tanto:
-  const actividades_prueba = [
-    {'id': 0, 'nombre': 'a'},
-    {'id': 1, 'nombre': 'b'},
-    {'id': 2, 'nombre': 'c'},
-    {'id': 3, 'nombre': 'd'},
-  ]
+    fetchAndSetActividades();
+    fetchAndSetActsPref();
+  }, []);
 
   return (
     <View style={{ flex: 1, backgroundColor: Colores.blanco }}> 
-      <SeleccionarActsModal visible={visibleSeleccionar} setVisible={setVisibleSeleccionar} actividades={actividades_prueba}/>
-      <CrearActividadModal visible={visibleCrear} setVisible={setVisibleCrear}/>
+      <SeleccionarActsModal visible={visibleSeleccionar} setVisible={setVisibleSeleccionar} actividades={actividades} actsPref={actsPref}/>
+      <CrearActividadModal visible={visibleCrear} setVisible={setVisibleCrear} isKeyboardVisible={isKeyboardVisible}/>
       <View style={[styles.titleContainer, { marginTop: yTexto }]}>
         <Texto text="Configuracion" estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} /> 
       </View>
@@ -85,7 +132,7 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
         </View>
         <View style={styles.seccion}>
           <BotonTextoIcono text="Seleccionar actividades" icon="check" onPress={abrirModalSeleccionar}/>
-          <BotonTextoIcono text="Agregar actividad" icon="add" onPress={() => console.log('Botón AgregarActividad presionado')}/>
+          <BotonTextoIcono text="Agregar actividad" icon="add" onPress={abrirModalCrear}/>
         </View>
         <View style={styles.seccion}>
           <SliderSegundos value={inhalar} onValueChange={setInhalar} text={"Tiempo inhalando"}/>

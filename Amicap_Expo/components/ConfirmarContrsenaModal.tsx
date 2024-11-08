@@ -50,13 +50,13 @@ const ConfirmarContrasenaModal: FC<Props> = ({ visible, setVisible, nombre, emai
             if (!data || data === null) {
                 throw new Error('data failed to response');
             }
-            console.log('data.Fetch: ', data);
             return data;
         } catch (error) {
             console.log('Hubo un error en el fetchToken ', error);
         }
     }
 
+    //modifica usuario
     const putUsuario = async () =>
     {
         //DBDomain es el dominio de ngrok
@@ -83,8 +83,7 @@ const ConfirmarContrasenaModal: FC<Props> = ({ visible, setVisible, nombre, emai
             if (!data || data === null) {
                 throw new Error('data failed to response');
             }
-            console.log('update.data: ', data);
-            return data;
+            setUsuario(data);
         } catch (error) {
             console.log('Hubo un error en el createUser ', error);
         }
@@ -95,7 +94,10 @@ const ConfirmarContrasenaModal: FC<Props> = ({ visible, setVisible, nombre, emai
         const token = await fetchToken();
         if (token !== null) {
             const data = await putUsuario()
-            if (data && data.length > 0) cerrarModal()
+            if (data && data.length > 0)
+            {
+                cerrarModal()
+            }
             else alert('algo salio mal, por favor intente denuevo');
         }
         else alert('la contraseña es incorrecta')
@@ -109,9 +111,8 @@ const ConfirmarContrasenaModal: FC<Props> = ({ visible, setVisible, nombre, emai
                         <InputTexto placeholder="ingrese su contraseña actual" onChange={setConfirmacion} esContrasena={true}/>
                     </View>
                     <View style={styles.botonesContainer}>
-                    <Boton text="Cancelar" onPress={cerrarModal} textStyle='textoBlanco' containerColor='turquesa'/>
-                        <Boton text="Confirmar" onPress={updateUsuario} textStyle='textoBlanco' containerColor='turquesa'/>
-                        
+                        <Boton text="Cancelar" onPress={cerrarModal} textStyle='textoBlanco' containerColor='turquesa'/>
+                        <Boton text="Confirmar" onPress={updateUsuario} textStyle='textoBlanco' containerColor='turquesa'/>  
                     </View>
                 </View>
             </View>

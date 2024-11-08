@@ -15,9 +15,9 @@ export default class ActPreferidaService
         return returnArray;
     }
 
-    deleteByIdAsync = async (id) =>
+    deleteAsync = async (idAct, idUsuario) =>
     {
-        const returnArray = await repo.deleteByIdAsync(id);
+        const returnArray = await repo.deleteAsync(idAct, idUsuario);
         return returnArray;
     }
 }
