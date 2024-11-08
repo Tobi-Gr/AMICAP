@@ -16,7 +16,7 @@ export default class ContactoRepository
     createAsync = async (entity) =>
     {
         let returnArray = null;
-        const sql = `Insert into "Contactos"(id_usuario, numero, nombre) Values ($1,$2,$3) Order By id`;
+        const sql = `Insert into "Contactos"(id_usuario, numero, nombre) Values ($1,$2,$3)`;
         const values = [entity.id_usuario, entity.numero, entity.nombre]
         returnArray = await pgHelper.requestCount(sql, values);
         return returnArray;

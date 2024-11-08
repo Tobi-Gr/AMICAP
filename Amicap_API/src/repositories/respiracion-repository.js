@@ -15,7 +15,7 @@ export default class RespiracionRepository
     createAsync = async (entity) =>
     {
         let returnArray = null;
-        const sql = `Insert into "Respiracion"(id_usuario, inhalar, exhalar, contener, esperar) Values ($1,$2,$3,$4,$5)`;
+        const sql = `Insert into "Respiracion"(id_usuario, tinhalando, texhalando, tconteniendo, tesperando) Values ($1,$2,$3,$4,$5)`;
         const values = [entity.id_usuario, entity.inhalar, entity.exhalar, entity.contener, entity.esperar];
         returnArray = await pgHelper.requestCount(sql, values);
         return returnArray;
@@ -24,7 +24,7 @@ export default class RespiracionRepository
     updateAsync = async (entity) =>
     {
         let returnArray = null;
-        const sql = `Update "Respiracion" Set inhalar=$2, exhalar=$3, contener=$4, esperar=$5 Where id_usuario= $1`;
+        const sql = `Update "Respiracion" Set tinhalando=$2, texhalando=$3, tconteniendo=$4, tesperando=$5 Where id_usuario= $1`;
         const values = [entity.id_usuario, entity.inhalar, entity.exhalar, entity.contener, entity.esperar]
         returnArray = await pgHelper.requestCount(sql, values);
         return returnArray;

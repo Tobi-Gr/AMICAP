@@ -50,13 +50,13 @@ const ConfirmarContrasenaModal: FC<Props> = ({ visible, setVisible, nombre, emai
             if (!data || data === null) {
                 throw new Error('data failed to response');
             }
-            console.log('data.Fetch: ', data);
             return data;
         } catch (error) {
             console.log('Hubo un error en el fetchToken ', error);
         }
     }
 
+    //modifica usuario
     const putUsuario = async () =>
     {
         //DBDomain es el dominio de ngrok
