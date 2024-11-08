@@ -46,6 +46,24 @@ const SeleccionarActsModal: FC<Props> = ({ visible, setVisible, actividades, act
         setVisible(false);
     }
 
+    useEffect(() => {
+        // Inicializar actsUser con las actividades y su estado 'preferida'
+        const inicializarActsUser = () => {
+            const acts = actividades.map((actividad) => {
+                const isPreferida = actsPref.some((pref) => pref.id_actividad === actividad.id && pref.id_usuario === usuario?.id);
+                return {
+                    actividad,
+                    preferida: isPreferida
+                };
+            });
+            setActsUser(acts);
+        };
+
+        if (usuario) {
+            inicializarActsUser();
+        }
+    }, [actividades, actsPref, usuario]);
+
     async function guardarCambios() {
         if(usuario)
         {
@@ -53,19 +71,19 @@ const SeleccionarActsModal: FC<Props> = ({ visible, setVisible, actividades, act
                 //Si está seleccionada y no existe, la crea
                 for (const actividadId of actsSeleccionadas) {
                     const actUser = actsUser.find(act => act.actividad.id === actividadId);
-                 
+                    
                     if (actUser && !actUser.preferida) {
                         await crearActUser(actUser.actividad, usuario.id);
                     }
                 }
-    
+        
                 // Si no está seleccionada pero existe, la elimina
                 for (const actUser of actsUser) {
                     if (!actsSeleccionadas.includes(actUser.actividad.id) && actUser.preferida) {
                         await eliminarActUser(actUser.actividad, usuario.id);
                     }
                 }
-                     
+                        
             } catch (error) {
                 console.error('Error guardando los cambios en actividades preferidas:', error);
             }
@@ -87,26 +105,22 @@ const SeleccionarActsModal: FC<Props> = ({ visible, setVisible, actividades, act
                     id_actividad: act.id,
                 }),
             });
-    
             if (!response.ok) {
                 throw new Error('Failed to fetch data');
             }
-    
             const data = await response.json();
             if (!data || data === null) {
                 throw new Error('data failed to response');
             }
             return data;
         } catch (error) {
-            console.error('Error en crearActUser:', error);
-            throw error; 
+            console.log('Hubo un error en el createActUser', error);
         }
     }
-    
 
     async function eliminarActUser(act: Actividad, user_id: number) {
         const urlApi = `${DBDomain}/api/actPreferida?idAct=${act.id}&idUsuario=${user_id}`;
-    
+        
         try {
             const response = await fetch(urlApi, {
                 method: 'DELETE',
@@ -123,12 +137,11 @@ const SeleccionarActsModal: FC<Props> = ({ visible, setVisible, actividades, act
             if (!data) {
                 throw new Error('No se recibió respuesta al eliminar la actividad preferida');
             }
+
         } catch (error) {
-            console.error('Error en eliminarActUser:', error);
-            throw error; 
+            console.error('Hubo un error al eliminar la actividad preferida:', error);
         }
     }
-    
 
     const Busqueda = () => {
         return (
