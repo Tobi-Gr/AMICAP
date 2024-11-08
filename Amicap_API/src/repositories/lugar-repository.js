@@ -24,7 +24,7 @@ export default class LugarRepository
     createAsync = async (entity) =>
     {
         let returnArray = null;
-        const sql = `Insert into "Lugar"(nombre, id_usuario) Values ($1,$2) Order By id`;
+        const sql = `Insert into "Lugar"(nombre, id_usuario) Values ($1,$2)`;
         const values = [entity.nombre, entity.id_usuario]
         returnArray = await pgHelper.requestCount(sql, values);
         return returnArray;
