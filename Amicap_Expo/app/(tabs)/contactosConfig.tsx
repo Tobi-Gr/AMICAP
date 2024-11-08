@@ -33,7 +33,7 @@ const ContactosConfigScreen: React.FC<Props> = ({ navigation }) => {
 
 
   const fetchContactos = async () => {
-    const urlApi=`${DBDomain}/api/contacto/1`;
+    const urlApi=`${DBDomain}/api/contacto/${usuario?.id}`;
     try {
       const response = await fetch(urlApi);
       if (!response.ok) {
@@ -61,7 +61,9 @@ const ContactosConfigScreen: React.FC<Props> = ({ navigation }) => {
     fetchAndSetContactos();
   }, []);
 
-
+  const eliminarContacto = (id: number) => {
+    setContactos(contactos.filter(contacto => contacto.id !== id)); // Filtrar y eliminar el contacto
+  };
 
   return (
     <View style={styles.container}>
@@ -71,12 +73,16 @@ const ContactosConfigScreen: React.FC<Props> = ({ navigation }) => {
       <View style={[styles.titleContainer, { marginTop: yTexto }]}>
         <Texto text={"Contactos"} estilo="tituloBlanco" style={{ fontSize: tamanoTitulo }} />
       </View>  
+
+      <View style={styles.contactosContainer}>
       {/* Mostrar la lista de contactos usando ContactoContacto */}
        {contactos.map(contacto => (
         <ContactoContacto
           contacto={contacto}
+          eliminarContacto={eliminarContacto} 
         />
       ))} 
+      </View>
       <View style={styles.agregar}>
         <AgregarContacto navigation={navigation} />
       </View>
@@ -89,9 +95,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colores.turquesa,
     alignItems: 'center',
-    paddingHorizontal: Dimensions.get('window').width / 25,
+    paddingHorizontal: Dimensions.get('window').width / 405,
   },
   titleContainer: {
+    alignItems: 'center',
+  },
+  contactosContainer:{
+    marginTop:'10%',
+    width: '120%',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
   },
   flechaContainer: {
@@ -102,6 +114,7 @@ const styles = StyleSheet.create({
     right: '5%',
     bottom: 20,
   },
+  
 });
 
 export default ContactosConfigScreen;
