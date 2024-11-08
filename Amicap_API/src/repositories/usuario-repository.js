@@ -49,25 +49,33 @@ export default class UsuarioRepository
         let sql = `select id From "Usuarios" Where email = $1`;
         let values = [entity.email];
         returnArray = await pgHelper.requestOne(sql, values);
-        if(returnArray != null) return console.log('email repetido'), null;
+        if(returnArray != null) return console.log('email repetido');
         sql = `Insert into "Usuarios"(username, email, contrasena) Values ($1,$2,$3)`;
         values = [entity.username, entity.email, entity.contrasena];
-        returnArray = await pgHelper.requestOne(sql, values);
-        console.log('register usuario: ', returnArray);
-        if (returnArray != null)
+        returnArray = await pgHelper.requestCount(sql, values);
+        if (returnArray > 0)
         {
-            sql = `select id From "Usuarios" Where username = $1, email = $2 And contrasena = $3`;
+            sql = `select id From "Usuarios" Where username = $1 And email = $2 And contrasena = $3`;
             const usuario = await pgHelper.requestOne(sql, values);
             if (usuario != null)
             {
-                sql = `select id From "Actividades" Where default = true`;
-                const actividades = pgHelper.request(sql);
-                console.log('register actividades: ', actividades);
-                actividades.forEach(item => {
-                    sql = `Insert into "actPreferidas"(id_usuario, id_actividad) Values ($1,$2)`;
-                    values = [usuario, item.id];
-                    const hecho = pgHelper.requestCount(sql, values);
-                });
+                let hecho = null;
+                sql = `select id From "Actividad" Where defecto = true`;
+                const actividades = await pgHelper.request(sql);
+                for (const item of actividades)
+                {
+                    sql = `Insert into "actPreferidas"(id_usuario, id_actividad) Values ($1, $2)`;
+                    values = [usuario.id, item.id];
+                    hecho = await pgHelper.requestCount(sql, values);
+                }
+
+                sql = `Insert into "mensajeDefault"(id_usuario, mensaje) Values ($1, $2)`;
+                values = [usuario.id, "Estoy teniendo un ataque de pánico."];
+                hecho = await pgHelper.requestCount(sql, values);
+
+                sql = `Insert into "Respiracion"(id_usuario, tinhalando, texhalando, tconteniendo, tesperando) Values ($1, $2, $3, $4, $5)`;
+                values = [usuario.id, 4, 4, 4, 4]; 
+                hecho = await pgHelper.requestCount(sql, values);
             }
         }
         return returnArray;
