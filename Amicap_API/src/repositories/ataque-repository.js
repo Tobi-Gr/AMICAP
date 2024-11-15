@@ -7,7 +7,8 @@ export default class AtaqueRepository
     getByIdUsuarioAsync = async (id_usuario) =>
     {
         let returnArray = null;
-        const sql = `SELECT A.fecha, L.nombre
+        const sql = `
+        SELECT A.fecha, L.nombre
         json_build_object('nombre', C.nombre) as causas
         FROM "Ataque" as A
         inner join "Ataque-Causa" as AC on A.id = AC.id_ataque
