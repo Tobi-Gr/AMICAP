@@ -29,19 +29,19 @@ router.get('/id/:id_usuario', async(req, res) =>{
 
 //Crea actividades preferidas
 router.post('', async (req, res) =>{
-    const entity = req.query;
+    const entity = req.body;
     const returnArray = await svc.createAsync(entity);
     if (returnArray != null)
     {
-        return res.status(200).send('');
+        return res.status(200).send('Actividad creada');
     }
     else return res.status(500).send('Error interno');
 });
 
 //Elimina una actividad preferida
 router.delete('', async (req, res) =>{
-    let idAct = hlp.validarInt(req.query.idAct);
-    let idUsuario = hlp.validarInt(req.query.idUsuario);
+    let idAct = hlp.validarInt(req.body.idAct);
+    let idUsuario = hlp.validarInt(req.body.idUsuario);
     const returnArray = await svc.deleteAsync(idAct, idUsuario);
     if (returnArray != null)
     {
