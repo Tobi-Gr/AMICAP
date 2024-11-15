@@ -6,6 +6,7 @@ import Flecha from '@/components/Flecha';
 import Texto from '@/components/Texto';
 import AgregarContacto from '@/components/AgregarContacto';
 import ContactoContacto from '@/components/ContactoContacto';
+import AgregarXeditarContactoModal from '@/components/AgregarXeditarContactoModal';
 import DBDomain from '@/constants/dbDomain';
 
 interface Contact {
@@ -16,9 +17,11 @@ interface Contact {
 
 interface Props {
   navigation: any;
+  visible: boolean;
+  setVisible: (visible: boolean) => void;
 }
 
-const ContactosConfigScreen: React.FC<Props> = ({ navigation }) => {
+const ContactosConfigScreen: React.FC<Props> = ({ navigation, setVisible }) => {
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
   const tamanoTitulo = windowWidth / 8;
@@ -26,6 +29,7 @@ const ContactosConfigScreen: React.FC<Props> = ({ navigation }) => {
   const flechaTamano = windowWidth / 10;
 
   const {usuario, setUsuario} = useUserContext();
+  const [visibleAgregar, setVisibleAgregar] = useState(false);
 
   // Estados para contactos y carga
   const [contactos, setContactos] = useState<Contact[]>([]);
@@ -64,9 +68,43 @@ const ContactosConfigScreen: React.FC<Props> = ({ navigation }) => {
   const eliminarContacto = (id: number) => {
     setContactos(contactos.filter(contacto => contacto.id !== id)); // Filtrar y eliminar el contacto
   };
+  
+  const handleOnPressAgregarContacto= () => {
+    
+    setVisibleAgregar(true);
+
+};
+  const handleAgregarContacto = async (nombre: string, numero: string) => {
+    try {
+      const response = await fetch(`${DBDomain}/api/contacto`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nombre: nombre,
+          numero: numero,
+        }),
+      });
+
+      if (response.ok) {
+        alert('Contacto agregado');
+        setVisibleAgregar(false);
+        // Aquí también puedes actualizar la lista de contactos
+      } else {
+        const errorMessage = await response.text();
+        alert(`Error: ${errorMessage}`);
+      }
+    } catch (error) {
+      console.log('Error al agregar contacto:', error);
+      alert('Hubo un error al agregar el contacto');
+    }
+  };
+ 
 
   return (
     <View style={styles.container}>
+      <AgregarXeditarContactoModal visible={visibleAgregar} setVisible={setVisibleAgregar} prompt={'Agregar contacto'} confirmado={handleAgregarContacto}/>
       <View style={styles.flechaContainer}>
         <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Perfil"} color={Colores.blanco} />
       </View>
@@ -84,7 +122,7 @@ const ContactosConfigScreen: React.FC<Props> = ({ navigation }) => {
       ))} 
       </View>
       <View style={styles.agregar}>
-        <AgregarContacto navigation={navigation} />
+        <AgregarContacto onPress ={handleOnPressAgregarContacto}/>
       </View>
     </View>
   );

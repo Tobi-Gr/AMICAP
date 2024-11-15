@@ -5,6 +5,7 @@ import { StyleSheet, View, Modal, Dimensions, ScrollView, Linking } from 'react-
 import Texto from './Texto';
 import Profile from './icons/Profile';
 import Phone from './icons/Phone';
+import InputTextoModal from './inputTextoModal';
 
 
 interface Props {
@@ -12,16 +13,19 @@ interface Props {
     setVisible: (visible: boolean) => void;
     prompt: string;
     aclaracion?: string;
-    confirmado: ()=> void;
+    confirmado: (nombre: string, numero: string) => void;
 }
 
-const ConfirmarModal: FC<Props> = ({ visible, setVisible, prompt, aclaracion, confirmado }) => {
+const AgregarXeditarContactoModal: FC<Props> = ({ visible, setVisible, prompt, aclaracion, confirmado }) => {
     const windowWidth = Dimensions.get('window').width;
     const windowHeight = Dimensions.get('window').height;
     const tamanoFuenteTexto = windowWidth / 18;
     const tamanoFuenteBttn = windowWidth / 20;
     const heightIcon = windowHeight / 25;
     const widthIcon = heightIcon * 0.9;
+
+    const [nombre, setNombre] = useState('');
+    const [numero, setNumero] = useState('');
     
     function cerrarModal() {
         setVisible(false);
@@ -29,9 +33,17 @@ const ConfirmarModal: FC<Props> = ({ visible, setVisible, prompt, aclaracion, co
     
     function handleConfirmado()
     {
-        confirmado();
+        confirmado(nombre, numero);
         cerrarModal();
     }
+
+    const handleNombreChange = (nuevoNombre: string) => {
+        setNombre(nuevoNombre);
+    }; 
+    
+    const handleTelefonoChange = (nuevoTelefono: string) => {
+        setNumero(nuevoTelefono);
+    }; 
 
     return (
         <Modal visible={visible} transparent={true} animationType="fade">
@@ -40,14 +52,27 @@ const ConfirmarModal: FC<Props> = ({ visible, setVisible, prompt, aclaracion, co
                 {aclaracion &&
                         <Texto text={aclaracion} estilo="textoTurquesa" style={{ fontSize: tamanoFuenteTexto * 0.9, fontWeight: 'normal', textAlign: 'center', marginTop: 10}} />
                     }
-                    <View style={styles.crud}>
-                    <Texto text={"Nombre"} estilo="textoTurquesa" style={{ fontSize: tamanoFuenteTexto * 0.9, fontWeight: 'normal', textAlign: 'center', marginTop: 10}} />
-                    <Profile height={heightIcon} width={widthIcon} color={ Colores.turquesa } />
-                    </View> 
-                    <View style={styles.crud}>
-                    <Texto text={"Telefono"} estilo="textoTurquesa" style={{ fontSize: tamanoFuenteTexto * 0.9, fontWeight: 'normal', textAlign: 'center', marginTop: 10}} />
-                    <Phone height={heightIcon} width={widthIcon} color={ Colores.turquesa } />
-                    </View>
+                    <View style={styles.innerContainer}>
+                    <View style={styles.columna1}>
+                    {/* <Texto text={"Nombre"} estilo="textoTurquesa" style={{ fontSize: tamanoFuenteTexto * 0.9, fontWeight: 'normal', textAlign: 'center', marginTop: 10}} /> */}
+                    <InputTextoModal  placeholder="Nombre" onChange={handleNombreChange}/>
+                      </View> 
+                      <View style={styles.columna2}>
+                      <Profile height={heightIcon} width={widthIcon} color={ Colores.turquesa } />
+                  </View>
+                  </View>
+               
+                  <View style={styles.innerContainer}>
+                    <View style={styles.columna1}>
+                    {/* <Texto text={"Telefono"} estilo="textoTurquesa" style={{ fontSize: tamanoFuenteTexto * 0.9, fontWeight: 'normal', textAlign: 'center', marginTop: 10}} /> */}
+                    <InputTextoModal  placeholder="Telefono" onChange={handleTelefonoChange}/>
+                       </View>
+                       <View style={styles.columna2}>
+                       <Phone height={heightIcon} width={widthIcon} color={ Colores.turquesa } />
+                       </View>
+                       </View>
+                      
+                      
                     <View style={styles.botonesContainer}>
                         <View style={[styles.botonContainer, styles.fondoBlanco]}>
                             <Boton text="Cancelar" onPress={cerrarModal} textStyle='textoTurquesa' containerColor='blanco' tamanoFuenteProps={tamanoFuenteBttn}/>
@@ -80,6 +105,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
+    innerContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '100%',
+        justifyContent: 'space-between',
+        borderBottomWidth:2,
+        borderColor: Colores.blanco
+    },
     botonesContainer: {
         flexDirection: 'row',
         marginTop: 20,
@@ -101,9 +134,20 @@ const styles = StyleSheet.create({
     fondoBlanco: {
         backgroundColor: Colores.blanco,
     },
-    crud:{
+    columna1:{
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+    },
+    columna2:{
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+    },
+    persona:{
+
+    },
+    numero:{
 
     }
 });
 
-export default ConfirmarModal;
+export default AgregarXeditarContactoModal;
