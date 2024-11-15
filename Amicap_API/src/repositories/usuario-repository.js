@@ -6,6 +6,7 @@ const KEY = 'claveToken';
 
 export default class UsuarioRepository
 {
+    //Login, devuelve el token
     LoginAsync = async (entity) =>
     {
         let returnArray = null;
@@ -43,13 +44,15 @@ export default class UsuarioRepository
         return returnArray;
     }
 
+    //Registro, crea un usuario
     RegisterAsync = async (entity) =>
     {
         let returnArray = null;
-        let sql = `select id From "Usuarios" Where email = $1`;
+        let sql = `select id From "Usuarios" Where email = $1`; //busca si el email ya existe
         let values = [entity.email];
         returnArray = await pgHelper.requestOne(sql, values);
         if(returnArray != null) return console.log('email repetido');
+        
         sql = `Insert into "Usuarios"(username, email, contrasena) Values ($1,$2,$3)`; //crea el usuario
         values = [entity.username, entity.email, entity.contrasena];
         returnArray = await pgHelper.requestCount(sql, values);
@@ -77,20 +80,19 @@ export default class UsuarioRepository
                 values = [usuario.id, 4, 4, 4, 4]; 
                 hecho = await pgHelper.requestCount(sql, values);
 
-                sql = `select id, username, email From "Usuarios" Where username = $1 And email = $2 And contrasena = $3`;
-                values = [entity.username, entity.email, entity.contrasena];
-                returnArray = await pgHelper.requestOne(sql, values);
+                returnArray = usuario;
             }
         }
         return returnArray;
     }
 
+    //Modifica el usuario
     updateAsync = async (entity) =>
     {
         let returnArray = null;
         let sql;
         let values = [entity.id];
-        if (entity.username != '') {
+        if (entity.username != '') { //se fija si modifica el username
             sql = `Update "Usuarios" Set username = $${values.length + 1}`;
             values.push(entity.username);
             if (entity.email != '') {
@@ -102,7 +104,7 @@ export default class UsuarioRepository
                 values.push(entity.contrasena);
             }
         }
-        else if (entity.email != '') {
+        else if (entity.email != '') { //se fija si modifica el mail
             sql = `Update "Usuarios" Set email = $${values.length + 1}`;
             values.push(entity.email);
             if (entity.contrasena != '') {
@@ -110,17 +112,18 @@ export default class UsuarioRepository
                 values.push(entity.contrasena);
             }
         }
-        else if (entity.contrasena != '') {
+        else if (entity.contrasena != '') { //se fija si modifica la contasena
             sql = `Update "Usuarios" Set contrasena = $${values.length + 1}`;
             values.push(entity.contrasena);
         }
         else return returnArray;
+
         sql = `${sql} Where id = $1`;
-        
         returnArray = await pgHelper.requestCount(sql, values);
         return returnArray;
     }
 
+    //Verifica el token y devuelve el usuario
     VerificarUsuarioAsync = async (token) =>
     {
         let returnArray = null;
@@ -135,4 +138,14 @@ export default class UsuarioRepository
         }
         return returnArray;
     }
+
+    //Elimina un usuario
+    deleteByIdAsync = async (id) =>
+    {
+        let returnArray = null;
+        const sql = `Delete FROM "Usuarios" where id = $1`;
+        const values = [id]
+        returnArray = await pgHelper.requestCount(sql, values);
+        return returnArray;
+    }    
 }

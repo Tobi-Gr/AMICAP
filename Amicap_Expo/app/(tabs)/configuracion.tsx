@@ -31,6 +31,7 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
   const [actsPref, setActsPref] = useState([]);
   
   //conectar con la base de datos
+  const { usuario } = useUserContext();
   const [inhalar, setInhalar] = useState(4);
   const [exhalar, setExhalar] = useState(4);
   const [mantener, setMantener] = useState(4);
@@ -58,7 +59,6 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
       if (!data) {
         throw new Error('data failed to response');
       }
-      console.log('data: ', data);
       return data;
     } catch (error) {
       console.log('Hubo un error en el fetchActividades ', error);
@@ -66,10 +66,9 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
   }
 
   const fetchActividadesPref = async () => {
-    const { usuario } = useUserContext();
     if(usuario)
     {
-      const urlApi = `${DBDomain}/api/actPreferida/` + usuario.id;
+      const urlApi = `${DBDomain}/api/actPreferida/id/${usuario.id}`;
       try {
         const response = await fetch(urlApi);
         if (!response.ok) {
@@ -79,10 +78,9 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
         if (!data) {
           throw new Error('data failed to response');
         }
-        console.log('data: ', data);
         return data;
       } catch (error) {
-        console.log('Hubo un error en el fetchActividades ', error);
+        console.log('Hubo un error en el fetchActividadesPref ', error);
       }
     }
   }

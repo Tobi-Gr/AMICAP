@@ -3,6 +3,7 @@ const pgHelper = new DataBaseHelper;
 
 export default class InformacionRepository
 {
+    //Devuelve la informacion
     getAllAsync = async () =>
     {
         let returnArray = null;

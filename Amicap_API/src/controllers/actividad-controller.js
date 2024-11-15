@@ -5,36 +5,36 @@ const router = Router();
 const svc = new ActividadService();
 const hlp = new ValidationHelper;
 
-//trae todas las actividades
+//Devuelve todas las actividades
 router.get('', async (req, res) =>{
     const returnArray = await svc.getAllAsync();
     if (returnArray != null)
     {
         return res.status(200).json(returnArray);
     }
-    else return res.status(404).send('No se encontro ningun resultado')
+    else return res.status(404).send('No se encontro ningun resultado');
 });
 
-//crea una nueva actividad
+//Crea una nueva actividad
 router.post('', async (req, res) =>{
-    const entity = req.query;
+    const entity = req.body;
     const returnArray = await svc.createAsync(entity);
     if (returnArray != null)
     {
         return res.status(200).send('');
     }
-    else return res.status(500).send('Error interno')
+    else return res.status(500).send('Error interno');
 });
 
-//modifica una actividad
+//Modifica una actividad
 router.put('', async (req, res) =>{
-    const entity = req.query;
+    const entity = req.body;
     const returnArray = await svc.updateAsync(entity);
     if (returnArray != null)
     {
         return res.status(200).send('');
     }
-    else return res.status(500).send('Error interno')
+    else return res.status(500).send('Error interno');
 });
 
 //Elimina una actividad
@@ -43,9 +43,9 @@ router.delete('', async (req, res) =>{
     const returnArray = await svc.deleteByIdAsync(id);
     if (returnArray != null)
     {
-        return res.status(200).send('')
+        return res.status(200).send('');
     }
-    else return res.status(500).send('Error interno')
+    else return res.status(500).send('Error interno');
 });
 
 export default router;

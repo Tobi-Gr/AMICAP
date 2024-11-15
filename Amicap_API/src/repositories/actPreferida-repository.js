@@ -3,6 +3,7 @@ const pgHelper = new DataBaseHelper;
 
 export default class ActPreferidaRepository
 {
+    //Devuelve las actividades que el usuario tiene como preferidas
     getByIdUsuarioAsync = async (id_usuario) =>
     {
         let returnArray = null;
@@ -12,6 +13,17 @@ export default class ActPreferidaRepository
         return returnArray;
     }
 
+    //Devuelve las filas de actsPreferidas que corresponden al usuario
+    getAsync = async (id_usuario) =>
+    {
+        let returnArray = null;
+        const sql = `SELECT * FROM "actPreferidas" where id_usuario = $1 Order By id`;
+        const values = [id_usuario];
+        returnArray = await pgHelper.requestValues(sql, values);
+        return returnArray;
+    }
+
+    //Crea actividades preferidas
     createAsync = async (entity) =>
     {
         let returnArray = null;
@@ -21,11 +33,12 @@ export default class ActPreferidaRepository
         return returnArray;
     }
 
-    deleteAsync = async (idAct, idUsuario) =>
+    //Elimina una actividad preferida
+    deleteAsync = async (entity) =>
     {
         let returnArray = null;
         const sql = `Delete FROM "actPreferidas" where id_actividad = $1 and id_actividad = $2`;
-        const values = [idAct, idUsuario];
+        const values = [entity.idAct, entity.idUsuario];
         returnArray = await pgHelper.requestCount(sql, values);
         return returnArray;
     }

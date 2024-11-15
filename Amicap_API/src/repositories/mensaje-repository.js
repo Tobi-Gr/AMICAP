@@ -3,6 +3,7 @@ const pgHelper = new DataBaseHelper;
 
 export default class MensajeRepository
 {
+    //Devuelve el mensaje del usuario
     getByIdUsuarioAsync = async (id_usuario) =>
     {
         let returnArray = null;
@@ -12,6 +13,7 @@ export default class MensajeRepository
         return returnArray;
     }
 
+    //Crea un mensaje nuevo
     createAsync = async (entity) =>
     {
         let returnArray = null;
@@ -21,6 +23,7 @@ export default class MensajeRepository
         return returnArray;
     }
 
+    //Modifica un mensaje
     updateAsync = async (entity) =>
     {
         let returnArray = null;
@@ -30,6 +33,7 @@ export default class MensajeRepository
         return returnArray;
     }
 
+    //Elimina un mensaje
     deleteByIdAsync = async (id) =>
     {
         let returnArray = null;
