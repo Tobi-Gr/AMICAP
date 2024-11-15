@@ -19,9 +19,10 @@ interface Props {
     eliminarContacto: (id: number) => void; 
 }
 
-const ContactoContacto: FC<Props> = ({ contacto, eliminarContacto }) => {
+const ContactoContacto: FC<Props> = ({ contacto, eliminarContacto, }) => {
     const [visibleEditar, setVisibleEditar] = useState(false);
     const [visibleEliminar, setVisibleEliminar] = useState(false);
+    const [visibleAgregar, setVisibleAgregar] = useState(false);
     const nombre=contacto?.nombre
 
     const windowHeight = Dimensions.get('window').height;
@@ -55,6 +56,32 @@ const ContactoContacto: FC<Props> = ({ contacto, eliminarContacto }) => {
             alert('Hubo un error al eliminar el contacto');
         }
     }
+    const handleAgregarContacto = async (nombre: string, numero: string) => {
+        try {
+          const response = await fetch(`${DBDomain}/api/contacto`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              nombre,
+              numero,
+            }),
+          });
+    
+          if (response.ok) {
+            alert('Contacto agregado');
+            setVisibleAgregar(false);
+            // Aquí también puedes actualizar la lista de contactos
+          } else {
+            const errorMessage = await response.text();
+            alert(`Error: ${errorMessage}`);
+          }
+        } catch (error) {
+          console.log('Error al agregar contacto:', error);
+          alert('Hubo un error al agregar el contacto');
+        }
+      };
 
     return (
         <TouchableOpacity style={[styles.container]}>
