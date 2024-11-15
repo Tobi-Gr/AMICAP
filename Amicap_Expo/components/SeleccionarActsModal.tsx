@@ -46,23 +46,28 @@ const SeleccionarActsModal: FC<Props> = ({ visible, setVisible, actividades, act
         setVisible(false);
     }
 
-    useEffect(() => {
-        // Inicializar actsUser con las actividades y su estado 'preferida'
-        const inicializarActsUser = () => {
-            const acts = actividades.map((actividad) => {
-                const isPreferida = actsPref.some((pref) => pref.id_actividad === actividad.id && pref.id_usuario === usuario?.id);
-                return {
-                    actividad,
-                    preferida: isPreferida
-                };
-            });
-            setActsUser(acts);
-        };
+    const inicializarActsUser = () => {    
+        const acts = actividades.map((actividad) => {
+            const isPreferida = actsPref.some((pref) => pref.id_actividad === actividad.id && pref.id_usuario === usuario?.id);
+            return {
+                actividad,
+                preferida: isPreferida
+            };
+        });
+        setActsUser(acts);
+    };
 
+    useEffect(() => {
         if (usuario) {
             inicializarActsUser();
         }
-    }, [actividades, actsPref, usuario]);
+    }, []);
+
+    useEffect(() => {
+        if (usuario) {
+            inicializarActsUser();
+        }
+    }, [visible, usuario]);
 
     async function guardarCambios() {
         if(usuario)
