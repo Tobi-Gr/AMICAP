@@ -17,7 +17,7 @@ router.get('', async (req, res) =>{
 
 //Crea una nueva actividad
 router.post('', async (req, res) =>{
-    const entity = req.query;
+    const entity = req.body;
     const returnArray = await svc.createAsync(entity);
     if (returnArray != null)
     {
@@ -28,7 +28,7 @@ router.post('', async (req, res) =>{
 
 //Modifica una actividad
 router.put('', async (req, res) =>{
-    const entity = req.query;
+    const entity = req.body;
     const returnArray = await svc.updateAsync(entity);
     if (returnArray != null)
     {

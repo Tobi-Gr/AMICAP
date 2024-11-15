@@ -18,41 +18,35 @@ router.get('/:id_usuario', async (req, res) =>{
 
 //Crea una causa
 router.post('', async (req, res) =>{
-    let respuesta;
-    const entity = req.query;
+    const entity = req.body;
     const returnArray = await svc.createAsync(entity);
     if (returnArray != null)
     {
-        respuesta = res.status(200).send('');
+        return res.status(200).send('');
     }
-    else respuesta = res.status(500).send('Error interno');
-    return respuesta;
+    else return res.status(500).send('Error interno');
 });
 
 //Modifica una causa
 router.put('', async (req, res) =>{
-    let respuesta;
-    const entity = req.query;
+    const entity = req.body;
     const returnArray = await svc.updateAsync(entity);
     if (returnArray != null)
     {
-        respuesta = res.status(200).send('');
+        return res.status(200).send('');
     }
-    else respuesta = res.status(500).send('Error interno');
-    return respuesta;
+    else return res.status(500).send('Error interno');
 });
 
 //Elimina una causa
 router.delete('/:id', async (req, res) =>{
-    let respuesta;
     let id = hlp.validarInt(req.params.id);
     const returnArray = await svc.deleteByIdAsync(id);
     if (returnArray != null)
     {
-        respuesta = res.status(200).send('')
+        return res.status(200).send('');
     }
-    else respuesta = res.status(500).send('Error interno');
-    return respuesta;
+    else return res.status(500).send('Error interno');
 });
 
 export default router;

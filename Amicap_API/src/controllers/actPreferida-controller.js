@@ -40,9 +40,8 @@ router.post('', async (req, res) =>{
 
 //Elimina una actividad preferida
 router.delete('', async (req, res) =>{
-    let idAct = hlp.validarInt(req.body.idAct);
-    let idUsuario = hlp.validarInt(req.body.idUsuario);
-    const returnArray = await svc.deleteAsync(idAct, idUsuario);
+    const entity = req.body;
+    const returnArray = await svc.deleteAsync(entity);
     if (returnArray != null)
     {
         return res.status(200).send('');

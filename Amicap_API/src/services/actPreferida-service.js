@@ -25,9 +25,9 @@ export default class ActPreferidaService
     }
 
     //Elimina una actividad preferida
-    deleteAsync = async (idAct, idUsuario) =>
+    deleteAsync = async (entity) =>
     {
-        const returnArray = await repo.deleteAsync(idAct, idUsuario);
+        const returnArray = await repo.deleteAsync(entity);
         return returnArray;
     }
 }
