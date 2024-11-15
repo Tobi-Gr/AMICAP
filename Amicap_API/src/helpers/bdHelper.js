@@ -4,7 +4,7 @@ const {Client} = pkg;
 
 export default class DataBaseHelper
 {
-    //este devuelve un objeto
+    //Devuelve un solo objeto
     requestOne = async (sql, values) => {
         let data = null;
         const client = new Client(DBConfig);
@@ -22,7 +22,7 @@ export default class DataBaseHelper
         return data;
     }
 
-    //devuelve las row counts
+    //Devuelve las filas modificadas
     requestCount = async (sql, values) => {
         let data = null;
         const client = new Client(DBConfig);
@@ -40,7 +40,7 @@ export default class DataBaseHelper
         return data;
     }
 
-    // varios objetos
+    //Devuelve varios objetos segun un parametro
     requestValues = async (sql, values) => {
         let data = null;
         const client = new Client(DBConfig);
@@ -58,7 +58,7 @@ export default class DataBaseHelper
         return data;
     }
     
-    //Todos
+    //Devuelve todos los objetos
     request = async (sql) => {
         let data = null;
         const client = new Client(DBConfig);

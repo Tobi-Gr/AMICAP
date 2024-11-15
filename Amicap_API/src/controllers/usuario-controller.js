@@ -9,7 +9,7 @@ router.get('/prueba', async (req, res) =>{
     return res.status(200).json('Hola, funciona el Ngrok');
 });
 
-//login
+//Login, devuelve el token
 router.post('/login', async (req, res) =>{
     const entity = req.body;
     if (hlp.validarMail(entity.email)) return res.status(400).send('mail invalido');
@@ -19,22 +19,22 @@ router.post('/login', async (req, res) =>{
     
 });
 
-//registro
+//Registro, crea un usuario
 router.post('/register', async (req, res) =>{
     try {
         const entity = req.body;
         if (hlp.validarMail(entity.email)) return res.status(400).send('mail invalido');
         else if (!hlp.validarString(entity.username)) return res.status(400).send('username invalido');
-        else if (!hlp.validarString(entity.contrasena)) return res.status(400).send('contraseña invalida');
+         else if (!hlp.validarString(entity.contrasena)) return res.status(400).send('contraseña invalida');
         const returnArray = await svc.RegisterAsync(entity);
-        if (returnArray != null)return res.status(201).json(returnArray);
+        if (returnArray != null) return res.status(201).json(returnArray);
         else return res.status(400).send('Error interno');
     } catch (e) {
         console.log(e);
     }
 });
 
-//modifica el usuario
+//Modifica el usuario
 router.put('/update', async (req, res) =>{
     const entity = req.query;
     const returnArray = await svc.updateAsync(entity);
@@ -42,7 +42,7 @@ router.put('/update', async (req, res) =>{
     {
         return res.status(200).send('');
     }
-    else return res.status(500).send('Error interno')
+    else return res.status(500).send('Error interno');
 });
 
 //Verifica el token y devuelve el usuario
@@ -59,6 +59,17 @@ router.get('/verify/:token', async (req, res) =>{
     } catch (e) {
         console.log(e);
     }
+});
+
+//Elimina un usuario
+router.delete('', async (req, res) =>{
+    let id = hlp.validarInt(req.query.id);
+    const returnArray = await svc.deleteByIdAsync(id);
+    if (returnArray != null)
+    {
+        return res.status(200).send('');
+    }
+    else return res.status(500).send('Error interno');
 });
 
 export default router;

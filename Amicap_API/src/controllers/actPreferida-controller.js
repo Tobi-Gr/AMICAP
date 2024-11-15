@@ -13,7 +13,7 @@ router.get('/:id_usuario', async (req, res) =>{
     {
         return res.status(200).json(returnArray);
     }
-    else return res.status(404).send('No se encontro ningun resultado')
+    else return res.status(404).send('No se encontro ningun resultado');
 });
 
 //Devuelve las filas de actsPreferidas que corresponden al usuario
@@ -27,30 +27,27 @@ router.get('/id/:id_usuario', async(req, res) =>{
     else return res.status(404).send('No se encontro ningun resultado')
 })
 
+//Crea actividades preferidas
 router.post('', async (req, res) =>{
-    let respuesta;
     const entity = req.query;
     const returnArray = await svc.createAsync(entity);
-    console.log(returnArray);
     if (returnArray != null)
     {
-        respuesta = res.status(200).send('');
+        return res.status(200).send('');
     }
-    else respuesta = res.status(500).send('Error interno')
-    return respuesta;
+    else return res.status(500).send('Error interno');
 });
 
+//Elimina una actividad preferida
 router.delete('', async (req, res) =>{
-    let respuesta;
     let idAct = hlp.validarInt(req.query.idAct);
     let idUsuario = hlp.validarInt(req.query.idUsuario);
     const returnArray = await svc.deleteAsync(idAct, idUsuario);
     if (returnArray != null)
     {
-        respuesta = res.status(200).send('')
+        return res.status(200).send('');
     }
-    else respuesta = res.status(500).send('Error interno')
-    return respuesta;
+    else return res.status(500).send('Error interno');
 });
 
 export default router;

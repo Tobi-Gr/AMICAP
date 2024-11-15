@@ -3,6 +3,7 @@ const pgHelper = new DataBaseHelper;
 
 export default class ActPreferidaRepository
 {
+    //Devuelve las actividades que el usuario tiene como preferidas
     getByIdUsuarioAsync = async (id_usuario) =>
     {
         let returnArray = null;
@@ -12,6 +13,7 @@ export default class ActPreferidaRepository
         return returnArray;
     }
 
+    //Devuelve las filas de actsPreferidas que corresponden al usuario
     getAsync = async (id_usuario) =>
     {
         let returnArray = null;
@@ -21,6 +23,7 @@ export default class ActPreferidaRepository
         return returnArray;
     }
 
+    //Crea actividades preferidas
     createAsync = async (entity) =>
     {
         let returnArray = null;
@@ -30,6 +33,7 @@ export default class ActPreferidaRepository
         return returnArray;
     }
 
+    //Elimina una actividad preferida
     deleteAsync = async (idAct, idUsuario) =>
     {
         let returnArray = null;
