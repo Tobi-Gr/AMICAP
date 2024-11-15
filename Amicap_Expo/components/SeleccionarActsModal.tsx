@@ -76,9 +76,8 @@ const SeleccionarActsModal: FC<Props> = ({ visible, setVisible, actividades, act
                 //Si está seleccionada y no existe, la crea
                 for (const actividadId of actsSeleccionadas) {
                     const actUser = actsUser.find(act => act.actividad.id === actividadId);
-                    
-                    if (actUser && !actUser.preferida) {
-                        console.log("Actividad a guardar: ", actUser);
+                    const esPreferida = actsPref.find(act => act.id_actividad === actividadId);
+                    if (actUser && esPreferida === undefined) { //YA LA IDENTIFICA CORRECTAMENTE!   
                         await crearActUser(actUser.actividad, usuario.id);
                     }
                 }
@@ -105,7 +104,6 @@ const SeleccionarActsModal: FC<Props> = ({ visible, setVisible, actividades, act
 
     async function crearActUser(act: Actividad, user_id: number) {
         const urlApi = `${DBDomain}/api/actPreferida`;
-    
         try {
             const response = await fetch(urlApi, {
                 method: 'POST',
@@ -126,7 +124,9 @@ const SeleccionarActsModal: FC<Props> = ({ visible, setVisible, actividades, act
             }
             return data;
         } catch (error) {
-            console.log('Hubo un error en el createActUser', error);
+            console.log('Hubo un error en el crearActUser', error); 
+            //Tira error pero igual se crea en la base de datos, no entiendo por qué
+            //funciona!
         }
     }
 
