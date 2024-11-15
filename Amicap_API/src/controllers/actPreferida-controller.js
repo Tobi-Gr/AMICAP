@@ -5,6 +5,7 @@ const router = Router();
 const svc = new ActPreferidaService();
 const hlp = new ValidationHelper;
 
+//Devuelve las actividades que el usuario tiene como preferidas
 router.get('/:id_usuario', async (req, res) =>{
     const id_usuario = hlp.validarInt(req.params.id_usuario);
     const returnArray = await svc.getByIdUsuarioAsync(id_usuario);
@@ -14,6 +15,17 @@ router.get('/:id_usuario', async (req, res) =>{
     }
     else return res.status(404).send('No se encontro ningun resultado')
 });
+
+//Devuelve las filas de actsPreferidas que corresponden al usuario
+router.get('/id/:id_usuario', async(req, res) =>{
+    const id_usuario = hlp.validarInt(req.params.id_usuario);
+    const returnArray = await svc.getAsync(id_usuario);
+    if (returnArray != null)
+    {
+        return res.status(200).json(returnArray);
+    }
+    else return res.status(404).send('No se encontro ningun resultado')
+})
 
 router.post('', async (req, res) =>{
     let respuesta;

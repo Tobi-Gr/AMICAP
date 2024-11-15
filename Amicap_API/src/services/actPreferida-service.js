@@ -9,6 +9,12 @@ export default class ActPreferidaService
         return returnArray;
     }
 
+    getAsync = async(id_usuario) =>
+    {
+        const returnArray = await repo.getAsync(id_usuario);
+        return returnArray;
+    }
+
     createAsync = async (entity) =>
     {
         const returnArray = await repo.createAsync(entity);

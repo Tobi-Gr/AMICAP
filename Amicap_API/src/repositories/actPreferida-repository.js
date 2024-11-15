@@ -12,6 +12,15 @@ export default class ActPreferidaRepository
         return returnArray;
     }
 
+    getAsync = async (id_usuario) =>
+    {
+        let returnArray = null;
+        const sql = `SELECT * FROM "actPreferidas" where id_usuario = $1 Order By id`;
+        const values = [id_usuario];
+        returnArray = await pgHelper.requestValues(sql, values);
+        return returnArray;
+    }
+
     createAsync = async (entity) =>
     {
         let returnArray = null;
