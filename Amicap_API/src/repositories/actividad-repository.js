@@ -3,6 +3,7 @@ const pgHelper = new DataBaseHelper;
 
 export default class ActividadRepository
 {
+    //Devuelve todas las actividades
     getAllAsync = async () =>
     {
         let returnArray = null;
@@ -11,6 +12,7 @@ export default class ActividadRepository
         return returnArray;
     }
 
+    //Crea una nueva actividad
     createAsync = async (entity) =>
     {
         let returnArray = null;
@@ -20,6 +22,7 @@ export default class ActividadRepository
         return returnArray;
     }
 
+    //Modifica una actividad
     updateAsync = async (entity) =>
     {
         let returnArray = null;
@@ -29,6 +32,7 @@ export default class ActividadRepository
         return returnArray;
     }
 
+    //Elimina una actividad
     deleteByIdAsync = async (id) =>
     {
         let returnArray = null;

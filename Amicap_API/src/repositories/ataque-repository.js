@@ -3,6 +3,7 @@ const pgHelper = new DataBaseHelper;
 
 export default class AtaqueRepository
 {
+    //Devuelve los ataque del usuario
     getByIdUsuarioAsync = async (id_usuario) =>
     {
         let returnArray = null;
@@ -18,6 +19,7 @@ export default class AtaqueRepository
         return returnArray;
     }
 
+    //Crea un ataque con el id del usuario y la fecha
     createAsync = async (entity) =>
     {
         let returnArray = null;
@@ -27,6 +29,7 @@ export default class AtaqueRepository
         return returnArray;
     }
 
+    //Elimina un ataque por id
     deleteByIdAsync = async (id) =>
     {
         let returnArray = null;
@@ -36,6 +39,7 @@ export default class AtaqueRepository
         return returnArray;
     }
     
+    //Modifica el lugar de un ataque
     updateLugarAsync = async (entity) =>
     {
         let returnArray = null;
@@ -45,6 +49,7 @@ export default class AtaqueRepository
         return returnArray;
     }
 
+    //Agrega una causas de un ataque
     createCausaAsync = async (entity) =>
     {
         let returnArray = null;
@@ -54,6 +59,7 @@ export default class AtaqueRepository
         return returnArray;
     }
 
+    //Elimina una causa de un ataque
     deleteCausaAsync = async (id) =>
     {
         let returnArray = null;

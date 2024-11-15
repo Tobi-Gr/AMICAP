@@ -3,6 +3,7 @@ const pgHelper = new DataBaseHelper;
 
 export default class RespiracionRepository
 {
+    //Devuelve la respiracion del usuario
     getByIdUsuarioAsync = async (id_usuario) =>
     {
         let returnArray = null;
@@ -12,6 +13,7 @@ export default class RespiracionRepository
         return returnArray;
     }
 
+    //Crea una respiracion nueva
     createAsync = async (entity) =>
     {
         let returnArray = null;
@@ -21,11 +23,22 @@ export default class RespiracionRepository
         return returnArray;
     }
 
+    //Modifica una respiracion
     updateAsync = async (entity) =>
     {
         let returnArray = null;
         const sql = `Update "Respiracion" Set tinhalando=$2, texhalando=$3, tconteniendo=$4, tesperando=$5 Where id_usuario= $1`;
         const values = [entity.id_usuario, entity.inhalar, entity.exhalar, entity.contener, entity.esperar]
+        returnArray = await pgHelper.requestCount(sql, values);
+        return returnArray;
+    }
+
+    //Elimina una respiracion
+    deleteByIdAsync = async (id) =>
+    {
+        let returnArray = null;
+        const sql = `Delete FROM "Respiracion" where id = $1`;
+        const values = [id]
         returnArray = await pgHelper.requestCount(sql, values);
         return returnArray;
     }
