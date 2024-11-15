@@ -34,11 +34,11 @@ export default class ActPreferidaRepository
     }
 
     //Elimina una actividad preferida
-    deleteAsync = async (idAct, idUsuario) =>
+    deleteAsync = async (entity) =>
     {
         let returnArray = null;
         const sql = `Delete FROM "actPreferidas" where id_actividad = $1 and id_actividad = $2`;
-        const values = [idAct, idUsuario];
+        const values = [entity.idAct, entity.idUsuario];
         returnArray = await pgHelper.requestCount(sql, values);
         return returnArray;
     }

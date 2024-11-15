@@ -62,8 +62,8 @@ router.get('/verify/:token', async (req, res) =>{
 });
 
 //Elimina un usuario
-router.delete('', async (req, res) =>{
-    let id = hlp.validarInt(req.query.id);
+router.delete('/:id', async (req, res) =>{
+    let id = hlp.validarInt(req.params.id);
     const returnArray = await svc.deleteByIdAsync(id);
     if (returnArray != null)
     {

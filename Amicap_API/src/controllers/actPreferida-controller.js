@@ -29,7 +29,7 @@ router.get('/id/:id_usuario', async(req, res) =>{
 
 //Crea actividades preferidas
 router.post('', async (req, res) =>{
-    const entity = req.query;
+    const entity = req.body;
     const returnArray = await svc.createAsync(entity);
     if (returnArray != null)
     {
@@ -40,9 +40,8 @@ router.post('', async (req, res) =>{
 
 //Elimina una actividad preferida
 router.delete('', async (req, res) =>{
-    let idAct = hlp.validarInt(req.query.idAct);
-    let idUsuario = hlp.validarInt(req.query.idUsuario);
-    const returnArray = await svc.deleteAsync(idAct, idUsuario);
+    const entity = req.body;
+    const returnArray = await svc.deleteAsync(entity);
     if (returnArray != null)
     {
         return res.status(200).send('');

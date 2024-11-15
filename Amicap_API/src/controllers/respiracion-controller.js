@@ -18,7 +18,7 @@ router.get('/:id_usuario', async (req, res) =>{
 
 //Crea una respiracion nueva
 router.post('', async (req, res) =>{
-    const entity = req.query;
+    const entity = req.body;
     const returnArray = await svc.createAsync(entity);
     if (returnArray != null)
     {
@@ -29,7 +29,7 @@ router.post('', async (req, res) =>{
 
 //Modifica una respiracion
 router.put('', async (req, res) =>{
-    const entity = req.query;
+    const entity = req.body;
     const returnArray = await svc.updateAsync(entity);
     if (returnArray != null)
     {
