@@ -78,7 +78,6 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
         if (!data) {
           throw new Error('data failed to response');
         }
-        console.log("data actsPrefs: ", data);
         return data;
       } catch (error) {
         console.log('Hubo un error en el fetchActividadesPref ', error);

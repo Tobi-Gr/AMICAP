@@ -78,19 +78,26 @@ const SeleccionarActsModal: FC<Props> = ({ visible, setVisible, actividades, act
                     const actUser = actsUser.find(act => act.actividad.id === actividadId);
                     
                     if (actUser && !actUser.preferida) {
+                        console.log("Actividad a guardar: ", actUser);
                         await crearActUser(actUser.actividad, usuario.id);
                     }
                 }
-        
+                
+            } catch (error) {
+                console.error('Error guardando nuevas actividades preferidas:', error);
+            }
+            
+            try {
                 // Si no está seleccionada pero existe, la elimina
                 for (const actUser of actsUser) {
                     if (!actsSeleccionadas.includes(actUser.actividad.id) && actUser.preferida) {
+                        console.log("Actividad a eliminar: ", actUser);
                         await eliminarActUser(actUser.actividad, usuario.id);
                     }
-                }
-                        
-            } catch (error) {
-                console.error('Error guardando los cambios en actividades preferidas:', error);
+                }                
+            }
+            catch (error) {
+                console.error('Error eliminando actividades preferidas:', error);
             }
         }
         cerrarModal();
@@ -167,6 +174,7 @@ const SeleccionarActsModal: FC<Props> = ({ visible, setVisible, actividades, act
     };
 
     const ListaActs = () => {
+        // cambio en el estado de las actividades
         const handleCheck = (actividadId: number, checked: boolean) => {
             if (checked) {
                 setActsSeleccionadas((prevSeleccionada) => [...prevSeleccionada, actividadId]);
@@ -175,8 +183,7 @@ const SeleccionarActsModal: FC<Props> = ({ visible, setVisible, actividades, act
                     prevSeleccionada.filter((id) => id !== actividadId)
                 );
             }
-
-            
+    
             setActsUser((prevActsUser) =>
                 prevActsUser.map((actUser) =>
                     actUser.actividad.id === actividadId
@@ -185,6 +192,15 @@ const SeleccionarActsModal: FC<Props> = ({ visible, setVisible, actividades, act
                 )
             );
         };
+    
+        // guardar las actividades seleccionadas cuando carga el componente
+        useEffect(() => {
+            const actividadesSeleccionadas = actsUser
+                .filter((actUser) => actUser.preferida)  // filtra las acts que están seleccionadas
+                .map((actUser) => actUser.actividad.id); // extrae solo los id's de las acts seleccionadas
+    
+            setActsSeleccionadas(actividadesSeleccionadas);
+        }, [actsUser]);
     
         return (
             <ScrollView>
@@ -195,7 +211,7 @@ const SeleccionarActsModal: FC<Props> = ({ visible, setVisible, actividades, act
                         id={actUser.actividad.id}
                         tamanoFuente={tamanoFuente}
                         check={actUser.preferida}
-                        onChange={(checked) => handleCheck(actUser.actividad.id, checked)}
+                        onChange={(checked) => handleCheck(actUser.actividad.id, !checked)}
                     />
                 ))}
             </ScrollView>
