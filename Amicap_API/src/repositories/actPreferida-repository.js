@@ -3,7 +3,7 @@ const pgHelper = new DataBaseHelper;
 
 export default class ActPreferidaRepository
 {
-    //Trae todas las actividades que el usuario prefiere, No los ids
+    //Devuelve las actividades que el usuario tiene como preferidas
     getByIdUsuarioAsync = async (id_usuario) =>
     {
         let returnArray = null;
@@ -13,7 +13,17 @@ export default class ActPreferidaRepository
         return returnArray;
     }
 
-    //Crea una actividad preferida
+    //Devuelve las filas de actsPreferidas que corresponden al usuario
+    getAsync = async (id_usuario) =>
+    {
+        let returnArray = null;
+        const sql = `SELECT * FROM "actPreferidas" where id_usuario = $1 Order By id`;
+        const values = [id_usuario];
+        returnArray = await pgHelper.requestValues(sql, values);
+        return returnArray;
+    }
+
+    //Crea actividades preferidas
     createAsync = async (entity) =>
     {
         let returnArray = null;
