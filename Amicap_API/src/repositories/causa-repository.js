@@ -3,6 +3,7 @@ const pgHelper = new DataBaseHelper;
 
 export default class CausaRepository
 {
+    //Devuelve las causas que creo el usuario
     getByIdUsuarioAsync = async (id_usuario) =>
     {
         let returnArray = null;
@@ -12,24 +13,17 @@ export default class CausaRepository
         return returnArray;
     }
 
-    getByIdAtaqueAsync = async (id_ataque) =>
-    {
-        let returnArray = null;
-        const sql = `SELECT * FROM "Causa" where id_ataque = $1`;
-        const values = [id_ataque]
-        returnArray = await pgHelper.requestValues(sql, values);
-        return returnArray;
-    }
-
+    //Crea una causa
     createAsync = async (entity) =>
     {
         let returnArray = null;
-        const sql = `Insert into "Causa"(nombre, id_usuario) Values ($1,$2) Order By id`;
+        const sql = `Insert into "Causa"(nombre, id_usuario) Values ($1,$2)`;
         const values = [entity.nombre, entity.id_usuario]
         returnArray = await pgHelper.requestCount(sql, values);
         return returnArray;
     }
 
+    //Modifica una causa
     updateAsync = async (entity) =>
     {
         let returnArray = null;
@@ -39,6 +33,7 @@ export default class CausaRepository
         return returnArray;
     }
 
+    //Elimina una causa
     deleteByIdAsync = async (id) =>
     {
         let returnArray = null;

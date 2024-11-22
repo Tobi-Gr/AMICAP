@@ -1,13 +1,13 @@
 import {Router} from 'express';
-import RespiracionService from '../services/respiracion-service.js';
+import MensajeService from '../services/mensaje-service.js';
 import ValidationHelper from '../helpers/validationHelper.js';
 const router = Router();
-const svc = new RespiracionService();
+const svc = new MensajeService();
 const hlp = new ValidationHelper;
 
-//Devuelve la respiracion del usuario
+//Devuelve el mensaje del usuario
 router.get('/:id_usuario', async (req, res) =>{
-    let id_usuario = hlp.validarInt(req.params.id_usuario);
+    const id_usuario = hlp.validarInt(req.params.id_usuario);
     const returnArray = await svc.getByIdUsuarioAsync(id_usuario);
     if (returnArray != null)
     {
@@ -16,7 +16,7 @@ router.get('/:id_usuario', async (req, res) =>{
     else return res.status(404).send('No se encontro ningun resultado');
 });
 
-//Crea una respiracion nueva
+//Crea un mensaje nuevo
 router.post('', async (req, res) =>{
     const entity = req.body;
     const returnArray = await svc.createAsync(entity);
@@ -27,7 +27,7 @@ router.post('', async (req, res) =>{
     else return res.status(500).send('Error interno');
 });
 
-//Modifica una respiracion
+//Modifica un mensaje
 router.put('', async (req, res) =>{
     const entity = req.body;
     const returnArray = await svc.updateAsync(entity);
@@ -38,7 +38,7 @@ router.put('', async (req, res) =>{
     else return res.status(500).send('Error interno');
 });
 
-//Elimina una respiracion
+//Elimina un mensaje
 router.delete('/:id', async (req, res) =>{
     let id = hlp.validarInt(req.params.id);
     const returnArray = await svc.deleteByIdAsync(id);

@@ -1,6 +1,7 @@
 import { StyleSheet, View, Dimensions, Keyboard } from 'react-native';
 import React, { useState, useEffect } from "react";
 import { Colores } from '../../constants/Colors';
+import {useUserContext} from '@/context/UserContext';
 import Texto from '@/components/Texto';
 import Boton from '@/components/Boton';
 import InputTexto from '@/components/inputTexto';
@@ -47,6 +48,10 @@ const EditarPerfilScreen: React.FC<Props> = ({ navigation }) => {
     };
   }, []);
 
+  function handleOnPressCancelar(){
+    navigation.navigate('Perfil');
+  }
+
   const [visible, setVisible] = useState(false);
   const abrirModal = () =>
   {
@@ -70,7 +75,7 @@ const EditarPerfilScreen: React.FC<Props> = ({ navigation }) => {
         </View>
         {!isKeyboardVisible && (
           <View style={styles.botoncontainer}>
-            <Boton text="Cancelar" onPress={abrirModal} containerColor={'turquesa'} textStyle={'textoBlanco'}/>
+            <Boton text="Cancelar" onPress={handleOnPressCancelar} containerColor={'turquesa'} textStyle={'textoBlanco'}/>
             <Boton text="Guardar" onPress={abrirModal} containerColor={'blanco'} textStyle={'textoTurquesa'}/>
           </View>
         )}

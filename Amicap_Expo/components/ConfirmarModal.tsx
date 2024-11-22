@@ -4,6 +4,7 @@ import React, { FC, useState } from 'react';
 import { StyleSheet, View, Modal, Dimensions, ScrollView, Linking } from 'react-native';
 import Texto from './Texto';
 
+
 interface Props {
     visible: boolean;
     setVisible: (visible: boolean) => void;

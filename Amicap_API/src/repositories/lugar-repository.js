@@ -3,6 +3,7 @@ const pgHelper = new DataBaseHelper;
 
 export default class LugarRepository
 {
+    //Devuelve los lugares que creo el usuario
     getByIdUsuarioAsync = async (id_usuario) =>
     {
         let returnArray = null;
@@ -12,24 +13,17 @@ export default class LugarRepository
         return returnArray;
     }
 
-    getByIdAtaqueAsync = async (id_ataque) =>
-    {
-        let returnArray = null;
-        const sql = `SELECT * FROM "Lugar" where id_ataque = $1`;
-        const values = [id_ataque]
-        returnArray = await pgHelper.requestValues(sql, values);
-        return returnArray;
-    }
-
+    //Crea un lugar
     createAsync = async (entity) =>
     {
         let returnArray = null;
-        const sql = `Insert into "Lugar"(nombre, id_usuario) Values ($1,$2) Order By id`;
+        const sql = `Insert into "Lugar"(nombre, id_usuario) Values ($1,$2)`;
         const values = [entity.nombre, entity.id_usuario]
         returnArray = await pgHelper.requestCount(sql, values);
         return returnArray;
     }
 
+    //Modifica un lugar
     updateAsync = async (entity) =>
     {
         let returnArray = null;
@@ -39,6 +33,7 @@ export default class LugarRepository
         return returnArray;
     }
 
+    //Elimina un lugar
     deleteByIdAsync = async (id) =>
     {
         let returnArray = null;

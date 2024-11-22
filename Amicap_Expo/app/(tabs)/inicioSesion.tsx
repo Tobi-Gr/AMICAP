@@ -79,7 +79,6 @@ const InicioSesion: React.FC<Props> = ({ navigation }) => {
       if (!data || data === null) {
         throw new Error('data failed to response');
       }
-      console.log('data.Fetch: ', data);
       return data;
     } catch (error) {
       console.log('Hubo un error en el fetchToken ', error);
@@ -102,6 +101,7 @@ const InicioSesion: React.FC<Props> = ({ navigation }) => {
         throw new Error('Failed to fetch data');
       }
       const data = await response.json();
+      console.log('token: ', data);
       if (!data) {
         throw new Error('data failed to response');
       }
@@ -119,7 +119,6 @@ const InicioSesion: React.FC<Props> = ({ navigation }) => {
 
   useEffect(() => {
     if (usuario !== null) {
-      console.log('usuario: ', usuario);
       navigation.navigate('Home');
     }
   }, [usuario]);

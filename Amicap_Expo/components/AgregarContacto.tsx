@@ -4,23 +4,20 @@ import { Colores } from './../constants/Colors';
 import Add from './icons/Add';
 
 interface Props {
-  navigation: any;
+  onPress: () => void; 
 }
 
-const AgregarContacto: React.FC<Props> = ({ navigation }) => {
+const AgregarContacto: React.FC<Props> = ({ onPress }) => {
   const windowWidth = Dimensions.get('window').width;
   const windowHeight= Dimensions.get('window').height
   const diametro = windowWidth * 0.15; //cambiar los tamaños
   const heightIcon = windowHeight / 25;
     const widthIcon = heightIcon * 0.9;
-  const handlePress = () => {
-    navigation.navigate('');
-  };
 
   return (
     <TouchableOpacity
       activeOpacity={1} 
-      onPress={handlePress}
+      onPress={onPress}
       style={[styles.container, { width: diametro, height: diametro }]}>
       <View style={[styles.circulo, { height: diametro, width: diametro }]}>       
       <Add height={heightIcon} width={widthIcon} color={Colores.turquesa} />

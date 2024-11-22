@@ -4,7 +4,7 @@ const {Client} = pkg;
 
 export default class DataBaseHelper
 {
-    //este devuelve un objeto
+    //Devuelve un solo objeto
     requestOne = async (sql, values) => {
         let data = null;
         const client = new Client(DBConfig);
@@ -12,7 +12,7 @@ export default class DataBaseHelper
             await client.connect();
             const result = await client.query(sql, values);
             await client.end();
-            if (result.rows.length > 0){
+            if (result.rowCount > 0){
                 data = result.rows[0];
             }
         }
@@ -22,7 +22,7 @@ export default class DataBaseHelper
         return data;
     }
 
-    //devuelve las row counts
+    //Devuelve las filas modificadas
     requestCount = async (sql, values) => {
         let data = null;
         const client = new Client(DBConfig);
@@ -30,10 +30,8 @@ export default class DataBaseHelper
             await client.connect();
             const result = await client.query(sql, values);
             await client.end();
-            console.log('result: ', result);
             if (result.rowCount > 0){
                 data = result.rowCount;
-                console.log('data: ', data);
             }
         }
         catch (error){
@@ -42,7 +40,7 @@ export default class DataBaseHelper
         return data;
     }
 
-    // varios objetos
+    //Devuelve varios objetos segun un parametro
     requestValues = async (sql, values) => {
         let data = null;
         const client = new Client(DBConfig);
@@ -50,7 +48,7 @@ export default class DataBaseHelper
             await client.connect();
             const result = await client.query(sql, values);
             await client.end();
-            if (result.rows.length > 0){
+            if (result.rowCount > 0){
                 data = result.rows;
             }
         }
@@ -60,7 +58,7 @@ export default class DataBaseHelper
         return data;
     }
     
-    //Todos
+    //Devuelve todos los objetos
     request = async (sql) => {
         let data = null;
         const client = new Client(DBConfig);
