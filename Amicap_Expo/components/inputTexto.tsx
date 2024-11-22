@@ -3,14 +3,16 @@ import { useFonts } from 'expo-font';
 import { TextInput, StyleSheet, View, KeyboardTypeOptions, Dimensions } from 'react-native';
 import { Colores } from "@/constants/Colors";
 
+type ColorKeys = keyof typeof Colores;
 interface Props {
     placeholder: string;
     keyBoardType?: KeyboardTypeOptions;
     onChange: (text: string) => void;
     esContrasena?: boolean;
+    color?: ColorKeys;
 }
 
-const InputTexto: FC<Props> = ({ placeholder, keyBoardType = 'default', onChange, esContrasena = false }) => { 
+const InputTexto: FC<Props> = ({ placeholder, keyBoardType = 'default', onChange, esContrasena = false, color = 'blanco' }) => { 
     useFonts({
         'Montserrat-Regular': require('./../assets/fonts/Montserrat-Regular.ttf'),
     });
@@ -22,7 +24,7 @@ const InputTexto: FC<Props> = ({ placeholder, keyBoardType = 'default', onChange
     return (
         <View style={styles.container}>
             <TextInput
-                style={[styles.textInput, { fontSize: tamanoFuente }]}
+                style={[styles.textInput, { fontSize: tamanoFuente, color: Colores[color]}]}
                 onChangeText={(newText) => {
                     setText(newText);
                     onChange(newText);
@@ -30,7 +32,7 @@ const InputTexto: FC<Props> = ({ placeholder, keyBoardType = 'default', onChange
                 value={text}
                 placeholder={placeholder}
                 keyboardType={keyBoardType}
-                placeholderTextColor={Colores.blanco}
+                placeholderTextColor={Colores[color]}
                 secureTextEntry={esContrasena} 
                 autoCapitalize="none"
             />
@@ -49,7 +51,6 @@ const styles = StyleSheet.create({
         width: '100%',
         paddingVertical: '2%',
         fontSize: 16,
-        color: Colores.blanco,
         fontFamily: 'Montserrat-Regular',
     },
 });

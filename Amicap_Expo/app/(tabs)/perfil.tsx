@@ -39,7 +39,7 @@ const PerfilScreen: React.FC<Props> = ({ navigation }) => {
     //dsp hacer que el nombre y email salga de la base de datos
     const {token, setToken, usuario, setUsuario} = useUserContext();
     const nombre = usuario?.username;
-    const email = 'usuario@gmail.com';
+    const email = usuario?.email;
     
     function handleOnPressEliminarCuenta () {
       setVisibleEliminar(true);

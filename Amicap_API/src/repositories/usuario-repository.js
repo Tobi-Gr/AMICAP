@@ -120,6 +120,12 @@ export default class UsuarioRepository
 
         sql = `${sql} Where id = $1`;
         returnArray = await pgHelper.requestCount(sql, values);
+        if(returnArray > 0)
+        {
+            sql = `select id, username, email From "Usuarios" Where id = $1`
+            values = [entity.id];
+            returnArray = await pgHelper.requestOne(sql, values);
+        }
         return returnArray;
     }
 

@@ -62,7 +62,7 @@ const EditarPerfilScreen: React.FC<Props> = ({ navigation }) => {
     return (
       <View style={{ flex: 1, backgroundColor: Colores.blanco }}> 
         <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Perfil"} color={Colores.turquesa}/>
-        <ConfirmarContrasenaModal visible={visible} setVisible={setVisible} nombre={nombre} email={email} contrasena={contrasena}/>
+        <ConfirmarContrasenaModal visible={visible} setVisible={setVisible} nuevoNombre={nombre} nuevoEmail={email} nuevaContrasena={contrasena}/>
         <View style={styles.tituloContainer}>
           <Texto text='Editar'estilo="textoTurquesa" style={{ fontSize: tamanoFuente }} />
         </View>

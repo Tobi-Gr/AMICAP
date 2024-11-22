@@ -1,20 +1,20 @@
-import Boton from './Boton';
-import { Colores } from '../constants/Colors';
 import React, { FC, useEffect, useState, useMemo } from 'react';
+import { Colores } from '../constants/Colors';
 import { StyleSheet, TouchableOpacity, View, Text, Modal, Dimensions, ScrollView } from 'react-native';
 import DBDomain from '@/constants/dbDomain';
+import Boton from './Boton';
 import {useUserContext} from '@/context/UserContext';
 import InputTexto from './inputTexto';
 
 interface Props {
     visible: boolean;
     setVisible: (visible: boolean) => void;
-    nombre: string;
-    email: string;
-    contrasena: string;
+    nuevoNombre: string;
+    nuevoEmail: string;
+    nuevaContrasena: string;
 }
 
-const ConfirmarContrasenaModal: FC<Props> = ({ visible, setVisible, nombre, email, contrasena }) => {
+const ConfirmarContrasenaModal: FC<Props> = ({ visible, setVisible, nuevoNombre, nuevoEmail, nuevaContrasena }) => {
     const windowWidth = Dimensions.get('window').width;
     const tamanoFuente = windowWidth / 14;
 
@@ -24,11 +24,11 @@ const ConfirmarContrasenaModal: FC<Props> = ({ visible, setVisible, nombre, emai
     function cerrarModal()
     {
         setVisible(false);
+        setConfirmacion('');
     }
 
     //corrobora que la contraseña sea correcta
     const fetchToken = async () => {
-        //DBDomain es el dominio de ngrok
         const urlApi = `${DBDomain}/api/usuario/login`;
 
         try {
@@ -59,7 +59,6 @@ const ConfirmarContrasenaModal: FC<Props> = ({ visible, setVisible, nombre, emai
     //modifica usuario
     const putUsuario = async () =>
     {
-        //DBDomain es el dominio de ngrok
         const urlApi = `${DBDomain}/api/usuario/update`;
 
         try {
@@ -71,21 +70,23 @@ const ConfirmarContrasenaModal: FC<Props> = ({ visible, setVisible, nombre, emai
                 },
                 body: JSON.stringify({
                     id: usuario?.id,
-                    username: nombre,
-                    email: email,
-                    contrasena: contrasena,
+                    username: nuevoNombre,
+                    email: nuevoEmail,
+                    contrasena: nuevaContrasena,
                 }),
             });
+
             if (!response.ok) {
-                throw new Error('Failed to fetch data');
+                throw new Error('Failed to fetch response');
             }
             const data = await response.json();
+
             if (!data || data === null) {
-                throw new Error('data failed to response');
+                throw new Error('data failed to data');
             }
-            setUsuario(data);
+            return data;
         } catch (error) {
-            console.log('Hubo un error en el createUser ', error);
+            console.log('Hubo un error en el updateUser ', error);
         }
     }
 
@@ -93,9 +94,11 @@ const ConfirmarContrasenaModal: FC<Props> = ({ visible, setVisible, nombre, emai
     {
         const token = await fetchToken();
         if (token !== null) {
-            const data = await putUsuario()
-            if (data && data.length > 0)
+            let data = null;
+            data = await putUsuario()
+            if (data !== null)
             {
+                setUsuario(data);
                 cerrarModal()
             }
             else alert('algo salio mal, por favor intente denuevo');
@@ -108,7 +111,7 @@ const ConfirmarContrasenaModal: FC<Props> = ({ visible, setVisible, nombre, emai
             <View style={styles.container}>
                 <View style={styles.card}>
                     <View style={styles.header}>
-                        <InputTexto placeholder="ingrese su contraseña actual" onChange={setConfirmacion} esContrasena={true}/>
+                        <InputTexto placeholder="contraseña actual" onChange={setConfirmacion} esContrasena={true} color={'negro'}/>
                     </View>
                     <View style={styles.botonesContainer}>
                         <Boton text="Cancelar" onPress={cerrarModal} textStyle='textoBlanco' containerColor='turquesa'/>
@@ -148,6 +151,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     header: {
+        width: '100%',
         marginBottom: 20,
     },
     botonesContainer: {

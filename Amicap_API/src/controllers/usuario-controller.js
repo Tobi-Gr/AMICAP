@@ -36,11 +36,11 @@ router.post('/register', async (req, res) =>{
 
 //Modifica el usuario
 router.put('/update', async (req, res) =>{
-    const entity = req.query;
+    const entity = req.body;
     const returnArray = await svc.updateAsync(entity);
     if (returnArray != null)
     {
-        return res.status(200).send('');
+        return res.status(200).json(returnArray);
     }
     else return res.status(500).send('Error interno');
 });
