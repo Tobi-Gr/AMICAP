@@ -8,21 +8,27 @@ interface Props {
     keyBoardType?: KeyboardTypeOptions;
     onChange: (text: string) => void;
     esContrasena?: boolean;
+    colorBorde?: string;
+    colorPlaceholder?: string;
+    colorTexto?: string;
 }
 
-const InputTexto: FC<Props> = ({ placeholder, keyBoardType = 'default', onChange, esContrasena = false }) => { 
+const InputTexto: FC<Props> = ({ placeholder, keyBoardType = 'default', onChange, esContrasena = false, colorBorde, colorPlaceholder, colorTexto}) => { 
     useFonts({
         'Montserrat-Regular': require('./../assets/fonts/Montserrat-Regular.ttf'),
     });
-    const [text, setText] = React.useState('');
+    colorBorde = colorBorde || Colores.celeste;
+    colorPlaceholder = colorPlaceholder || Colores.blanco;
+    colorTexto = colorTexto || Colores.blanco;
 
+    const [text, setText] = React.useState('');
     const width = Dimensions.get('window').width;
     const tamanoFuente = width * 0.05;
 
     return (
         <View style={styles.container}>
             <TextInput
-                style={[styles.textInput, { fontSize: tamanoFuente }]}
+                style={[styles.textInput, { fontSize: tamanoFuente,  borderBottomColor: colorBorde, color: colorTexto}]}
                 onChangeText={(newText) => {
                     setText(newText);
                     onChange(newText);
@@ -30,7 +36,7 @@ const InputTexto: FC<Props> = ({ placeholder, keyBoardType = 'default', onChange
                 value={text}
                 placeholder={placeholder}
                 keyboardType={keyBoardType}
-                placeholderTextColor={Colores.blanco}
+                placeholderTextColor={colorPlaceholder}
                 secureTextEntry={esContrasena} 
                 autoCapitalize="none"
             />
@@ -45,11 +51,9 @@ const styles = StyleSheet.create({
     textInput: {
         height: 'auto',
         borderBottomWidth: 2,
-        borderBottomColor: Colores.celeste,
         width: '100%',
         paddingVertical: '2%',
         fontSize: 16,
-        color: Colores.blanco,
         fontFamily: 'Montserrat-Regular',
     },
 });

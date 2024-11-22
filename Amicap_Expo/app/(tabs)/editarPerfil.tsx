@@ -16,17 +16,17 @@ interface Props {
 const EditarPerfilScreen: React.FC<Props> = ({ navigation }) => {
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
-  const tamanoTitulo = windowWidth / 10;
-  const tamanoTexto = windowWidth * 0.05;
   const flechaTamano = windowWidth / 10;
-  const botonesY = windowHeight / 4;
   const tamanoFuente = windowWidth / 20;
+  // const tamanoTitulo = windowWidth / 10;
+  // const tamanoTexto = windowWidth * 0.05;
+  // const botonesY = windowHeight / 4;
 
   const [nombre, setNombre] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [contrasena, setContrasena] = useState<string>('');
   const [confirmacion, setConfirmacion] = useState<string>('');
-  const [isKeyboardVisible, setKeyboardVisible] = useState(false); // Estado para controlar la visibilidad del teclado
+  const [isKeyboardVisible, setKeyboardVisible] = useState(false); // Estado para ver si el teclado es visible
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -53,6 +53,7 @@ const EditarPerfilScreen: React.FC<Props> = ({ navigation }) => {
   }
 
   const [visible, setVisible] = useState(false);
+  
   const abrirModal = () =>
   {
     if (contrasena == confirmacion) setVisible(true);
