@@ -38,8 +38,8 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
   const [pruebaVolumen, setPruebaVolumen] = useState(0);
   const [pruebaMensaje, setPruebaMensaje] = useState("Estoy teniendo un ataque de pánico.");
 
-  const abrirModalSeleccionar = () =>
-  {
+  const abrirModalSeleccionar = async () => {
+    fetchAndSetActsPref();
     setVisibleSeleccionar(true);
   };
 
@@ -85,6 +85,13 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
     }
   }
 
+  const fetchAndSetActsPref = async () => {
+    const data = await fetchActividadesPref();
+    if (data.length > 0) {
+      setActsPref(data);
+    }
+  };
+
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
@@ -104,13 +111,7 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
       if (data.length > 0) {
         setActividades(data);
       }
-    };
-    const fetchAndSetActsPref = async () => {
-      const data = await fetchActividadesPref();
-      if (data.length > 0) {
-        setActsPref(data);
-      }
-    };
+    };    
 
     fetchAndSetActividades();
     fetchAndSetActsPref();
