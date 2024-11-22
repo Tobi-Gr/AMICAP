@@ -1,8 +1,8 @@
-import Boton from './Boton';
-import { Colores } from '../constants/Colors';
 import React, { FC, useEffect, useState, useMemo } from 'react';
+import { Colores } from '../constants/Colors';
 import { StyleSheet, TouchableOpacity, View, Text, Modal, Dimensions, ScrollView } from 'react-native';
 import DBDomain from '@/constants/dbDomain';
+import Boton from './Boton';
 import {useUserContext} from '@/context/UserContext';
 import InputTexto from './inputTexto';
 import Texto from './Texto';
@@ -10,12 +10,12 @@ import Texto from './Texto';
 interface Props {
     visible: boolean;
     setVisible: (visible: boolean) => void;
-    nombre: string;
-    email: string;
-    contrasena: string;
+    nuevoNombre: string;
+    nuevoEmail: string;
+    nuevaContrasena: string;
 }
 
-const ConfirmarContrasenaModal: FC<Props> = ({ visible, setVisible, nombre, email, contrasena }) => {
+const ConfirmarContrasenaModal: FC<Props> = ({ visible, setVisible, nuevoNombre, nuevoEmail, nuevaContrasena }) => {
     const windowWidth = Dimensions.get('window').width;
     const tamanoFuente = windowWidth / 15;
 
@@ -25,11 +25,11 @@ const ConfirmarContrasenaModal: FC<Props> = ({ visible, setVisible, nombre, emai
     function cerrarModal()
     {
         setVisible(false);
+        setConfirmacion('');
     }
 
     //corrobora que la contraseña sea correcta
     const fetchToken = async () => {
-        //DBDomain es el dominio de ngrok
         const urlApi = `${DBDomain}/api/usuario/login`;
 
         try {
@@ -69,9 +69,9 @@ const ConfirmarContrasenaModal: FC<Props> = ({ visible, setVisible, nombre, emai
                 },
                 body: JSON.stringify({
                     id: usuario?.id,
-                    username: nombre,
-                    email: email,
-                    contrasena: contrasena,
+                    username: nuevoNombre,
+                    email: nuevoEmail,
+                    contrasena: nuevaContrasena,
                 }),
             });
     
@@ -98,7 +98,7 @@ const ConfirmarContrasenaModal: FC<Props> = ({ visible, setVisible, nombre, emai
                 return data;
             }
         } catch (error) {
-            console.log('Hubo un error en el createUser ', error);
+            console.log('Hubo un error en el updateUser ', error);
         }
     };
 
@@ -164,6 +164,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     header: {
+        width: '100%',
         marginBottom: 20,
     },
     botonesContainer: {

@@ -35,14 +35,14 @@ router.post('/register', async (req, res) =>{
 });
 
 //Modifica el usuario
-router.put('/update', async (req, res) => {
+router.put('/update', async (req, res) =>{
     const entity = req.body;
     const returnArray = await svc.updateAsync(entity);
-    if (returnArray > 0) {  
-        return res.status(200).send('Actualización exitosa');
-    } else {
-        return res.status(404).send('Usuario no encontrado o sin cambios');
+    if (returnArray != null)
+    {
+        return res.status(200).send('');
     }
+    else return res.status(500).send('Error interno');
 });
 
 

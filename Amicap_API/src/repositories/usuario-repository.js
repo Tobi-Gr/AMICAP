@@ -107,6 +107,7 @@ export default class UsuarioRepository
             condiciones.push(`contrasena = $${values.length + 1}`);
             values.push(entity.contrasena);
         }
+<<<<<<< HEAD
     
         // si no hay nada para actualizar devuelve null
         if (condiciones.length === 0) {
@@ -118,6 +119,18 @@ export default class UsuarioRepository
         values.push(entity.id); // se agrega el id del usuario para el WHERE
     
         returnArray = await pgHelper.requestCount(sql, values); //devuelve las filas modificadas
+=======
+        else return returnArray;
+
+        sql = `${sql} Where id = $1`;
+        returnArray = await pgHelper.requestCount(sql, values);
+        if(returnArray > 0)
+        {
+            sql = `select id, username, email From "Usuarios" Where id = $1`
+            values = [entity.id];
+            returnArray = await pgHelper.requestOne(sql, values);
+        }
+>>>>>>> e572ea852cf0e26bafc83c91e05fed0b4f57b0a5
         return returnArray;
     };    
 
