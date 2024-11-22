@@ -37,7 +37,7 @@ export default class ActPreferidaRepository
     deleteAsync = async (entity) =>
     {
         let returnArray = null;
-        const sql = `Delete FROM "actPreferidas" where id_actividad = $1 and id_actividad = $2`;
+        const sql = `Delete FROM "actPreferidas" where id_actividad = $1 and id_usuario = $2`;
         const values = [entity.idAct, entity.idUsuario];
         returnArray = await pgHelper.requestCount(sql, values);
         return returnArray;
