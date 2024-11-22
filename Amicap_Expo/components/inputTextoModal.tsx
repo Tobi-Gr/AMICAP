@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         width: '100%',
         paddingVertical: '2%',
         fontSize: 16,
-        color: Colores.blanco,
+        color: Colores.turquesa,
         fontFamily: 'Montserrat-Regular',
     },
 });

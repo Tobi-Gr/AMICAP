@@ -116,9 +116,10 @@ const styles = StyleSheet.create({
     botonesContainer: {
         flexDirection: 'row',
         marginTop: 20,
-        width: '100%',
+        width: '180%',
         height: '30%',        
-        justifyContent: 'flex-end',
+        justifyContent: 'flex-start',
+        marginLeft:50
     },
     botonContainer:
     {
@@ -141,6 +142,9 @@ const styles = StyleSheet.create({
     columna2:{
         flexDirection: 'row',
         alignItems: 'flex-end',
+    },
+    inputTexto:{
+    color: Colores.turquesa
     },
     persona:{
 
