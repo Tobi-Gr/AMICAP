@@ -40,6 +40,22 @@ export default class DataBaseHelper
         return data;
     }
 
+    //Hace un put y devuelve la respuesta del endpoint
+    update = async (sql, values) => {
+        let data = null;
+        const client = new Client(DBConfig);
+        try {
+            const result = await client.query(sql, values);
+            await client.end();
+            if (result.rowCount > 0) {
+                data = result.result;
+            }
+        } catch (error) {
+            console.log(error);
+        }
+        return result;
+    };
+
     //Devuelve varios objetos segun un parametro
     requestValues = async (sql, values) => {
         let data = null;

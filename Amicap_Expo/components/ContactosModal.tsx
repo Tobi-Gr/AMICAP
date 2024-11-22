@@ -1,9 +1,9 @@
-import Add from './icons/Add';
+import Ex from './icons/Ex';
 import Boton from './Boton';
 import { Colores } from './../constants/Colors';
 import Communications from 'react-native-communications';
 import React, { FC, useState, useMemo } from 'react';
-import { StyleSheet, View, Modal, Dimensions, ScrollView, Linking } from 'react-native';
+import { StyleSheet, View, Modal, Dimensions, ScrollView, Linking, Pressable } from 'react-native';
 import Texto from './Texto';
 import NombreContacto from './NombreContacto';
 import DBDomain from '@/constants/dbDomain';
@@ -79,12 +79,17 @@ const ContactosModal: FC<Props> = ({ visible, setVisible, contactosArray, mensaj
         <Modal visible={visible} transparent={true} animationType="fade">
             <View style={styles.container}>
                 <View style={styles.card}>
+                <View style={styles.ex}>
+                        <Pressable onPress={cerrarModal}>
+                            <Ex color={Colores.turquesa}/>
+                        </Pressable>
+                        </View>
                     <View style={styles.header}>
                         <Texto text="Contactar" estilo="textoTurquesa" style={{ fontSize: tamanoFuente }} />
                     </View>
                     <Contactos />
                     <View style={styles.botonesContainer}>
-                        <Boton text="Cerrar" onPress={mandarMensaje} textStyle='textoBlanco' containerColor='turquesa'/>
+                        <Boton text="Mensaje" onPress={mandarMensaje} textStyle='textoBlanco' containerColor='turquesa'/>
                         <Boton text="Llamada" onPress={handlePhoneCall} textStyle='textoBlanco' containerColor='turquesa'/>
                     </View>
                 </View>
@@ -122,6 +127,9 @@ const styles = StyleSheet.create({
     },
     header: {
         marginBottom: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
     botonesContainer: {
         flexDirection: 'row',
@@ -129,6 +137,9 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'space-around',
     },
+    ex:{
+        marginLeft: 280
+    }
 });
 
 export default ContactosModal;

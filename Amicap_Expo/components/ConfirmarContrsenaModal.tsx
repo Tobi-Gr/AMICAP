@@ -5,6 +5,7 @@ import DBDomain from '@/constants/dbDomain';
 import Boton from './Boton';
 import {useUserContext} from '@/context/UserContext';
 import InputTexto from './inputTexto';
+import Texto from './Texto';
 
 interface Props {
     visible: boolean;
@@ -16,7 +17,7 @@ interface Props {
 
 const ConfirmarContrasenaModal: FC<Props> = ({ visible, setVisible, nuevoNombre, nuevoEmail, nuevaContrasena }) => {
     const windowWidth = Dimensions.get('window').width;
-    const tamanoFuente = windowWidth / 14;
+    const tamanoFuente = windowWidth / 15;
 
     const {usuario, setUsuario} = useUserContext();
     const [confirmacion, setConfirmacion] = useState<string>('');
@@ -57,13 +58,11 @@ const ConfirmarContrasenaModal: FC<Props> = ({ visible, setVisible, nuevoNombre,
     }
 
     //modifica usuario
-    const putUsuario = async () =>
-    {
+    const putUsuario = async () => {
         const urlApi = `${DBDomain}/api/usuario/update`;
-
+    
         try {
             const response = await fetch(urlApi, {
-                //metodo PUT para mandarle un json
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -75,44 +74,58 @@ const ConfirmarContrasenaModal: FC<Props> = ({ visible, setVisible, nuevoNombre,
                     contrasena: nuevaContrasena,
                 }),
             });
-
+    
             if (!response.ok) {
-                throw new Error('Failed to fetch response');
+                console.log(response);
+                throw new Error('Failed to fetch data');
             }
-            const data = await response.json();
-
+    
+            const text = await response.text(); // Obtener la respuesta como texto
+            let data;
+    
+            // Verificar si la respuesta tiene formato JSON
+            try {
+                data = JSON.parse(text); // Intentar parsear como JSON
+            } catch (parseError) {
+                // Si no es JSON, considera la respuesta como exitosa
+                data = { message: text }; // Puedes asignar el texto como un campo de mensaje
+            }
+    
             if (!data || data === null) {
-                throw new Error('data failed to data');
+                throw new Error('Data failed to respond');
+            } else {
+                setUsuario(data); // Actualizar usuario con la respuesta
+                return data;
             }
-            return data;
         } catch (error) {
             console.log('Hubo un error en el updateUser ', error);
         }
-    }
+    };
 
-    const updateUsuario = async () =>
-    {
-        const token = await fetchToken();
-        if (token !== null) {
-            let data = null;
-            data = await putUsuario()
-            if (data !== null)
-            {
-                setUsuario(data);
-                cerrarModal()
-            }
-            else alert('algo salio mal, por favor intente denuevo');
+
+const updateUsuario = async () => {
+    const token = await fetchToken();
+    if (token !== null) {
+        const data = await putUsuario();
+        if (data) {
+            cerrarModal();
+            alert('Usuario editado.');
+        } else {
+            alert('Algo salió mal, intenta de nuevo');
         }
-        else alert('la contraseña es incorrecta')
+    } else {
+        cerrarModal();
+        alert('La contraseña es incorrecta.');
     }
+}
+
 
     return (
         <Modal visible={visible} transparent={true} animationType="fade">
             <View style={styles.container}>
                 <View style={styles.card}>
-                    <View style={styles.header}>
-                        <InputTexto placeholder="contraseña actual" onChange={setConfirmacion} esContrasena={true} color={'negro'}/>
-                    </View>
+                    <Texto text='Ingresa tu contraseña' estilo='textoTurquesa' style={{fontSize: tamanoFuente}}/>                    
+                    <InputTexto placeholder="Contraseña" onChange={setConfirmacion} esContrasena={true} colorBorde={Colores.negro} colorPlaceholder={Colores.turquesa} colorTexto={Colores.negro}/>
                     <View style={styles.botonesContainer}>
                         <Boton text="Cancelar" onPress={cerrarModal} textStyle='textoBlanco' containerColor='turquesa'/>
                         <Boton text="Confirmar" onPress={updateUsuario} textStyle='textoBlanco' containerColor='turquesa'/>  
@@ -126,7 +139,7 @@ const ConfirmarContrasenaModal: FC<Props> = ({ visible, setVisible, nuevoNombre,
 const styles = StyleSheet.create({
     card: {
         width: '83%',
-        height: '40%',
+        height: '30%',
         padding: 20,
         backgroundColor: Colores.blanco,
         borderRadius: 18,

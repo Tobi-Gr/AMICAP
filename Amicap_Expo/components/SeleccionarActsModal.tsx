@@ -148,13 +148,6 @@ const SeleccionarActsModal: FC<Props> = ({ visible, setVisible, actividades, act
                 throw new Error('Error al eliminar la actividad preferida');
             }
     
-            // if (response.status !== 200) {
-            //     const data = await response.json();
-            //     if (!data) {
-            //         throw new Error('No se recibió respuesta al eliminar la actividad preferida');
-            //     }
-            // }
-    
         } catch (error) {
             console.error('Hubo un error al eliminar la actividad preferida:', error);
         }

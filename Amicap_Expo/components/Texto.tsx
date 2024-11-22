@@ -54,6 +54,11 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat-Regular',
     fontWeight: 'bold'
   },
+  textoNaranja:{
+    color: Colores.naranja,
+    fontFamily: 'Montserrat-Regular',
+    fontWeight: 'bold'
+  },
   textoNegro:{
     color: Colores.negro,
     fontFamily: 'Montserrat-Regular',

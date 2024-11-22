@@ -7,6 +7,8 @@ import Texto from "./Texto";
 import Edit from "./icons/Edit";
 import Add from "./icons/Add";
 import ConfirmarModal from '@/components/ConfirmarModal';
+import AgregarXeditarContactoModal from "./AgregarXeditarContactoModal";
+import {useUserContext} from '@/context/UserContext';
 
 interface Contact {
     id: number;
@@ -23,7 +25,7 @@ const ContactoContacto: FC<Props> = ({ contacto, eliminarContacto, }) => {
     const [visibleEditar, setVisibleEditar] = useState(false);
     const [visibleEliminar, setVisibleEliminar] = useState(false);
     const nombre=contacto?.nombre
-
+    const {usuario} = useUserContext();
     const windowHeight = Dimensions.get('window').height;
     const windowWidth = Dimensions.get('window').width;
     const tamanoFuente = windowWidth / 18;
@@ -55,9 +57,36 @@ const ContactoContacto: FC<Props> = ({ contacto, eliminarContacto, }) => {
             alert('Hubo un error al eliminar el contacto');
         }
     }
+    const handleEditarContacto = async (nombre: string, numero: string) => {
+        console.log("entro")
+        try {
+          const response = await fetch(`${DBDomain}/api/contacto/${contacto.id}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+             id_usuario: usuario?.id,
+             nombre: nombre,
+              numero: numero,
+            }),
+          });
+          console.log(response)
+    
+          if (response.ok) {
+            alert('Contacto editado');
+            setVisibleEditar(false);
+            // Aquí también puedes actualizar la lista de contactos
+          } 
+        } catch (error) {
+          console.log('Error al editar contacto:', error);
+          alert('Hubo un error al editar el contacto');
+        }
+      };
 
     return (
         <TouchableOpacity style={[styles.container]}>
+            <AgregarXeditarContactoModal visible={visibleEditar} setVisible={setVisibleEditar} prompt='Editar contacto' confirmado={handleEditarContacto} aclaracion ='Editar'/>
             <ConfirmarModal visible={visibleEliminar} setVisible={setVisibleEliminar} prompt={`¿Querés eliminar a ${nombre}?`} confirmado={handleConfirmarEliminar}/>
             <View style={styles.innerContainer}>
                 <View style={styles.columna1}>

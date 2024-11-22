@@ -28,7 +28,7 @@ const ContactosConfigScreen: React.FC<Props> = ({ navigation, setVisible }) => {
   const yTexto = windowHeight / 45;
   const flechaTamano = windowWidth / 10;
 
-  const {usuario, setUsuario} = useUserContext();
+  const {usuario} = useUserContext();
   const [visibleAgregar, setVisibleAgregar] = useState(false);
 
   // Estados para contactos y carga
@@ -74,37 +74,45 @@ const ContactosConfigScreen: React.FC<Props> = ({ navigation, setVisible }) => {
     setVisibleAgregar(true);
 
 };
+
   const handleAgregarContacto = async (nombre: string, numero: string) => {
+    console.log("entro");
     try {
       const response = await fetch(`${DBDomain}/api/contacto`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+
         body: JSON.stringify({
+          id_usuario: usuario?.id,
           nombre: nombre,
           numero: numero,
         }),
       });
+      console.log(response)
 
       if (response.ok) {
         alert('Contacto agregado');
         setVisibleAgregar(false);
         // Aquí también puedes actualizar la lista de contactos
-      } else {
-        const errorMessage = await response.text();
-        alert(`Error: ${errorMessage}`);
-      }
+      } 
+    else {
+      const errorMessage = await response.text();
+      alert(`Error: ${errorMessage}`);
+  }
     } catch (error) {
       console.log('Error al agregar contacto:', error);
       alert('Hubo un error al agregar el contacto');
     }
   };
+
+
  
 
   return (
     <View style={styles.container}>
-      <AgregarXeditarContactoModal visible={visibleAgregar} setVisible={setVisibleAgregar} prompt={'Agregar contacto'} confirmado={handleAgregarContacto}/>
+      <AgregarXeditarContactoModal visible={visibleAgregar} setVisible={setVisibleAgregar} prompt='Agregar contacto' confirmado={handleAgregarContacto} aclaracion='Añadir'/>
       <View style={styles.flechaContainer}>
         <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Perfil"} color={Colores.blanco} />
       </View>

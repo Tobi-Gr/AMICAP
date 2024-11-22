@@ -87,35 +87,39 @@ export default class UsuarioRepository
     }
 
     //Modifica el usuario
-    updateAsync = async (entity) =>
-    {
+    updateAsync = async (entity) => {
         let returnArray = null;
-        let sql;
-        let values = [entity.id];
-        if (entity.username != '') { //se fija si modifica el username
-            sql = `Update "Usuarios" Set username = $${values.length + 1}`;
+        let sql = 'Update "Usuarios" Set';
+        let values = [];
+        let condiciones = [];
+    
+        if (entity.username && entity.username !== '') {
+            condiciones.push(`username = $${values.length + 1}`);
             values.push(entity.username);
-            if (entity.email != '') {
-                sql = `${sql}, email = $${values.length + 1}`;
-                values.push(entity.email);
-            }
-            if (entity.contrasena != '') {
-                sql = `${sql}, contrasena = $${values.length + 1}`;
-                values.push(entity.contrasena);
-            }
         }
-        else if (entity.email != '') { //se fija si modifica el mail
-            sql = `Update "Usuarios" Set email = $${values.length + 1}`;
+    
+        if (entity.email && entity.email !== '') {
+            condiciones.push(`email = $${values.length + 1}`);
             values.push(entity.email);
-            if (entity.contrasena != '') {
-                sql = `${sql}, contrasena = $${values.length + 1}`;
-                values.push(entity.contrasena);
-            }
         }
-        else if (entity.contrasena != '') { //se fija si modifica la contasena
-            sql = `Update "Usuarios" Set contrasena = $${values.length + 1}`;
+    
+        if (entity.contrasena && entity.contrasena !== '') {
+            condiciones.push(`contrasena = $${values.length + 1}`);
             values.push(entity.contrasena);
         }
+<<<<<<< HEAD
+    
+        // si no hay nada para actualizar devuelve null
+        if (condiciones.length === 0) {
+            return returnArray;
+        }
+    
+        // junta las condiciones en la query de SQL
+        sql = `${sql} ${condiciones.join(', ')} WHERE id = $${values.length + 1}`;
+        values.push(entity.id); // se agrega el id del usuario para el WHERE
+    
+        returnArray = await pgHelper.requestCount(sql, values); //devuelve las filas modificadas
+=======
         else return returnArray;
 
         sql = `${sql} Where id = $1`;
@@ -126,8 +130,9 @@ export default class UsuarioRepository
             values = [entity.id];
             returnArray = await pgHelper.requestOne(sql, values);
         }
+>>>>>>> e572ea852cf0e26bafc83c91e05fed0b4f57b0a5
         return returnArray;
-    }
+    };    
 
     //Verifica el token y devuelve el usuario
     VerificarUsuarioAsync = async (token) =>

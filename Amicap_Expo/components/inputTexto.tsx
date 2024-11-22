@@ -9,22 +9,38 @@ interface Props {
     keyBoardType?: KeyboardTypeOptions;
     onChange: (text: string) => void;
     esContrasena?: boolean;
+<<<<<<< HEAD
+    colorBorde?: string;
+    colorPlaceholder?: string;
+    colorTexto?: string;
+}
+
+const InputTexto: FC<Props> = ({ placeholder, keyBoardType = 'default', onChange, esContrasena = false, colorBorde, colorPlaceholder, colorTexto}) => { 
+=======
     color?: ColorKeys;
 }
 
 const InputTexto: FC<Props> = ({ placeholder, keyBoardType = 'default', onChange, esContrasena = false, color = 'blanco' }) => { 
+>>>>>>> e572ea852cf0e26bafc83c91e05fed0b4f57b0a5
     useFonts({
         'Montserrat-Regular': require('./../assets/fonts/Montserrat-Regular.ttf'),
     });
-    const [text, setText] = React.useState('');
+    colorBorde = colorBorde || Colores.celeste;
+    colorPlaceholder = colorPlaceholder || Colores.blanco;
+    colorTexto = colorTexto || Colores.blanco;
 
+    const [text, setText] = React.useState('');
     const width = Dimensions.get('window').width;
     const tamanoFuente = width * 0.05;
 
     return (
         <View style={styles.container}>
             <TextInput
+<<<<<<< HEAD
+                style={[styles.textInput, { fontSize: tamanoFuente,  borderBottomColor: colorBorde, color: colorTexto}]}
+=======
                 style={[styles.textInput, { fontSize: tamanoFuente, color: Colores[color]}]}
+>>>>>>> e572ea852cf0e26bafc83c91e05fed0b4f57b0a5
                 onChangeText={(newText) => {
                     setText(newText);
                     onChange(newText);
@@ -32,7 +48,11 @@ const InputTexto: FC<Props> = ({ placeholder, keyBoardType = 'default', onChange
                 value={text}
                 placeholder={placeholder}
                 keyboardType={keyBoardType}
+<<<<<<< HEAD
+                placeholderTextColor={colorPlaceholder}
+=======
                 placeholderTextColor={Colores[color]}
+>>>>>>> e572ea852cf0e26bafc83c91e05fed0b4f57b0a5
                 secureTextEntry={esContrasena} 
                 autoCapitalize="none"
             />
@@ -47,7 +67,6 @@ const styles = StyleSheet.create({
     textInput: {
         height: 'auto',
         borderBottomWidth: 2,
-        borderBottomColor: Colores.celeste,
         width: '100%',
         paddingVertical: '2%',
         fontSize: 16,
