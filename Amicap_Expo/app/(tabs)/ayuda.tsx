@@ -33,12 +33,6 @@ const AyudaScreen: React.FC<Props> = ({ navigation }) => {
     navigation.navigate('Actividad');
   }
 
-  // <Arrow color={Colores.blanco} 
-  //   height={flechaTamano} 
-  //   width={flechaTamano} 
-  //   style={styles.flecha}/>
-
-
   //PARA LA FLECHA HAY QUE VER SI EL USUARIO ESTA REGISTRADO O NO
   // Si está registrado vuelve a 'Home'
   // Si no vuelve a 'Inicio'
@@ -57,8 +51,6 @@ const AyudaScreen: React.FC<Props> = ({ navigation }) => {
       
     </View>
   );
-  //El Piso tapa los botones
-  // <Piso/>
 };
 
 const styles = StyleSheet.create({

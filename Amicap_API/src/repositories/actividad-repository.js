@@ -7,7 +7,7 @@ export default class ActividadRepository
     getAllAsync = async () =>
     {
         let returnArray = null;
-        const sql = `SELECT * FROM "Actividad" Order By id`;
+        const sql = `select id From "Actividad" Where defecto = true Order By id`;
         returnArray = await pgHelper.request(sql);
         return returnArray;
     }

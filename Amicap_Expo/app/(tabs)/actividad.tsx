@@ -2,6 +2,7 @@ import DBDomain from '../../constants/dbDomain';
 import { Image, StyleSheet, Platform, View, Text, Dimensions} from 'react-native';
 import React, {FC, useState, useEffect} from 'react';
 import {Colores} from './../../constants/Colors';
+import { useUserContext } from '@/context/UserContext';
 import CuadroTexto from '@/components/CuadroTexto';
 import Piso from './../../components/Piso';
 import Flecha from '@/components/Flecha';
@@ -29,7 +30,8 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
   const dialogoX = windowWidth / 4.5;
   const flechaTamano = windowWidth / 10;
 
-  //DBDomain tiene el dominio del ngrok
+  const {usuario} = useUserContext();
+
   const [actividades, setActividades] = useState<Actividad[]>([]);
   const [selectedActividad, setSelectedActividad] = useState<Actividad>({nombre: '', paso_uno: '', paso_dos:'', paso_tres:'', paso_cuatro:''});
   const [pasoActual, setPasoActual] = useState<number>(1);
@@ -38,7 +40,12 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
   
   //toma las actividades preferidas de la API
   const fetchActividades = async () => {
-    const urlApi = `${DBDomain}/api/actPreferida/1`;
+    let urlApi;
+    if(usuario)
+    {
+      urlApi = `${DBDomain}/api/actPreferida/${usuario?.id}`;
+    }
+    else urlApi = `${DBDomain}/api/actividades`;
     try {
       const response = await fetch(urlApi);
       if (!response.ok) {
@@ -48,13 +55,12 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
       if (!data) {
         throw new Error('data failed to response');
       }
-      console.log('data: ', data);
       return data;
     } catch (error) {
       console.log('Hubo un error en el fetchActividades ', error);
     }
   }
-
+  
   const randomActividad = async () => {
     try {
       console.log('random: ', actividades);
