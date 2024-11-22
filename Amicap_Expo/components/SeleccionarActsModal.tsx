@@ -32,7 +32,7 @@ interface Props {
     actsPref: ActPref[];
 }
 
-const SeleccionarActsModal: FC<Props> = ({ visible, setVisible, actividades, actsPref }) => {
+const SeleccionarActsModal: FC<Props> = ({ visible, setVisible, actividades, actsPref}) => {
     const [busqueda, setBusqueda] = React.useState('');
     const [actsSeleccionadas, setActsSeleccionadas] = useState<number[]>([]);
     const [actsUser, setActsUser] = useState<actividadUser[]>([]);
@@ -41,10 +41,10 @@ const SeleccionarActsModal: FC<Props> = ({ visible, setVisible, actividades, act
     const windowWidth = Dimensions.get('window').width;
     const tamanoFuente = windowWidth * 0.05;
     const tamanoTitulo = windowWidth * 0.06;
-        
-    function cerrarModal() {
+
+    const cerrarModal = async () => {
         setVisible(false);
-    }
+    };
 
     const inicializarActsUser = () => {    
         const acts = actividades.map((actividad) => {
@@ -64,16 +64,31 @@ const SeleccionarActsModal: FC<Props> = ({ visible, setVisible, actividades, act
     }, []);
 
     useEffect(() => {
+
         if (usuario) {
             inicializarActsUser();
         }
     }, [visible, usuario]);
 
-    async function guardarCambios() {
+    /*chatgpt: Corregi la función guardar cambios */
+    async function guardarCambios() {   
+        
         if(usuario)
         {
+            const eliminar = async () => {
+                for (const actUser of actsUser) {
+                    // Elimina solo si está en actsPref y no está seleccionada
+                    if (!actsSeleccionadas.includes(actUser.actividad.id) && 
+                        actsPref.some((pref) => pref.id_actividad === actUser.actividad.id && pref.id_usuario === usuario?.id)) {
+                        console.log("Actividad a eliminar: ", actUser);
+                        await eliminarActUser(actUser.actividad, usuario.id);
+                    }
+                }
+            };
+            
+
             try {
-                //Si está seleccionada y no existe, la crea
+                //Si está seleccionada y no existe, la creaa
                 for (const actividadId of actsSeleccionadas) {
                     const actUser = actsUser.find(act => act.actividad.id === actividadId);
                     const esPreferida = actsPref.find(act => act.id_actividad === actividadId);
@@ -85,19 +100,8 @@ const SeleccionarActsModal: FC<Props> = ({ visible, setVisible, actividades, act
             } catch (error) {
                 console.error('Error guardando nuevas actividades preferidas:', error);
             }
-            
-            try {
-                // Si no está seleccionada pero existe, la elimina
-                for (const actUser of actsUser) {
-                    if (!actsSeleccionadas.includes(actUser.actividad.id) && actUser.preferida) {
-                        console.log("Actividad a eliminar: ", actUser);
-                        await eliminarActUser(actUser.actividad, usuario.id);
-                    }
-                }                
-            }
-            catch (error) {
-                console.error('Error eliminando actividades preferidas:', error);
-            }
+
+            eliminar();
         }
         cerrarModal();
     }
@@ -116,44 +120,47 @@ const SeleccionarActsModal: FC<Props> = ({ visible, setVisible, actividades, act
                 }),
             });
             if (!response.ok) {
-                throw new Error('Failed to fetch data');
+                throw new Error('Failed to create ActUser');
             }
-            const data = await response.json();
-            if (!data || data === null) {
-                throw new Error('data failed to response');
-            }
-            return data;
         } catch (error) {
-            console.log('Hubo un error en el crearActUser', error); 
-            //Tira error pero igual se crea en la base de datos, no entiendo por qué
-            //funciona!
+            console.log('Hubo un error en el crearActUser', error);
         }
     }
 
     async function eliminarActUser(act: Actividad, user_id: number) {
-        const urlApi = `${DBDomain}/api/actPreferida?idAct=${act.id}&idUsuario=${user_id}`;
-        
+        const urlApi = `${DBDomain}/api/actPreferida`;
+    
+        const bodyData = {
+            idAct: act.id,
+            idUsuario: user_id,
+        };
+    
         try {
             const response = await fetch(urlApi, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                body: JSON.stringify(bodyData),
             });
     
             if (!response.ok) {
                 throw new Error('Error al eliminar la actividad preferida');
             }
     
-            const data = await response.json();
-            if (!data) {
-                throw new Error('No se recibió respuesta al eliminar la actividad preferida');
-            }
-
+            // if (response.status !== 200) {
+            //     const data = await response.json();
+            //     if (!data) {
+            //         throw new Error('No se recibió respuesta al eliminar la actividad preferida');
+            //     }
+            // }
+    
         } catch (error) {
             console.error('Hubo un error al eliminar la actividad preferida:', error);
         }
     }
+    
+    
 
     const Busqueda = () => {
         return (
@@ -278,3 +285,16 @@ const styles = StyleSheet.create({
 });
 
 export default SeleccionarActsModal;
+
+// useEffect(() => {
+//     const actividadesSeleccionadas = actsUser
+//     .filter((actUser) => actUser.preferida)  // filtra las acts que están seleccionadas
+//     .map((actUser) => actUser.actividad.id); // extrae solo los id's de las acts seleccionadas
+    
+//     actsPref.map((actPref) => {
+//         if (!actsSeleccionadas.includes(actPref.id)) {
+//             setActsSeleccionadas(actividadesSeleccionadas);
+//         }
+//     })
+
+// }, [actsUser, actsSeleccionadas]);
