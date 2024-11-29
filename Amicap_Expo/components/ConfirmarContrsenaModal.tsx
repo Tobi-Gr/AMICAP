@@ -77,27 +77,16 @@ const ConfirmarContrasenaModal: FC<Props> = ({ visible, setVisible, nuevoNombre,
     
             if (!response.ok) {
                 throw new Error('Failed to fetch data');
+              }
+      
+              const data = await response.json();
+              if (!data) {
+                throw new Error('Data failed to response');
+              } 
+              return data;
+            } catch (error) {
+              console.log('Hubo un error en el updateUsuario ', error);
             }
-    
-            const text = await response.text();
-            let data;
-    
-            try {
-                data = JSON.parse(text); 
-            } catch (parseError) {
-                // Si no es JSON, considera la respuesta como exitosa
-                data = { message: text }; // Puedes asignar el texto como un campo de mensaje
-            }
-    
-            if (!data || data === null) {
-                throw new Error('Data failed to respond');
-            } else {
-                setUsuario(data); 
-                return data;
-            }
-        } catch (error) {
-            console.log('Hubo un error en el updateUser ', error);
-        }
     };
 
 
@@ -107,6 +96,7 @@ const updateUsuario = async () => {
         const data = await putUsuario();
         if (data) {
             cerrarModal();
+            setUsuario(data);
             alert('Usuario editado.');
         } else {
             alert('Algo salió mal, intenta de nuevo');

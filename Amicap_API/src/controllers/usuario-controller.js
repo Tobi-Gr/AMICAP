@@ -41,7 +41,7 @@ router.put('/update', async (req, res) =>{
     else if (!hlp.validarString(entity.username)) return res.status(400).send('username invalido');
     else if (!hlp.validarString(entity.contrasena)) return res.status(400).send('contraseña invalida');
     const returnArray = await svc.updateAsync(entity);
-    if (returnArray != null) return res.status(200).send('');
+    if (returnArray != null) return res.status(200).json(returnArray);
     else return res.status(500).send('Error interno');
 });
 
