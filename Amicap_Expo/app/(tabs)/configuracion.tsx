@@ -69,34 +69,34 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
 
   //modifica respiracion
   const putRespiracion = async () => {
-      const urlApi = `${DBDomain}/api/usuario/update`;
-  
-      try {
-        const response = await fetch(urlApi, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            id: usuario?.id,
-            tinhalando: inhalar,
-            texhalando: exhalar,
-            tmanteniendo: mantener,
-          }),
-        });
+    const urlApi = `${DBDomain}/api/respiracion`;
 
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
+    try {
+      const response = await fetch(urlApi, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: usuario?.id,
+          tinhalando: inhalar,
+          texhalando: exhalar,
+          tmanteniendo: mantener,
+        }),
+      });
 
-        const data = await response.json();
-        if (!data) {
-          throw new Error('Data failed to response');
-        } 
-        return data;
-      } catch (error) {
-        console.log('Hubo un error en el updateRespiracion ', error);
+      if (!response.ok) {
+        throw new Error('Failed to fetch data');
       }
+
+      const data = await response.json();
+      if (!data) {
+        throw new Error('Data failed to response');
+      } 
+      return data;
+    } catch (error) {
+      console.log('Hubo un error en el updateRespiracion ', error);
+    }
   };
 
   const fetchMensaje = async () => {
@@ -118,6 +118,36 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
       }
     }
   }
+
+    //modifica mensaje
+    const putMensaje = async () => {
+      const urlApi = `${DBDomain}/api/mensaje`;
+  
+      try {
+        const response = await fetch(urlApi, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            id: usuario?.id,
+            mensaje: pruebaMensaje,
+          }),
+        });
+  
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+  
+        const data = await response.json();
+        if (!data) {
+          throw new Error('Data failed to response');
+        } 
+        return data;
+      } catch (error) {
+        console.log('Hubo un error en el updateMensaje ', error);
+      }
+    };
 
   const fetchActividades = async () => {
     const urlApi = `${DBDomain}/api/actividades`;
@@ -205,6 +235,22 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
     fetchAndSetRespiracion();
     fetchAndSetMensaje();
   }, []);
+
+  useEffect(() => {
+    const updateRespiracion = async () => {
+      const data = await putRespiracion();
+    };
+    
+    updateRespiracion();
+  }, [inhalar, exhalar, mantener])
+
+  useEffect(() => {
+    const updateMensaje = async () => {
+      const data = await putMensaje();
+    };
+    
+    updateMensaje();
+  }, [pruebaMensaje])
 
   return (
     <View style={{ flex: 1, backgroundColor: Colores.blanco }}> 
