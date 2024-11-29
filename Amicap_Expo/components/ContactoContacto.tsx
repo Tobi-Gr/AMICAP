@@ -21,7 +21,7 @@ interface Props {
     eliminarContacto: (id: number) => void; 
 }
 
-const ContactoContacto: FC<Props> = ({ contacto, eliminarContacto, }) => {
+const ContactoContacto: FC<Props> = ({ contacto, eliminarContacto }) => {
     const [visibleEditar, setVisibleEditar] = useState(false);
     const [visibleEliminar, setVisibleEliminar] = useState(false);
     const nombre=contacto?.nombre
@@ -60,29 +60,29 @@ const ContactoContacto: FC<Props> = ({ contacto, eliminarContacto, }) => {
     const handleEditarContacto = async (nombre: string, numero: string) => {
         console.log("entro")
         try {
-          const response = await fetch(`${DBDomain}/api/contacto/${contacto.id}`, {
+            const response = await fetch(`${DBDomain}/api/contacto/${contacto.id}`, {
             method: 'PUT',
             headers: {
-              'Content-Type': 'application/json',
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-             id_usuario: usuario?.id,
-             nombre: nombre,
-              numero: numero,
+                id_usuario: usuario?.id,
+                nombre: nombre,
+                numero: numero,
             }),
-          });
-          console.log(response)
+        });
+        console.log('Response updateCont:', response)
     
-          if (response.ok) {
+        if (response.ok) {
             alert('Contacto editado');
             setVisibleEditar(false);
             // Aquí también puedes actualizar la lista de contactos
-          } 
+        } 
         } catch (error) {
-          console.log('Error al editar contacto:', error);
-          alert('Hubo un error al editar el contacto');
+            console.log('Error al editar contacto:', error);
+            alert('Hubo un error al editar el contacto');
         }
-      };
+    };
 
     return (
         <TouchableOpacity style={[styles.container]}>
