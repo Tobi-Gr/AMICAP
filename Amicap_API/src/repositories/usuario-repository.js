@@ -108,7 +108,8 @@ export default class UsuarioRepository
             values.push(entity.contrasena);
         }
         else return returnArray;
-
+        
+        console.log("returnArray: ", returnArray);
         sql = `${sql} Where id = $1`;
         returnArray = await pgHelper.requestCount(sql, values);
         if(returnArray > 0)
@@ -117,6 +118,7 @@ export default class UsuarioRepository
             values = [entity.id];
             returnArray = await pgHelper.requestOne(sql, values);
         }
+
         return returnArray;
     };    
 
