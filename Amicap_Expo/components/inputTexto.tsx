@@ -9,19 +9,12 @@ interface Props {
     keyBoardType?: KeyboardTypeOptions;
     onChange: (text: string) => void;
     esContrasena?: boolean;
-<<<<<<< HEAD
     colorBorde?: string;
     colorPlaceholder?: string;
     colorTexto?: string;
 }
 
 const InputTexto: FC<Props> = ({ placeholder, keyBoardType = 'default', onChange, esContrasena = false, colorBorde, colorPlaceholder, colorTexto}) => { 
-=======
-    color?: ColorKeys;
-}
-
-const InputTexto: FC<Props> = ({ placeholder, keyBoardType = 'default', onChange, esContrasena = false, color = 'blanco' }) => { 
->>>>>>> e572ea852cf0e26bafc83c91e05fed0b4f57b0a5
     useFonts({
         'Montserrat-Regular': require('./../assets/fonts/Montserrat-Regular.ttf'),
     });
@@ -36,11 +29,7 @@ const InputTexto: FC<Props> = ({ placeholder, keyBoardType = 'default', onChange
     return (
         <View style={styles.container}>
             <TextInput
-<<<<<<< HEAD
                 style={[styles.textInput, { fontSize: tamanoFuente,  borderBottomColor: colorBorde, color: colorTexto}]}
-=======
-                style={[styles.textInput, { fontSize: tamanoFuente, color: Colores[color]}]}
->>>>>>> e572ea852cf0e26bafc83c91e05fed0b4f57b0a5
                 onChangeText={(newText) => {
                     setText(newText);
                     onChange(newText);
@@ -48,11 +37,7 @@ const InputTexto: FC<Props> = ({ placeholder, keyBoardType = 'default', onChange
                 value={text}
                 placeholder={placeholder}
                 keyboardType={keyBoardType}
-<<<<<<< HEAD
                 placeholderTextColor={colorPlaceholder}
-=======
-                placeholderTextColor={Colores[color]}
->>>>>>> e572ea852cf0e26bafc83c91e05fed0b4f57b0a5
                 secureTextEntry={esContrasena} 
                 autoCapitalize="none"
             />
