@@ -24,14 +24,42 @@ export default class ContactoRepository
     }
 
     //Modifica un contacto
-    updateAsync = async (entity) =>
-    {
+    updateAsync = async (entity) => {
         let returnArray = null;
-        const sql = `Update "Contactos" Set numero= $2, nombre= $3 Where id = $1`;
-        const values = [entity.id, entity.numero, entity.nombre]
+        let id = entity.id;
+        let values = [id];
+        let numero = entity.numero;
+        let nombre = entity.nombre;
+        
+        
+        if (!numero && !nombre) {
+            return 0;
+        }
+    
+        
+        let sql = `UPDATE "Contactos" SET `;
+    
+        
+        if (numero) {
+            values.push(numero);
+            sql += `numero = $${values.length}`;
+        }
+        
+        if (numero && nombre) {
+            sql += ', ';
+        }
+    
+        if (nombre) {
+            values.push(nombre);
+            sql += `nombre = $${values.length}`;
+        }
+    
+        sql += ` WHERE id = $1`;
+    
         returnArray = await pgHelper.requestCount(sql, values);
         return returnArray;
-    }
+    };
+    
 
     //Elimina un contacto
     deleteByIdAsync = async (id) =>

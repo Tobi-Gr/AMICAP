@@ -29,7 +29,6 @@ router.post('', async (req, res) =>{
 
 //Modifica un contacto
 router.put('/:id', async (req, res) =>{
-    console.log("accediste a put contacto");
     const entity = req.body;
     const returnArray = await svc.updateAsync(entity);
     if (returnArray != null)
