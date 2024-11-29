@@ -30,7 +30,6 @@ const PerfilScreen: React.FC<Props> = ({ navigation }) => {
   const editTamano = windowWidth / 10;
   const rectangleHeight = windowHeight * 0.7;
 
-  //dsp hacer que el nombre y email salga de la base de datos
   const {token, setToken, usuario, setUsuario} = useUserContext();
   const nombre = usuario?.username;
   const email = usuario?.email;

@@ -76,16 +76,14 @@ const ConfirmarContrasenaModal: FC<Props> = ({ visible, setVisible, nuevoNombre,
             });
             
             if (!response.ok) {
-                console.log(response);
                 throw new Error('Failed to fetch data');
             }
     
-            const text = await response.text(); // Obtener la respuesta como texto
+            const text = await response.text();
             let data;
     
-            // Verificar si la respuesta tiene formato JSON
             try {
-                data = JSON.parse(text); // Intentar parsear como JSON
+                data = JSON.parse(text); 
             } catch (parseError) {
                 // Si no es JSON, considera la respuesta como exitosa
                 data = { message: text }; // Puedes asignar el texto como un campo de mensaje
@@ -94,7 +92,7 @@ const ConfirmarContrasenaModal: FC<Props> = ({ visible, setVisible, nuevoNombre,
             if (!data || data === null) {
                 throw new Error('Data failed to respond');
             } else {
-                setUsuario(data); // Actualizar usuario con la respuesta
+                setUsuario(data); 
                 return data;
             }
         } catch (error) {
