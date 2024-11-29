@@ -89,22 +89,26 @@ export default class UsuarioRepository
     //Modifica el usuario
     updateAsync = async (entity) => {
         let returnArray = null;
-        let sql = 'Update "Usuarios" Set';
-        let values = [];
-        let condiciones = [];
+        let sql = `select id From "Usuarios" Where email = $1`; //busca si el email ya existe
+        let values = [entity.email];
+        returnArray = await pgHelper.requestOne(sql, values);
+        if(returnArray != null) return console.log('email repetido');
+
+        sql = 'Update "Usuarios" Set';
+        values = [];
     
         if (entity.username && entity.username !== '') {
-            condiciones.push(`username = $${values.length + 1}`);
+            sql = `${sql} username = $${values.length + 1}`;
             values.push(entity.username);
         }
     
         if (entity.email && entity.email !== '') {
-            condiciones.push(`email = $${values.length + 1}`);
+            sql = `${sql} email = $${values.length + 1}`;
             values.push(entity.email);
         }
     
         if (entity.contrasena && entity.contrasena !== '') {
-            condiciones.push(`contrasena = $${values.length + 1}`);
+            sql = `${sql} contrasena = $${values.length + 1}`;
             values.push(entity.contrasena);
         }
         else return returnArray;

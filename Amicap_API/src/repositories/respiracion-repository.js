@@ -7,7 +7,7 @@ export default class RespiracionRepository
     getByIdUsuarioAsync = async (id_usuario) =>
     {
         let returnArray = null;
-        const sql = `SELECT * FROM "Respiracion" where id_usuario = $1 Order By id`;
+        const sql = `SELECT * FROM "Respiracion" where id_usuario = $1`;
         const values = [id_usuario];
         returnArray = await pgHelper.requestOne(sql, values);
         return returnArray;

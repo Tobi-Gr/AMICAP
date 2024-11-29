@@ -22,7 +22,7 @@ router.post('', async (req, res) =>{
     const returnArray = await svc.createAsync(entity);
     if (returnArray != null)
     {
-        return res.status(200).send('');
+        return res.status(200).json(returnArray);
     }
     else return res.status(500).send('Error interno');
 });
@@ -33,7 +33,7 @@ router.put('', async (req, res) =>{
     const returnArray = await svc.updateAsync(entity);
     if (returnArray != null)
     {
-        return res.status(200).send('');
+        return res.status(200).json(returnArray);
     }
     else return res.status(500).send('Error interno');
 });
@@ -44,7 +44,7 @@ router.delete('/:id', async (req, res) =>{
     const returnArray = await svc.deleteByIdAsync(id);
     if (returnArray != null)
     {
-        return res.status(200).send('');
+        return res.status(200).json(returnArray);
     }
     else  return res.status(500).send('Error interno');
 });
