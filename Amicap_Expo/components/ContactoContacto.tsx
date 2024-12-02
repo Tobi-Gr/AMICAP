@@ -58,7 +58,6 @@ const ContactoContacto: FC<Props> = ({ contacto, eliminarContacto }) => {
         }
     }
     const handleEditarContacto = async (nombre: string, numero: string) => {
-        console.log("entro")
         try {
             const response = await fetch(`${DBDomain}/api/contacto/${contacto.id}`, {
             method: 'PUT',
@@ -66,7 +65,7 @@ const ContactoContacto: FC<Props> = ({ contacto, eliminarContacto }) => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                id_usuario: usuario?.id,
+                id: contacto.id,
                 nombre: nombre,
                 numero: numero,
             }),
