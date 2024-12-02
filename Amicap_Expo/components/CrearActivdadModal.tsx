@@ -34,16 +34,16 @@ const CrearActividadModal: FC<Props> = ({visible, setVisible, isKeyboardVisible}
     const crearActividad = async () => {
         console.log("entro");
         try {
-            const response = await fetch(`${DBDomain}/api/actividad`, {
+            const response = await fetch(`${DBDomain}/api/actividades`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
     
             body: JSON.stringify({
-                id_usuario: usuario?.id,
-                nombre: actNombre,
-                paso_uno: nuevaAct
+                'id_usuario': usuario?.id,
+                'nombre': actNombre,
+                'paso_uno': nuevaAct
             }),
         });
         console.log(response)

@@ -7,6 +7,7 @@ const hlp = new ValidationHelper;
 
 //Devuelve todas las actividades
 router.get('', async (req, res) =>{
+    console.log("entra al endpoint get all");
     const returnArray = await svc.getAllAsync();
     if (returnArray != null)
     {

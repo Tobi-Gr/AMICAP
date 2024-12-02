@@ -13,14 +13,32 @@ export default class ActividadRepository
     }
 
     //Crea una nueva actividad
-    createAsync = async (entity) =>
-    {
+    createAsync = async (entity) => {
         let returnArray = null;
-        const sql = `Insert into "Actividad"(id_usuario, nombre, paso_uno, paso_dos, paso_tres, paso_cuatro, defecto) Values ($1,$2,$3,$4,$5,$6, false)`;
-        const values = [entity.id_usuario, entity.nombre, entity.paso_uno, entity.paso_dos, entity.paso_tres, entity.paso_cuatro]
+        
+        // Se inicializa el array de valores
+        let values = [entity.id_usuario, entity.nombre];
+        let pasos = ['paso_uno', 'paso_dos', 'paso_tres', 'paso_cuatro'];
+    
+        // Construcción de la consulta SQL
+        let columnas = ['id_usuario', 'nombre'];
+        let placeholders = ['$1', '$2'];
+    
+        // Recorremos los pasos, se incluyen solo si existen
+        pasos.forEach((step, index) => {
+            if (entity[step]) {
+                columnas.push(step);
+                placeholders.push(`$${values.length + 1}`);
+                values.push(entity[step]);
+            }
+        });
+    
+        const sql = `INSERT INTO "Actividad"(${columnas.join(', ')}, defecto) VALUES (${placeholders.join(', ')}, false)`;
+    
         returnArray = await pgHelper.requestCount(sql, values);
         return returnArray;
-    }
+    };
+    
 
     //Modifica una actividad
     updateAsync = async (entity) =>
