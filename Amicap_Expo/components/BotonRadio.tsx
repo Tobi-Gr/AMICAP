@@ -51,7 +51,7 @@ const BotonRadio: FC<Props> = ({text, onChange, tamanoFuente, id, check}) => {
         padding: 8
     },
     circulo: {
-        borderRadius: 50,
+        borderRadius: 5,
         height: 25,
         width: 25,
         backgroundColor: 'transparent',
@@ -65,7 +65,7 @@ const BotonRadio: FC<Props> = ({text, onChange, tamanoFuente, id, check}) => {
         borderColor: Colores.turquesa,
     },
     circuloInterno: {
-        borderRadius: 50,
+        borderRadius: 2.5,
         backgroundColor: Colores.turquesa,
         width: 15,
         height: 15,

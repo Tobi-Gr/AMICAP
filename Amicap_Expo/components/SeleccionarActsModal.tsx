@@ -64,13 +64,11 @@ const SeleccionarActsModal: FC<Props> = ({ visible, setVisible, actividades, act
     }, []);
 
     useEffect(() => {
-
         if (usuario) {
             inicializarActsUser();
         }
     }, [visible, usuario]);
 
-    /*chatgpt: Corregi la función guardar cambios */
     async function guardarCambios() {   
         
         if(usuario)
@@ -278,16 +276,3 @@ const styles = StyleSheet.create({
 });
 
 export default SeleccionarActsModal;
-
-// useEffect(() => {
-//     const actividadesSeleccionadas = actsUser
-//     .filter((actUser) => actUser.preferida)  // filtra las acts que están seleccionadas
-//     .map((actUser) => actUser.actividad.id); // extrae solo los id's de las acts seleccionadas
-    
-//     actsPref.map((actPref) => {
-//         if (!actsSeleccionadas.includes(actPref.id)) {
-//             setActsSeleccionadas(actividadesSeleccionadas);
-//         }
-//     })
-
-// }, [actsUser, actsSeleccionadas]);
