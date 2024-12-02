@@ -108,8 +108,6 @@ const ContactosConfigScreen: React.FC<Props> = ({ navigation, setVisible }) => {
   };
 
 
- 
-
   return (
     <View style={styles.container}>
       <AgregarXeditarContactoModal visible={visibleAgregar} setVisible={setVisibleAgregar} prompt='Agregar contacto' confirmado={handleAgregarContacto} aclaracion='Añadir'/>
@@ -122,7 +120,7 @@ const ContactosConfigScreen: React.FC<Props> = ({ navigation, setVisible }) => {
 
       <View style={styles.contactosContainer}>
       {/* Mostrar la lista de contactos usando ContactoContacto */}
-       {contactos.map(contacto => (
+        {contactos.map(contacto => (
         <ContactoContacto
           contacto={contacto}
           eliminarContacto={eliminarContacto} 

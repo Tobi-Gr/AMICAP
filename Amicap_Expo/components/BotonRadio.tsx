@@ -3,6 +3,9 @@ import React, { FC } from 'react';
 import Texto from './Texto';
 import {StyleSheet, Pressable, Dimensions, View } from 'react-native';
 
+//ya no es radio, es un cuadrado
+//cambiarle el nombre era demasiado lío
+
 interface Props{
     text:string,
     onChange?: (checked: boolean) => void;
