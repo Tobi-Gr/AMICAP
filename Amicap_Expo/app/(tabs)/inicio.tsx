@@ -4,7 +4,7 @@ import Texto from '@/components/Texto';
 import Boton from '@/components/Boton';
 
 interface Props {
-  navigation: any;
+    navigation: any;
 }
 
 const InicioScreen: React.FC<Props> = ({ navigation }) => {
@@ -12,33 +12,33 @@ const InicioScreen: React.FC<Props> = ({ navigation }) => {
     const tamanoFuente = windowWidth / 10;
     const gifAmi = require('./../../assets/images/ami-saludando.gif');
 
-  return (
-    <View style={styles.background}>
-        <Texto text="Hola, soy Ami!" estilo="tituloBlanco" style={{fontSize: tamanoFuente}}/>
-        <Texto text="¿Qué necesitas?" estilo="tituloBlanco" style={{fontSize: tamanoFuente}}/>
-        <Image source={gifAmi} style={styles.ami} resizeMode='contain'/>
-        <View style={styles.orangeBttnContainer}>
-            <Boton 
-                text="Ayuda" 
-                textStyle='textoTurquesa' 
-                containerColor='naranja' 
-                fullWidth={true}
-                onPress={() => navigation.navigate('Ayuda')}/>
+    return (
+        <View style={styles.background}>
+            <Texto text="Hola, soy Ami!" estilo="tituloBlanco" style={{fontSize: tamanoFuente}}/>
+            <Texto text="¿Qué necesitas?" estilo="tituloBlanco" style={{fontSize: tamanoFuente}}/>
+            <Image source={gifAmi} style={styles.ami} resizeMode='contain'/>
+            <View style={styles.orangeBttnContainer}>
+                <Boton 
+                    text="Ayuda" 
+                    textStyle='textoTurquesa' 
+                    containerColor='naranja' 
+                    fullWidth={true}
+                    onPress={() => navigation.navigate('Ayuda')}/>
+            </View>
+            <View style={styles.whiteBttnsContainer}>
+                <Boton 
+                    text="Iniciar sesión" 
+                    textStyle='textoTurquesa' 
+                    containerColor='blanco'
+                    onPress={() => navigation.navigate('InicioSesion')}/>
+                <Boton 
+                    text="Registrarme" 
+                    textStyle='textoTurquesa' 
+                    containerColor='blanco'
+                    onPress={() => navigation.navigate('Registro')}/>
+            </View>
         </View>
-        <View style={styles.whiteBttnsContainer}>
-            <Boton 
-                text="Iniciar sesión" 
-                textStyle='textoTurquesa' 
-                containerColor='blanco'
-                onPress={() => navigation.navigate('InicioSesion')}/>
-            <Boton 
-                text="Registrarme" 
-                textStyle='textoTurquesa' 
-                containerColor='blanco'
-                onPress={() => navigation.navigate('Registro')}/>
-        </View>
-    </View>
-  );
+    );
 };
 
 const styles = StyleSheet.create({

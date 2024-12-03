@@ -8,7 +8,7 @@ import InputTexto from '@/components/inputTexto';
 import BotonTexto from '@/components/BotonTexto';
 
 interface Props {
-  navigation: any;
+    navigation: any;
 }
 
 const Registro: React.FC<Props> = ({ navigation }) => {
@@ -24,25 +24,24 @@ const Registro: React.FC<Props> = ({ navigation }) => {
 
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener(
-          'keyboardDidShow',
-          () => {
-            setKeyboardVisible(true); // Muestra elementos si el teclado está visible
-          }
+        'keyboardDidShow',
+            () => {
+                setKeyboardVisible(true); // Muestra elementos si el teclado está visible
+            }
         );
         const keyboardDidHideListener = Keyboard.addListener(
-          'keyboardDidHide',
-          () => {
-            setKeyboardVisible(false); // Oculta elementos si el teclado no está visible
-          }
+        'keyboardDidHide',
+            () => {
+                setKeyboardVisible(false); // Oculta elementos si el teclado no está visible
+            }
         );
     
         return () => {
-          keyboardDidHideListener.remove();
-          keyboardDidShowListener.remove();
+            keyboardDidHideListener.remove();
+            keyboardDidShowListener.remove();
         };
-      }, []);
+        }, []);
 
-      
     const handleEmailChange = (nuevoEmail: string) => {
         setEmail(nuevoEmail);
     }; 
@@ -101,7 +100,7 @@ const Registro: React.FC<Props> = ({ navigation }) => {
             console.log('user: ', data);
             if (data > 0)
             {
-              navigation.navigate('InicioSesion');
+                navigation.navigate('InicioSesion');
             }
             else throw new Error('no se pudo crear la cuenta');
         }

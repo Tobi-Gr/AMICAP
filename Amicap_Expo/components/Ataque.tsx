@@ -14,7 +14,6 @@ interface Props{
 }
 
 const Ataque: React.FC<Props> = ({ ataques, tipo}) => {
- 
   const [ataquesContados, setAtaquesContados] = useState<number>(0);
 
   useEffect(() => {
