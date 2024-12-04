@@ -57,7 +57,6 @@ const RegistroDataScreen: React.FC<Props> = ({navigation }) => {
         if (!data) {
           throw new Error('Data failed to response (fetch ataques)');
         }
-        console.log("ataques: ", data);
         return data;
       } catch (error) {
         console.log('Hubo un error en el fetchAtaques', error);
@@ -114,7 +113,7 @@ const RegistroDataScreen: React.FC<Props> = ({navigation }) => {
               ))}
             </ScrollView>
             <TouchableOpacity style={styles.verMasButton}>
-              <Texto text="Ver más" estilo="textoTurquesa"/>
+              <Texto text="Ver más" estilo="textoBlanco" style={{fontSize: tamanoTexto}}/>
             </TouchableOpacity>
           </View>
       </View>
@@ -145,6 +144,7 @@ const styles = StyleSheet.create({
   ataquesRecientesContainer: {
     width: '90%',
     marginTop: 20,
+    display: 'flex'
   },
   ataqueItem: {
     paddingVertical: 10,
@@ -155,10 +155,12 @@ const styles = StyleSheet.create({
   },
   verMasButton: {
     marginTop: 10,
-    alignSelf: 'center',
+    width: '25%',
+    left: '75%'
   },
   scroll: {
-    height: '55%'
+    minHeight: '35%',
+    maxHeight: '40%',
   }
 });
 
