@@ -26,7 +26,7 @@ const DetalleAtaque: React.FC<Props> = ({ navigation }) => {
                     screen={"ListaAtaques"}
                     color={Colores.blanco}
                 />
-                <Texto text="Fecha del ataque" estilo="textoBlanco" style={{fontSize: tamanoIndice}}/>
+                <Texto text="Fecha del ataque" estilo="textoBlanco" style={{fontSize: tamanoIndice}}/> {/*Hay que poner la fecha posta lol*/}
             </View>
         </View>
     );
