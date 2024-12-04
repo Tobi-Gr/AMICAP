@@ -5,6 +5,7 @@ import CuadroTexto from '@/components/CuadroTexto';
 import Flecha from '@/components/Flecha';
 import Boton from '@/components/Boton';
 import Add from '@/components/icons/Add';
+import { useUserContext } from '@/context/UserContext';
 
 interface Props {
   navigation: any;
@@ -13,6 +14,7 @@ interface Props {
 const AyudaScreen: React.FC<Props> = ({ navigation }) => {  
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
+  const { registrarAtaque } = useUserContext();
 
   const tamanoFuente = windowWidth / 20;
   const botonesX = windowWidth / 5.5;
@@ -27,9 +29,11 @@ const AyudaScreen: React.FC<Props> = ({ navigation }) => {
   const nombre = "Nombre"
 
   function handleOnPressRespiracion(){
+    registrarAtaque();
     navigation.navigate('Respiracion');
   }
   function handleOnPressActividad(){
+    registrarAtaque();
     navigation.navigate('Actividad');
   }
 
