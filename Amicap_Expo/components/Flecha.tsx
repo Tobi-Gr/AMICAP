@@ -18,12 +18,12 @@ const Flecha: FC<Props> = ({ height, width, navigation, screen, color}) => {
       }
     return (
     <Pressable onPress={goBack} style={{height: height, width: width}}>
-        <Arrow 
+      <Arrow 
         color={color}
-          height={height} 
-          width={width} 
-          style={styles.flecha}/>
-      </Pressable>
+        height={height} 
+        width={width} 
+        style={styles.flecha}/>
+    </Pressable>
   );
 };
 
