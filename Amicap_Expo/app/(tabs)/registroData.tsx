@@ -1,4 +1,5 @@
 import { StyleSheet, View, Dimensions, TouchableOpacity } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import React, { FC, useState, useEffect } from 'react';
 import { Colores } from '../../constants/Colors';
 import DBDomain from '../../constants/dbDomain';
@@ -8,6 +9,7 @@ import Texto from '@/components/Texto';
 import Ataque from '@/components/Ataque';
 import Triangulo from '@/components/icons/Triangulo';
 import { useUserContext } from '@/context/UserContext';
+import { ScrollView } from 'react-native-gesture-handler';
 
 interface Attack {
   fecha: Date; 
@@ -72,47 +74,51 @@ const RegistroDataScreen: React.FC<Props> = ({navigation }) => {
   
 
   return (
-  <View style={styles.container}>
-    <View style={styles.flechaContainer}>
-      <Flecha
-        height={flechaTamano}
-        width={flechaTamano}
-        navigation={navigation}
-        screen={"Perfil"}
-        color={Colores.blanco}
-      />
-    </View>
+    <GestureHandlerRootView>
+      <View style={styles.container}>
+        <View style={styles.flechaContainer}>
+          <Flecha
+            height={flechaTamano}
+            width={flechaTamano}
+            navigation={navigation}
+            screen={"Perfil"}
+            color={Colores.blanco}
+          />
+        </View>
 
-    {/* Título */}
-    <View style={[styles.titleContainer, { marginTop: yTexto }]}>
-      <Texto text={"Registros"} estilo="tituloBlanco" style={{ fontSize: tamanoTitulo }} />
-    </View>
+        {/* Título */}
+        <View style={[styles.titleContainer, { marginTop: yTexto }]}>
+          <Texto text={"Registros"} estilo="tituloBlanco" style={{ fontSize: tamanoTitulo }} />
+        </View>
 
-    {/* Contadores de ataques */}
-    <View style={styles.counterContainer}>
-      <Ataque ataques={ataques} tipo="mensual" />
-      <Ataque ataques={ataques} tipo="semanal" />
-    </View>
+        {/* Contadores de ataques */}
+        <View style={styles.counterContainer}>
+          <Ataque ataques={ataques} tipo="mensual" />
+          <Ataque ataques={ataques} tipo="semanal" />
+        </View>
 
-    {/* Lista de ataques recientes */}
-    <View style={styles.ataquesRecientesContainer}>
-        <Texto text="Tus últimos ataques" estilo="textoBlanco" style={{fontSize: tamanoSubtitulo}}/>
-        {ataques.slice(0, 3).map((ataque, index) => (
-          <TouchableOpacity key={index} style={styles.ataqueItem}>
-            {/* Formateamos la fecha con día de la semana */}
-            <Texto
-              text={`${getDiaSemana(ataque.fecha)}, ${new Date(ataque.fecha).toLocaleDateString('es-ES')} ${new Date(ataque.fecha).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}`}
-              estilo="textoBlanco"
-              style={{fontSize: tamanoTexto}}
-            />
-            <Triangulo color={Colores.blanco}/>
-          </TouchableOpacity>
-        ))}
-        <TouchableOpacity style={styles.verMasButton}>
-          <Texto text="Ver más" estilo="textoTurquesa" />
-        </TouchableOpacity>
+        {/* Lista de ataques recientes */}
+        <View style={styles.ataquesRecientesContainer}>
+            <Texto text="Tus últimos ataques" estilo="textoBlanco" style={{fontSize: tamanoSubtitulo}}/>
+            <ScrollView style={styles.scroll}>
+              {ataques.slice(0, 3).map((ataque, index) => (
+                  <TouchableOpacity key={index} style={styles.ataqueItem}>
+                    {/* Formateamos la fecha con día de la semana */}
+                    <Texto
+                      text={`${getDiaSemana(ataque.fecha)}, ${new Date(ataque.fecha).toLocaleDateString('es-ES')} ${new Date(ataque.fecha).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}`}
+                      estilo="textoBlanco"
+                      style={{fontSize: tamanoTexto}}
+                      />
+                    <Triangulo color={Colores.blanco} style={{ transform: [{ rotate: '-90deg' }] }} />
+                  </TouchableOpacity>
+              ))}
+            </ScrollView>
+            <TouchableOpacity style={styles.verMasButton}>
+              <Texto text="Ver más" estilo="textoTurquesa"/>
+            </TouchableOpacity>
+          </View>
       </View>
-  </View>
+    </GestureHandlerRootView>
   )
 };
 
@@ -142,11 +148,18 @@ const styles = StyleSheet.create({
   },
   ataqueItem: {
     paddingVertical: 10,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   verMasButton: {
     marginTop: 10,
     alignSelf: 'center',
   },
+  scroll: {
+    height: '55%'
+  }
 });
 
 export default RegistroDataScreen;
