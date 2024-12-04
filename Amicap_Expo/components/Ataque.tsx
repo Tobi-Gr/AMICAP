@@ -39,26 +39,27 @@ const Ataque: React.FC<Props> = ({ ataques, tipo}) => {
 
     calcularAtaques();
   }, [ataques, tipo]);
- 
- 
+
   const windowWidth = Dimensions.get('window').width;
   const windowHeight= Dimensions.get('window').height
-  const diametro = windowWidth * 0.2;
-  const tamanoFuente = diametro / 5;
+  const ancho = windowWidth * 0.4;
+  const alto = windowWidth * 0.3;
+  const tamanoFuente = ancho / 7.5;
+  const tamanoNumero = ancho / 5;
 
 
   return (
-    <TouchableOpacity
-      activeOpacity={1} 
-      style={[styles.container, { width: diametro, height: diametro }]}>
-      <View style={[styles.circulo, { height: diametro, width: diametro }]}> 
+    <View
+      style={[styles.container, { width: ancho, height: alto }]}>
+      <View style={[styles.card, { height: alto, width: ancho }]}> 
+      <Texto text={`${ataquesContados}`} estilo="tituloTurquesa" style={{ fontSize: tamanoNumero }}/>
       <Texto
-          text={`${tipo === 'semanal' ? 'Ataques Semanales' : 'Ataques Mensuales'}: ${ataquesContados}`}
+          text={`${tipo === 'semanal' ? 'Ataques esta semana' : 'Ataques este \n mes'}`}
           estilo="tituloTurquesa"
-          style={{ fontSize: tamanoFuente }}
+          style={{ fontSize: tamanoFuente, textAlign: 'center' }}
         />
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 
@@ -68,12 +69,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-  circulo: {
+  card: {
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,
     backgroundColor: Colores.blanco,
-    zIndex: 1,
+    //zIndex: 1,
   },
 });
 
