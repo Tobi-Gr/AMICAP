@@ -6,6 +6,7 @@ import React, { FC, useState, useMemo } from 'react';
 import { StyleSheet, View, Modal, Dimensions, ScrollView, Linking, Pressable } from 'react-native';
 import Texto from './Texto';
 import NombreContacto from './NombreContacto';
+import { useUserContext } from '@/context/UserContext';
 import DBDomain from '@/constants/dbDomain';
 
 interface Contacto {
@@ -24,16 +25,12 @@ interface Props {
 const ContactosModal: FC<Props> = ({ visible, setVisible, contactosArray, mensaje }) => {
     const windowWidth = Dimensions.get('window').width;
     const tamanoFuente = windowWidth / 14;
-    // const contactosArray = useMemo(() => [
-    //     { id: 1, nombre: "Luca", numero: "+5491125119535" },
-    //     { id: 2, nombre: "Juli Lif", numero: "+549116245965" },
-    //     { id: 3, nombre: "Juli Lav", numero: "+5491139435672" },
-    //     { id: 4, nombre: "Tobi", numero: "+5491170033777" }
-    // ], []);
+    const { registrarAtaque } = useUserContext();
 
     const [selectedContact, setSelectedContact] = useState<Contacto | null>(null);
 
     const handlePhoneCall = () => {
+        registrarAtaque();
         if (selectedContact != null) {
             Communications.phonecall(selectedContact.numero, true);
         }
@@ -45,6 +42,7 @@ const ContactosModal: FC<Props> = ({ visible, setVisible, contactosArray, mensaj
     }
     
     function mandarMensaje() {
+        registrarAtaque();
         let api_whatsapp;
         if (selectedContact != null) {
             api_whatsapp = `https://api.whatsapp.com/send?phone=${encodeURIComponent(selectedContact.numero)}&text=${encodeURIComponent(mensaje + ' yo ')}`;
