@@ -21,14 +21,14 @@ export default class AtaqueRepository
     }
 
     //Crea un ataque con el id del usuario y la fecha
-    createAsync = async (entity) =>
-    {
+    createAsync = async (id_usuario) => {
         let returnArray = null;
-        const sql = `Insert into "Ataque"(id_usuario, fecha) Values ($1,$2)`;
-        const values = [entity.id_usuario, entity.fecha]
+        const sql = `Insert into "Ataque"(id_usuario, fecha) Values ($1, CURRENT_TIMESTAMP)`;
+        const values = [id_usuario];
         returnArray = await pgHelper.requestCount(sql, values);
         return returnArray;
     }
+    
 
     //Elimina un ataque por id
     deleteByIdAsync = async (id) =>

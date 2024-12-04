@@ -17,15 +17,17 @@ router.get('/:id_usuario', async (req, res) =>{
 });
 
 //Crea un ataque con el id del usuario y la fecha
-router.post('', async (req, res) =>{
-    const entity = req.body;
-    const returnArray = await svc.createAsync(entity);
-    if (returnArray != null)
-    {
+router.post('/:id_usuario', async (req, res) => {
+    const id_usuario = req.params.id_usuario; 
+    const returnArray = await svc.createAsync(id_usuario);
+    
+    if (returnArray != null) {
         return res.status(200).send('');
+    } else {
+        return res.status(500).send('Error interno');
     }
-    else return res.status(500).send('Error interno');
 });
+
 
 //Elimina un ataque por id
 router.delete('/:id', async (req, res) =>{

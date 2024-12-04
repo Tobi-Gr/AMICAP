@@ -11,9 +11,9 @@ export default class AtaqueService
     }
 
     //Crea un ataque con el id del usuario y la fecha
-    createAsync = async (entity) =>
+    createAsync = async (id_usuario) =>
     {
-        const returnArray = await repo.createAsync(entity);
+        const returnArray = await repo.createAsync(id_usuario);
         return returnArray;
     }
 
