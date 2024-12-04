@@ -6,6 +6,7 @@ import Flecha from '@/components/Flecha';
 import Boton from '@/components/Boton';
 import Texto from '@/components/Texto';
 import Ataque from '@/components/Ataque';
+import Triangulo from '@/components/icons/Triangulo';
 import { useUserContext } from '@/context/UserContext';
 
 interface Attack {
@@ -25,6 +26,8 @@ const RegistroDataScreen: React.FC<Props> = ({navigation }) => {
   const windowHeight = Dimensions.get('window').height;
   
   const tamanoTitulo = windowWidth / 8;
+  const tamanoSubtitulo = windowWidth / 14;
+  const tamanoTexto = windowWidth / 21;
   const yTexto = windowHeight / 45;
   const flechaTamano = windowWidth / 10;
   
@@ -59,63 +62,58 @@ const RegistroDataScreen: React.FC<Props> = ({navigation }) => {
       }
     }
   }
+
+  const getDiaSemana = (date: Date): string => {
+    const options: Intl.DateTimeFormatOptions = { weekday: 'long' };
+    const diaSemana = new Date(date).toLocaleDateString('es-ES', options);
+    
+    return diaSemana.charAt(0).toUpperCase() + diaSemana.slice(1);
+  };
   
-//   return (
-//     <View style={styles.container}>
-      
-//       <View style={styles.flechaContainer}>
-//         <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Perfil"} color={Colores.blanco} />
-//       </View>
-//       <View style={[styles.titleContainer, { marginTop: yTexto }]}>
-//         <Texto text={"Mis registros"} estilo="tituloBlanco" style={{ fontSize: tamanoTitulo }} />
-//       </View>
-//         <Ataque ataques={ataques} tipo='semanal'/> {/*acá tiene que recibir un array con todos los ataques, no? */}
-//         <Ataque ataques={ataques} tipo='mensual'/>
-//     </View>
-//   );
-// };
-return (
-<View style={styles.container}>
-  <View style={styles.flechaContainer}>
-    <Flecha
-      height={flechaTamano}
-      width={flechaTamano}
-      navigation={navigation}
-      screen={"Perfil"}
-      color={Colores.blanco}
-    />
-  </View>
 
-  {/* Título */}
-  <View style={[styles.titleContainer, { marginTop: yTexto }]}>
-    <Texto text={"Registros"} estilo="tituloBlanco" style={{ fontSize: tamanoTitulo }} />
-  </View>
+  return (
+  <View style={styles.container}>
+    <View style={styles.flechaContainer}>
+      <Flecha
+        height={flechaTamano}
+        width={flechaTamano}
+        navigation={navigation}
+        screen={"Perfil"}
+        color={Colores.blanco}
+      />
+    </View>
 
-  {/* Contadores de ataques */}
-  <View style={styles.counterContainer}>
-    <Ataque ataques={ataques} tipo="mensual" />
-    <Ataque ataques={ataques} tipo="semanal" />
-  </View>
+    {/* Título */}
+    <View style={[styles.titleContainer, { marginTop: yTexto }]}>
+      <Texto text={"Registros"} estilo="tituloBlanco" style={{ fontSize: tamanoTitulo }} />
+    </View>
 
-  {/* Lista de ataques recientes */}
-  <View style={styles.ataquesRecientesContainer}>
-    <Texto text="Tus últimos ataques" style="subtituloBlanco" />
-    {ataques.slice(0, 3).map((ataque, index) => (
-      <TouchableOpacity key={index} style={styles.ataqueItem}>
-        {/* Formateamos la fecha y hora */}
-        <Texto
-          text={`${new Date(ataque.fecha).toLocaleDateString('es-ES')} ${new Date(ataque.fecha).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}`}
-          estilo="textoBlanco"
-        />
-      </TouchableOpacity>
-    ))}
-    <TouchableOpacity style={styles.verMasButton}>
-      <Texto text="Ver más" estilo="textoTurquesa" />
-    </TouchableOpacity>
-  </View>
-</View>
+    {/* Contadores de ataques */}
+    <View style={styles.counterContainer}>
+      <Ataque ataques={ataques} tipo="mensual" />
+      <Ataque ataques={ataques} tipo="semanal" />
+    </View>
 
-)
+    {/* Lista de ataques recientes */}
+    <View style={styles.ataquesRecientesContainer}>
+        <Texto text="Tus últimos ataques" estilo="textoBlanco" style={{fontSize: tamanoSubtitulo}}/>
+        {ataques.slice(0, 3).map((ataque, index) => (
+          <TouchableOpacity key={index} style={styles.ataqueItem}>
+            {/* Formateamos la fecha con día de la semana */}
+            <Texto
+              text={`${getDiaSemana(ataque.fecha)}, ${new Date(ataque.fecha).toLocaleDateString('es-ES')} ${new Date(ataque.fecha).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}`}
+              estilo="textoBlanco"
+              style={{fontSize: tamanoTexto}}
+            />
+            <Triangulo color={Colores.blanco}/>
+          </TouchableOpacity>
+        ))}
+        <TouchableOpacity style={styles.verMasButton}>
+          <Texto text="Ver más" estilo="textoTurquesa" />
+        </TouchableOpacity>
+      </View>
+  </View>
+  )
 };
 
 const styles = StyleSheet.create({
@@ -143,8 +141,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   ataqueItem: {
-    borderBottomWidth: 1,
-    borderBottomColor: Colores.blanco,
     paddingVertical: 10,
   },
   verMasButton: {
@@ -152,21 +148,5 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
 });
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: Colores.turquesa,
-//     alignItems: 'center',
-//     paddingHorizontal: Dimensions.get('window').width / 25, 
-//   },
-//   titleContainer: {
-//     alignItems: 'center',
-//   },
-
-//   flechaContainer: {
-//     alignSelf: 'flex-start'
-//   },
-// });
 
 export default RegistroDataScreen;
