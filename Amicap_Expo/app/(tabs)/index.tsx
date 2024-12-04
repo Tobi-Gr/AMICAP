@@ -14,6 +14,8 @@ import PerfilScreen from './perfil';
 import EditarPerfilScreen from './editarPerfil';
 import ContactosConfigScreen from './contactosConfig';
 import RegistroDataScreen from './registroData';
+import ListaAtaquesScreen from './listaAtaques';
+import DetalleAtaqueScreen from './detalleAtaque';
 
 const Stack = createNativeStackNavigator();
 
@@ -40,6 +42,8 @@ const App = () => {
         <Stack.Screen name="EditarPerfil" component={EditarPerfilScreen}/>
         <Stack.Screen name="ContactosConfig" component={ContactosConfigScreen}/>
         <Stack.Screen name="RegistroData" component={RegistroDataScreen}/>
+        <Stack.Screen name="ListaAtaques" component={ListaAtaquesScreen}/>
+        <Stack.Screen name="DetalleAtaque" component={DetalleAtaqueScreen}/>
       </Stack.Navigator>
     </UserProvider>
   );

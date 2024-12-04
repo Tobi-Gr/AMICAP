@@ -112,7 +112,7 @@ const RegistroDataScreen: React.FC<Props> = ({navigation }) => {
                   </TouchableOpacity>
               ))}
             </ScrollView>
-            <TouchableOpacity style={styles.verMasButton}>
+            <TouchableOpacity style={styles.verMasButton} onPress={()=> {navigation.navigate('ListaAtaques');}}>
               <Texto text="Ver más" estilo="textoBlanco" style={{fontSize: tamanoTexto}}/>
             </TouchableOpacity>
           </View>
