@@ -31,11 +31,11 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
   const [actsPref, setActsPref] = useState([]);
   
   const { usuario } = useUserContext();
-  const [inhalar, setInhalar] = useState(4);
-  const [exhalar, setExhalar] = useState(4);
-  const [mantener, setMantener] = useState(4);
+  const [inhalar, setInhalar] = useState(0);
+  const [exhalar, setExhalar] = useState(0);
+  const [mantener, setMantener] = useState(0);
   const [pruebaVolumen, setPruebaVolumen] = useState(0);
-  const [pruebaMensaje, setPruebaMensaje] = useState("Estoy teniendo un ataque de pánico.");
+  const [mensaje, seMensaje] = useState("");
 
   const abrirModalSeleccionar = async () => {
     fetchAndSetActsPref();
@@ -50,7 +50,7 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
   const fetchRespiracion = async () => {
     if(usuario)
     {
-      const urlApi = `${DBDomain}/api/respiracion${usuario.id}`;
+      const urlApi = `${DBDomain}/api/respiracion/${usuario.id}`;
       try {
         const response = await fetch(urlApi);
         if (!response.ok) {
@@ -102,7 +102,7 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
   const fetchMensaje = async () => {
     if(usuario)
     {
-      const urlApi = `${DBDomain}/api/mensaje${usuario.id}`;
+      const urlApi = `${DBDomain}/api/mensaje/${usuario.id}`;
       try {
         const response = await fetch(urlApi);
         if (!response.ok) {
@@ -110,11 +110,11 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
         }
         const data = await response.json();
         if (!data) {
-          throw new Error('data failed to response');
+          throw new Error('Data failed to response');
         }
         return data;
       } catch (error) {
-        console.log('Hubo un error en el fetchMensaje ', error);
+        console.log('Hubo un error en el fetchMensaje: ', error);
       }
     }
   }
@@ -131,7 +131,7 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
           },
           body: JSON.stringify({
             id: usuario?.id,
-            mensaje: pruebaMensaje,
+            mensaje: mensaje,
           }),
         });
   
@@ -194,18 +194,18 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
   };
 
   useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener(
-      'keyboardDidShow',
-      () => {
-        setKeyboardVisible(true); // Muestra elementos si el teclado está visible
-      }
-    );
-    const keyboardDidHideListener = Keyboard.addListener(
-      'keyboardDidHide',
-      () => {
-        setKeyboardVisible(false); // Oculta elementos si el teclado no está visible
-      }
-    );
+    // const keyboardDidShowListener = Keyboard.addListener(
+    //   'keyboardDidShow',
+    //   () => {
+    //     setKeyboardVisible(true); // Muestra elementos si el teclado está visible
+    //   }
+    // );
+    // const keyboardDidHideListener = Keyboard.addListener(
+    //   'keyboardDidHide',
+    //   () => {
+    //     setKeyboardVisible(false); // Oculta elementos si el teclado no está visible
+    //   }
+    // );
 
     const fetchAndSetActividades = async () => {
       const data = await fetchActividades();
@@ -226,7 +226,7 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
     const fetchAndSetMensaje = async () => {
       const data = await fetchMensaje();
       if (data.length > 0) {
-        setPruebaMensaje(data.mensaje);
+        seMensaje(data.mensaje);
       }
     };
 
@@ -250,7 +250,7 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
     };
     
     updateMensaje();
-  }, [pruebaMensaje])
+  }, [mensaje])
 
   return (
     <View style={{ flex: 1, backgroundColor: Colores.blanco }}> 
@@ -274,7 +274,7 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
           <SliderSegundos value={mantener} onValueChange={setMantener} text={"Tiempo manteniendo"}/>
         </View>        
         <View style={styles.seccion}>
-          <TextArea prompt="Mensaje por defecto" value={pruebaMensaje} onChange={setPruebaMensaje}/>
+          <TextArea prompt="Mensaje por defecto" value={mensaje} onChange={seMensaje}/>
         </View>        
       </ScrollView>
       {!isKeyboardVisible && (<Navbar tipo="configuration" navigation={navigation}/>)}
