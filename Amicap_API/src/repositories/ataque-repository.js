@@ -8,13 +8,14 @@ export default class AtaqueRepository
     {
         let returnArray = null;
         const sql = `
-        SELECT A.fecha, L.nombre
+        SELECT A.fecha, L.nombre, 
         json_build_object('nombre', C.nombre) as causas
         FROM "Ataque" as A
-        inner join "Ataque-Causa" as AC on A.id = AC.id_ataque
-        inner join "Causa" as C On C.id = AC.id_causa
-        inner join "Lugar" as L On L.id = A.id_lugar
-        where A.id_usuario = $1 Order By A.id`;
+        LEFT JOIN "Ataque-Causa" as AC on A.id = AC.id_ataque
+        LEFT JOIN "Causa" as C On C.id = AC.id_causa
+        LEFT JOIN "Lugar" as L On L.id = A.id_lugar
+        WHERE A.id_usuario = $1
+        ORDER BY A.id;`;
         const values = [id_usuario]
         returnArray = await pgHelper.requestValues(sql, values);
         return returnArray;
