@@ -52,6 +52,7 @@ const RegistroDataScreen: React.FC<Props> = ({navigation }) => {
         if (!data) {
           throw new Error('Data failed to response (fetch ataques)');
         }
+        console.log("ataques: ", data);
         return data;
       } catch (error) {
         console.log('Hubo un error en el fetchAtaques', error);
@@ -101,7 +102,11 @@ return (
     <Texto text="Tus últimos ataques" style="subtituloBlanco" />
     {ataques.slice(0, 3).map((ataque, index) => (
       <TouchableOpacity key={index} style={styles.ataqueItem}>
-        <Texto text={`${new Date(ataque.fecha).toLocaleDateString()} ${new Date(ataque.fecha).toLocaleTimeString()}`} estilo="textoBlanco" />
+        {/* Formateamos la fecha y hora */}
+        <Texto
+          text={`${new Date(ataque.fecha).toLocaleDateString('es-ES')} ${new Date(ataque.fecha).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}`}
+          estilo="textoBlanco"
+        />
       </TouchableOpacity>
     ))}
     <TouchableOpacity style={styles.verMasButton}>

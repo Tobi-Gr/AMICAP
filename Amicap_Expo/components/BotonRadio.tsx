@@ -12,10 +12,11 @@ interface Props{
     tamanoFuente: number;
     id: number;
     check: boolean;
+    cuadrado: boolean;
 }
 
 
-const BotonRadio: FC<Props> = ({text, onChange, tamanoFuente, id, check}) => { 
+const BotonRadio: FC<Props> = ({text, onChange, tamanoFuente, id, check, cuadrado = true}) => { 
     const windowWidth = Dimensions.get('window').width;
     const tamanoFuenteLocal = windowWidth * 0.05;
     const [checked, setChecked] = React.useState(check);
@@ -28,7 +29,6 @@ const BotonRadio: FC<Props> = ({text, onChange, tamanoFuente, id, check}) => {
             onChange(checked);
         }
     };
-  
     const Circulo = () => {
         return (
             <View style={[styles.circulo, checked && styles.circuloSeleccionado]}>
@@ -41,13 +41,13 @@ const BotonRadio: FC<Props> = ({text, onChange, tamanoFuente, id, check}) => {
 
     return (
         <Pressable onPress={handleOnPress} style={styles.container}>
-             <Circulo />
-             <Texto text={text} style={{ fontSize: tamanoFuente }}/>
+            <Circulo />
+            <Texto text={text} style={{ fontSize: tamanoFuente }}/>
         </Pressable>
     );
-  };
+};
 
-  const styles = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
         flexDirection: 'row',
