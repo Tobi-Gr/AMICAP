@@ -87,11 +87,11 @@ const PerfilScreen: React.FC<Props> = ({ navigation }) => {
   };
 
   function handleOnPressContactos(){
-    navigation.navigate ('ContactosConfig')
+    navigation.navigate ('ContactosConfig');
   }
 
   function handleOnPressRegistros(){
-    navigation.navigate ('RegistroData')
+    navigation.navigate ('RegistroData');
   }
 
   return (

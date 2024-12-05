@@ -12,6 +12,7 @@ import { useUserContext } from '@/context/UserContext';
 import { ScrollView } from 'react-native-gesture-handler';
 
 interface Attack {
+  id: number,
   fecha: Date; 
 }
 
@@ -23,7 +24,7 @@ const RegistroDataScreen: React.FC<Props> = ({navigation }) => {
   const {usuario} = useUserContext();
 
   const [visible, setVisible] = useState(false);
-  const [ataques, setAtaques] = useState<Ataque[]>([]);
+  const [ataques, setAtaques] = useState<Attack[]>([]);
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
   
@@ -33,17 +34,7 @@ const RegistroDataScreen: React.FC<Props> = ({navigation }) => {
   const yTexto = windowHeight / 45;
   const flechaTamano = windowWidth / 10;
   
-  useEffect( () =>{
-    const fetchAndSetAtaques = async () => {
-      const data = await fetchAtaques();
-      if (data.length > 0) {
-        setAtaques(data);
-      }
-    };
-
-    fetchAndSetAtaques();
-  }, []);
-
+  
   const fetchAtaques = async () => {
     if(usuario)
     {
@@ -63,6 +54,18 @@ const RegistroDataScreen: React.FC<Props> = ({navigation }) => {
       }
     }
   }
+
+  useEffect( () =>{
+    const fetchAndSetAtaques = async () => {
+      const data = await fetchAtaques();
+      console.log('ataques: ', data);
+      if (data.length > 0) {
+        setAtaques(data);
+      }
+    };
+
+    fetchAndSetAtaques();
+  }, []);
 
   const getDiaSemana = (date: Date): string => {
     const options: Intl.DateTimeFormatOptions = { weekday: 'long' };
@@ -101,7 +104,7 @@ const RegistroDataScreen: React.FC<Props> = ({navigation }) => {
             <Texto text="Tus últimos ataques" estilo="textoBlanco" style={{fontSize: tamanoSubtitulo}}/>
             <ScrollView style={styles.scroll}>
               {ataques.slice(0, 3).map((ataque, index) => (
-                  <TouchableOpacity key={index} style={styles.ataqueItem}>
+                  <TouchableOpacity key={index} style={styles.ataqueItem} onPress={()=> {navigation.navigate('DetalleAtaque', {id_ataque: ataque.id})}}>
                     {/* Formateamos la fecha con día de la semana */}
                     <Texto
                       text={`${getDiaSemana(ataque.fecha)}, ${new Date(ataque.fecha).toLocaleDateString('es-ES')} ${new Date(ataque.fecha).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}`}

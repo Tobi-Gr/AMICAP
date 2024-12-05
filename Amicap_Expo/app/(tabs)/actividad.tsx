@@ -124,7 +124,6 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
   useEffect( () =>{
     const fetchAndSetActividades = async () => {
       const data = await fetchActividades();
-      console.log('fetchAndSetActividades: ', data );
       if (data.length > 0) {
         setActividades(data);
       }
@@ -139,10 +138,6 @@ const ActividadScreen: React.FC<Props> = ({navigation}) => {
       randomActividad();
     }
   }, [actividades]);
-
-  useEffect( () =>{
-    console.log('selectedActividad', selectedActividad);
-  }, [selectedActividad]);
 
   function handleOnPressHome(){
     navigation.navigate('Home');

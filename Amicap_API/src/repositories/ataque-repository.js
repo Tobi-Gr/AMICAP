@@ -8,16 +8,30 @@ export default class AtaqueRepository
     {
         let returnArray = null;
         const sql = `
-        SELECT A.fecha, L.nombre, 
-            json_build_object('nombre', C.nombre) as causas
+        SELECT A.id, A.fecha
         FROM "Ataque" as A
-        LEFT JOIN "Ataque-Causa" as AC on A.id = AC.id_ataque
-        LEFT JOIN "Causa" as C On C.id = AC.id_causa
-        LEFT JOIN "Lugar" as L On L.id = A.id_lugar
         WHERE A.id_usuario = $1
         ORDER BY A.fecha DESC;`;
         const values = [id_usuario]
         returnArray = await pgHelper.requestValues(sql, values);
+        return returnArray;
+    }
+
+    //Devuelve un ataque segun el id
+    getByIdAtaqueAsync = async (id) =>
+    {
+        let returnArray = null;
+        const sql = `
+        SELECT A.fecha, L.nombre, 
+        json_build_object('nombre', C.nombre) as causas
+        FROM "Ataque" as A
+        LEFT JOIN "Ataque-Causa" as AC on A.id = AC.id_ataque
+        LEFT JOIN "Causa" as C On C.id = AC.id_causa
+        LEFT JOIN "Lugar" as L On L.id = A.id_lugar
+        WHERE A.id = $1
+        ORDER BY A.fecha DESC;`;
+        const values = [id]
+        returnArray = await pgHelper.requestOne(sql, values);
         return returnArray;
     }
 

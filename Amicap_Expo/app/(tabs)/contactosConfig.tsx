@@ -17,11 +17,9 @@ interface Contact {
 
 interface Props {
   navigation: any;
-  visible: boolean;
-  setVisible: (visible: boolean) => void;
 }
 
-const ContactosConfigScreen: React.FC<Props> = ({ navigation, setVisible }) => {
+const ContactosConfigScreen: React.FC<Props> = ({ navigation }) => {
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
   const tamanoTitulo = windowWidth / 8;
@@ -72,11 +70,9 @@ const ContactosConfigScreen: React.FC<Props> = ({ navigation, setVisible }) => {
   const handleOnPressAgregarContacto= () => {
     
     setVisibleAgregar(true);
-
-};
+  };
 
   const handleAgregarContacto = async (nombre: string, numero: string) => {
-    console.log("entro");
     try {
       const response = await fetch(`${DBDomain}/api/contacto`, {
         method: 'POST',
@@ -90,7 +86,6 @@ const ContactosConfigScreen: React.FC<Props> = ({ navigation, setVisible }) => {
           numero: numero,
         }),
       });
-      console.log(response)
 
       if (response.ok) {
         alert('Contacto agregado');

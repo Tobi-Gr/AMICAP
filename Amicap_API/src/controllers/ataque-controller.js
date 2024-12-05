@@ -16,6 +16,17 @@ router.get('/:id_usuario', async (req, res) =>{
     else return res.status(404).send('No se encontro ningun resultado');
 });
 
+//Devuelve un ataque segun el id
+router.get('/detalles/:id_ataque', async (req, res) =>{
+    let id = hlp.validarInt(req.params.id_ataque);
+    const returnArray = await svc.getByIdAtaqueAsync(id);
+    if (returnArray != null)
+    {
+        return res.status(200).json(returnArray);
+    }
+    else return res.status(404).send('No se encontro ningun resultado');
+});
+
 //Crea un ataque con el id del usuario y la fecha
 router.post('/:id_usuario', async (req, res) => {
     const id_usuario = req.params.id_usuario; 
