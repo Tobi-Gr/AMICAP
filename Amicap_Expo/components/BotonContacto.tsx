@@ -20,7 +20,6 @@ const BotonContacto: FC<Props> = ({onPress, contactos, key}) => {
     const iconWidth = diameter / 1.6;
     const iconHeight = iconWidth / 0.9;
     const handlePress = () => {
-        console.log("llamando a luca");
          if(onPress){
              onPress();
          }

@@ -1,4 +1,3 @@
-//MODAL: https://www.youtube.com/watch?v=4iz_GZLtZ_o
 import DBDomain from '../../constants/dbDomain';
 import { useEffect, useState } from 'react';
 import { StyleSheet, View, Dimensions, Pressable, Touchable, TouchableOpacity, Text } from 'react-native';
@@ -60,29 +59,49 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
       if (!data) {
         throw new Error('data failed to response');
       }
-      console.log('data: ', data);
       return data;
     } catch (error) {
       console.log('Hubo un error en el fetchContactos ', error);
     }
   }
 
-  const fetchMensaje = async() => {
-    //HAY QUE SACARLO DE LA BASE DE DATOS !
-    setMensaje("Mensaje default");
+  const fetchMensaje = async () => {
+    if(usuario)
+    {
+      const urlApi = `${DBDomain}/api/mensaje/${usuario.id}`;
+      try {
+        const response = await fetch(urlApi);
+        if (!response.ok) {
+          throw new Error('Failed to fetch mensaje');
+        }
+        const data = await response.json();
+        if (!data) {
+          throw new Error('Data failed to response');
+        }
+        return data;
+      } catch (error) {
+        console.log('Hubo un error en el fetchMensaje: ', error);
+      }
+    }
   }
 
   useEffect(() => {
     const fetchAndSetContactos = async () => {
       const data = await fetchContactos();
-      if (data.length > 0) {
+      if (data != null) {
         setContactos(data);
+      }
+    };
+    const fetchAndSetMensaje = async () => {
+      const data = await fetchMensaje();
+      if (data != null) {
+        setMensaje(data.mensaje);
       }
     };
     
     fetchAndSetContactos();
-    fetchMensaje();
-  }, []);
+    fetchAndSetMensaje();
+  }, [usuario]);
 
   return (
     <View style={{ flex: 1, backgroundColor: Colores.blanco }}> 

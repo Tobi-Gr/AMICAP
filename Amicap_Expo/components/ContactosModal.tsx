@@ -45,7 +45,7 @@ const ContactosModal: FC<Props> = ({ visible, setVisible, contactosArray, mensaj
         registrarAtaque();
         let api_whatsapp;
         if (selectedContact != null) {
-            api_whatsapp = `https://api.whatsapp.com/send?phone=${encodeURIComponent(selectedContact.numero)}&text=${encodeURIComponent(mensaje + ' yo ')}`;
+            api_whatsapp = `https://api.whatsapp.com/send?phone=${encodeURIComponent(selectedContact.numero)}&text=${encodeURIComponent(mensaje)}`;
             Linking.openURL(api_whatsapp).catch(err => console.error("Error al abrir WhatsApp: ", err));
         }
         cerrarModal();

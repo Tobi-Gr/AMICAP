@@ -84,7 +84,6 @@ const ContactoContacto: FC<Props> = ({ contacto, eliminarContacto }) => {
                 numero: numero,
             }),
         });
-        console.log('Response updateCont:', response)
     
         if (response.ok) {
             alert('Contacto editado');

@@ -8,8 +8,8 @@ export default class MensajeRepository
     {
         let returnArray = null;
         const sql = `SELECT * FROM "mensajeDefault" where id_usuario = $1`;
-        const values = [id_usuario]
-        returnArray = await pgHelper.requestValues(sql, values);
+        const values = [id_usuario];
+        returnArray = await pgHelper.requestOne(sql, values);
         return returnArray;
     }
 
@@ -26,8 +26,9 @@ export default class MensajeRepository
     //Modifica un mensaje
     updateAsync = async (entity) =>
     {
+        console.log('putMensaje: ', entity);
         let returnArray = null;
-        const sql = `Update "mensajeDefault" Set mensaje= $2 Where id = $1`;
+        const sql = `Update "mensajeDefault" Set mensaje=$2 Where id_usuario = $1`;
         const values = [entity.id, entity.mensaje]
         returnArray = await pgHelper.requestCount(sql, values);
         return returnArray;

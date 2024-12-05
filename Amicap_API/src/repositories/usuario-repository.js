@@ -76,8 +76,8 @@ export default class UsuarioRepository
                 values = [usuario.id, "Estoy teniendo un ataque de pánico."];
                 hecho = await pgHelper.requestCount(sql, values);
 
-                sql = `Insert into "Respiracion"(id_usuario, tinhalando, texhalando, tconteniendo, tesperando) Values ($1, $2, $3, $4, $5)`; //crea respiracion del usuario creado
-                values = [usuario.id, 4, 4, 4, 4]; 
+                sql = `Insert into "Respiracion"(id_usuario, tinhalando, texhalando, tmanteniendo) Values ($1, $2, $3, $4)`; //crea respiracion del usuario creado
+                values = [usuario.id, 4, 4, 4]; 
                 hecho = await pgHelper.requestCount(sql, values);
 
                 returnArray = usuario;

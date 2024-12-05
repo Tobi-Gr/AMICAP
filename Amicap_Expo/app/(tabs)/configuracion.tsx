@@ -35,7 +35,7 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
   const [exhalar, setExhalar] = useState(0);
   const [mantener, setMantener] = useState(0);
   const [pruebaVolumen, setPruebaVolumen] = useState(0);
-  const [mensaje, seMensaje] = useState("");
+  const [mensaje, setMensaje] = useState("");
 
   const abrirModalSeleccionar = async () => {
     fetchAndSetActsPref();
@@ -194,19 +194,6 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
   };
 
   useEffect(() => {
-    // const keyboardDidShowListener = Keyboard.addListener(
-    //   'keyboardDidShow',
-    //   () => {
-    //     setKeyboardVisible(true); // Muestra elementos si el teclado está visible
-    //   }
-    // );
-    // const keyboardDidHideListener = Keyboard.addListener(
-    //   'keyboardDidHide',
-    //   () => {
-    //     setKeyboardVisible(false); // Oculta elementos si el teclado no está visible
-    //   }
-    // );
-
     const fetchAndSetActividades = async () => {
       const data = await fetchActividades();
       if (data.length > 0) {
@@ -216,7 +203,7 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
     
     const fetchAndSetRespiracion = async () => {
       const data = await fetchRespiracion();
-      if (data.length > 0) {
+      if (data != null) {
         setInhalar(data.tinhalando);
         setExhalar(data.texhalando);
         setMantener(data.tmanteniendo);
@@ -225,8 +212,8 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
 
     const fetchAndSetMensaje = async () => {
       const data = await fetchMensaje();
-      if (data.length > 0) {
-        seMensaje(data.mensaje);
+      if (data != null) {
+        setMensaje(data.mensaje);
       }
     };
 
@@ -247,6 +234,7 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
   useEffect(() => {
     const updateMensaje = async () => {
       const data = await putMensaje();
+      console.log('putMensaje: ', data);
     };
     
     updateMensaje();
@@ -274,7 +262,7 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
           <SliderSegundos value={mantener} onValueChange={setMantener} text={"Tiempo manteniendo"}/>
         </View>        
         <View style={styles.seccion}>
-          <TextArea prompt="Mensaje por defecto" value={mensaje} onChange={seMensaje}/>
+          <TextArea prompt="Mensaje por defecto" value={mensaje} onChange={setMensaje}/>
         </View>        
       </ScrollView>
       {!isKeyboardVisible && (<Navbar tipo="configuration" navigation={navigation}/>)}
