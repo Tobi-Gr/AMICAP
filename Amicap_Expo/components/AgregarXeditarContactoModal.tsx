@@ -7,7 +7,6 @@ import Profile from './icons/Profile';
 import Phone from './icons/Phone';
 import InputTextoModal from './inputTextoModal';
 
-
 interface Props {
     visible: boolean;
     setVisible: (visible: boolean) => void;
@@ -55,26 +54,25 @@ const AgregarXeditarContactoModal: FC<Props> = ({ visible, setVisible, prompt, a
                         <Texto text={aclaracion} estilo="textoTurquesa" style={{ fontSize: tamanoFuenteTexto * 0.9, fontWeight: 'normal', textAlign: 'center', marginTop: 10}} />
                     }
                     <View style={styles.innerContainer}>
-                    <View style={styles.columna1}>
-                    {/* <Texto text={"Nombre"} estilo="textoTurquesa" style={{ fontSize: tamanoFuenteTexto * 0.9, fontWeight: 'normal', textAlign: 'center', marginTop: 10}} /> */}
-                    <InputTextoModal  placeholder="Nombre" onChange={handleNombreChange}/>
-                      </View> 
-                      <View style={styles.columna2}>
-                      <Profile height={heightIcon} width={widthIcon} color={ Colores.turquesa } />
-                  </View>
-                  </View>
-               
-                  <View style={styles.innerContainer}>
-                    <View style={styles.columna1}>
-                    {/* <Texto text={"Telefono"} estilo="textoTurquesa" style={{ fontSize: tamanoFuenteTexto * 0.9, fontWeight: 'normal', textAlign: 'center', marginTop: 10}} /> */}
-                    <InputTextoModal  placeholder="Telefono" onChange={handleTelefonoChange}/>
-                       </View>
-                       <View style={styles.columna2}>
-                       <Phone height={heightIcon} width={widthIcon} color={ Colores.turquesa } />
-                       </View>
-                       </View>
-                      
-                      
+                        <View style={styles.columna1}>
+                            {/* <Texto text={"Nombre"} estilo="textoTurquesa" style={{ fontSize: tamanoFuenteTexto * 0.9, fontWeight: 'normal', textAlign: 'center', marginTop: 10}} /> */}
+                            <InputTextoModal  placeholder="Nombre" onChange={handleNombreChange}/>
+                        </View> 
+                        <View style={styles.columna2}>
+                            <Profile height={heightIcon} width={widthIcon} color={ Colores.turquesa } />
+                        </View>
+                    </View>
+                    <View style={styles.innerContainer}>
+                        <View style={styles.columna1}>
+                            {/* <Texto text={"Telefono"} estilo="textoTurquesa" style={{ fontSize: tamanoFuenteTexto * 0.9, fontWeight: 'normal', textAlign: 'center', marginTop: 10}} /> */}
+                            <InputTextoModal  placeholder="Telefono" onChange={handleTelefonoChange}/>
+                        </View>
+                        <View style={styles.columna2}>
+                            <Phone height={heightIcon} width={widthIcon} color={ Colores.turquesa } />
+                        </View>
+                    </View>
+
+
                     <View style={styles.botonesContainer}>
                         <View style={[styles.botonContainer, styles.fondoBlanco]}>
                             <Boton text="Cancelar" onPress={cerrarModal} textStyle='textoTurquesa' containerColor='blanco' tamanoFuenteProps={tamanoFuenteBttn}/>
@@ -140,10 +138,12 @@ const styles = StyleSheet.create({
     columna1:{
         flexDirection: 'row',
         alignItems: 'flex-start',
+        width: '85%'
     },
     columna2:{
         flexDirection: 'row',
         alignItems: 'flex-end',
+        top: '25%'
     },
     inputTexto:{
     color: Colores.turquesa

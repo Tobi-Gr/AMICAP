@@ -34,19 +34,17 @@ const ContactoContacto: FC<Props> = ({ contacto, eliminarContacto }) => {
     const widthIcon = heightIcon * 0.9;
 
     useEffect(() => {
-        const keyboardDidShowListener = Keyboard.addListener(
-          'keyboardDidShow',
-          () => {
-            setKeyboardVisible(true); // Muestra elementos si el teclado está visible
-          }
+        const keyboardDidShowListener = Keyboard.addListener( 'keyboardDidShow',
+        () => {
+                setKeyboardVisible(true); // Muestra elementos si el teclado está visible
+            }
         );
-        const keyboardDidHideListener = Keyboard.addListener(
-          'keyboardDidHide',
-          () => {
-            setKeyboardVisible(false); // Oculta elementos si el teclado no está visible
-          }
+        const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide',
+        () => {
+                setKeyboardVisible(false); // Oculta elementos si el teclado no está visible
+            }
         );
-      }, []);
+    }, []);
 
     const handleOnPressEliminarContacto = () => {
         setVisibleEliminar(true);

@@ -1,5 +1,5 @@
-import { StyleSheet, View, Dimensions, ActivityIndicator, Text } from 'react-native';
-import React, { FC, useEffect, useState } from 'react';
+import { StyleSheet, View, Dimensions, Keyboard } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import { Colores } from '../../constants/Colors';
 import {useUserContext} from '@/context/UserContext';
 import Flecha from '@/components/Flecha';
@@ -34,7 +34,6 @@ const ContactosConfigScreen: React.FC<Props> = ({ navigation }) => {
   const [contactos, setContactos] = useState<Contact[]>([]);
   // const [loading, setLoading] = useState(true);
 
-
   const fetchContactos = async () => {
     const urlApi=`${DBDomain}/api/contacto/${usuario?.id}`;
     try {
@@ -60,6 +59,17 @@ const ContactosConfigScreen: React.FC<Props> = ({ navigation }) => {
       }
       else console.log('no hay contactos');
     };
+    const keyboardDidShowListener = Keyboard.addListener( 'keyboardDidShow',
+      () => {
+              setKeyboardVisible(true); // Muestra elementos si el teclado está visible
+          }
+      );
+    const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide',
+      () => {
+              setKeyboardVisible(false); // Oculta elementos si el teclado no está visible
+          }
+      );
+
     
     fetchAndSetContactos();
   }, []);
