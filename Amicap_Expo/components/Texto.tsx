@@ -7,9 +7,10 @@ interface Props {
   text: string,
   estilo?: keyof typeof styles,
   style?: any,
+  centered?: boolean,
 }
 
-const Texto: React.FC<Props> = ({ text, estilo, style }) => {
+const Texto: React.FC<Props> = ({ text, estilo, style, centered = true }) => {
   const [fontsLoaded] = useFonts({
     'FiraSans-Regular': require('./../assets/fonts/FiraSans-Regular.ttf'),
     'Montserrat-Regular': require('./../assets/fonts/Montserrat-Regular.ttf'),
@@ -21,7 +22,7 @@ const Texto: React.FC<Props> = ({ text, estilo, style }) => {
 
   const textStyle = estilo ? styles[estilo] : styles.defaultText;
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, !centered && styles.left]}>
       <Text style={[textStyle, style]}>{text}</Text>
     </View>
   );
@@ -30,7 +31,11 @@ const Texto: React.FC<Props> = ({ text, estilo, style }) => {
 const styles = StyleSheet.create({
   container: {
     alignContent: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+  },
+  left:{
+    justifyContent: "flex-start",
+    width: '100%'
   },
   defaultText: {
     fontFamily: 'Montserrat-Regular',
