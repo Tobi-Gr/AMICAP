@@ -63,21 +63,22 @@ const DetalleAtaque: React.FC<Props> = ({ navigation, route }) => {
     return (
         <View>
             {ataque != undefined ? (
-            <View style={styles.flechaContainer}>
-                <Flecha
-                    height={flechaTamano}
-                    width={flechaTamano}
-                    navigation={navigation}
-                    screen={"ListaAtaques"}
-                    color={Colores.blanco}
-                />
-                <Texto
-                    text={`${getDiaSemana(ataque.fecha)}, ${new Date(ataque.fecha).toLocaleDateString('es-ES')} ${new Date(ataque.fecha).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}`}
-                    estilo="textoBlanco"
-                    style={{fontSize: tamanoIndice}}/>
-            </View>
+                <View style={styles.flechaContainer}>
+                    <Flecha
+                        height={flechaTamano}
+                        width={flechaTamano}
+                        navigation={navigation}
+                        screen={"ListaAtaques"}
+                        color={Colores.blanco}
+                    />
+                    <Texto
+                        text={`${getDiaSemana(ataque.fecha)}, ${new Date(ataque.fecha).toLocaleDateString('es-ES')} ${new Date(ataque.fecha).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}`}
+                        estilo="textoBlanco"
+                        style={{fontSize: tamanoIndice}}/>
+                </View>
                 ) : 
-                <Texto text='Cargando...' estilo="textoBlanco" style={{fontSize: tamanoIndice}}/> }
+                <Texto text='Cargando...' estilo="textoBlanco" style={{fontSize: tamanoIndice}}/>
+            }
         </View>
     );
 };

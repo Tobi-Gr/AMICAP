@@ -14,7 +14,7 @@ interface Props {
 const AyudaScreen: React.FC<Props> = ({ navigation }) => {  
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
-  const { registrarAtaque } = useUserContext();
+  const {usuario, registrarAtaque } = useUserContext();
 
   const tamanoFuente = windowWidth / 20;
   const botonesX = windowWidth / 5.5;
@@ -38,11 +38,13 @@ const AyudaScreen: React.FC<Props> = ({ navigation }) => {
   }
 
   //PARA LA FLECHA HAY QUE VER SI EL USUARIO ESTA REGISTRADO O NO
-  // Si está registrado vuelve a 'Home'
-  // Si no vuelve a 'Inicio'
   return (
     <View style={{ flex: 1, backgroundColor: Colores.turquesa }} >
-      <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Home"} color={Colores.blanco}/>
+      {usuario ? (
+        <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Home"} color={Colores.blanco}/>
+      ):
+        <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Inicio"} color={Colores.blanco}/>
+      }
       <CuadroTexto 
         nombre={nombre} 
         actividad="¿Qué querés hacer?" 

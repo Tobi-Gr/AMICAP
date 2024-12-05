@@ -119,35 +119,35 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
     }
   }
 
-    //modifica mensaje
-    const putMensaje = async () => {
-      const urlApi = `${DBDomain}/api/mensaje`;
-  
-      try {
-        const response = await fetch(urlApi, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            id: usuario?.id,
-            mensaje: mensaje,
-          }),
-        });
-  
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
-  
-        const data = await response.json();
-        if (!data) {
-          throw new Error('Data failed to response');
-        } 
-        return data;
-      } catch (error) {
-        console.log('Hubo un error en el updateMensaje ', error);
+  //modifica mensaje
+  const putMensaje = async () => {
+    const urlApi = `${DBDomain}/api/mensaje`;
+
+    try {
+      const response = await fetch(urlApi, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: usuario?.id,
+          mensaje: mensaje,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch data');
       }
-    };
+
+      const data = await response.json();
+      if (!data) {
+        throw new Error('Data failed to response');
+      } 
+      return data;
+    } catch (error) {
+      console.log('Hubo un error en el updateMensaje ', error);
+    }
+  };
 
   const fetchActividades = async () => {
     const urlApi = `${DBDomain}/api/actividades`;
