@@ -1,5 +1,5 @@
-import React, { FC, useState } from "react";
-import { TouchableOpacity, StyleSheet, Dimensions, View, ScrollView } from 'react-native';
+import React, { FC, useState, useEffect } from "react";
+import { TouchableOpacity, StyleSheet, Dimensions, View, ScrollView, Keyboard } from 'react-native';
 import DBDomain from '@/constants/dbDomain';
 import Contact from './icons/Contact';
 import { Colores } from './../constants/Colors';
@@ -25,12 +25,28 @@ const ContactoContacto: FC<Props> = ({ contacto, eliminarContacto }) => {
     const [visibleEditar, setVisibleEditar] = useState(false);
     const [visibleEliminar, setVisibleEliminar] = useState(false);
     const nombre=contacto?.nombre
+    const [isKeyboardVisible, setKeyboardVisible] = useState(false);
     const {usuario} = useUserContext();
     const windowHeight = Dimensions.get('window').height;
     const windowWidth = Dimensions.get('window').width;
     const tamanoFuente = windowWidth / 18;
     const heightIcon = windowHeight / 25;
     const widthIcon = heightIcon * 0.9;
+
+    useEffect(() => {
+        const keyboardDidShowListener = Keyboard.addListener(
+          'keyboardDidShow',
+          () => {
+            setKeyboardVisible(true); // Muestra elementos si el teclado está visible
+          }
+        );
+        const keyboardDidHideListener = Keyboard.addListener(
+          'keyboardDidHide',
+          () => {
+            setKeyboardVisible(false); // Oculta elementos si el teclado no está visible
+          }
+        );
+      }, []);
 
     const handleOnPressEliminarContacto = () => {
         setVisibleEliminar(true);
@@ -84,8 +100,8 @@ const ContactoContacto: FC<Props> = ({ contacto, eliminarContacto }) => {
     };
 
     return (
-        <TouchableOpacity style={[styles.container]}>
-            <AgregarXeditarContactoModal visible={visibleEditar} setVisible={setVisibleEditar} prompt='Editar contacto' confirmado={handleEditarContacto} aclaracion ='Editar'/>
+        <View style={[styles.container]}>
+            <AgregarXeditarContactoModal visible={visibleEditar} setVisible={setVisibleEditar} prompt='Editar contacto' confirmado={handleEditarContacto} aclaracion ='Editar' isKeyboardVisible={isKeyboardVisible}/>
             <ConfirmarModal visible={visibleEliminar} setVisible={setVisibleEliminar} prompt={`¿Querés eliminar a ${nombre}?`} confirmado={handleConfirmarEliminar}/>
             <View style={styles.innerContainer}>
                 <View style={styles.columna1}>
@@ -99,7 +115,7 @@ const ContactoContacto: FC<Props> = ({ contacto, eliminarContacto }) => {
                 </View>
                 </View>
             </View>
-        </TouchableOpacity>
+        </View>
     );
 };
 

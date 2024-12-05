@@ -26,6 +26,7 @@ const ContactosConfigScreen: React.FC<Props> = ({ navigation }) => {
   const yTexto = windowHeight / 45;
   const flechaTamano = windowWidth / 10;
 
+  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const {usuario} = useUserContext();
   const [visibleAgregar, setVisibleAgregar] = useState(false);
 
@@ -105,7 +106,7 @@ const ContactosConfigScreen: React.FC<Props> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <AgregarXeditarContactoModal visible={visibleAgregar} setVisible={setVisibleAgregar} prompt='Agregar contacto' confirmado={handleAgregarContacto} aclaracion='Añadir'/>
+      <AgregarXeditarContactoModal visible={visibleAgregar} setVisible={setVisibleAgregar} prompt='Agregar contacto' confirmado={handleAgregarContacto} aclaracion='Añadir' isKeyboardVisible={isKeyboardVisible}/>
       <View style={styles.flechaContainer}>
         <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Perfil"} color={Colores.blanco} />
       </View>

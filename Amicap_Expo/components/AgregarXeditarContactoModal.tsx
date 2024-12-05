@@ -14,15 +14,17 @@ interface Props {
     prompt: string;
     aclaracion?: string;
     confirmado: (nombre: string, numero: string) => void;
+    isKeyboardVisible: boolean;
 }
 
-const AgregarXeditarContactoModal: FC<Props> = ({ visible, setVisible, prompt, aclaracion, confirmado }) => {
+const AgregarXeditarContactoModal: FC<Props> = ({ visible, setVisible, prompt, aclaracion, confirmado, isKeyboardVisible }) => {
     const windowWidth = Dimensions.get('window').width;
     const windowHeight = Dimensions.get('window').height;
     const tamanoFuenteTexto = windowWidth / 18;
     const tamanoFuenteBttn = windowWidth / 20;
     const heightIcon = windowHeight / 25;
     const widthIcon = heightIcon * 0.9;
+    const cardHeight = isKeyboardVisible ? '45%' : '30%';
 
     const [nombre, setNombre] = useState('');
     const [numero, setNumero] = useState('');
@@ -48,7 +50,7 @@ const AgregarXeditarContactoModal: FC<Props> = ({ visible, setVisible, prompt, a
     return (
         <Modal visible={visible} transparent={true} animationType="fade">
             <View style={styles.container}>
-                <View style={styles.card}>
+                <View style={[styles.card, { height: cardHeight }]}>
                 {aclaracion &&
                         <Texto text={aclaracion} estilo="textoTurquesa" style={{ fontSize: tamanoFuenteTexto * 0.9, fontWeight: 'normal', textAlign: 'center', marginTop: 10}} />
                     }
