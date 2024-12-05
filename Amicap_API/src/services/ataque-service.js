@@ -11,7 +11,7 @@ export default class AtaqueService
     }
 
     //Devuelve un ataque segun el id
-    getByIdUsuarioAsync = async (id) =>
+    getByIdAtaqueAsync = async (id) =>
     {
         const returnArray = await repo.getByIdAtaqueAsync(id);
         return returnArray;
