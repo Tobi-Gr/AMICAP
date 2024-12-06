@@ -136,6 +136,7 @@ const DetalleAtaque: React.FC<Props> = ({ navigation, route }) => {
                         />
                     </View>
                     <Dropdown type="causa" ataque={ataque} data={causas} />
+                    <Dropdown type="lugar" ataque={ataque} data={lugares} />
                 </View>
             ) : (
                 <Texto text='Cargando...' estilo="textoBlanco" style={{fontSize: tamanoIndice}} />

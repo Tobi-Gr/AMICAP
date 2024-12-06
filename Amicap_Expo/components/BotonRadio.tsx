@@ -10,9 +10,10 @@ interface Props {
     id?: number;
     check: boolean;
     cuadrado?: boolean;
+    fondoOscuro?: boolean;
 }
 
-const BotonRadio: FC<Props> = ({ text, onChange, tamanoFuente, id, check, cuadrado = true }) => {
+const BotonRadio: FC<Props> = ({ text, onChange, tamanoFuente, id, check, cuadrado = true, fondoOscuro = false }) => {
     const windowWidth = Dimensions.get('window').width;
     const tamanoFuenteLocal = windowWidth * 0.05;
     const [checked, setChecked] = React.useState(check);
@@ -24,6 +25,12 @@ const BotonRadio: FC<Props> = ({ text, onChange, tamanoFuente, id, check, cuadra
         }
     };
 
+    // Definir colores según si color fondo
+    const colorCirculo = fondoOscuro ? Colores.blanco : Colores.negro;
+    const colorCirculoSeleccionado = fondoOscuro ? Colores.celeste : Colores.turquesa;
+    const colorCirculoInterno = fondoOscuro ? Colores.celeste : Colores.turquesa;
+    const colorTexto= fondoOscuro ? 'textoBlanco' : 'textoNegro';
+
     const Circulo = () => {
         const borderRadiusValue = cuadrado ? 5 : 50;
 
@@ -31,11 +38,12 @@ const BotonRadio: FC<Props> = ({ text, onChange, tamanoFuente, id, check, cuadra
             <View
                 style={[
                     styles.circulo,
-                    checked && styles.circuloSeleccionado,
+                    checked && { borderColor: colorCirculoSeleccionado },
                     { borderRadius: borderRadiusValue },
+                    !checked && { borderColor: colorCirculo}
                 ]}
             >
-                {checked ? <View style={[styles.circuloInterno, { borderRadius: borderRadiusValue / 2 }]} /> : <View />}
+                {checked ? <View style={[styles.circuloInterno, { backgroundColor: colorCirculoInterno, borderRadius: borderRadiusValue / 2 }]} /> : <View />}
             </View>
         );
     };
@@ -43,7 +51,7 @@ const BotonRadio: FC<Props> = ({ text, onChange, tamanoFuente, id, check, cuadra
     return (
         <Pressable onPress={handleOnPress} style={styles.container}>
             <Circulo />
-            <Texto text={text} style={{ fontSize: tamanoFuente }} />
+            <Texto text={text} style={{ fontSize: tamanoFuente}} estilo={colorTexto}/>
         </Pressable>
     );
 };
@@ -59,16 +67,11 @@ const styles = StyleSheet.create({
         width: 25,
         backgroundColor: 'transparent',
         borderWidth: 2,
-        borderColor: Colores.negro,
         alignItems: 'center',
         justifyContent: 'center',
         marginRight: '5%',
     },
-    circuloSeleccionado: {
-        borderColor: Colores.turquesa,
-    },
     circuloInterno: {
-        backgroundColor: Colores.turquesa,
         width: 15,
         height: 15,
     },

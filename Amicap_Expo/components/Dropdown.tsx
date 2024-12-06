@@ -12,10 +12,16 @@ interface AtaqueDetalles {
     lugar: string;
 }
 
+interface Item {
+    id: number;
+    id_usuario: number;
+    nombre: string;
+}
+
 interface Props {
     type: 'causa' | 'lugar';
     ataque: AtaqueDetalles;
-    data: string[]; //aca mandan o todas las causas o todos los lugares
+    data: Item[]; //aca mandan o todas las causas o todos los lugares
 }
 
 const Dropdown: FC<Props> = ({type, ataque, data }) => {
@@ -24,7 +30,8 @@ const Dropdown: FC<Props> = ({type, ataque, data }) => {
     const [causas, setCausas] = useState([]);
     const [lugares, setLugares] = useState([]);
     const titulo = type === 'lugar' ? 'Lugares' : 'Causas';
-    const tamanoFuente = screen_width / 15;
+    const tamanoTitulos = screen_width / 15;
+    const tamanoFuente = screen_width / 20;
 
     const handleCheck = (item: string, check: boolean) =>
     {
@@ -37,12 +44,15 @@ const Dropdown: FC<Props> = ({type, ataque, data }) => {
             <ScrollView>
                 {data.map((item) => (
                     <BotonRadio
-                        text={item}
+                        text={item.nombre}
                         tamanoFuente={tamanoFuente}
-                        check={false} //hay q poner una variable posta !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        onChange={(checked) => handleCheck(item, !checked)}
+                        check={false} //placeholder hardcodeado
+                        // onChange={(checked) => handleCheck(item, !checked)}
+                        onChange={()=> console.log(item)}
                         cuadrado={isCuadrado}
+                        fondoOscuro={true}
                     />
+
                 ))}
             </ScrollView>
         );
@@ -51,7 +61,7 @@ const Dropdown: FC<Props> = ({type, ataque, data }) => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <Texto text={titulo} estilo={"textoBlanco"} style={{fontSize: tamanoFuente}}/>
+                <Texto text={titulo} estilo={"textoBlanco"} style={{fontSize: tamanoTitulos}}/>
                 <View style={styles.iconosContainer}>
                     <Add color={Colores.blanco} width={27}/>
                     <TouchableOpacity onPress={()=> setAbierto(!abierto)} style={styles.containerTriangulo}>
