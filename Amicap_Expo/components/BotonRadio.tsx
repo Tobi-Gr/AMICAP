@@ -9,7 +9,7 @@ interface Props {
     tamanoFuente: number;
     id: number;
     check: boolean;
-    cuadrado: boolean;
+    cuadrado?: boolean;
 }
 
 const BotonRadio: FC<Props> = ({ text, onChange, tamanoFuente, id, check, cuadrado = true }) => {
