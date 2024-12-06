@@ -19,13 +19,14 @@ interface Props {
     visible: boolean;
     setVisible: (visible: boolean) => void;
     contactosArray: Contacto[];
-    mensaje: string;
 }
 
-const ContactosModal: FC<Props> = ({ visible, setVisible, contactosArray, mensaje }) => {
+const ContactosModal: FC<Props> = ({ visible, setVisible, contactosArray }) => {
     const windowWidth = Dimensions.get('window').width;
     const tamanoFuente = windowWidth / 14;
-    const { registrarAtaque } = useUserContext();
+    const { registrarAtaque, mensaje } = useUserContext();
+
+    const mnsj = mensaje? mensaje : '';
 
     const [selectedContact, setSelectedContact] = useState<Contacto | null>(null);
 
@@ -43,9 +44,10 @@ const ContactosModal: FC<Props> = ({ visible, setVisible, contactosArray, mensaj
     
     function mandarMensaje() {
         registrarAtaque();
+        console.log('mnsj: ', mnsj);
         let api_whatsapp;
         if (selectedContact != null) {
-            api_whatsapp = `https://api.whatsapp.com/send?phone=${encodeURIComponent(selectedContact.numero)}&text=${encodeURIComponent(mensaje)}`;
+            api_whatsapp = `https://api.whatsapp.com/send?phone=${encodeURIComponent(selectedContact.numero)}&text=${encodeURIComponent(mnsj)}`;
             Linking.openURL(api_whatsapp).catch(err => console.error("Error al abrir WhatsApp: ", err));
         }
         cerrarModal();

@@ -13,6 +13,8 @@ interface UserContextType {
   setToken: React.Dispatch<React.SetStateAction<string | null>>;
   usuario: Usuario | null;
   setUsuario: React.Dispatch<React.SetStateAction<Usuario | null>>;
+  mensaje: string | null;
+  setMensaje: React.Dispatch<React.SetStateAction<string | null>>
   registrarAtaque: () => Promise<void>;
 }
 
@@ -23,6 +25,7 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [token, setToken] = useState<string | null>(null);
   const [usuario, setUsuario] = useState<Usuario | null>(null);
+  const [mensaje, setMensaje] = useState<string | null>(null);
 
   const registrarAtaque = async () => {
     const urlApi = `${DBDomain}/api/ataque/` + usuario?.id;
@@ -47,7 +50,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   return (
-    <UserContext.Provider value={{ token, setToken, usuario, setUsuario, registrarAtaque }}>
+    <UserContext.Provider value={{ token, setToken, usuario, setUsuario, mensaje, setMensaje, registrarAtaque }}>
       {children}
     </UserContext.Provider>
   );
