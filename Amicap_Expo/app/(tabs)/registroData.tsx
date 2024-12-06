@@ -1,5 +1,4 @@
-import { StyleSheet, View, Dimensions, TouchableOpacity } from 'react-native';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { StyleSheet, View, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
 import React, { FC, useState, useEffect } from 'react';
 import { Colores } from '../../constants/Colors';
 import DBDomain from '../../constants/dbDomain';
@@ -9,7 +8,6 @@ import Texto from '@/components/Texto';
 import Ataque from '@/components/Ataque';
 import Triangulo from '@/components/icons/Triangulo';
 import { useUserContext } from '@/context/UserContext';
-import { ScrollView } from 'react-native-gesture-handler';
 
 interface Attack {
   id: number,
@@ -76,7 +74,6 @@ const RegistroDataScreen: React.FC<Props> = ({navigation }) => {
   
 
   return (
-    <GestureHandlerRootView>
       <View style={styles.container}>
         <View style={styles.flechaContainer}>
           <Flecha
@@ -120,7 +117,6 @@ const RegistroDataScreen: React.FC<Props> = ({navigation }) => {
             </TouchableOpacity>
           </View>
       </View>
-    </GestureHandlerRootView>
   )
 };
 

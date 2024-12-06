@@ -153,23 +153,23 @@ const SeleccionarActsModal: FC<Props> = ({ visible, setVisible, actividades, act
     
     
 
-    const Busqueda = () => {
-        return (
-            <View style={styles.busquedaContainer}>
-                <TextInput
-                    style={{fontSize: tamanoFuente, width: '90%' }}
-                    onChangeText={(nuevaBusqueda) => {
-                        setBusqueda(nuevaBusqueda);
-                        //onChange(nuevaBusqueda);
-                    }}
-                    value={busqueda}
-                    placeholder='Buscar'
-                    placeholderTextColor={Colores.negro}
-                />
-                <Search color={Colores.turquesa}/>
-            </View>
-        );
-    };
+    // const Busqueda = () => {
+    //     return (
+    //         <View style={styles.busquedaContainer}>
+    //             <TextInput
+    //                 style={{fontSize: tamanoFuente, width: '90%' }}
+    //                 onChangeText={(nuevaBusqueda) => {
+    //                     setBusqueda(nuevaBusqueda);
+    //                     //onChange(nuevaBusqueda);
+    //                 }}
+    //                 value={busqueda}
+    //                 placeholder='Buscar'
+    //                 placeholderTextColor={Colores.negro}
+    //             />
+    //             <Search color={Colores.turquesa}/>
+    //         </View>
+    //     );
+    // };
 
     const ListaActs = () => {
         // cambio en el estado de las actividades
@@ -226,7 +226,7 @@ const SeleccionarActsModal: FC<Props> = ({ visible, setVisible, actividades, act
                             <Ex color={Colores.turquesa}/>
                         </Pressable>
                     </View>
-                    <Busqueda/>
+                    {/* <Busqueda/> */}
                     {ListaActs()}
                     <View style={styles.buttonContainer}>
                         <Boton onPress={cerrarModal} text="Cancelar" containerColor='blanco' textStyle='textoTurquesa'/>

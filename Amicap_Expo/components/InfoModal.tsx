@@ -1,10 +1,8 @@
-import { GestureHandlerRootView, ScrollView } from 'react-native-gesture-handler';
 import React, { FC, useEffect, useState } from 'react';
-import {StyleSheet, TouchableOpacity, View, Text, Modal, Dimensions } from 'react-native';
+import {StyleSheet, TouchableOpacity, View, Text, Modal, Dimensions, ScrollView } from 'react-native';
 import { Colores } from './../constants/Colors';
 import Texto from './Texto';
 import Triangulo from './icons/Triangulo';
-import { tapHandlerName } from 'react-native-gesture-handler/lib/typescript/handlers/TapGestureHandler';
 import Ex from './icons/Ex';
 
 interface Info{
@@ -30,7 +28,7 @@ const InfoModal: FC<Props> = ({visible, setVisible, selectedInfo}) => {
 
   return (
     <Modal visible={visible} transparent={true} animationType="slide">
-      <GestureHandlerRootView style={styles.container}>
+      <View style={styles.container}>
         <View style={styles.card}>
           <TouchableOpacity onPress={cerrarModal} style={styles.equis}>
             <Ex color={Colores.turquesa}/>
@@ -49,7 +47,7 @@ const InfoModal: FC<Props> = ({visible, setVisible, selectedInfo}) => {
             )}
           </ScrollView>
         </View>
-      </GestureHandlerRootView>
+      </View>
     </Modal>
   );
 };

@@ -1,5 +1,5 @@
-import { GestureHandlerRootView, ScrollView } from 'react-native-gesture-handler';
-import { StyleSheet, View, Dimensions, TouchableOpacity } from 'react-native';
+// import { GestureHandlerRootView, ScrollView } from 'react-native-gesture-handler';
+import { StyleSheet, View, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { Colores } from '../../constants/Colors';
 import Texto from '@/components/Texto';
@@ -82,7 +82,7 @@ const ListaAtaques: React.FC<Props> = ({ navigation }) => {
     const ataquesAgrupados = agruparPorMes(ataques);
 
     return (
-      <GestureHandlerRootView style={styles.background}>
+      <View style={styles.background}>
         <View style={styles.flechaContainer}>
             <Flecha
                 height={flechaTamano}
@@ -124,7 +124,7 @@ const ListaAtaques: React.FC<Props> = ({ navigation }) => {
               );
             })}
         </ScrollView>
-      </GestureHandlerRootView>
+      </View>
     );
 };
 

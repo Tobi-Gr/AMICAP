@@ -4,8 +4,8 @@ import Contact from './icons/Contact';
 import { Colores } from './../constants/Colors';
 
 interface Contact{
-  nombre:string;
-  numero:string;
+    nombre:string;
+    numero:string;
 }
 interface Props {
     contactos?: Contact[],
@@ -20,9 +20,9 @@ const BotonContacto: FC<Props> = ({onPress, contactos, key}) => {
     const iconWidth = diameter / 1.6;
     const iconHeight = iconWidth / 0.9;
     const handlePress = () => {
-         if(onPress){
-             onPress();
-         }
+        if(onPress){
+            onPress();
+        }
     };
 
     return (
