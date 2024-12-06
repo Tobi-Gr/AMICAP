@@ -8,11 +8,19 @@ interface Usuario {
   email: string;
 }
 
+interface Contacto {
+  id: number;
+  nombre: string;
+  numero: string;
+}
+
 interface UserContextType {
   token: string | null;
   setToken: React.Dispatch<React.SetStateAction<string | null>>;
   usuario: Usuario | null;
   setUsuario: React.Dispatch<React.SetStateAction<Usuario | null>>;
+  contactos: Contacto[];
+  setContactos: React.Dispatch<React.SetStateAction<Contacto[]>>;
   mensaje: string | null;
   setMensaje: React.Dispatch<React.SetStateAction<string | null>>
   registrarAtaque: () => Promise<void>;
@@ -26,6 +34,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [token, setToken] = useState<string | null>(null);
   const [usuario, setUsuario] = useState<Usuario | null>(null);
   const [mensaje, setMensaje] = useState<string | null>(null);
+  const [contactos, setContactos] = useState<Contacto[]>([]);
 
   const registrarAtaque = async () => {
     const urlApi = `${DBDomain}/api/ataque/` + usuario?.id;
@@ -50,7 +59,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   return (
-    <UserContext.Provider value={{ token, setToken, usuario, setUsuario, mensaje, setMensaje, registrarAtaque }}>
+    <UserContext.Provider value={{ token, setToken, usuario, setUsuario, mensaje, setMensaje, contactos, setContactos, registrarAtaque }}>
       {children}
     </UserContext.Provider>
   );

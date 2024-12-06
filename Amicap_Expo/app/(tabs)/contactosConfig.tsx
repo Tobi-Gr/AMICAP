@@ -27,12 +27,8 @@ const ContactosConfigScreen: React.FC<Props> = ({ navigation }) => {
   const flechaTamano = windowWidth / 10;
 
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
-  const {usuario} = useUserContext();
+  const {usuario, contactos, setContactos} = useUserContext();
   const [visibleAgregar, setVisibleAgregar] = useState(false);
-
-  // Estados para contactos y carga
-  const [contactos, setContactos] = useState<Contact[]>([]);
-  // const [loading, setLoading] = useState(true);
 
   const fetchContactos = async () => {
     const urlApi=`${DBDomain}/api/contacto/${usuario?.id}`;
@@ -51,26 +47,25 @@ const ContactosConfigScreen: React.FC<Props> = ({ navigation }) => {
     }
   }
 
-  useEffect(() => {
-    const fetchAndSetContactos = async () => {
-      const data = await fetchContactos();
-      if (data.length > 0) {
-        setContactos(data);
-      }
-      else console.log('no hay contactos');
-    };
-    const keyboardDidShowListener = Keyboard.addListener( 'keyboardDidShow',
-      () => {
-              setKeyboardVisible(true); // Muestra elementos si el teclado está visible
-          }
-      );
-    const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide',
-      () => {
-              setKeyboardVisible(false); // Oculta elementos si el teclado no está visible
-          }
-      );
+  const fetchAndSetContactos = async () => {
+    const data = await fetchContactos();
+    if (data.length > 0) {
+      setContactos(data);
+    }
+    else console.log('no hay contactos');
+  };
+  const keyboardDidShowListener = Keyboard.addListener( 'keyboardDidShow',
+    () => {
+            setKeyboardVisible(true); // Muestra elementos si el teclado está visible
+        }
+    );
+  const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide',
+    () => {
+            setKeyboardVisible(false); // Oculta elementos si el teclado no está visible
+        }
+    );
 
-    
+  useEffect(() => {
     fetchAndSetContactos();
   }, []);
 
@@ -101,7 +96,7 @@ const ContactosConfigScreen: React.FC<Props> = ({ navigation }) => {
       if (response.ok) {
         alert('Contacto agregado');
         setVisibleAgregar(false);
-        // Aquí también puedes actualizar la lista de contactos
+        fetchAndSetContactos();
       } 
     else {
       const errorMessage = await response.text();

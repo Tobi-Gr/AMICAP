@@ -18,15 +18,15 @@ interface Contacto {
 interface Props {
     visible: boolean;
     setVisible: (visible: boolean) => void;
-    contactosArray: Contacto[];
 }
 
-const ContactosModal: FC<Props> = ({ visible, setVisible, contactosArray }) => {
+const ContactosModal: FC<Props> = ({ visible, setVisible }) => {
     const windowWidth = Dimensions.get('window').width;
     const tamanoFuente = windowWidth / 14;
-    const { registrarAtaque, mensaje } = useUserContext();
+    const { registrarAtaque, mensaje, contactos } = useUserContext();
 
     const mnsj = mensaje? mensaje : '';
+    const contactosArray = contactos? contactos : [];
 
     const [selectedContact, setSelectedContact] = useState<Contacto | null>(null);
 
