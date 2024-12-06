@@ -88,7 +88,7 @@ const ListaAtaques: React.FC<Props> = ({ navigation }) => {
                 height={flechaTamano}
                 width={flechaTamano}
                 navigation={navigation}
-                screen={"registroData"}
+                screen={"RegistroData"}
                 color={Colores.blanco}
             />
             <Texto text="Tus ataques" estilo="textoBlanco" style={{ fontSize: tamanoIndice, top: '50%' }} />
