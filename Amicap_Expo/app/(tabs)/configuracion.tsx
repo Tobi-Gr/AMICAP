@@ -30,12 +30,12 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
   const [actividades, setActividades] = useState([]);
   const [actsPref, setActsPref] = useState([]);
   
-  const { usuario } = useUserContext();
+  const { usuario, mensaje, setMensaje } = useUserContext();
   const [inhalar, setInhalar] = useState(0);
   const [exhalar, setExhalar] = useState(0);
   const [mantener, setMantener] = useState(0);
   const [pruebaVolumen, setPruebaVolumen] = useState(0);
-  const [mensaje, setMensaje] = useState("");
+  const [mensajeDefault, setMensajeDefault] = useState("");
 
   const abrirModalSeleccionar = async () => {
     fetchAndSetActsPref();
@@ -214,6 +214,7 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
       const data = await fetchMensaje();
       if (data != null) {
         setMensaje(data.mensaje);
+        setMensajeDefault(data.mensaje);
       }
     };
 
@@ -234,11 +235,11 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
   useEffect(() => {
     const updateMensaje = async () => {
       const data = await putMensaje();
-      console.log('putMensaje: ', data);
+      if(data) setMensaje(mensajeDefault);
     };
     
     updateMensaje();
-  }, [mensaje])
+  }, [mensajeDefault])
 
   return (
     <View style={{ flex: 1, backgroundColor: Colores.blanco }}> 
@@ -262,7 +263,7 @@ const ConfiguracionScreen: React.FC<Props> = ({ navigation }) => {
           <SliderSegundos value={mantener} onValueChange={setMantener} text={"Tiempo manteniendo"}/>
         </View>        
         <View style={styles.seccion}>
-          <TextArea prompt="Mensaje por defecto" value={mensaje} onChange={setMensaje}/>
+          <TextArea prompt="Mensaje por defecto" value={mensajeDefault} onChange={setMensajeDefault}/>
         </View>        
       </ScrollView>
       {!isKeyboardVisible && (<Navbar tipo="configuration" navigation={navigation}/>)}
