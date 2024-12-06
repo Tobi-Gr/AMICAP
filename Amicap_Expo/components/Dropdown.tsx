@@ -7,48 +7,41 @@ import Texto from './Texto';
 import Add from './icons/Add';
 import BotonRadio from './BotonRadio';
 
-interface Item {
-    id: number;
-    nombre: string;
-}
-
-interface Attack {
-    id: number;
-    id_lugar: number;
+interface AtaqueDetalles {
+    causas: string[];
+    lugar: string;
 }
 
 interface Props {
-    onClick: () => void;
     type: 'causa' | 'lugar';
-    data: Item[];
-    ataque: Attack
+    ataque: AtaqueDetalles;
+    data: string[]; //aca mandan o todas las causas o todos los lugares
 }
 
-const Dropdown: FC<Props> = ({onClick, type, data }) => {
-
+const Dropdown: FC<Props> = ({type, ataque, data }) => {
+    const screen_width = Dimensions.get("screen").width;
     const [abierto, setAbierto] = useState(false);
     const [causas, setCausas] = useState([]);
     const [lugares, setLugares] = useState([]);
     const titulo = type === 'lugar' ? 'Lugares' : 'Causas';
-    const tamanoFuente = 50;
+    const tamanoFuente = screen_width / 15;
 
-
-    const handleCheck = (item: number, check: boolean) =>
+    const handleCheck = (item: string, check: boolean) =>
     {
-
+        console.log("check");
     }
 
-    const ListaActs = () => {
+    const ListaItems = () => {
+        const isCuadrado = type === 'causa'; //es cuadrado si el tipo es causa
         return (
             <ScrollView>
                 {data.map((item) => (
                     <BotonRadio
-                        key={item.id}
-                        text={item.nombre}
-                        id={item.id}
+                        text={item}
                         tamanoFuente={tamanoFuente}
-                        check={false} //hay q poner una variable posta
-                        onChange={(checked) => handleCheck(item.id, !checked)}
+                        check={false} //hay q poner una variable posta !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                        onChange={(checked) => handleCheck(item, !checked)}
+                        cuadrado={isCuadrado}
                     />
                 ))}
             </ScrollView>
@@ -58,12 +51,15 @@ const Dropdown: FC<Props> = ({onClick, type, data }) => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <Texto text={titulo} estilo={"textoBlanco"}/>
-                <Add/>
-                <TouchableOpacity onPress={()=> setAbierto(!abierto)}>
-                    <Triangulo/>
-                </TouchableOpacity>
+                <Texto text={titulo} estilo={"textoBlanco"} style={{fontSize: tamanoFuente}}/>
+                <View style={styles.iconosContainer}>
+                    <Add color={Colores.blanco} width={27}/>
+                    <TouchableOpacity onPress={()=> setAbierto(!abierto)} style={styles.containerTriangulo}>
+                        <Triangulo color={Colores.blanco} />
+                    </TouchableOpacity>
+                </View>
             </View>
+            {abierto && ListaItems()}
             
         </View>
     );
@@ -71,11 +67,22 @@ const Dropdown: FC<Props> = ({onClick, type, data }) => {
 
 const styles = StyleSheet.create({
     container: {
-        width: '90%'
+        width: '80%',
+        alignSelf: 'center'
     },
     header:
     {
-
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    iconosContainer:
+    {
+        flexDirection: 'row',
+        gap: 10
+    },
+    containerTriangulo:
+    {
+        top: '10%'
     }
 });
 

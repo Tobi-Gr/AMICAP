@@ -8,6 +8,8 @@ import informacionRouter from './src/controllers/informacion-controller.js';
 import respiracionRouter from './src/controllers/respiracion-controller.js';
 import usuarioRouter from './src/controllers/usuario-controller.js';
 import mensajeRouter from './src/controllers/mensaje-controller.js';
+import causaRouter from './src/controllers/causa-controller.js'
+import lugarRouter from './src/controllers/lugar-controller.js'
 
 
 const app=express();
@@ -26,6 +28,8 @@ app.use("/api/informacion", informacionRouter);
 app.use("/api/respiracion", respiracionRouter);
 app.use("/api/mensaje", mensajeRouter);
 app.use("/api/usuario", usuarioRouter);
+app.use("/api/causa", causaRouter)
+app.use("/api/lugar", lugarRouter)
 
 //Inicio el Server y lo pongo a escuchar.
 app.listen(port,()=> {
