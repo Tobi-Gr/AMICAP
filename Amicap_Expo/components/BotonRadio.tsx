@@ -7,7 +7,7 @@ interface Props {
     text: string;
     onChange?: (checked: boolean) => void;
     tamanoFuente: number;
-    id: number;
+    id?: number;
     check: boolean;
     cuadrado?: boolean;
 }

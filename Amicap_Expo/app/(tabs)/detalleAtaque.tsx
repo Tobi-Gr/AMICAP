@@ -41,7 +41,24 @@ const DetalleAtaque: React.FC<Props> = ({ navigation, route }) => {
         console.log('Hubo un error en el fetchDetallesAtaque', error);
         }
     }
-
+    
+    const fetchCausas = async () => {
+        const urlApi = `${DBDomain}/api/ataque/api/${id_ataque}`;
+        try {
+        const response = await fetch(urlApi);
+        if (!response.ok) {
+            throw new Error('Failed to fetchDetallesAtaque');
+        }
+        const data = await response.json();
+        if (!data) {
+            throw new Error('Data failed to response (fetchDetallesAtaque)');
+        }
+        return data;
+        } catch (error) {
+        console.log('Hubo un error en el fetchDetallesAtaque', error);
+        }
+    }
+    
     const getDiaSemana = (date: Date): string => {
         const options: Intl.DateTimeFormatOptions = { weekday: 'long' };
         const diaSemana = new Date(date).toLocaleDateString('es-ES', options);
@@ -51,10 +68,10 @@ const DetalleAtaque: React.FC<Props> = ({ navigation, route }) => {
 
     useEffect( () =>{
         const fetchAndSetAtaque = async () => {
-          const data = await fetchDetallesAtaque();
-          if (data.length > 0) {
-            setAtaque(data);
-          }
+        const data = await fetchDetallesAtaque();
+            if (data.length > 0) {
+                setAtaque(data);
+            }
         };
 
         fetchAndSetAtaque();

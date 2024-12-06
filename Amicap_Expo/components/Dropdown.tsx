@@ -7,24 +7,19 @@ import Texto from './Texto';
 import Add from './icons/Add';
 import BotonRadio from './BotonRadio';
 
-interface Item {
-    id: number;
-    nombre: string;
-}
-
-interface Attack {
-    id: number;
-    id_lugar: number;
+interface AtaqueDetalles {
+    causas: string[];
+    lugar: string;
 }
 
 interface Props {
     onClick: () => void;
     type: 'causa' | 'lugar';
-    data: Item[];
-    ataque: Attack
+    ataque: AtaqueDetalles;
+    data: string[]; //aca mandan o todas las causas o todos los lugares
 }
 
-const Dropdown: FC<Props> = ({onClick, type, data }) => {
+const Dropdown: FC<Props> = ({onClick, type, ataque, data }) => {
 
     const [abierto, setAbierto] = useState(false);
     const [causas, setCausas] = useState([]);
@@ -33,22 +28,22 @@ const Dropdown: FC<Props> = ({onClick, type, data }) => {
     const tamanoFuente = 50;
 
 
-    const handleCheck = (item: number, check: boolean) =>
+    const handleCheck = (item: string, check: boolean) =>
     {
 
     }
 
-    const ListaActs = () => {
+    const ListaItems = () => {
+        const isCuadrado = type === 'causa'; //es cuadrado si el tipo es causa
         return (
             <ScrollView>
                 {data.map((item) => (
                     <BotonRadio
-                        key={item.id}
-                        text={item.nombre}
-                        id={item.id}
+                        text={item}
                         tamanoFuente={tamanoFuente}
-                        check={false} //hay q poner una variable posta
-                        onChange={(checked) => handleCheck(item.id, !checked)}
+                        check={false} //hay q poner una variable posta !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                        onChange={(checked) => handleCheck(item, !checked)}
+                        cuadrado={isCuadrado}
                     />
                 ))}
             </ScrollView>
@@ -64,6 +59,7 @@ const Dropdown: FC<Props> = ({onClick, type, data }) => {
                     <Triangulo/>
                 </TouchableOpacity>
             </View>
+            {abierto && ListaItems()}
             
         </View>
     );
