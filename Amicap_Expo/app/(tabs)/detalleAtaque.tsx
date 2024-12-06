@@ -6,6 +6,7 @@ import Texto from '@/components/Texto';
 import DBDomain from '@/constants/dbDomain';
 import Flecha from '@/components/Flecha';
 import Dropdown from '@/components/Dropdown';
+import Boton from '@/components/Boton';
 
 interface Attack {
     fecha: Date;

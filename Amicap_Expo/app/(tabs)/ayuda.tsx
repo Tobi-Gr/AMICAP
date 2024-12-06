@@ -71,7 +71,8 @@ const styles = StyleSheet.create({
   },
   buttonsContainer:{
     alignContent: 'center',
-    marginHorizontal: 'auto'
+    marginHorizontal: 'auto',
+    gap: 20
   }
 });
 

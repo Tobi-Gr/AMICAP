@@ -8,8 +8,8 @@ import Add from './icons/Add';
 import BotonRadio from './BotonRadio';
 
 interface AtaqueDetalles {
-    causas: string[];
-    lugar: string;
+    causas: string[];  // Causas seleccionadas
+    lugar: string;     // Lugar seleccionado
 }
 
 interface Item {
@@ -21,39 +21,65 @@ interface Item {
 interface Props {
     type: 'causa' | 'lugar';
     ataque: AtaqueDetalles;
-    data: Item[]; //aca mandan o todas las causas o todos los lugares
+    data: Item[]; // aca mandan o todas las causas o todos los lugares
 }
 
 const Dropdown: FC<Props> = ({type, ataque, data }) => {
     const screen_width = Dimensions.get("screen").width;
     const [abierto, setAbierto] = useState(false);
-    const [causas, setCausas] = useState([]);
-    const [lugares, setLugares] = useState([]);
+    const [causas, setCausas] = useState<string[]>([]);
+    const [lugares, setLugares] = useState<string[]>([]);
+    const [causasSeleccionadas, setCausasSeleccionadas] = useState<string[]>([]);
+    const [lugarSeleccionado, setLugarSeleccionado] = useState<string>('');
     const titulo = type === 'lugar' ? 'Lugares' : 'Causas';
     const tamanoTitulos = screen_width / 15;
     const tamanoFuente = screen_width / 20;
 
-    const handleCheck = (item: string, check: boolean) =>
-    {
-        console.log("check");
-    }
+    useEffect(() => {
+        // Inicializa las causas y lugares al cargar el componente
+        if (type === 'causa') {
+            setCausas(ataque.causas);
+            setCausasSeleccionadas(ataque.causas); // Causas seleccionadas por defecto
+        } else if (type === 'lugar') {
+            setLugares([ataque.lugar]); // Solo un lugar por vez
+            setLugarSeleccionado(ataque.lugar); // Lugar seleccionado por defecto
+        }
+    }, [ataque, type]);
+
+    const handleCheck = (item: Item, check: boolean) => {
+        if (type === 'causa') {
+            if (check) {
+                setCausasSeleccionadas([...causasSeleccionadas, item.nombre]);
+            } else {
+                setCausasSeleccionadas(causasSeleccionadas.filter(causa => causa !== item.nombre));
+            }
+        } else if (type === 'lugar') {
+            setLugarSeleccionado(item.nombre);
+        }
+    };
 
     const ListaItems = () => {
-        const isCuadrado = type === 'causa'; //es cuadrado si el tipo es causa
+        const isCuadrado = type === 'causa'; // Es cuadrado si el tipo es causa
         return (
-            <ScrollView>
-                {data.map((item) => (
-                    <BotonRadio
-                        text={item.nombre}
-                        tamanoFuente={tamanoFuente}
-                        check={false} //placeholder hardcodeado
-                        // onChange={(checked) => handleCheck(item, !checked)}
-                        onChange={()=> console.log(item)}
-                        cuadrado={isCuadrado}
-                        fondoOscuro={true}
-                    />
+            <ScrollView style={styles.scroll}>
+                {data.map((item) => {
+                    // Verifica si el item está en las causas o lugares
+                    const check = type === 'causa' 
+                        ? causasSeleccionadas.includes(item.nombre) 
+                        : lugarSeleccionado === item.nombre;
 
-                ))}
+                    return (
+                        <BotonRadio
+                            key={item.id}
+                            text={item.nombre}
+                            tamanoFuente={tamanoFuente}
+                            check={check}
+                            onChange={(checked) => handleCheck(item, !checked)}
+                            cuadrado={isCuadrado}
+                            fondoOscuro={true}
+                        />
+                    );
+                })}
             </ScrollView>
         );
     };
@@ -70,7 +96,6 @@ const Dropdown: FC<Props> = ({type, ataque, data }) => {
                 </View>
             </View>
             {abierto && ListaItems()}
-            
         </View>
     );
 };
@@ -78,7 +103,8 @@ const Dropdown: FC<Props> = ({type, ataque, data }) => {
 const styles = StyleSheet.create({
     container: {
         width: '80%',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        marginBottom: '5%'
     },
     header:
     {
@@ -93,6 +119,10 @@ const styles = StyleSheet.create({
     containerTriangulo:
     {
         top: '10%'
+    },
+    scroll: 
+    {
+        maxHeight: '80%'
     }
 });
 
