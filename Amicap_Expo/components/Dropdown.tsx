@@ -13,24 +13,22 @@ interface AtaqueDetalles {
 }
 
 interface Props {
-    onClick: () => void;
     type: 'causa' | 'lugar';
     ataque: AtaqueDetalles;
     data: string[]; //aca mandan o todas las causas o todos los lugares
 }
 
-const Dropdown: FC<Props> = ({onClick, type, ataque, data }) => {
-
+const Dropdown: FC<Props> = ({type, ataque, data }) => {
+    const screen_width = Dimensions.get("screen").width;
     const [abierto, setAbierto] = useState(false);
     const [causas, setCausas] = useState([]);
     const [lugares, setLugares] = useState([]);
     const titulo = type === 'lugar' ? 'Lugares' : 'Causas';
-    const tamanoFuente = 50;
-
+    const tamanoFuente = screen_width / 15;
 
     const handleCheck = (item: string, check: boolean) =>
     {
-
+        console.log("check");
     }
 
     const ListaItems = () => {
@@ -53,11 +51,13 @@ const Dropdown: FC<Props> = ({onClick, type, ataque, data }) => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <Texto text={titulo} estilo={"textoBlanco"}/>
-                <Add/>
-                <TouchableOpacity onPress={()=> setAbierto(!abierto)}>
-                    <Triangulo/>
-                </TouchableOpacity>
+                <Texto text={titulo} estilo={"textoBlanco"} style={{fontSize: tamanoFuente}}/>
+                <View style={styles.iconosContainer}>
+                    <Add color={Colores.blanco} width={27}/>
+                    <TouchableOpacity onPress={()=> setAbierto(!abierto)} style={styles.containerTriangulo}>
+                        <Triangulo color={Colores.blanco} />
+                    </TouchableOpacity>
+                </View>
             </View>
             {abierto && ListaItems()}
             
@@ -67,11 +67,22 @@ const Dropdown: FC<Props> = ({onClick, type, ataque, data }) => {
 
 const styles = StyleSheet.create({
     container: {
-        width: '90%'
+        width: '80%',
+        alignSelf: 'center'
     },
     header:
     {
-
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    iconosContainer:
+    {
+        flexDirection: 'row',
+        gap: 10
+    },
+    containerTriangulo:
+    {
+        top: '10%'
     }
 });
 
