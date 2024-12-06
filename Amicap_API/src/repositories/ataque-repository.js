@@ -22,7 +22,7 @@ export default class AtaqueRepository
     {
         let returnArray = null;
         const sql = `
-        SELECT A.fecha, L.nombre, 
+        SELECT A.fecha, L.nombre as lugar, 
         json_build_object('nombre', C.nombre) as causas
         FROM "Ataque" as A
         LEFT JOIN "Ataque-Causa" as AC on A.id = AC.id_ataque
