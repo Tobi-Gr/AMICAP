@@ -23,7 +23,7 @@ interface Props {
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {  
   
-  const {token, setToken, usuario, setUsuario} = useUserContext();
+  const {token, usuario, setMensaje, contactos, setContactos} = useUserContext();
   
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
@@ -43,9 +43,6 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
   {
     setVisible(true);
   };
-
-  const [contactos, setContactos] = useState<Contacto[]>([]);
-  const [mensaje, setMensaje] = useState('');
   
   //toma los contactos del usuario
   const fetchContactos = async () => {
@@ -101,11 +98,11 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
     
     fetchAndSetContactos();
     fetchAndSetMensaje();
-  }, [usuario]);
+  }, []);
 
   return (
     <View style={{ flex: 1, backgroundColor: Colores.blanco }}> 
-      <ContactosModal visible={visible} setVisible={setVisible} contactosArray={contactos} mensaje={mensaje}/>
+      <ContactosModal visible={visible} setVisible={setVisible}/>
       <View style={[styles.titleContainer, { marginTop: yTexto }]}>
         <Texto text={saludo} estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} />
       </View>

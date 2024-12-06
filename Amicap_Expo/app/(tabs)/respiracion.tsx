@@ -21,9 +21,9 @@ const RespiracionScreen: React.FC<Props> = ({ navigation }) => {
   const margenSuperiorBoton = margenSuperiorCuadrado / 3;
 
   const {usuario} = useUserContext();
-  const [inhalar, setInhalar] = useState<number>(0);
-  const [exhalar, setExhalar] = useState<number>(0);
-  const [mantener, setMantener] = useState<number>(0);
+  const [inhalar, setInhalar] = useState<number>();
+  const [exhalar, setExhalar] = useState<number>();
+  const [mantener, setMantener] = useState<number>();
   
   const fetchRespiracion = async () => {
     if(usuario)
@@ -65,17 +65,17 @@ const RespiracionScreen: React.FC<Props> = ({ navigation }) => {
 
   return (
     <View style={{ flex: 1, backgroundColor: Colores.turquesa }} >
-      {inhalar === 0 && exhalar === 0 && mantener === 0 ? (
-        <View>
-          <Texto text="Cargando..." estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} /> 
-        </View>
-      ) : (
+      {inhalar != undefined && exhalar != undefined && mantener != undefined ? (
         <View>
           <Flecha height={flechaTamano} width={flechaTamano} navigation={navigation} screen={"Ayuda"} color={Colores.blanco}/>
           <View style={{height: margenSuperiorCuadrado}} ></View>
           <Respirar inhalar={inhalar} exhalar={exhalar} mantener={mantener}/>
           <View style={{height: margenSuperiorBoton}} ></View>
           <Boton text={"Volver a inicio"} onPress={handleOnPressInicio} tamanoFuenteProps={tamanoFuente} containerColor={'blanco'} textStyle={'textoTurquesa'}/>
+        </View>
+      ) : (
+        <View>
+          <Texto text="Cargando..." estilo="tituloTurquesa" style={{ fontSize: tamanoFuente }} /> 
         </View>
       )}
     </View>

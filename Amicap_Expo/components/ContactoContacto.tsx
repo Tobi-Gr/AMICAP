@@ -26,12 +26,48 @@ const ContactoContacto: FC<Props> = ({ contacto, eliminarContacto }) => {
     const [visibleEliminar, setVisibleEliminar] = useState(false);
     const nombre=contacto?.nombre
     const [isKeyboardVisible, setKeyboardVisible] = useState(false);
-    const {usuario} = useUserContext();
+    const {usuario, contactos, setContactos} = useUserContext();
     const windowHeight = Dimensions.get('window').height;
     const windowWidth = Dimensions.get('window').width;
     const tamanoFuente = windowWidth / 18;
     const heightIcon = windowHeight / 25;
     const widthIcon = heightIcon * 0.9;
+
+    const fetchContactos = async () => {
+        const urlApi=`${DBDomain}/api/contacto/${usuario?.id}`;
+        try {
+            const response = await fetch(urlApi);
+            if (!response.ok) {
+                throw new Error('Failed to fetch data');
+            }
+            const data = await response.json();
+            if (!data) {
+                throw new Error('Data failed to response');
+            }
+            return data;
+        } catch (error) {
+            console.log('Hubo un error en el fetchContacto ', error);
+        }
+    }
+    
+    const fetchAndSetContactos = async () => {
+        const data = await fetchContactos();
+        if (data.length > 0) {
+            setContactos(data);
+        }
+        else console.log('no hay contactos');
+    };
+
+    const keyboardDidShowListener = Keyboard.addListener( 'keyboardDidShow',
+        () => {
+            setKeyboardVisible(true); // Muestra elementos si el teclado está visible
+        }
+    );
+    const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide',
+        () => {
+            setKeyboardVisible(false); // Oculta elementos si el teclado no está visible
+        }
+    );
 
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener( 'keyboardDidShow',
@@ -87,8 +123,8 @@ const ContactoContacto: FC<Props> = ({ contacto, eliminarContacto }) => {
     
         if (response.ok) {
             alert('Contacto editado');
+            fetchAndSetContactos();
             setVisibleEditar(false);
-            // Aquí también puedes actualizar la lista de contactos
         } 
         } catch (error) {
             console.log('Error al editar contacto:', error);

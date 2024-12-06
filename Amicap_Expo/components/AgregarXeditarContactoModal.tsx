@@ -119,11 +119,12 @@ const styles = StyleSheet.create({
         width: '180%',
         height: '30%',        
         justifyContent: 'flex-start',
-        marginLeft:50
+        marginLeft: 15,
+        marginRight: 5,
     },
     botonContainer:
     {
-        width: '25%',
+        width: 'auto',
         height: '100%',
         alignContent: 'center',
         justifyContent: 'center',
