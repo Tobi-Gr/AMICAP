@@ -30,7 +30,8 @@ const Dropdown: FC<Props> = ({type, ataque, data }) => {
     const [causas, setCausas] = useState([]);
     const [lugares, setLugares] = useState([]);
     const titulo = type === 'lugar' ? 'Lugares' : 'Causas';
-    const tamanoFuente = screen_width / 15;
+    const tamanoTitulos = screen_width / 15;
+    const tamanoFuente = screen_width / 20;
 
     const handleCheck = (item: string, check: boolean) =>
     {
@@ -49,6 +50,7 @@ const Dropdown: FC<Props> = ({type, ataque, data }) => {
                         // onChange={(checked) => handleCheck(item, !checked)}
                         onChange={()=> console.log(item)}
                         cuadrado={isCuadrado}
+                        fondoOscuro={true}
                     />
 
                 ))}
@@ -59,7 +61,7 @@ const Dropdown: FC<Props> = ({type, ataque, data }) => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <Texto text={titulo} estilo={"textoBlanco"} style={{fontSize: tamanoFuente}}/>
+                <Texto text={titulo} estilo={"textoBlanco"} style={{fontSize: tamanoTitulos}}/>
                 <View style={styles.iconosContainer}>
                     <Add color={Colores.blanco} width={27}/>
                     <TouchableOpacity onPress={()=> setAbierto(!abierto)} style={styles.containerTriangulo}>
